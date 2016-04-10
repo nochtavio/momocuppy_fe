@@ -1,0 +1,31 @@
+#wrapabout{
+	clear:both;
+	margin:0 auto;
+	padding:10px 0;
+	width:600px;
+}
+
+
+	.content p{
+		padding-top:10px;
+		line-height:26px;
+		font-size:17px;
+	}
+
+h2#aboutinfo{
+	background:url(/images/aboutus/headerintro.png) no-repeat center top;
+	clear:both;
+	height:250px;
+	margin-top:65px;
+	position:relative;
+	width:100%;
+}
+
+h2#aboutinfo img.gif{
+	clear:both;
+	bottom:0;
+	height:133px;
+	left:243px;
+	position:absolute;
+	width:107px;
+}

@@ -1,0 +1,47 @@
+#popaddress{
+	background:url(/images/layout/member/bgloadcart.png) repeat center top;
+	border-radius:20px;
+  box-shadow: 2px 2px 2px #d6cfd1;
+	float:left;
+	padding:20px 40px;
+	width:620px;	
+}
+
+#popaddress h3.title{
+	font-size:22px;
+	float:left;
+	font-weight:bold;
+	margin:25px 0 10px 0;
+	text-transform:uppercase;
+}
+
+#popaddress form.formaddr{
+	clear:both;
+	float:left;
+	width:100%;
+}
+#popaddress form.formaddr input{
+	width:414px;
+}
+
+#popaddress form.formaddr input.saveaddr{
+	background:none;
+	border:none;
+	float:left;
+	height:47px;
+	margin-left:-5px;
+	width:155px;
+}
+#popaddress form.formaddr input#firstname,
+#popaddress form.formaddr input#lastname{
+	width:140px;
+}
+#popaddress form.formaddr input#lastname{
+	width:140px !important;	
+}
+#popaddress form.formaddr .row{
+	margin-top:10px;
+	position:relative;
+}
+
+

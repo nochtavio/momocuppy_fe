@@ -1,0 +1,11 @@
+.navbar-fixed-top, .navbar-fixed-bottom{
+    z-index: 3;
+}
+
+.modal{
+    z-index: 5;
+}
+
+.modal-backdrop{
+    z-index: 3;
+}

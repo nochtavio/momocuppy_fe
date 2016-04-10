@@ -1,0 +1,21 @@
+ALIEF
+
+
+FILES :
+- Controllers: 
+    - api.php
+- Models: 
+    - model_member.php
+    - model_order.php
+- Frontend:
+    - order/index.php
+    - order/order2.php
+    - products/detail/index.php
+    - products/list/index.php
+- JS:
+    - order.js
+    - order2.js
+    - order3.js
+    - product-details.js
+    - product-list.js
+    - bflogin.js

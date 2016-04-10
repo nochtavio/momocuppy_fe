@@ -1,0 +1,29 @@
+Eff - File up 20/12/2015
+
+PHP :
+
+/products/detail/index.php
+/member/register/index.php
+/member/register/regmember.php
+/member/ticker-login.php
+/lib/lib.php
+/lib/member/f_reg.php
+/products/category/index.php
+/products/detail/index.php
+/products/list/index.php
+
+
+CSS :
+
+/assets/css/main.css
+
+/assets/css/products.css
+
+/assets/css/gallery.css
+
+/assets/css/order.css
+
+IMG :
+
+/images/layout/buttons/checkoutmin.png
+

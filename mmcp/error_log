@@ -1,0 +1,48 @@
+[07-Dec-2015 18:14:53 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[07-Dec-2015 23:15:50 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[07-Dec-2015 23:16:56 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[07-Dec-2015 23:17:22 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 13:58:17 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 19:38:50 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 19:59:09 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 20:00:58 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 20:44:06 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 21:56:03 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 22:10:16 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 22:19:21 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 22:21:01 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 22:21:24 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 22:21:45 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 22:23:47 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 22:23:49 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 22:24:02 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 22:24:22 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 22:28:33 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 22:29:04 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 22:33:26 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 22:33:50 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 22:33:59 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 22:34:12 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 22:34:12 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 22:36:05 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 22:36:32 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 23:19:00 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 23:19:23 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[08-Dec-2015 23:36:23 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[09-Dec-2015 08:52:35 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[09-Dec-2015 16:22:28 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[09-Dec-2015 16:25:37 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[09-Dec-2015 17:27:48 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[09-Dec-2015 17:49:14 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[09-Dec-2015 18:08:13 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[09-Dec-2015 19:02:22 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[09-Dec-2015 20:32:51 Asia/Jakarta] PHP Fatal error:  Call to undefined method model_product::get_object_api() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 137
+[12-Dec-2015 03:28:07 Asia/Jakarta] PHP Fatal error:  Call to undefined method stdClass::expired_date() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 595
+[12-Dec-2015 03:28:19 Asia/Jakarta] PHP Fatal error:  Call to undefined method stdClass::expired_date() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 595
+[12-Dec-2015 03:29:32 Asia/Jakarta] PHP Fatal error:  Call to undefined method stdClass::expired_date() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 595
+[12-Dec-2015 03:29:34 Asia/Jakarta] PHP Fatal error:  Call to undefined method stdClass::expired_date() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 595
+[12-Dec-2015 03:30:22 Asia/Jakarta] PHP Fatal error:  Call to undefined method stdClass::expired_date() in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 595
+[21-Dec-2015 23:52:58 America/New_York] PHP Parse error:  syntax error, unexpected ';' in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 425
+[21-Dec-2015 23:52:58 America/New_York] PHP Parse error:  syntax error, unexpected ';' in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 425
+[21-Dec-2015 23:53:00 America/New_York] PHP Parse error:  syntax error, unexpected ';' in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 425
+[15-Jan-2016 20:59:06 Asia/Jakarta] PHP Fatal error:  Call to a member function get_object() on a non-object in /home/k2007810/public_html/mmcp/application/controllers/api.php on line 1419

@@ -1,0 +1,22 @@
+ALIEF
+
+FILES :
+- Controllers: 
+    - api.php
+- Models: 
+    - dashboard/model_order.php
+    - dashboard/model_detail_address.php
+- View:
+    - email/register.php
+- Frontend:
+    - lib/order/get_city.php
+    - member/ticker-login.php
+    - member/pop-login.php
+    - content/footer.php
+    - content/header.php
+    - order/index.php
+    - order/order2.php
+- JS:
+    - order.js
+    - order2.js
+    - bflogin.js

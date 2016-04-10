@@ -1,0 +1,28 @@
+.wrapregister{
+    clear:both;
+    float: left;
+    margin: 35px 0 0 40px;
+    width: 700px;
+}
+.wrapregister form span{
+    clear:both;
+    float: left;
+    margin: 0 15px 15px 0;
+    width: 300px;
+}
+.wrapregister form input{
+    float: left;
+    margin: -3px 0 0 0;
+}
+.wrapregister form input.btn_register{
+    background-color: #8D212F;
+    border: none;
+    font-weight: bold;
+    clear: both;
+    color: #fff;
+    cursor: pointer;
+    float: left;
+    font-size: 14px;
+    padding: 9px;
+    margin: 7px 15px 0 0;
+}

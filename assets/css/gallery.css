@@ -1,0 +1,196 @@
+
+
+.simpleLens-thumbnails-container a{
+	background:#fff;
+	border:1px solid #eaeaea;
+	display: inline-block;
+	width: 83px; 
+	position:relative;
+	height:83px;
+	overflow:hidden;
+}
+
+.simpleLens-thumbnails-container a img.potrait{
+	position: absolute;
+	left: 50%;
+	top: 50%;			
+	width: 100%;
+	height: auto;	
+	-webkit-transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
+	transform: translate(-50%,-50%);
+}
+
+.simpleLens-thumbnails-container a img.landscape{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	height: 100%;
+	width: auto;
+	-webkit-transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
+	transform: translate(-50%,-50%);
+}
+
+.simpleLens-gallery-container{
+
+	float:left;
+/*
+	height:600px;		*/
+
+	position:relative;
+
+	width:100%;
+
+}
+
+
+
+.simpleLens-container{
+
+    display: inline;
+
+		float:left;
+
+/*		height:600px;		*/
+
+    position: relative;
+
+		width:370px;
+
+}
+
+
+
+
+
+.simpleLens-big-image-container {
+
+		/*height:600px;	*/	
+
+		float:left;
+
+    vertical-align: middle;
+
+    text-align: center;
+
+		position:relative;
+
+    width: 370px;
+
+}
+
+
+
+.simpleLens-big-image {
+
+   width: 370px;
+
+		height:auto;
+
+}
+
+
+
+.simpleLens-lens-image {
+
+    width: 370px;
+
+		height:auto;			
+
+    display: inline-block;
+
+    text-align: center;
+
+    margin:0;
+
+    box-shadow:none;
+
+    float:none;
+
+    position:relative;
+
+}
+
+
+
+.simpleLens-mouse-cursor{
+
+	background-color:#CCC;
+
+	opacity:0.2;
+
+	filter: alpha(opacity = 20);
+
+	position:absolute;
+
+	top:0;
+
+	left:0;
+
+	border:1px solid #999;
+
+	box-shadow:0 0 2px 2px #999;
+
+	cursor:none;
+
+}
+
+
+
+.simpleLens-lens-element {
+
+    background-color: #fde2e7;
+
+    box-shadow: 0 0 2px 2px #fde2e7;
+		height:100%;
+
+    left: 510px;
+
+    overflow: hidden;
+
+    position: absolute;
+
+    top: 0;
+
+    width: 370px;
+
+    z-index: 9999;
+
+    text-align: center;
+
+}
+
+
+
+.simpleLens-lens-element img{
+
+    position:relative;
+
+    top:0;
+
+    left:0;
+
+    width:740px;
+
+    max-width:none !important;
+
+}
+
+
+
+.simpleLens-thumbnails-container{
+
+	float:left;
+
+	margin-left:10px;
+
+	width:120px;
+
+}
+
+.simpleLens-thumbnails-container a{
+
+	margin:0 0 22px 0;
+
+}

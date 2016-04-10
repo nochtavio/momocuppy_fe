@@ -1,0 +1,14 @@
+ALIEF
+
+
+FILES :
+- Controllers: 
+    - api.php
+- Models: 
+    - 
+- View:
+    - email/register.php
+- Frontend:
+    - 
+- JS:
+    - 

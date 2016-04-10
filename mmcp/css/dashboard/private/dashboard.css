@@ -1,0 +1,49 @@
+a{
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: none;
+    color: #2C3E50;
+}
+
+a.link-footer:hover{
+    text-decoration: none;
+    color: white;
+}
+
+.cleardiv{
+    clear: both;
+}
+
+.clearpaddingmargin{
+    padding: 0;
+    margin: 0;
+}
+
+.full{
+    width: 100%;   
+}
+
+.tdcenter{
+    text-align: center;
+}
+
+.tdright{
+    text-align: right;
+}
+
+.page-header{
+    margin-top: 10px !important;
+}
+
+.ajaxloading-tr{
+    background: url('ajax.gif') no-repeat left top;
+    height: 16px;
+    width: 16px;
+}
+
+table th{
+    text-align: center;
+}

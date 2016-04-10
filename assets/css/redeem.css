@@ -1,0 +1,774 @@
+#wrapredeem{
+
+	clear:both;
+
+	margin:0 auto;
+
+	padding:10px 0;
+
+	text-align:left;
+
+	width:1080px;
+
+}
+
+
+
+
+
+#redeemcontent{
+
+	background:url(/images/products/archive/bgshoppingbag.png) repeat center top;
+
+	clear:both;
+
+	float:left;
+
+	margin-left:60px;
+
+	padding:20px 100px;
+
+	width:750px;
+
+}
+
+
+
+#redeemcontent h3{
+
+	color:#ee5363;
+
+	float:left;
+
+	font-family:Lobster;
+
+	font-size:46px;
+
+	font-weight:normal;
+
+	margin-top:30px;
+
+	text-align:center;
+
+	width:100%;
+
+}
+
+
+
+#redeemcontent span.subtitle{
+
+	clear:both;
+
+	float:left;
+
+	font-size:22px;
+
+	text-align:center;
+
+	margin-top:40px;
+
+	width:100%;
+
+}
+
+
+
+#redeemcontent ul.listredeem{
+
+	clear:both;
+
+	float:left;
+
+	margin-top:40px;
+
+	text-align:left;
+
+	width:100%;
+
+}
+
+#redeemcontent ul.listredeem li{
+
+	float:left;
+
+	margin:0 30px;
+
+	width:186px;
+
+}
+
+#redeemcontent ul.listredeem li .img{
+	background:#fff;
+	border:1px solid #eaeaea;
+	height:186px;
+	width:186px;
+	position:relative;
+	overflow:hidden;	
+}
+
+#redeemcontent ul.listredeem li .img img.potrait{
+	position: absolute;
+	left: 50%;
+	top: 50%;			
+	width: 100%;
+	height: auto;	
+	-webkit-transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
+	transform: translate(-50%,-50%);
+}
+
+#redeemcontent ul.listredeem li .img img.landscape{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	height: 100%;
+	width: auto;
+	-webkit-transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
+	transform: translate(-50%,-50%);
+}
+
+#redeemcontent ul.listredeem li span.redeem_title{
+
+	clear:both;
+
+	float:left;
+
+	font-size:15px;
+
+	margin-top:15px;
+
+	text-align:center;
+
+	width:100%;
+
+}
+
+
+
+#redeemcontent ul.listredeem li span.redeem_points{
+
+	clear:both;
+
+	float:left;
+
+	font-size:22px;
+
+	font-weight:bold;
+
+	text-align:center;
+
+	width:100%;	
+
+}
+
+#redeemcontent ul.listredeem li a.redeembtn{
+
+	background:url(/images/layout/redeem/redeem.png) no-repeat left top;
+
+	clear:both;
+
+	float:left;
+
+	height:37px;
+
+	margin:17px 0 0 20px;
+
+	width:149px;
+
+}
+
+#redeemcontent ul.listredeem li a.redeembtn:hover{
+
+	background:url(/images/layout/redeem/redeemh.png) no-repeat left top;	
+
+}
+
+#redeemcontent ul.listredeem li a.redeembtn span{
+
+	display:none;
+
+}
+
+
+
+#redeemcontent span.extranote{
+
+	clear:both;
+
+	float:left;
+
+	font-size:14px;
+
+	margin:60px 0 0 30px;
+
+	text-align:left;
+
+	width:100%;
+
+}
+
+
+
+/*start redeem2*/
+
+.redeem_pic{
+
+	float:left;
+
+	margin-top:35px;
+
+	width:310px;
+
+
+}
+
+.redeem_pic img{
+	width:310px;
+}
+
+.redeem_detail{
+
+	float:left;
+
+	margin:35px 0 0 40px;
+
+	width:360px;
+
+}
+
+.redeem_detail p{
+	clear: both;
+	color: #a8a8a8;
+	float: left;
+	font-size: 18px;
+	margin-top: 15px;
+	line-height: 25px;
+	text-align: left;
+	width: 100%;
+}
+
+.redeem_detail span{
+
+	clear:both;
+
+	float:left;
+
+	text-align:left;	
+
+}
+a.forcelogin{
+	color:inherit;
+	text-decoration:none;
+}
+
+p.logininfo{
+	color:#8c5422;
+}
+
+
+.redeem_detail span.pointtitle{
+
+	border-bottom:1px solid #8b5623;
+
+	font-weight:bold;
+
+	font-size:16px;
+
+	margin-top:20px;
+
+	padding-bottom:1px;
+
+	text-transform:uppercase;
+
+}
+
+
+
+.redeem_detail span.detail_point{
+
+	color:#ee5463;
+
+	font-size:30px;
+
+	font-family:'ProximaNova-Bold';	
+
+	margin-top:10px;
+
+	width:100%;
+
+}
+
+.redeem_detail span.detail_name{
+
+	font-family:'ProximaNova-Bold';
+
+	font-size:31px;
+
+	margin-top:30px;
+
+}
+
+.redeem_detail p.detail_desc{
+
+	clear:both;
+
+	color:#a8a8a8;
+
+	float:left;
+
+	font-size:18px;
+
+	margin-top:15px;
+
+	line-height:25px;
+
+	text-align:left;
+
+	width:100%;
+
+}
+
+.redeem_detail span.detail_cost{
+
+	color:#a8a8a8;	
+
+	font-family:'ProximaNova-Bold';
+
+	font-size:28px;
+
+	margin-top:10px;
+
+}
+
+.redeem_detail a.detail_redeembtn{
+
+	background:url(/images/layout/redeem/redeemnew.png) no-repeat left top;
+
+	clear:both;
+
+	float:left;
+
+	height:50px;
+
+	margin:15px 0 0 0;
+
+	width:208px;
+
+}
+
+.redeem_detail a.detail_redeembtn:hover{
+	background:url(/images/layout/redeem/redeemnewh.png) no-repeat left top;
+}
+.redeem_detail a.detail_redeembtn span{
+
+	display:none;
+
+}
+/*
+
+
+.redeem_detail a.detail_redeembtn:hover{
+
+	background:url(/images/layout/redeem/redeemh.png) no-repeat left top;
+
+}*/
+
+/*end redeem2*/
+
+
+
+/*redeem 3*/
+
+.wrapaddressbox{
+
+	background:url(/images/products/archive/bgshoppingbag.png) repeat center top;
+
+	border-radius:5px;
+
+  box-shadow: 2px 2px 2px #d6cfd1;		
+
+	float:left;
+
+	margin-left:18%;
+
+	width:680px;
+
+}
+
+	.wrapaddressbox h2{
+
+		border-bottom:2px solid #fff;
+
+		float:left;
+
+		font-size:20px;
+
+		font-family:'ProximaNova-Bold';
+
+		margin-top:20px;
+
+		padding-bottom:20px;
+
+		text-transform:uppercase;
+
+		width:100%;
+
+	}
+
+	.wrapaddressbox .box_address{
+
+		background:#fff9fa;
+
+		float:left;		
+
+		margin-left:55px;
+
+		padding-bottom:20px;
+
+		width:570px;
+
+	}
+
+	.wrapaddressbox .box_address h3{
+
+		float:left;
+
+		margin-top:20px;
+
+		text-transform:uppercase;
+
+		width:100%;
+
+	}
+
+	
+
+	.wrapaddressbox .box_address span.address_detail{
+
+		float:left;
+
+		margin-top:20px;
+
+		width:100%;
+
+	}
+
+	
+
+	.wrapaddressbox .box_address a.btnedit{
+
+		clear:both;
+
+		color:#8a5421;
+
+		float:left;
+
+		margin-top:20px;
+
+		text-decoration:none;				
+
+		text-transform:uppercase;
+
+		width:100%;
+
+	}
+
+	.wrapaddressbox .box_address a.btnedit:hover{
+
+		text-decoration:underline;
+
+	}
+
+	.wrapaddnewaddr{
+
+		clear:both;
+
+		float:left;
+
+		margin-top:20px;
+
+		width:100%;
+
+	}
+
+	.wrapaddnewaddr a.newaddr{
+
+		background:url(/images/layout/order/icnplus.gif) no-repeat left top;
+
+		float:left;
+
+		margin:25px 0 0 35%;
+
+		width:300px;
+
+	}
+
+	
+
+	.wrapaddnewaddr a.newaddr span{
+
+		color:#8f5a29;
+
+		float:left;
+
+		margin-left:35px;
+
+		text-decoration:underline;
+
+		text-align:left;
+
+		text-transform:uppercase;
+
+	}
+
+	.selboxaddr{
+
+		clear:both;
+
+		float:left;
+
+		margin-top:40px;
+
+		width:100%;
+
+	}
+
+	.selboxaddr span{
+
+		float:left;
+
+		padding-right:10px;
+
+		margin-left:20%;
+
+	}
+
+		
+
+	.selboxaddr .select-style {
+
+			padding: 0;
+
+			margin: 0;
+
+			width: 150px;
+
+			border-radius: 3px;
+
+			overflow: hidden;
+
+			background-color: #fff;
+
+	
+
+			background: #fff url(/images/layout/order/select-arr-down.gif) no-repeat 95% 50%;
+
+	}
+
+	
+
+	.selboxaddr .select-style select {
+
+			padding:2px 0;
+
+			width: 100%;
+
+			border: none;
+
+			box-shadow: none;
+
+			background-color: transparent;
+
+			background-image: none;
+
+			-webkit-appearance: none;
+
+				 -moz-appearance: none;
+
+							appearance: none;
+
+	}
+
+	
+
+	
+
+	.selboxaddr .select-style select::-ms-expand {
+
+			display: none;
+
+	}
+
+	.selboxaddr .select-style select:focus {
+
+			outline: none;
+
+	}	
+
+	
+
+	ul.order_rules{
+
+		clear:both;
+
+		float:left;
+
+		font-size:13px;
+
+		margin:28px 0 0 55px;
+
+		padding-bottom:20px;
+
+		text-align:left;
+
+		width:570px;
+
+	}
+
+	ul.order_rules li{
+
+		list-style-image:url(/images/layout/order/bull.gif);
+
+		float:left;
+
+		width:100%;
+
+	}
+
+	
+
+	.wrapbtnredeem{
+
+		clear:both;
+
+		float:left;
+
+		margin-bottom:20px;
+
+		width:100%;
+
+	}
+
+/*end redeem 3*/
+
+
+
+/*redeem 4*/
+
+.order_result{
+
+	clear:both;
+
+	float:left;
+
+	margin-top:45px;
+
+	text-align:center;
+
+	width:100%;
+
+}
+
+.order_result h3.thanksheader{
+
+	font-family:Lobster;
+
+	font-size:24px;
+
+	font-weight:normal;
+
+	margin-top:20px;
+
+}
+
+
+
+.order_result .final_summary{
+
+	background:url(/images/products/archive/bgshoppingbag.png) repeat center top;	
+
+	border-radius:10px;	
+
+	clear:both;
+
+	float:left;
+
+	margin:45px 0 0 30%;
+
+	padding:10px;
+
+	width:420px;
+
+}
+
+.order_result .final_summary span{
+
+	clear:both;
+
+	float:left;
+
+	text-align:center;
+
+	width:100%;
+
+}
+
+
+
+.order_result .final_summary span.sum_title{
+
+	margin-top:10px;
+
+	text-transform:uppercase;
+
+	text-decoration:underline;
+
+}
+
+.order_result .final_summary span.sum_data{
+
+	font-weight:bold;
+
+	margin-bottom:10px;
+
+}
+
+.order_result .row{
+
+	clear:both;
+
+	float:left;
+
+	margin-top:20px;
+
+	width:100%;
+
+}
+
+.order_result .row p{
+
+	margin-top:30px;
+
+}
+
+.order_result .row p a{
+
+	color:#8f5a29;
+
+	font-weight:bold;
+
+}
+
+
+
+.order_result .row a.btnprint{
+
+	float:left;
+
+	margin:60px 0 0 41%;
+
+}
+
+/*end redeem 4*/

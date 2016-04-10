@@ -1,0 +1,27 @@
+EFF
+
+
+FILES :
+
+
+- /order/index.php
+
+- /test/test.php
+- /test/test2.php
+- /content/footer.php
+
+
+
+
+CSS :
+
+
+- /css/popaddress.css
+
+
+- /css/product.css
+
+- /css/message.css
+
+JS :
+- /js/mfp-message.js

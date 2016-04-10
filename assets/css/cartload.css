@@ -1,0 +1,159 @@
+#cartload{
+	background:url(/images/layout/member/bgloadcart.png) repeat center top;
+	border-radius:20px;
+  box-shadow: 2px 2px 2px #d6cfd1;
+	float:left;
+	padding:10px 20px 10px 40px;
+	width:795px;
+}
+
+#cartload h3.ordercode{
+	color:#dd5c4c;
+	font-size:20px;
+	float:left;
+	font-weight:bold;
+	margin-top:15px;
+}
+
+#cartload .cartdesc{
+	border-bottom:3px solid #fff;
+	clear:both;
+	float:left;
+	padding:7px 0;
+	width:775px;
+}
+
+#cartload .cartdesc span{
+	color:#824f18;
+	float:left;
+	font-size:15px;
+	font-weight:bold;
+	min-width:50px;
+}
+.popupdetail{
+	width:60%;
+}
+.popupqty{
+	text-align:center;	
+	width:10%;
+}
+.popupprice{
+	text-align:center;	
+	width:15%;
+}
+.popuptotal{
+	text-align:center;
+	width:15%;
+}
+
+.popupimg{
+	width:15%;
+}
+.popupdesc{
+	text-align:left;
+	width:45%;
+}
+
+.popupdesc h3.titledesc{
+	color:#824f18;
+	font-size:19px;
+	font-weight:bold;
+	float:left;
+	text-transform:uppercase;
+}
+.popupdesc span{
+	clear:both;
+	float:left;
+	font-size:15px;
+	font-weight:normal;
+	margin-top:5px;
+	width:100%;
+}
+
+.popupqty span,
+.popupprice span,
+.popuptotal span{
+	font-size:15px;
+	font-weight:normal;
+}
+.popuptotal span{
+	font-weight:bold;
+}
+
+#cartload ul#itemload{
+	clear:both;
+	color:#824f18;
+	float:left;
+	height:292px;
+	margin-top:10px;
+	font-size:12px;
+	font-weight:bold;	
+	overflow:hidden;
+	width:775px;	
+}
+#cartload ul#itemload li{
+	float:left;
+	margin-bottom:30px;
+	width:100%;
+}
+
+#cartload ul#itemload li div{
+	float:left;
+}
+
+#cartload .popupsum{
+	clear:both;
+	float:left;
+	margin-top:10px;
+	padding-bottom:10px;
+	width:775px;
+}
+#cartload .popupsum .row{
+	clear:both;
+	float:right;
+	text-align:right;
+	width:385px;
+}
+
+#cartload .popupsum .row span{
+	float:left;
+	line-height:25px;
+}
+
+#cartload .popupsum .row span.titlesum,
+#cartload .popupsum .row span.titlesumtotal{
+	font-size:17px;
+	width:50%;
+}
+
+#cartload .popupsum .row span.titlesumtotal{
+	font-weight:bold;
+}
+
+#cartload .popupsum .row span.price{
+	font-size:17px;
+	width:50%;
+}
+
+.popupaddress{
+	width:40%;
+}
+.popuppayment{
+	width:35%;
+}
+.popupstat{
+	width:25%;
+}
+
+.detailpayment{
+	border-bottom:3px solid #fff;
+	clear:both;
+	float:left;
+	margin-top:10px;
+	padding-bottom:10px;
+	width:775px;	
+}
+
+.detailpayment div{
+	float:left;
+}

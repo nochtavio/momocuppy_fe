@@ -1,0 +1,93 @@
+#mfp_message{
+	background: #ffb4c1;
+	border-radius: 10px;
+	box-shadow: 2px 2px 2px #d6cfd1;
+	clear: both;
+	float: left;
+	padding: 20px 0;
+	position: relative;
+	text-align:center;
+	width: 400px;	
+}
+
+#mfp_message button.mfp-close{
+	display:none;
+}
+
+#mfp_message p.message{
+	clear:both;
+	float:left;
+	margin:5px 0;		
+	width:inherit;
+}
+
+h3.titlemsg{
+	color:#d24f72;
+	font-family:Lobster;
+	font-size:20px;
+	font-weight:bold;
+	float:left;
+	margin:5px 0;
+	text-align:center;	
+	width:inherit;
+}
+
+.wrapbtn{
+	clear:both;
+	float:left;
+	margin:5px 0 0 90px;
+	width:230px;
+}
+
+.wrapbtn .yesbtn{
+	clear:none;
+	background:none;
+	border:1px solid #fff;
+	float:left;
+	cursor:pointer;
+	height:24px;
+	margin:0 10px 0 0;
+	padding:0 10px;
+	width:80px;	
+	
+}
+
+.wrapbtn .nobtn{
+	clear:none;
+	background:#d2718d;
+	border:1px solid #df9baf;
+	float:left;
+	cursor:pointer;
+	height:24px;
+	margin:0 10px 0 0;
+	padding:0 10px;
+	width:80px;
+}
+
+.wrapbtn span,
+.wrapok span{
+	clear:both;
+	color:#fff;
+	float:left;
+	font-weight:bold;
+	font-size:15px;
+	text-transform:uppercase;
+	width:100%;
+}
+
+.wrapok{
+	clear:both;
+	float:left;
+	width:100%;
+}
+
+.wrapok .okbtn{
+	clear:none;
+	background:#d2718d;
+	border:1px solid #df9baf;
+	cursor:pointer;
+	height:24px;
+	margin:5px auto 0 auto;
+	padding:0 10px;
+	width:80px;	
+}
