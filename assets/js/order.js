@@ -31,11 +31,13 @@ $(document).ready(function () {
         subtotal = 0;
         var totalweight = 0;
         var point = 0;
+        var temp_height = 0;
+        var temp_width = 0;
         if (result['result'] === 's'){
           $.each(result['content'], function (key, value) {
             $('#shopbaglist').append("\
               <li>\
-                <div class='bag_prodimg'><img src='/mmcp/images/products/" + value['img'] + "' width=85 height=115 /></div>\
+                <div class='bag_prodimg'><img id='cart_img_" + value['id'] + "' src='/mmcp/images/products/" + value['img'] + "' width=85 height=115 /></div>\
                 <div class='bag_proddesc'><span>" + value['product_name'] + "</span></div>\
                 <div class='bag_qty'><span>" + value['qty'] + "</span></div>\
                 <div class='bag_color'><span>" + value['color_name'] + "</span></div>\
@@ -48,6 +50,17 @@ $(document).ready(function () {
             $('#div-hidden').append("\
               <input type='hidden' id='object" + totalobject + "' value='" + value['id'] + "' />\
             ");
+            
+            //Check Image Resolution
+            temp_height = $('#cart_img_'+value['id']).height();
+            temp_width = $('#cart_img_'+value['id']).width();
+            if(temp_width > temp_height){
+              $('#cart_img_'+value['id']).addClass("img-landscape");
+            }else{
+              $('#cart_img_'+value['id']).addClass("img-portrait");
+            }
+            //End Check Image Resolution
+            
             totalobject++;
             subtotal = parseInt(subtotal) + (parseInt(value['qty']) * parseInt(value['product_price']));
             totalweight = parseFloat(totalweight) + (parseInt(value['qty']) * parseFloat(value['product_weight']));

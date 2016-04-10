@@ -2,7 +2,8 @@
   <div class="col-lg-12">
     <form class="form-horizontal" role="form" id="form_edit">
       <div class="form-group">
-        <div class="col-sm-12" id="txt_editcontent">
+        <div class="col-sm-12">
+          <textarea id="txt_editcontent" style="width:100%;"></textarea>
         </div>
       </div>
       <div class="alert alert-warning modal_warning" role="alert" style="display: none;"></div>

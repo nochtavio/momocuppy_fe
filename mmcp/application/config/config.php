@@ -30,7 +30,7 @@
 
 */
 
-$config['base_url']	= 'http://www.momocuppy.com/mmcp/';
+$config['base_url']	= 'http://www.momocuppy.fe/mmcp/';
 
 
 

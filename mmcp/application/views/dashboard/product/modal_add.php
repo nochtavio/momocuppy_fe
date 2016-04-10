@@ -21,7 +21,8 @@
           </div>
           <div class="form-group">
             <label for="txt_addproductdesc" class="col-sm-4 control-label">Product Description</label>
-            <div class="col-sm-6" id="txt_addproductdesc">
+            <div class="col-sm-6">
+              <div id="txt_addproductdesc"></div>
             </div>
           </div>
           <div class="form-group">

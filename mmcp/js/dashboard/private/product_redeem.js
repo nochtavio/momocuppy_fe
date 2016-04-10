@@ -100,7 +100,7 @@ $(document).ready(function () {
   {
     var product_name = $('#txt_addproductname').val();
     var product_point = $('#txt_addproductpoint').val();
-    var product_desc = $('#txt_addproductdesc').code();
+    var product_desc = $('#txt_addproductdesc').trumbowyg('html');
     var publish_date = $('#txt_addpublishdate').val();
     $.ajax({
       url: baseurl + 'dashboard/product_redeem/check_field',
@@ -157,7 +157,7 @@ $(document).ready(function () {
     var id = $('#txteditid').val();
     var product_name = $('#txt_editproductname').val();
     var product_point = $('#txt_editproductpoint').val();
-    var product_desc = $('#txt_editproductdesc').code();
+    var product_desc = $('#txt_editproductdesc').trumbowyg('html');
     var publish_date = $('#txt_editpublishdate').val();
     $.ajax({
       url: baseurl + 'dashboard/product_redeem/check_field',
@@ -297,7 +297,7 @@ $(document).ready(function () {
               $("#txteditid").val(val);
               $("#txt_editproductname").val(result['product_name']);
               $("#txt_editproductpoint").val(result['product_point']);
-              $('#txt_editproductdesc').code(result['product_desc']);
+              $('#txt_editproductdesc').trumbowyg('html', result['product_desc']);
               $("#txt_editpublishdate").val(result['publish_date']);
 
               $('.modal_warning').hide();
@@ -350,25 +350,12 @@ $(document).ready(function () {
     zIndexOffset: '9999',
     format: 'yyyy-m-d'
   });
-  $('#txt_addproductdesc').summernote({
-    height: 150,
-    toolbar:
-      [
-        //[groupname, [button list]]
-        ['style', ['bold', 'italic', 'underline']],
-        ['font', []],
-        ['fontsize', ['fontsize']]
-      ]
+  $('#txt_addproductdesc').trumbowyg({
+    btns: [['formatting'], ['bold', 'italic', 'underline']]
   });
-  $('#txt_editproductdesc').summernote({
-    height: 150,
-    toolbar:
-      [
-        //[groupname, [button list]]
-        ['style', ['bold', 'italic', 'underline']],
-        ['font', []],
-        ['fontsize', ['fontsize']]
-      ]
+  
+  $('#txt_editproductdesc').trumbowyg({
+    btns: [['formatting'], ['bold', 'italic', 'underline']]
   });
   //End Initial Setup
 

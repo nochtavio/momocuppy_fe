@@ -17,8 +17,7 @@ if (!$this->session->userdata('admin')) {
     <link rel="stylesheet" media="screen" type="text/css" href="<?php echo base_url() . 'css/dashboard/font-awesome.css'; ?>" />
     <link rel="stylesheet" media="screen" type="text/css" href="<?php echo base_url() . 'css/dashboard/datepicker.css'; ?>" />
     <link rel="stylesheet" media="screen" type="text/css" href="<?php echo base_url() . 'css/dashboard/datepicker3.css'; ?>" />
-    <link rel="stylesheet" media="screen" type="text/css" href="<?php echo base_url() . 'css/dashboard/pickacolor.css'; ?>" />
-    <link rel="stylesheet" media="screen" type="text/css" href="<?php echo base_url() . 'css/dashboard/summernote.css'; ?>" />
+    <link rel="stylesheet" media="screen" type="text/css" href="<?php echo base_url() . 'css/dashboard/trumbowyg.css'; ?>" />
     <link rel="stylesheet" media="screen" type="text/css" href="<?php echo base_url() . 'css/dashboard/private/dashboard.css'; ?>" />
   </head>
   <body>
@@ -222,6 +221,7 @@ if (!$this->session->userdata('admin')) {
     <script type="text/javascript" src="<?php echo base_url() . 'js/dashboard/tinycolor.js'; ?>"></script>
     <script type="text/javascript" src="<?php echo base_url() . 'js/dashboard/pickacolor.js'; ?>"></script>
     <script type="text/javascript" src="<?php echo base_url() . 'js/dashboard/summernote.js'; ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url() . 'js/dashboard/trumbowyg.js'; ?>"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="<?php echo base_url() . 'js/dashboard/private/function.js'; ?>"></script>
 

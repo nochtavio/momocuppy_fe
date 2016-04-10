@@ -20,8 +20,9 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="txt_addproductdesc" class="col-sm-4 control-label">Product Description</label>
-            <div class="col-sm-6" id="txt_editproductdesc">
+            <label for="txt_editproductdesc" class="col-sm-4 control-label">Product Description</label>
+            <div class="col-sm-6">
+              <textarea id="txt_editproductdesc" style="width:100%;"></textarea>
             </div>
           </div>
           <div class="form-group">

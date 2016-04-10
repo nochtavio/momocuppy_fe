@@ -101,7 +101,7 @@ $(document).ready(function () {
   {
     var product_name = $('#txt_addproductname').val();
     var product_price = $('#txt_addproductprice').val();
-    var product_desc = $('#txt_addproductdesc').code();
+    var product_desc = $('#txt_addproductdesc').trumbowyg('html');
     var product_weight = $('#txt_addproductweight').val();
     var publish_date = $('#txt_addpublishdate').val();
     var category_homedecor = [];
@@ -172,7 +172,7 @@ $(document).ready(function () {
     var id = $('#txteditid').val();
     var product_name = $('#txt_editproductname').val();
     var product_price = $('#txt_editproductprice').val();
-    var product_desc = $('#txt_editproductdesc').code();
+    var product_desc = $('#txt_editproductdesc').trumbowyg('html');
     var product_weight = $('#txt_editproductweight').val();
     var publish_date = $('#txt_editpublishdate').val();
     var category_homedecor = [];
@@ -325,7 +325,7 @@ $(document).ready(function () {
               $("#txteditid").val(val);
               $("#txt_editproductname").val(result['product_name']);
               $("#txt_editproductprice").val(result['product_price']);
-              $('#txt_editproductdesc').code(result['product_desc']);
+              $('#txt_editproductdesc').trumbowyg('html', result['product_desc']);
               $("#txt_editproductweight").val(result['product_weight']);
               $("#txt_editpublishdate").val(result['publish_date']);
               var category_length = result['category'].length;
@@ -403,35 +403,13 @@ $(document).ready(function () {
     zIndexOffset: '9999',
     format: 'yyyy-m-d'
   });
-  $('#txt_addproductdesc').summernote({
-    height: 150,
-    toolbar:
-      [
-        //[groupname, [button list]]
-        ['style', ['bold', 'italic', 'underline']],
-        ['font', []],
-        ['fontsize', ['fontsize']]
-      ],
-    onPaste: function (e) {
-        var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
-        e.preventDefault();
-        document.execCommand('insertText', false, bufferText);
-    }
+  
+  $('#txt_addproductdesc').trumbowyg({
+    btns: [['formatting'], ['bold', 'italic', 'underline']]
   });
-  $('#txt_editproductdesc').summernote({
-    height: 150,
-    toolbar:
-      [
-        //[groupname, [button list]]
-        ['style', ['bold', 'italic', 'underline']],
-        ['font', []],
-        ['fontsize', ['fontsize']]
-      ],
-    onPaste: function (e) {
-        var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
-        e.preventDefault();
-        document.execCommand('insertText', false, bufferText);
-    }
+  
+  $('#txt_editproductdesc').trumbowyg({
+    btns: [['formatting'], ['bold', 'italic', 'underline']]
   });
   //End Initial Setup
 

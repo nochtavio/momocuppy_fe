@@ -10,7 +10,7 @@
 <script type="text/javascript" src="/assets/js/bflogin.js" ></script>
 <script type="text/javascript" src="/assets/js/mfp-message.js" ></script>
 <script type="text/javascript">
-  var base_url = "http://www.momocuppy.com/mmcp/";
+  var base_url = "http://www.momocuppy.fe/mmcp/";
   var cur_url = "<?php echo "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" ?>";
   var format_number = function (num) {
     if (typeof (num) != 'string')

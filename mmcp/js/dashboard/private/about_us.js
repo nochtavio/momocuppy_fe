@@ -64,7 +64,7 @@ $(document).ready(function () {
     success: function (result) {
       if (result['result'] === 's')
       {
-        $('#txt_editcontent').code(result['content']);
+        $('#txt_editcontent').trumbowyg('html', result['content']);
       }
       else
       {
@@ -76,20 +76,8 @@ $(document).ready(function () {
   //End Function Set Edit Product
 
   //Initial Setup
-  $('#txt_editcontent').summernote({
-    height: 150,
-    toolbar:
-      [
-        //[groupname, [button list]]
-        ['style', ['bold', 'italic', 'underline']],
-        ['font', []],
-        ['fontsize', ['fontsize']]
-      ],
-    onPaste: function (e) {
-        var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
-        e.preventDefault();
-        document.execCommand('insertText', false, bufferText);
-    }
+  $('#txt_editcontent').trumbowyg({
+    btns: [['formatting'], ['bold', 'italic', 'underline']]
   });
   getObject();
   //End Initial Setup
