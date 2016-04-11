@@ -6,25 +6,13 @@
   <div class="col-lg-12">
     <form class="form-inline form_filter" role="form">
       <div class="form-group">
-        <select class="form-control" id="sel_type">
-          <option value="-1">All Category</option>
-          <?php 
-            foreach ($fetch_type as $type) {
-              ?>
-              <option value="<?php echo $type->id ?>"><?php echo $type->type_name ?></option>
-              <?php
-            }
-          ?>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="sr-only" for="txt_category_name">Category Name</label>
-        <input type="text" class="form-control" id="txt_category_name" placeholder="Category Name">
+        <label class="sr-only" for="txt_type_name">Type Name</label>
+        <input type="text" class="form-control" id="txt_type_name" placeholder="Type Name">
       </div>
       <div class="form-group">
         <select class="form-control" id="sel_order">
-          <option value="-1">Sort By Category Name A-Z</option>
-          <option value="1">Sort By Category Name Z-A</option>
+          <option value="-1">Sort By Type Name A-Z</option>
+          <option value="1">Sort By Type Name Z-A</option>
           <option value="2">Sort Highest Position</option>
           <option value="3">Sort Lowest Position</option>
           <option value="4">Sort By Newest Data</option>
@@ -42,7 +30,7 @@
       <div class="form-group">
         <div class="ajaxloading-tr"></div>
       </div>
-      <button id="btn_add" type="button" class="btn btn-primary pull-right">Add Category</button>
+      <button id="btn_add" type="button" class="btn btn-primary pull-right">Add Type</button>
       <div class="cleardiv"></div>
     </form>
   </div>
@@ -55,8 +43,7 @@
         <thead>
           <tr>
             <th>No</th>
-            <th>Type</th>
-            <th>Category Name</th>
+            <th>Type Name</th>
             <th>Position</th>
             <th>Detail</th>
             <th>Visible</th>

@@ -1,34 +1,28 @@
 <?php
 
-class category extends CI_Controller {
+class type extends CI_Controller {
 
   function __construct() {
     date_default_timezone_set('Asia/Jakarta');
     parent::__construct();
     $this->load->model('dashboard/model_admin', '', TRUE);
-    $this->load->model('dashboard/model_category', '', TRUE);
     $this->load->model('dashboard/model_type', '', TRUE);
   }
 
   function index() {
     //Data
-    $content['page'] = "Category";
+    $content['page'] = "Type";
     $content['pagesize'] = 10;
 
     //JS
-    $content['js'][0] = 'js/dashboard/private/category.js';
+    $content['js'][0] = 'js/dashboard/private/type.js';
 
-    //Get Type
-    $external_data['fetch_type'] = $this->model_type->get_object(0, "", 1, 0)->result();
-    
     //Modal
-    $content['modal'][0] = $this->load->view('dashboard/category/modal_add', $external_data, TRUE);
-    $content['modal'][1] = $this->load->view('dashboard/category/modal_edit', $external_data, TRUE);
-    $content['modal'][2] = $this->load->view('dashboard/category/modal_remove', $external_data, TRUE);
-    
-    $content['fetch_type'] = $external_data['fetch_type'];
-    
-    $data['content'] = $this->load->view('dashboard/category/index', $content, TRUE);
+    $content['modal'][0] = $this->load->view('dashboard/type/modal_add', '', TRUE);
+    $content['modal'][1] = $this->load->view('dashboard/type/modal_edit', '', TRUE);
+    $content['modal'][2] = $this->load->view('dashboard/type/modal_remove', '', TRUE);
+
+    $data['content'] = $this->load->view('dashboard/type/index', $content, TRUE);
     $this->load->view('dashboard/template_index', $data);
   }
 
@@ -47,13 +41,9 @@ class category extends CI_Controller {
       $limit = ($page - 1) * $size;
       //end paging
       //Filter
-      $type = 0;
-      if ($this->input->post('type', TRUE)) {
-        $type = $this->input->post('type', TRUE);
-      }
-      $category_name = "";
-      if ($this->input->post('category_name', TRUE)) {
-        $category_name = $this->input->post('category_name', TRUE);
+      $type_name = "";
+      if ($this->input->post('type_name', TRUE)) {
+        $type_name = $this->input->post('type_name', TRUE);
       }
       $visible = 0;
       if ($this->input->post('visible', TRUE)) {
@@ -65,7 +55,7 @@ class category extends CI_Controller {
       }
       //End Filter
 
-      $totalrow = $this->model_category->get_object(0, $category_name, $type, $visible, $order)->num_rows();
+      $totalrow = $this->model_type->get_object(0, $type_name, $visible, $order)->num_rows();
 
       //Set totalpaging
       $totalpage = ceil($totalrow / $size);
@@ -73,14 +63,13 @@ class category extends CI_Controller {
       //End Set totalpaging
 
       if ($totalrow > 0) {
-        $query = $this->model_category->get_object(0, $category_name, $type, $visible, $order, $limit, $size)->result();
+        $query = $this->model_type->get_object(0, $type_name, $visible, $order, $limit, $size)->result();
         $temp = 0;
         foreach ($query as $row) {
           $data['result'] = "s";
 
           $data['id'][$temp] = $row->id;
           $data['type_name'][$temp] = $row->type_name;
-          $data['category_name'][$temp] = $row->category_name;
           $data['position'][$temp] = $row->position;
           $data['visible'][$temp] = $row->visible;
 
@@ -94,7 +83,7 @@ class category extends CI_Controller {
         $data['size'] = $size;
       } else {
         $data['result'] = "f";
-        $data['message'] = "No Category";
+        $data['message'] = "No Type";
       }
       echo json_encode($data);
     }
@@ -105,9 +94,9 @@ class category extends CI_Controller {
     $checkadmin = $this->model_admin->check_admin($admin)->num_rows();
     if ($checkadmin > 0) {
       //Get Post Request
-      $category_name = "";
-      if ($this->input->post('category_name', TRUE)) {
-        $category_name = $this->input->post('category_name', TRUE);
+      $type_name = "";
+      if ($this->input->post('type_name', TRUE)) {
+        $type_name = $this->input->post('type_name', TRUE);
       }
 
       $position = "";
@@ -118,8 +107,8 @@ class category extends CI_Controller {
       //Check Error
       $data['message'] = "";
 
-      if ($category_name === "") {
-        $data['message'] .= "Category name must be filled! <br/>";
+      if ($type_name === "") {
+        $data['message'] .= "Type name must be filled! <br/>";
       }
       if ($position === "") {
         $data['message'] .= "Position must be filled! <br/>";
@@ -142,23 +131,16 @@ class category extends CI_Controller {
     //Get Post
     $element = $this->input->post('element', TRUE);
     $path = $this->input->post('path', TRUE);
-    $type = $this->input->post('type', TRUE);
     //End Get Post
     //Set File Name
-    if ($type == "img") {
-      $file_name = "category";
-    } else {
-      $file_name = "category_h";
-    }
-
-    $lastid = $this->model_category->get_last_id()->result();
+    $lastid = $this->model_type->get_last_id()->result();
     if ($lastid) {
       foreach ($lastid as $row) {
         $newid = $row->id + 1;
-        $img = $file_name . $newid . ".png";
+        $img = "type" . $newid . ".png";
       }
     } else {
-      $img = $file_name . "1.png";
+      $img = "type" . "1.png";
     }
     //End Set File Name
 
@@ -187,14 +169,9 @@ class category extends CI_Controller {
     $checkadmin = $this->model_admin->check_admin($admin)->num_rows();
     if ($checkadmin > 0) {
       //Get Post Request
-      $type = "";
-      if ($this->input->post('type', TRUE)) {
-        $type = $this->input->post('type', TRUE);
-      }
-
-      $category_name = "";
-      if ($this->input->post('category_name', TRUE)) {
-        $category_name = $this->input->post('category_name', TRUE);
+      $type_name = "";
+      if ($this->input->post('type_name', TRUE)) {
+        $type_name = $this->input->post('type_name', TRUE);
       }
 
       $position = "";
@@ -202,20 +179,18 @@ class category extends CI_Controller {
         $position = $this->input->post('position', TRUE);
       }
 
-      $lastid = $this->model_category->get_last_id()->result();
+      $lastid = $this->model_type->get_last_id()->result();
       if ($lastid) {
         foreach ($lastid as $row) {
           $newid = $row->id + 1;
-          $img = 'category' . $newid . ".png";
-          $img_hover = 'category_h' . $newid . ".png";
+          $img = 'type' . $newid . ".png";
         }
       } else {
-        $img = "category1.png";
-        $img_hover = "category_h1.png";
+        $img = "type1.png";
       }
 
       $data['result'] = "s";
-      $this->model_category->add_object($type, $category_name, $img, $img_hover, $position);
+      $this->model_type->add_object($type_name, $img, $position);
 
       echo json_encode($data);
     }
@@ -262,14 +237,9 @@ class category extends CI_Controller {
         $id = $this->input->post('id', TRUE);
       }
 
-      $type = "";
-      if ($this->input->post('type', TRUE)) {
-        $type = $this->input->post('type', TRUE);
-      }
-
-      $category_name = "";
-      if ($this->input->post('category_name', TRUE)) {
-        $category_name = $this->input->post('category_name', TRUE);
+      $type_name = "";
+      if ($this->input->post('type_name', TRUE)) {
+        $type_name = $this->input->post('type_name', TRUE);
       }
 
       $position = "";
@@ -279,7 +249,7 @@ class category extends CI_Controller {
       //End Get Post Request
 
       $data['result'] = "s";
-      $this->model_category->edit_object($id, $type, $category_name, $position);
+      $this->model_type->edit_object($id, $type_name, $position);
 
       echo json_encode($data);
     }
@@ -290,15 +260,13 @@ class category extends CI_Controller {
     $checkadmin = $this->model_admin->check_admin($admin)->num_rows();
     if ($checkadmin > 0) {
       $id = $this->input->post('id', TRUE);
-      $query = $this->model_category->get_object($id)->result();
+      $query = $this->model_type->get_object($id)->result();
       foreach ($query as $row) {
         $data['result'] = "s";
 
         $data['id'] = $row->id;
-        $data['type'] = $row->type;
-        $data['category_name'] = $row->category_name;
+        $data['type_name'] = $row->type_name;
         $data['img'] = $row->img;
-        $data['img_hover'] = $row->img_hover;
         $data['position'] = $row->position;
         $data['visible'] = $row->visible;
       }
@@ -312,7 +280,7 @@ class category extends CI_Controller {
     if ($checkadmin > 0) {
       $id = $this->input->post('id', TRUE);
 
-      $query = $this->model_category->get_visible($id)->result();
+      $query = $this->model_type->get_visible($id)->result();
       foreach ($query as $row) {
         $visible = $row->visible;
       }
@@ -324,7 +292,7 @@ class category extends CI_Controller {
 
       $data['result'] = "s";
       $data['visible'] = $visible;
-      $this->model_category->set_visible($id, $visible);
+      $this->model_type->set_visible($id, $visible);
 
       echo json_encode($data);
     }
@@ -335,15 +303,13 @@ class category extends CI_Controller {
     $checkadmin = $this->model_admin->check_admin($admin)->num_rows();
     if ($checkadmin > 0) {
       $id = $this->input->post('id', TRUE);
-      $query = $this->model_category->get_object($id)->result();
+      $query = $this->model_type->get_object($id)->result();
       foreach ($query as $row) {
         $img = $row->img;
-        $img_hover = $row->img_hover;
       }
-      unlink('./images/category/' . $img);
-      unlink('./images/category/' . $img_hover);
+      unlink('./images/type/' . $img);
       $data['result'] = "s";
-      $this->model_category->remove_object($id);
+      $this->model_type->remove_object($id);
 
       echo json_encode($data);
     }

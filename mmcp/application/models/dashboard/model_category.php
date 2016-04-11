@@ -7,8 +7,9 @@ class model_category extends CI_Model {
   }
 
   function get_object($id = 0, $category_name = "", $type = -1, $visible = -1, $order = 0, $limit = 0, $size = 0) {
-    $this->db->select('mc.*');
+    $this->db->select('mc.*, mt.type_name AS type_name');
     $this->db->from('ms_category mc');
+    $this->db->join('ms_type mt', 'mt.id = mc.type');
 
     //Set Filter
     if ($id > 0) {

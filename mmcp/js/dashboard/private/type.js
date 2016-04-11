@@ -7,18 +7,18 @@ $(document).ready(function () {
     $('#paging').empty();
     var pagesize = $('#pagesize').val();
     //Filter
-    var product_name = $('#txt_product_name').val();
+    var type_name = $('#txt_type_name').val();
     var visible = $('#sel_visible').val();
     var order = $('#sel_order').val();
     //End Filter
     $.ajax({
-      url: baseurl + 'dashboard/product/show_object',
+      url: baseurl + 'dashboard/type/show_object',
       type: 'POST',
       data:
         {
           page: page,
           size: pagesize,
-          product_name: product_name,
+          type_name: type_name,
           visible: visible,
           order: order
         },
@@ -49,26 +49,23 @@ $(document).ready(function () {
             }
             //End Set Detail
 
-            //Set Icon
+            //Set Visible
             var visible = "<a id='btn_visible" + result['id'][x] + "' class='icon-minus-2'></a>";
             if (result['visible'][x] === "1")
             {
               visible = "<a id='btn_visible" + result['id'][x] + "' class='icon-checkmark'></a>";
             }
-            //End Set Icon
+            //End Set Visible
 
             $('#tablecontent').append("\
             <tr>\
               <td class='tdcenter'>" + (parseInt(no) + parseInt(x)) + "</td>\
-              <td class='tdcenter'>" + result['product_name'][x] + "</td>\
-              <td class='tdcenter'>" + result['product_price'][x] + "</td>\
-              <td class='tdcenter'>" + result['publish_date'][x] + "</td>\
+              <td class='tdcenter'>" + result['type_name'][x] + "</td>\
+              <td class='tdcenter'>" + result['position'][x] + "</td>\
               <td class='tdcenter'>" + detail + "</td>\
               <td class='tdcenter'>" + visible + "</td>\
               <td class='tdcenter'>\
                 <a id='btn_edit" + result['id'][x] + "' class='fa fa-pencil-square-o'></a> &nbsp;\
-                <a href='" + baseurl + "dashboard/detail_product/?id=" + result['id'][x] + "' class='fa fa-folder-open'></a> &nbsp;\
-                <a href='" + baseurl + "dashboard/detail_product_img/?id=" + result['id'][x] + "' class='fa fa-picture-o'></a> &nbsp;\
               </td>\
             </tr>");
 
@@ -88,7 +85,7 @@ $(document).ready(function () {
         {
           $('#tablecontent').append("\
           <tr>\
-            <td colspan='7'><strong style='color:red;'>" + result['message'] + "</strong></td>\
+            <td colspan='6'><strong style='color:red;'>" + result['message'] + "</strong></td>\
           </tr>");
         }
       }
@@ -99,46 +96,58 @@ $(document).ready(function () {
   //Function Add Object
   addObject = function ()
   {
-    var product_name = $('#txt_addproductname').val();
-    var product_price = $('#txt_addproductprice').val();
-    var product_desc = $('#txt_addproductdesc').trumbowyg('html');
-    var product_weight = $('#txt_addproductweight').val();
-    var publish_date = $('#txt_addpublishdate').val();
-    var category = $('#sel_addcategory').val();
+    var type_name = $('#txt_addtypename').val();
+    var position = $('#txt_addposition').val();
     $.ajax({
-      url: baseurl + 'dashboard/product/check_field',
+      url: baseurl + 'dashboard/type/check_field',
       type: 'POST',
       data:
         {
-          product_name: product_name,
-          product_price: product_price,
-          product_desc: product_desc,
-          product_weight: product_weight,
-          publish_date: publish_date
+          type_name: type_name,
+          position: position
         },
       dataType: 'json',
       success: function (result) {
-        if (result['result'] === 's')
+        if (result['result'] == 's')
         {
-          $.ajax({
-            url: baseurl + 'dashboard/product/add_object',
-            type: 'POST',
+          var path = './images/type/';
+          $.ajaxFileUpload({
+            url: baseurl + 'dashboard/type/upload_image',
+            secureuri: false,
+            fileElementId: 'userfile',
+            dataType: 'json',
             data:
               {
-                product_name: product_name,
-                product_price: product_price,
-                product_desc: product_desc,
-                product_weight: product_weight,
-                publish_date: publish_date,
-                category: category
+                element: 'userfile',
+                path: path,
+                type: 'img'
               },
-            dataType: 'json',
-            success: function (result) {
-              if (result['result'] === "s")
+            success: function (result)
+            {
+              if (result['result'] == "s")
               {
-                document.location.href = '/mmcp/dashboard/detail_product/?id='+result['id_product'];
-                //$('#modal_add').modal('hide');
-                //getObject(1);
+                $.ajax({
+                  url: baseurl + 'dashboard/type/add_object',
+                  type: 'POST',
+                  data:
+                    {
+                      type_name: type_name,
+                      position: position
+                    },
+                  dataType: 'json',
+                  success: function (result) {
+                    if (result['result'] === "s")
+                    {
+                      $('#modal_add').modal('hide');
+                      getObject(1);
+                    }
+                    else
+                    {
+                      $('.modal_warning').show();
+                      $('.modal_warning').html(result['message']);
+                    }
+                  }
+                });
               }
               else
               {
@@ -162,46 +171,60 @@ $(document).ready(function () {
   editObject = function ()
   {
     var id = $('#txteditid').val();
-    var product_name = $('#txt_editproductname').val();
-    var product_price = $('#txt_editproductprice').val();
-    var product_desc = $('#txt_editproductdesc').trumbowyg('html');
-    var product_weight = $('#txt_editproductweight').val();
-    var publish_date = $('#txt_editpublishdate').val();
-    var category = $('#sel_editcategory').val();
+    var type_name = $('#txt_edittypename').val();
+    var position = $('#txt_editposition').val();
+    var img = $('#txteditimg').val();
     $.ajax({
-      url: baseurl + 'dashboard/product/check_field',
+      url: baseurl + 'dashboard/type/check_field',
       type: 'POST',
       data:
         {
-          product_name: product_name,
-          product_price: product_price,
-          product_desc: product_desc,
-          publish_date: publish_date,
-          product_weight: product_weight
+          type_name: type_name,
+          position: position
         },
       dataType: 'json',
       success: function (result) {
         if (result['result'] === "s")
         {
           $.ajax({
-            url: baseurl + 'dashboard/product/edit_object',
+            url: baseurl + 'dashboard/type/edit_object',
             type: 'POST',
             data:
               {
                 id: id,
-                product_name: product_name,
-                product_price: product_price,
-                product_desc: product_desc,
-                publish_date: publish_date,
-                product_weight: product_weight,
-                category: category
+                type_name: type_name,
+                position: position
               },
             dataType: 'json',
             success: function (result) {
               if (result['result'] === "s")
               {
-                $('#modal_edit').modal('hide');
-                getObject(1);
+                var path = './images/type/';
+                $.ajaxFileUpload({
+                  url: baseurl + 'dashboard/type/update_image',
+                  secureuri: false,
+                  fileElementId: 'editfile',
+                  dataType: 'json',
+                  data:
+                    {
+                      element: 'editfile',
+                      path: path,
+                      img: img
+                    },
+                  success: function (result)
+                  {
+                    if (result['result'] === "s")
+                    {
+                      $('#modal_edit').modal('hide');
+                      getObject(1);
+                    }
+                    else
+                    {
+                      $('.modal_warning').show();
+                      $('.modal_warning').html(result['message']);
+                    }
+                  }
+                });
               }
               else
               {
@@ -225,7 +248,7 @@ $(document).ready(function () {
   removeObject = function (id)
   {
     $.ajax({
-      url: baseurl + 'dashboard/product/remove_object',
+      url: baseurl + 'dashboard/type/remove_object',
       type: 'POST',
       data:
         {
@@ -247,7 +270,7 @@ $(document).ready(function () {
   };
   //End Function Remove Object
 
-  //Function Set Active
+  //Function Set Visible
   setVisible = function ()
   {
     var id = [];
@@ -260,7 +283,7 @@ $(document).ready(function () {
       $(document).off('click', '#btn_visible' + val);
       $(document).on('click', '#btn_visible' + val, function () {
         $.ajax({
-          url: baseurl + 'dashboard/product/set_visible',
+          url: baseurl + 'dashboard/type/set_visible',
           type: 'POST',
           data:
             {
@@ -281,7 +304,7 @@ $(document).ready(function () {
       });
     });
   };
-  //End Function Set Active
+  //End Function Set Visible
 
   //Function Set Edit Product
   setEdit = function ()
@@ -292,11 +315,14 @@ $(document).ready(function () {
       id[x] = $('#object' + x).val();
     }
 
+    var d = new Date();
+    var time = d.getTime();
+
     $.each(id, function (x, val) {
       $(document).off('click', '#btn_edit' + val);
       $(document).on('click', '#btn_edit' + val, function () {
         $.ajax({
-          url: baseurl + 'dashboard/product/get_object',
+          url: baseurl + 'dashboard/type/get_object',
           type: 'POST',
           data:
             {
@@ -307,16 +333,10 @@ $(document).ready(function () {
             if (result['result'] === 's')
             {
               $("#txteditid").val(val);
-              $("#txt_editproductname").val(result['product_name']);
-              $("#txt_editproductprice").val(result['product_price']);
-              $('#txt_editproductdesc').trumbowyg('html', result['product_desc']);
-              $("#txt_editproductweight").val(result['product_weight']);
-              $("#txt_editpublishdate").val(result['publish_date']);
-              $('option', $('#sel_editcategory')).each(function(element) {
-                  $(this).removeAttr('selected').prop('selected', false);
-              });
-              $('#sel_editcategory').multiselect('refresh');
-              $('#sel_editcategory').multiselect('select', result['category']);
+              $("#txteditimg").val(result['img']);
+              $("#txt_edittypename").val(result['type_name']);
+              $("#txt_editposition").val(result['position']);
+              $("#img_edit").attr("src", baseurl + "images/type/" + result['img'] + "?" + time);
               $('.modal_warning').hide();
               $('#modal_edit').modal('show');
             }
@@ -357,54 +377,21 @@ $(document).ready(function () {
   $('.ajaxloading-tr').hide();
   var totalobject = 0;
   $('.modal_warning').hide();
-  
-  $('#sel_addcategory').multiselect({
-    enableFiltering: true,
-    buttonClass: 'btn btn-default',
-    maxHeight: 400
-  });
-  
-  $('#sel_editcategory').multiselect({
-    enableFiltering: true,
-    buttonClass: 'btn btn-default',
-    maxHeight: 400
-  });
-  
-  $('#txt_addpublishdate').datepicker({
-    todayHighlight: true,
-    zIndexOffset: '9999',
-    format: 'yyyy-m-d'
-  });
-  $('#txt_editpublishdate').datepicker({
-    todayHighlight: true,
-    zIndexOffset: '9999',
-    format: 'yyyy-m-d'
-  });
-  
-  $('#txt_addproductdesc').trumbowyg({
-    btns: [['formatting'], ['bold', 'italic', 'underline']]
-  });
-  
-  $('#txt_editproductdesc').trumbowyg({
-    btns: [['formatting'], ['bold', 'italic', 'underline']]
-  });
   //End Initial Setup
 
   //User Action
   $('#btn_add').click(function () {
-    $('#txt_addproductname').val("");
-    $('#txt_addproductprice').val("");
-    $('#txt_addpublishdate').val("");
-    $('#txt_addproductweight').val("");
-    $('option', $('#sel_addcategory')).each(function(element) {
-        $(this).removeAttr('selected').prop('selected', false);
-    });
-    $('#sel_addcategory').multiselect('refresh');
+    $('#txt_addtypename').val("");
     $('#modal_add').modal('show');
     $('.modal_warning').hide();
   });
 
   $('#btn_search_').click(function () {
+    ajaxLoader();
+    getObject(1);
+  });
+
+  $("#sel_type").change(function () {
     ajaxLoader();
     getObject(1);
   });

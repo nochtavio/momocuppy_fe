@@ -43,14 +43,6 @@ $(document).ready(function () {
 
           for (var x = 0; x < result['total']; x++)
           {
-            //Set Type
-            var type = "Home Decor";
-            if (result['type'][x] == 2)
-            {
-              type = "Accessories";
-            }
-            //End Set Type
-
             //Set Detail
             var detail = "Created by <strong>" + result['creby'][x] + "</strong> <br/> on <strong>" + result['cretime'][x] + "</strong>";
             if (result['modby'][x] != null)
@@ -70,7 +62,7 @@ $(document).ready(function () {
             $('#tablecontent').append("\
             <tr>\
               <td class='tdcenter'>" + (parseInt(no) + parseInt(x)) + "</td>\
-              <td class='tdcenter'>" + type + "</td>\
+              <td class='tdcenter'>" + result['type_name'][x] + "</td>\
               <td class='tdcenter'>" + result['category_name'][x] + "</td>\
               <td class='tdcenter'>" + result['position'][x] + "</td>\
               <td class='tdcenter'>" + detail + "</td>\
@@ -97,7 +89,7 @@ $(document).ready(function () {
         {
           $('#tablecontent').append("\
           <tr>\
-            <td colspan='6'><strong style='color:red;'>" + result['message'] + "</strong></td>\
+            <td colspan='7'><strong style='color:red;'>" + result['message'] + "</strong></td>\
           </tr>");
         }
       }

@@ -14,21 +14,9 @@ class product extends CI_Controller {
     //Data
     $content['page'] = "Product";
     $content['pagesize'] = 10;
+    
     //Get Category
-    $query_category = $this->model_detail_category->generate_ms_category()->result();
-    $content['category_homedecor_total'] = 0;
-    $content['category_accessories_total'] = 0;
-    foreach ($query_category as $row) {
-      if ($row->type == 1) { //Home Decor
-        $content['category_homedecor_id'][$content['category_homedecor_total']] = $row->id;
-        $content['category_homedecor_name'][$content['category_homedecor_total']] = $row->category_name;
-        $content['category_homedecor_total'] ++;
-      } else { //Accessories
-        $content['category_accessories_id'][$content['category_accessories_total']] = $row->id;
-        $content['category_accessories_name'][$content['category_accessories_total']] = $row->category_name;
-        $content['category_accessories_total'] ++;
-      }
-    }
+    $content['category'] = $this->model_detail_category->generate_ms_category()->result();
 
     //JS
     $content['js'][0] = 'js/dashboard/private/product.js';
@@ -192,19 +180,14 @@ class product extends CI_Controller {
         $publish_date = $this->input->post('publish_date', TRUE);
       }
 
-      $category_homedecor = NULL;
-      if ($this->input->post('category_homedecor', TRUE)) {
-        $category_homedecor = $this->input->post('category_homedecor', TRUE);
-      }
-
-      $category_accessories = NULL;
-      if ($this->input->post('category_accessories', TRUE)) {
-        $category_accessories = $this->input->post('category_accessories', TRUE);
+      $category = array();
+      if ($this->input->post('category', TRUE)) {
+        $category = $this->input->post('category', TRUE);
       }
       //End Get Post Request
 
       $data['result'] = "s";
-      $data['id_product'] = $this->model_product->add_object($product_name, $product_price, $product_desc, $product_weight, $publish_date, $category_homedecor, $category_accessories);
+      $data['id_product'] = $this->model_product->add_object($product_name, $product_price, $product_desc, $product_weight, $publish_date, $category);
       $this->session->set_flashdata('add_product_message', 'You have succesfully add product to database. Please add stock for each color now.');
       echo json_encode($data);
     }
@@ -245,19 +228,14 @@ class product extends CI_Controller {
         $publish_date = $this->input->post('publish_date', TRUE);
       }
 
-      $category_homedecor = NULL;
-      if ($this->input->post('category_homedecor', TRUE)) {
-        $category_homedecor = $this->input->post('category_homedecor', TRUE);
-      }
-
-      $category_accessories = NULL;
-      if ($this->input->post('category_accessories', TRUE)) {
-        $category_accessories = $this->input->post('category_accessories', TRUE);
+      $category = array();
+      if ($this->input->post('category', TRUE)) {
+        $category = $this->input->post('category', TRUE);
       }
       //End Get Post Request
 
       $data['result'] = "s";
-      $this->model_product->edit_object($id, $product_name, $product_price, $product_desc, $product_weight, $publish_date, $category_homedecor, $category_accessories);
+      $this->model_product->edit_object($id, $product_name, $product_price, $product_desc, $product_weight, $publish_date, $category);
 
       echo json_encode($data);
     }

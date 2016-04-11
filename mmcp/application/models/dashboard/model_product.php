@@ -45,7 +45,7 @@ class model_product extends CI_Model {
     return $query;
   }
 
-  function add_object($product_name, $product_price, $product_desc, $product_weight, $publish_date, $category_homedecor, $category_accessories) {
+  function add_object($product_name, $product_price, $product_desc, $product_weight, $publish_date, $category) {
     $data = array(
       'product_name' => $product_name,
       'product_price' => $product_price,
@@ -58,30 +58,16 @@ class model_product extends CI_Model {
     );
 
     $this->db->insert('ms_product', $data);
-
-    //Insert Category
-    $id_product = $this->db->insert_id();
-    if (!empty($category_homedecor)) {
-      foreach ($category_homedecor as $id_category) {
+    
+    //add new category
+    if(!empty($category)){
+      foreach ($category as $cat) {
         $data = array(
-          'id_category' => $id_category,
+          'id_category' => $cat,
           'id_product' => $id_product,
           'cretime' => date('Y-m-d H:i:s'),
           'creby' => $this->session->userdata('admin')
         );
-
-        $this->db->insert('dt_category', $data);
-      }
-    }
-    if (!empty($category_accessories)) {
-      foreach ($category_accessories as $id_category) {
-        $data = array(
-          'id_category' => $id_category,
-          'id_product' => $id_product,
-          'cretime' => date('Y-m-d H:i:s'),
-          'creby' => $this->session->userdata('admin')
-        );
-
         $this->db->insert('dt_category', $data);
       }
     }
@@ -89,7 +75,7 @@ class model_product extends CI_Model {
     return $id_product;
   }
 
-  function edit_object($id, $product_name, $product_price, $product_desc, $product_weight, $publish_date, $category_homedecor, $category_accessories) {
+  function edit_object($id, $product_name, $product_price, $product_desc, $product_weight, $publish_date, $category) {
     $data = array(
       'product_name' => $product_name,
       'product_price' => $product_price,
@@ -106,28 +92,15 @@ class model_product extends CI_Model {
     $this->db->where('id_product', $id);
     $this->db->delete('dt_category');
 
-    if (!empty($category_homedecor)) {
-      foreach ($category_homedecor as $id_category) {
+    //add new category
+    if(!empty($category)){
+      foreach ($category as $cat) {
         $data = array(
-          'id_category' => $id_category,
+          'id_category' => $cat,
           'id_product' => $id,
           'cretime' => date('Y-m-d H:i:s'),
           'creby' => $this->session->userdata('admin')
         );
-
-        $this->db->insert('dt_category', $data);
-      }
-    }
-
-    if (!empty($category_accessories)) {
-      foreach ($category_accessories as $id_category) {
-        $data = array(
-          'id_category' => $id_category,
-          'id_product' => $id,
-          'cretime' => date('Y-m-d H:i:s'),
-          'creby' => $this->session->userdata('admin')
-        );
-
         $this->db->insert('dt_category', $data);
       }
     }

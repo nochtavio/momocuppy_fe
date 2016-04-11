@@ -40,41 +40,16 @@
           </div>
           <div class="form-group">
             <label class="col-sm-4 control-label">Category</label>
-            <div class="col-sm-4" style="padding: 7px 0 0 14px;">
-              <label>Home Decor</label>
-              <?php
-              if (!empty($category_homedecor_total)) {
-                if (count($category_homedecor_total) > 0) {
-                  for ($x = 0; $x < $category_homedecor_total; $x++) {
-                    ?>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox" name="category_homedecor" value="<?php echo $category_homedecor_id[$x] ?>"><?php echo $category_homedecor_name[$x] ?>
-                      </label>
-                    </div>
-                    <?php
-                  }
+            <div class="col-sm-6">
+              <select id="sel_addcategory" class="form-control" multiple="multiple">
+                <?php 
+                foreach($category as $cat){
+                  ?>
+                    <option value="<?php echo $cat->id; ?>"><?php echo '['.$cat->type_name.'] '.$cat->category_name; ?></option>
+                  <?php
                 }
-              }
               ?>
-            </div>
-            <div class="col-sm-4" style="padding: 7px 0 0 14px;">
-              <label>Accessories</label>
-              <?php
-              if (!empty($category_accessories_total)) {
-                if (count($category_accessories_total) > 0) {
-                  for ($x = 0; $x < $category_accessories_total; $x++) {
-                    ?>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox" name="category_accessories" value="<?php echo $category_accessories_id[$x] ?>"><?php echo $category_accessories_name[$x] ?>
-                      </label>
-                    </div>
-                    <?php
-                  }
-                }
-              }
-              ?>
+              </select>
             </div>
           </div>
           <div class="alert alert-warning modal_warning" role="alert"></div>

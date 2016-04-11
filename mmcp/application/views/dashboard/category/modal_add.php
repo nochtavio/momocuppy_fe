@@ -11,8 +11,13 @@
             <label for="sel_addtype" class="col-sm-4 control-label">Type</label>
             <div class="col-sm-6">
               <select class="form-control" id="sel_addtype">
-                <option value="1">Home Decor</option>
-                <option value="2">Accessories</option>
+                <?php 
+                  foreach ($fetch_type as $type) {
+                    ?>
+                    <option value="<?php echo $type->id ?>"><?php echo $type->type_name ?></option>
+                    <?php
+                  }
+                ?>
               </select>            
             </div>
           </div>

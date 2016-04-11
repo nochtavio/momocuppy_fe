@@ -67,12 +67,13 @@ class model_detail_category extends CI_Model {
   }
 
   function generate_ms_category($type = 0) {
-    $this->db->select('mc.*');
+    $this->db->select('mc.*, mt.type_name');
     $this->db->from('ms_category mc');
+    $this->db->join('ms_type mt', 'mt.id = mc.type');
     if ($type > 0) {
-      $this->db->where('type', $type);
+      $this->db->where('mc.type', $type);
     }
-    $this->db->where('visible', 1);
+    $this->db->where('mc.visible', 1);
     $query = $this->db->get();
 
     return $query;
