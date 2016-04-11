@@ -8,6 +8,9 @@ $(document).ready(function () {
     var pagesize = $('#pagesize').val();
     //Filter
     var product_name = $('#txt_product_name').val();
+    var type = $('#sel_type').val();
+    var color = $('#sel_color').val();
+    var sale = $('#sel_sale').val();
     var visible = $('#sel_visible').val();
     var order = $('#sel_order').val();
     //End Filter
@@ -19,6 +22,9 @@ $(document).ready(function () {
           page: page,
           size: pagesize,
           product_name: product_name,
+          type: type,
+          color: color,
+          sale: sale,
           visible: visible,
           order: order
         },
@@ -50,6 +56,12 @@ $(document).ready(function () {
             //End Set Detail
 
             //Set Icon
+            var sale = "<a id='btn_sale" + result['id'][x] + "' class='icon-minus-2'></a>";
+            if (result['sale'][x] === "1")
+            {
+              sale = "<a id='btn_sale" + result['id'][x] + "' class='icon-checkmark'></a>";
+            }
+            
             var visible = "<a id='btn_visible" + result['id'][x] + "' class='icon-minus-2'></a>";
             if (result['visible'][x] === "1")
             {
@@ -61,9 +73,11 @@ $(document).ready(function () {
             <tr>\
               <td class='tdcenter'>" + (parseInt(no) + parseInt(x)) + "</td>\
               <td class='tdcenter'>" + result['product_name'][x] + "</td>\
+              <td class='tdcenter'>" + result['category'][x] + "</td>\
               <td class='tdcenter'>" + result['product_price'][x] + "</td>\
               <td class='tdcenter'>" + result['publish_date'][x] + "</td>\
               <td class='tdcenter'>" + detail + "</td>\
+              <td class='tdcenter'>" + sale + "</td>\
               <td class='tdcenter'>" + visible + "</td>\
               <td class='tdcenter'>\
                 <a id='btn_edit" + result['id'][x] + "' class='fa fa-pencil-square-o'></a> &nbsp;\
@@ -79,7 +93,8 @@ $(document).ready(function () {
             totalobject++;
             //End Set Object ID
           }
-
+          
+          setSale();
           setVisible();
           setEdit();
           setRemove();
@@ -88,7 +103,7 @@ $(document).ready(function () {
         {
           $('#tablecontent').append("\
           <tr>\
-            <td colspan='7'><strong style='color:red;'>" + result['message'] + "</strong></td>\
+            <td colspan='9'><strong style='color:red;'>" + result['message'] + "</strong></td>\
           </tr>");
         }
       }
@@ -246,6 +261,42 @@ $(document).ready(function () {
     });
   };
   //End Function Remove Object
+
+  //Function Set Sale
+  setSale = function ()
+  {
+    var id = [];
+    for (var x = 0; x < totalobject; x++)
+    {
+      id[x] = $('#object' + x).val();
+    }
+
+    $.each(id, function (x, val) {
+      $(document).off('click', '#btn_sale' + val);
+      $(document).on('click', '#btn_sale' + val, function () {
+        $.ajax({
+          url: baseurl + 'dashboard/product/set_sale',
+          type: 'POST',
+          data:
+            {
+              id: val
+            },
+          dataType: 'json',
+          success: function (result) {
+            if (result['result'] === 's')
+            {
+              getObject(page);
+            }
+            else
+            {
+              alert("Error in connection");
+            }
+          }
+        });
+      });
+    });
+  };
+  //End Function Set Sale
 
   //Function Set Active
   setVisible = function ()
@@ -410,6 +461,21 @@ $(document).ready(function () {
   });
 
   $("#sel_order").change(function () {
+    ajaxLoader();
+    getObject(1);
+  });
+  
+  $("#sel_type").change(function () {
+    ajaxLoader();
+    getObject(1);
+  });
+  
+  $("#sel_color").change(function () {
+    ajaxLoader();
+    getObject(1);
+  });
+  
+  $("#sel_sale").change(function () {
     ajaxLoader();
     getObject(1);
   });

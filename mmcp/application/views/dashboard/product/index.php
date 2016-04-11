@@ -9,11 +9,42 @@
         <input type="text" class="form-control" id="txt_product_name" placeholder="Product Name">
       </div>
       <div class="form-group">
+        <select class="form-control" id="sel_type">
+          <option value="-1">All Category</option>
+          <?php 
+            foreach ($fetch_type as $type) {
+              ?>
+              <option value="<?php echo $type->id ?>"><?php echo $type->type_name ?></option>
+              <?php
+            }
+          ?>
+        </select>
+      </div>
+      <div class="form-group">
+        <select class="form-control" id="sel_color">
+          <option value="-1">All Color</option>
+          <?php 
+            foreach ($fetch_color as $color) {
+              ?>
+              <option value="<?php echo $color->id ?>"><?php echo $color->color_name ?></option>
+              <?php
+            }
+          ?>
+        </select>
+      </div>
+      <div class="form-group">
         <select class="form-control" id="sel_order">
           <option value="-1">Sort By Name A-Z</option>
           <option value="1">Sort By Name Z-A</option>
           <option value="2">Sort By Newest Data</option>
           <option value="3">Sort By Oldest Data</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <select class="form-control" id="sel_sale">
+          <option selected="selected" value="-1">-</option>
+          <option value="1">Sale Only</option>
+          <option value="0">Non-Sale Only</option>
         </select>
       </div>
       <div class="form-group">
@@ -42,9 +73,11 @@
           <tr>
             <th>No</th>
             <th>Product Name</th>
+            <th>Category</th>
             <th>Product Price</th>
             <th>Publish Date</th>
             <th>Detail</th>
+            <th>Sale</th>
             <th>Visible</th>
             <th>Action</th>
         </thead>

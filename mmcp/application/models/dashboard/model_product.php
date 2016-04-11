@@ -6,7 +6,7 @@ class model_product extends CI_Model {
     parent::__construct();
   }
 
-  function get_object($id = 0, $product_name = "", $visible = -1, $order = 0, $limit = 0, $size = 0) {
+  function get_object($id = 0, $product_name = "", $type = 0, $color = 0, $sale = -1, $visible = -1, $order = 0, $limit = 0, $size = 0) {
     $this->db->select('mp.*, (SELECT img FROM dt_product_img dpi WHERE dpi.id_product = mp.id LIMIT 1) as img');
     $this->db->from('ms_product mp');
 
@@ -17,7 +17,15 @@ class model_product extends CI_Model {
     if ($product_name !== "") {
       $this->db->like('mp.product_name', $product_name);
     }
-
+    if ($type > 0) {
+      $this->db->where('mp.id IN (SELECT DISTINCT dc.id_product AS id FROM dt_category dc JOIN ms_category mc ON dc.id_category = mc.id JOIN ms_type mt ON mt.id = mc.type WHERE mt.id = '.$type.')', NULL, FALSE);
+    }
+    if ($color > 0) {
+      $this->db->where('mp.id IN (SELECT id_product AS id FROM dt_product WHERE id_color = '.$color.')', NULL, FALSE);
+    }
+    if ($sale > -1) {
+      $this->db->where('mp.sale', $sale);
+    }
     if ($visible > -1) {
       $this->db->where('mp.visible', $visible);
     }
@@ -52,6 +60,7 @@ class model_product extends CI_Model {
       'product_desc' => $product_desc,
       'product_weight' => $product_weight,
       'publish_date' => $publish_date,
+      'sale' => 0,
       'visible' => 0,
       'cretime' => date('Y-m-d H:i:s'),
       'creby' => $this->session->userdata('admin')
@@ -104,6 +113,24 @@ class model_product extends CI_Model {
         $this->db->insert('dt_category', $data);
       }
     }
+  }
+  
+  function get_sale($id) {
+    $this->db->select('mp.sale');
+    $this->db->from('ms_product mp');
+    $this->db->where('mp.id', $id);
+
+    $query = $this->db->get();
+    return $query;
+  }
+
+  function set_sale($id, $sale) {
+    $data = array(
+      'sale' => $sale
+    );
+
+    $this->db->where('id', $id);
+    $this->db->update('ms_product', $data);
   }
 
   function get_visible($id) {

@@ -8,6 +8,8 @@ class product extends CI_Controller {
     $this->load->model('dashboard/model_admin', '', TRUE);
     $this->load->model('dashboard/model_product', '', TRUE);
     $this->load->model('dashboard/model_detail_category', '', TRUE);
+    $this->load->model('dashboard/model_type', '', TRUE);
+    $this->load->model('dashboard/model_color', '', TRUE);
   }
 
   function index() {
@@ -17,6 +19,12 @@ class product extends CI_Controller {
     
     //Get Category
     $content['category'] = $this->model_detail_category->generate_ms_category()->result();
+    
+    //Get Type
+    $content['fetch_type'] = $this->model_type->get_object(0, "", 1, 0)->result();
+    
+    //Get Color
+    $content['fetch_color'] = $this->model_color->get_object(0, "", 1, 0)->result();
 
     //JS
     $content['js'][0] = 'js/dashboard/private/product.js';
@@ -49,6 +57,18 @@ class product extends CI_Controller {
       if ($this->input->post('product_name', TRUE)) {
         $product_name = $this->input->post('product_name', TRUE);
       }
+      $type = 0;
+      if ($this->input->post('type', TRUE)) {
+        $type = $this->input->post('type', TRUE);
+      }
+      $color = 0;
+      if ($this->input->post('color', TRUE)) {
+        $color = $this->input->post('color', TRUE);
+      }
+      $sale = 0;
+      if ($this->input->post('sale', TRUE)) {
+        $sale = $this->input->post('sale', TRUE);
+      }
       $visible = 0;
       if ($this->input->post('visible', TRUE)) {
         $visible = $this->input->post('visible', TRUE);
@@ -59,7 +79,7 @@ class product extends CI_Controller {
       }
       //End Filter
 
-      $totalrow = $this->model_product->get_object(0, $product_name, $visible, $order)->num_rows();
+      $totalrow = $this->model_product->get_object(0, $product_name, $type, $color, $sale, $visible, $order)->num_rows();
 
       //Set totalpaging
       $totalpage = ceil($totalrow / $size);
@@ -67,16 +87,23 @@ class product extends CI_Controller {
       //End Set totalpaging
 
       if ($totalrow > 0) {
-        $query = $this->model_product->get_object(0, $product_name, $visible, $order, $limit, $size)->result();
+        $query = $this->model_product->get_object(0, $product_name, $type, $color, $sale, $visible, $order, $limit, $size)->result();
         $temp = 0;
         foreach ($query as $row) {
           $data['result'] = "s";
 
           $data['id'][$temp] = $row->id;
+          $category = $this->model_detail_category->generate_dt_category($row->id)->result();
+          $temp_category = "";
+          foreach ($category as $cat) {
+            $temp_category = $temp_category.'['.$cat->type_name.'] '.$cat->category_name.', ';
+          }
+          $data['category'][$temp] = substr($temp_category, 0, -2);
           $data['product_name'][$temp] = $row->product_name;
           $data['product_price'][$temp] = number_format($row->product_price);
           $data['product_weight'][$temp] = $row->product_weight;
           $data['publish_date'][$temp] = $row->publish_date != null ? date_format(date_create($row->publish_date), 'd F Y') : 'Not Set';
+          $data['sale'][$temp] = $row->sale;
           $data['visible'][$temp] = $row->visible;
 
           $data['cretime'][$temp] = date_format(date_create($row->cretime), 'd F Y H:i:s');
@@ -89,7 +116,7 @@ class product extends CI_Controller {
         $data['size'] = $size;
       } else {
         $data['result'] = "f";
-        $data['message'] = "No Product Type";
+        $data['message'] = "No Products";
       }
       echo json_encode($data);
     }
@@ -123,7 +150,9 @@ class product extends CI_Controller {
       //Check Error
       $data['message'] = "";
       if ($product_name === "") {
-        $data['message'] .= "Product Type name must be filled! <br/>";
+        $data['message'] .= "Product name must be filled! <br/>";
+      } else if(strlen($product_name) > 22){
+        $data['message'] .= "Product name length is more than 22 characters! <br/>";
       }
       if ($product_price === "") {
         $data['message'] .= "Product Price name must be filled! <br/>";
@@ -265,6 +294,30 @@ class product extends CI_Controller {
           $data['category'][] = $row->id_category;
         }
       }
+      echo json_encode($data);
+    }
+  }
+  
+  function set_sale() {
+    $admin = $this->session->userdata('admin');
+    $checkadmin = $this->model_admin->check_admin($admin)->num_rows();
+    if ($checkadmin > 0) {
+      $id = $this->input->post('id', TRUE);
+
+      $query = $this->model_product->get_sale($id)->result();
+      foreach ($query as $row) {
+        $sale = $row->sale;
+      }
+      if ($sale === "0") {
+        $sale = "1";
+      } else {
+        $sale = "0";
+      }
+
+      $data['result'] = "s";
+      $data['sale'] = $sale;
+      $this->model_product->set_sale($id, $sale);
+
       echo json_encode($data);
     }
   }

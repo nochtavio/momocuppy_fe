@@ -80,8 +80,10 @@ class model_detail_category extends CI_Model {
   }
 
   function generate_dt_category($id_product = 0) {
-    $this->db->select('dc.*');
+    $this->db->select('dc.*, mc.category_name, mt.type_name');
     $this->db->from('dt_category dc');
+    $this->db->join('ms_category mc', 'mc.id = dc.id_category');
+    $this->db->join('ms_type mt', 'mt.id = mc.type');
     if ($id_product > 0) {
       $this->db->where('id_product', $id_product);
     }
