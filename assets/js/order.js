@@ -31,18 +31,16 @@ $(document).ready(function () {
         subtotal = 0;
         var totalweight = 0;
         var point = 0;
-        var temp_height = 0;
-        var temp_width = 0;
         if (result['result'] === 's'){
           $.each(result['content'], function (key, value) {
             $('#shopbaglist').append("\
               <li>\
-                <div class='bag_prodimg'><img id='cart_img_" + value['id'] + "' src='/mmcp/images/products/" + value['img'] + "' width=85 height=115 /></div>\
+                <div class='bag_prodimg'><img id='cart_img_" + value['id'] + "' src='/mmcp/images/products/" + value['img'] + "'  /></div>\
                 <div class='bag_proddesc'><span>" + value['product_name'] + "</span></div>\
                 <div class='bag_qty'><span>" + value['qty'] + "</span></div>\
                 <div class='bag_color'><span>" + value['color_name'] + "</span></div>\
                 <div class='bag_price'><span>" + format_number(value['product_price']) + "</span></div>\
-                <div class='bag_delete'><a id='btn_remove" + value['id'] + "' href='#'>X</a></div>\
+                <div class='bag_delete'><a id='btn_remove" + value['id'] + "' href='#'><img src='/images/layout/order/icondel.gif' /></a></div>\
                 <div class='bag_weight'><span>" + value['product_weight'] + "</span></div>\
                 <div class='bag_total'><span>" + format_number(parseInt(value['product_price']) * parseInt(value['qty'])) + "</span></div>\
               </li>\
@@ -51,20 +49,13 @@ $(document).ready(function () {
               <input type='hidden' id='object" + totalobject + "' value='" + value['id'] + "' />\
             ");
             
-            //Check Image Resolution
-            temp_height = $('#cart_img_'+value['id']).height();
-            temp_width = $('#cart_img_'+value['id']).width();
-            if(temp_width > temp_height){
-              $('#cart_img_'+value['id']).addClass("img-landscape");
-            }else{
-              $('#cart_img_'+value['id']).addClass("img-portrait");
-            }
-            //End Check Image Resolution
-            
             totalobject++;
             subtotal = parseInt(subtotal) + (parseInt(value['qty']) * parseInt(value['product_price']));
             totalweight = parseFloat(totalweight) + (parseInt(value['qty']) * parseFloat(value['product_weight']));
+									
           });
+          
+          set_resolution();
           set_remove();
 
           $('#txt_total_products').text(totalobject);
@@ -85,7 +76,30 @@ $(document).ready(function () {
       }
     });
   };
-
+  
+  var set_resolution = function(){
+    var id = [];
+    for (var x = 0; x < totalobject; x++)
+    {
+      id[x] = $('#object' + x).val();
+    }
+    var temp_height = 0;
+    var temp_width = 0;
+    $.each(id, function (x, val) {
+      setTimeout(function(){
+        //Check Image Resolution
+        temp_height = $('#cart_img_'+val).height();
+        temp_width = $('#cart_img_'+val).width();
+        if(temp_width <= temp_height){
+          $('#cart_img_'+val).addClass("img-portrait");
+        }else{
+          $('#cart_img_'+val).addClass("img-landscape");
+        }
+        //End Check Image Resolution
+      }, 250);
+    });
+  };
+  
   var set_remove = function () {
     var id = [];
     for (var x = 0; x < totalobject; x++)

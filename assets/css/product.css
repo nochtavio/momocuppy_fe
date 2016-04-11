@@ -64,7 +64,7 @@ ul.listcategory{
 
 		float:left;
 
-		height:269px;
+		height:268px;
 
 		position:relative;		
 
@@ -83,6 +83,8 @@ ul.listcategory{
 		float:left;		
 
 		position:relative;
+		
+    top: 269px;
 
 		width:269px;
 
@@ -264,17 +266,36 @@ ul.productitem{
 
 		}
 
-		ul.productitem li .listitem span img.zoomImg{
+		ul.productitem li .potrait span img.zoomImg{
 
 			-webkit-transform: translate(0,0);
 
 			-ms-transform: translate(0,0);
 
 			transform: translate(0,0);
-
-			width:50%;
+			
+			width:auto;
+			height:200%;
 
 		}
+		
+		ul.productitem li .landscape span img.zoomImg{
+
+			-webkit-transform: translate(0,0);
+
+			-ms-transform: translate(0,0);
+
+			transform: translate(0,0);
+			
+			width:200%;
+			height:auto;
+
+		}		
+		
+		
+		
+		
+
 
 		
 
@@ -330,13 +351,15 @@ ul.productitem{
 
 			clear:both;
 
-			cursor:default;
 
 			position:absolute;
 
 			left:0;
 
 			top:0;
+			width:188px;
+			height:188px;
+			overflow:hidden;
 
 		}
 
@@ -665,13 +688,14 @@ ul.shopbaglist{
 
 	ul.shopbaglist .qty{
 
-		width:80px;		
+		width: 70px;
+    margin-left: 10px;	
 
 	}	
 
 	ul.shopbaglist .price{	
 
-		width:100px;
+		width:85px;
 
 	}	
 
@@ -764,6 +788,8 @@ ul.shopbaglist{
 		font-weight:bold;
 
 		font-size:29px;
+		
+    line-height: 35px;
 
 	}
 
@@ -1119,3 +1145,38 @@ ul.related_product{
 
 /*END PRODUCT DETAIL*/
 
+
+/*REVISI*/
+.categorylandscape{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	min-height:269px !important;
+	height: 100% !important;
+	width: auto !important;
+	-webkit-transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
+	transform: translate(-50%,-50% );	
+	z-index:1;
+}
+
+.categorypotrait{
+	position: absolute;
+	left: 50%;
+	top: 50%;			
+	min-width:269px !important;
+	width: 100% !important;
+	height: auto !important;	
+	-webkit-transform: translate(-50%,-50%) ;
+	-ms-transform: translate(-50%,-50%);	
+	transform: translate(-50%,-50%);	
+	z-index:1;
+}
+
+.outofstock{
+	color:#ee5262;
+	font-size:20px !important;
+	font-weight:bold;
+	width:100%;
+}
+/*END REVISI*/

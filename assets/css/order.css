@@ -252,7 +252,6 @@ ul.shopbaglist{
 
 		font-weight:normal;
 
-		height:115px;
 
 		text-align:center;		
 
@@ -263,28 +262,48 @@ ul.shopbaglist{
 	
 
 	ul.shopbaglist li div.bag_prodimg{
-
-		width:100px;
-
+		float:left;
+		width:85px;
+		overflow:hidden;
+		position:relative;
+		height:85px;
 	}
+	
+	ul.shopbaglist li div.bag_prodimg img.img-portrait{
+		position: absolute;
+		left: 50%;
+		top: 50%;			
+		width: 100%;
+		height: auto;	
+		-webkit-transform: translate(-50%,-50%) ;
+		-ms-transform: translate(-50%,-50%);	
+		transform: translate(-50%,-50%);				
+	}
+	ul.shopbaglist li div.bag_prodimg img.img-landscape{
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		height: 100%;
+		width: auto;
+		-webkit-transform: translate(-50%,-50%);
+		-ms-transform: translate(-50%,-50%);
+		transform: translate(-50%,-50% );	
+		z-index:1;			
+	}	
 
 	ul.shopbaglist li div span{
-
-		float:left;
-
-		margin-top:40px;
-
+		display: table-cell;
+		vertical-align: middle;
 		text-align:center;
-
 		width:100%;
 
 	}
 
 	ul.shopbaglist li div.bag_proddesc{
-
-		vertical-align:middle;		
-
-		width:180px;
+		display:table;		
+		height:75px;
+		padding: 5px;
+		width:170px;
 
 	}
 
@@ -292,38 +311,43 @@ ul.shopbaglist{
 
 	ul.shopbaglist li div.bag_qty{
 
-		margin-left:5px;
-
-		width:80px;
+		display:table;		
+		height:75px;
+		padding: 5px;
+		width:100px;
 
 	}
 
 	ul.shopbaglist li div.bag_color{
-
+		display:table;		
+		height:75px;
+		padding: 5px;
 		width:120px;
-
-		margin-left:25px;
 
 	}			
 
 	ul.shopbaglist li div.bag_price{	
-
+		display:table;		
+		height:75px;
+		padding: 5px;
 		width:130px;
 
 	}
 
 	ul.shopbaglist li div.bag_delete{		
+		display:table;		
+		height:75px;
+		padding: 5px;
 
-		height:auto;
 
-		margin-top:45px;
-
-		width:120px;
+		width:100px;
 
 	}
 
 			ul.shopbaglist li div.bag_delete a{
-
+				display: table-cell;
+				vertical-align: middle;
+				text-align:center;
 				color:#8b5623;
 
 				text-decoration:none;
@@ -331,18 +355,20 @@ ul.shopbaglist{
 			}
 
 	ul.shopbaglist li div.bag_weight{					
+		display:table;		
+		height:75px;
+		padding: 5px;
 
-		margin-left:30px;
-
-		width:120px;
+		width:170px;
 
 	}
 
 	ul.shopbaglist li div.bag_total{						
+		display:table;		
+		height:75px;
+		padding: 5px;
 
-		margin-left:20px;
-
-		width:130px;
+		width:100px;
 
 	}
 
@@ -1131,7 +1157,7 @@ form.confirmchkout{
 	font-size:12px;
 
 	font-weight:normal;
-
+  line-height: 15px;
 	margin:0;
 
 	text-align:center;
