@@ -28,7 +28,12 @@
           <div class="form-group">
             <label for="txt_editpublishdate" class="col-sm-4 control-label">Publish Date</label>
             <div class="col-sm-6">
-              <input type="text" class="form-control" id="txt_editpublishdate" placeholder="Input publish date ...">
+              <div class='input-group date' id='txt_editpublishdate'>
+                <input type='text' class="form-control" />
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+              </div>
               <p class="help-block" style="font-size: 12px;">Leave it empty if you want to publish this product immediately.</p>
             </div>
           </div>
@@ -36,6 +41,12 @@
             <label for="txt_editproductweight" class="col-sm-4 control-label">Product Weight (kg)</label>
             <div class="col-sm-6">
               <input type="text" class="form-control" id="txt_editproductweight" placeholder="Input product weight ...">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="txt_editposition" class="col-sm-4 control-label">Position</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" id="txt_editposition" placeholder="Input product position ...">
             </div>
           </div>
           <div class="form-group">

@@ -34,8 +34,19 @@
           <div class="form-group">
             <label for="txt_addpublishdate" class="col-sm-4 control-label">Publish Date</label>
             <div class="col-sm-6">
-              <input type="text" class="form-control" id="txt_addpublishdate" placeholder="Input publish date ...">
+              <div class='input-group date' id='txt_addpublishdate'>
+                <input type='text' class="form-control" />
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+              </div>
               <p class="help-block" style="font-size: 12px;">Leave it empty if you want to publish this product immediately.</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="txt_addposition" class="col-sm-4 control-label">Position</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" id="txt_addposition" placeholder="Input product position ...">
             </div>
           </div>
           <div class="form-group">

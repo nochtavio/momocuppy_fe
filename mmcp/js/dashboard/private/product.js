@@ -47,6 +47,14 @@ $(document).ready(function () {
 
           for (var x = 0; x < result['total']; x++)
           {
+            //Set Product Image
+            var img = "<img src='"+baseurl+"images/products/no-img-potrait.jpg' height='150px' width='125px' />";
+            if (result['img'][x] != null)
+            {
+              img = "<img src='"+baseurl+"images/products/"+result['img'][x]+"' height='150px' width='125px' />";
+            }
+            //End Set Product Image
+            
             //Set Detail
             var detail = "Created by <strong>" + result['creby'][x] + "</strong> <br/> on <strong>" + result['cretime'][x] + "</strong>";
             if (result['modby'][x] != null)
@@ -72,10 +80,14 @@ $(document).ready(function () {
             $('#tablecontent').append("\
             <tr>\
               <td class='tdcenter'>" + (parseInt(no) + parseInt(x)) + "</td>\
+              <td class='tdcenter'>" + img + "</td>\
               <td class='tdcenter'>" + result['product_name'][x] + "</td>\
               <td class='tdcenter'>" + result['category'][x] + "</td>\
+              <td class='tdcenter'>" + result['color'][x] + "</td>\
               <td class='tdcenter'>" + result['product_price'][x] + "</td>\
+              <td class='tdcenter'>" + result['stock'][x] + "</td>\
               <td class='tdcenter'>" + result['publish_date'][x] + "</td>\
+              <td class='tdcenter'>" + result['position'][x] + "</td>\
               <td class='tdcenter'>" + detail + "</td>\
               <td class='tdcenter'>" + sale + "</td>\
               <td class='tdcenter'>" + visible + "</td>\
@@ -103,7 +115,7 @@ $(document).ready(function () {
         {
           $('#tablecontent').append("\
           <tr>\
-            <td colspan='9'><strong style='color:red;'>" + result['message'] + "</strong></td>\
+            <td colspan='11'><strong style='color:red;'>" + result['message'] + "</strong></td>\
           </tr>");
         }
       }
@@ -118,7 +130,12 @@ $(document).ready(function () {
     var product_price = $('#txt_addproductprice').val();
     var product_desc = $('#txt_addproductdesc').trumbowyg('html');
     var product_weight = $('#txt_addproductweight').val();
-    var publish_date = $('#txt_addpublishdate').val();
+    var publish_date_raw = $('#txt_addpublishdate').data("DateTimePicker").date();
+    var publish_date = '';
+    if(publish_date_raw != null){
+      publish_date = publish_date_raw.year()+'-'+(publish_date_raw.month()+1)+'-'+publish_date_raw.date()+' '+publish_date_raw.hour()+':'+publish_date_raw.minute()+':'+publish_date_raw.second();
+    }    
+    var position = $('#txt_addposition').val();
     var category = $('#sel_addcategory').val();
     $.ajax({
       url: baseurl + 'dashboard/product/check_field',
@@ -129,7 +146,8 @@ $(document).ready(function () {
           product_price: product_price,
           product_desc: product_desc,
           product_weight: product_weight,
-          publish_date: publish_date
+          publish_date: publish_date,
+          position: position
         },
       dataType: 'json',
       success: function (result) {
@@ -145,6 +163,7 @@ $(document).ready(function () {
                 product_desc: product_desc,
                 product_weight: product_weight,
                 publish_date: publish_date,
+                position: position,
                 category: category
               },
             dataType: 'json',
@@ -181,7 +200,12 @@ $(document).ready(function () {
     var product_price = $('#txt_editproductprice').val();
     var product_desc = $('#txt_editproductdesc').trumbowyg('html');
     var product_weight = $('#txt_editproductweight').val();
-    var publish_date = $('#txt_editpublishdate').val();
+    var publish_date_raw = $('#txt_editpublishdate').data("DateTimePicker").date();
+    var publish_date = '';
+    if(publish_date_raw != null){
+      publish_date = publish_date_raw.year()+'-'+(publish_date_raw.month()+1)+'-'+publish_date_raw.date()+' '+publish_date_raw.hour()+':'+publish_date_raw.minute()+':'+publish_date_raw.second();
+    }
+    var position = $('#txt_editposition').val();
     var category = $('#sel_editcategory').val();
     $.ajax({
       url: baseurl + 'dashboard/product/check_field',
@@ -192,7 +216,8 @@ $(document).ready(function () {
           product_price: product_price,
           product_desc: product_desc,
           publish_date: publish_date,
-          product_weight: product_weight
+          product_weight: product_weight,
+          position: position
         },
       dataType: 'json',
       success: function (result) {
@@ -209,6 +234,7 @@ $(document).ready(function () {
                 product_desc: product_desc,
                 publish_date: publish_date,
                 product_weight: product_weight,
+                position: position,
                 category: category
               },
             dataType: 'json',
@@ -362,7 +388,8 @@ $(document).ready(function () {
               $("#txt_editproductprice").val(result['product_price']);
               $('#txt_editproductdesc').trumbowyg('html', result['product_desc']);
               $("#txt_editproductweight").val(result['product_weight']);
-              $("#txt_editpublishdate").val(result['publish_date']);
+              $('#txt_editpublishdate').data("DateTimePicker").date(result['publish_date']);
+              $("#txt_editposition").val(result['position']);
               $('option', $('#sel_editcategory')).each(function(element) {
                   $(this).removeAttr('selected').prop('selected', false);
               });
@@ -421,15 +448,11 @@ $(document).ready(function () {
     maxHeight: 400
   });
   
-  $('#txt_addpublishdate').datepicker({
-    todayHighlight: true,
-    zIndexOffset: '9999',
-    format: 'yyyy-m-d'
+  $('#txt_addpublishdate').datetimepicker({
+    format: "YYYY-MM-DD HH:mm:SS"
   });
-  $('#txt_editpublishdate').datepicker({
-    todayHighlight: true,
-    zIndexOffset: '9999',
-    format: 'yyyy-m-d'
+  $('#txt_editpublishdate').datetimepicker({
+    format: "YYYY-MM-DD HH:mm:SS"
   });
   
   $('#txt_addproductdesc').trumbowyg({

@@ -15,8 +15,7 @@ if (!$this->session->userdata('admin')) {
     <link rel="stylesheet" media="screen" type="text/css" href="<?php echo base_url() . 'css/dashboard/iconFont.css'; ?>" />
     <link rel="stylesheet" media="screen" type="text/css" href="<?php echo base_url() . 'css/dashboard/sb-admin.css'; ?>" />
     <link rel="stylesheet" media="screen" type="text/css" href="<?php echo base_url() . 'css/dashboard/font-awesome.css'; ?>" />
-    <link rel="stylesheet" media="screen" type="text/css" href="<?php echo base_url() . 'css/dashboard/datepicker.css'; ?>" />
-    <link rel="stylesheet" media="screen" type="text/css" href="<?php echo base_url() . 'css/dashboard/datepicker3.css'; ?>" />
+    <link rel="stylesheet" media="screen" type="text/css" href="<?php echo base_url() . 'css/dashboard/bootstrap-datetimepicker.min.css'; ?>" />
     <link rel="stylesheet" media="screen" type="text/css" href="<?php echo base_url() . 'css/dashboard/trumbowyg.css'; ?>" />
     <link rel="stylesheet" media="screen" type="text/css" href="<?php echo base_url() . 'css/dashboard/bootstrap-multiselect.css'; ?>" />
     <link rel="stylesheet" media="screen" type="text/css" href="<?php echo base_url() . 'css/dashboard/private/dashboard.css'; ?>" />
@@ -220,11 +219,14 @@ if (!$this->session->userdata('admin')) {
     <!--End Custom Modals-->
 
     <script type="text/javascript" src="<?php echo base_url() . 'js/dashboard/jquery-1.11.0.min.js'; ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url() . 'js/dashboard/moment.js'; ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url() . 'js/dashboard/transition.js'; ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url() . 'js/dashboard/collapse.js'; ?>"></script>
     <script type="text/javascript" src="<?php echo base_url() . 'js/dashboard/bootstrap.min.js'; ?>"></script>
     <script type="text/javascript" src="<?php echo base_url() . 'js/dashboard/ajaxfileupload.js'; ?>"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript" src="<?php echo base_url() . 'js/dashboard/raphael.min.js'; ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url() . 'js/dashboard/bootstrap-datepicker.js'; ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url() . 'js/dashboard/bootstrap-datetimepicker.min.js'; ?>"></script>
     <script type="text/javascript" src="<?php echo base_url() . 'js/dashboard/jquery.fancybox.js'; ?>"></script>
     <script type="text/javascript" src="<?php echo base_url() . 'js/dashboard/tinycolor.js'; ?>"></script>
     <script type="text/javascript" src="<?php echo base_url() . 'js/dashboard/pickacolor.js'; ?>"></script>

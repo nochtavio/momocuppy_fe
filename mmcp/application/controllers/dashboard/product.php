@@ -7,6 +7,7 @@ class product extends CI_Controller {
     parent::__construct();
     $this->load->model('dashboard/model_admin', '', TRUE);
     $this->load->model('dashboard/model_product', '', TRUE);
+    $this->load->model('dashboard/model_detail_product', '', TRUE);
     $this->load->model('dashboard/model_detail_category', '', TRUE);
     $this->load->model('dashboard/model_type', '', TRUE);
     $this->load->model('dashboard/model_color', '', TRUE);
@@ -93,15 +94,27 @@ class product extends CI_Controller {
           $data['result'] = "s";
 
           $data['id'][$temp] = $row->id;
+          $data['img'][$temp] = $row->img;
+          
           $category = $this->model_detail_category->generate_dt_category($row->id)->result();
           $temp_category = "";
           foreach ($category as $cat) {
             $temp_category = $temp_category.'['.$cat->type_name.'] '.$cat->category_name.', ';
           }
           $data['category'][$temp] = substr($temp_category, 0, -2);
+          
+          $color = $this->model_detail_product->get_object(0, $row->id)->result();
+          $temp_color = "";
+          foreach ($color as $col) {
+            $temp_color = $temp_color.$col->color_name.', ';
+          }
+          $data['color'][$temp] = substr($temp_color, 0, -2);
+          
           $data['product_name'][$temp] = $row->product_name;
           $data['product_price'][$temp] = number_format($row->product_price);
+          $data['stock'][$temp] = number_format($row->stock);
           $data['product_weight'][$temp] = $row->product_weight;
+          $data['position'][$temp] = $row->position;
           $data['publish_date'][$temp] = $row->publish_date != null ? date_format(date_create($row->publish_date), 'd F Y') : 'Not Set';
           $data['sale'][$temp] = $row->sale;
           $data['visible'][$temp] = $row->visible;
@@ -146,6 +159,11 @@ class product extends CI_Controller {
       if ($this->input->post('product_weight', TRUE)) {
         $product_weight = $this->input->post('product_weight', TRUE);
       }
+      
+      $position = "";
+      if ($this->input->post('position', TRUE)) {
+        $position = $this->input->post('position', TRUE);
+      }
       //End Get Post Request
       //Check Error
       $data['message'] = "";
@@ -166,6 +184,11 @@ class product extends CI_Controller {
         $data['message'] .= "Product Weight name must be filled! <br/>";
       } else if (!is_numeric($product_weight)) {
         $data['message'] .= "Product Weight must be a number! <br/>";
+      }
+      if ($position === "") {
+        $data['message'] .= "Product Position name must be filled! <br/>";
+      } else if (!is_numeric($position)) {
+        $data['message'] .= "Product Position must be a number! <br/>";
       }
       //End Check Error
 
@@ -208,6 +231,11 @@ class product extends CI_Controller {
       if ($this->input->post('publish_date', TRUE)) {
         $publish_date = $this->input->post('publish_date', TRUE);
       }
+      
+      $position = "";
+      if ($this->input->post('position', TRUE)) {
+        $position = $this->input->post('position', TRUE);
+      }
 
       $category = array();
       if ($this->input->post('category', TRUE)) {
@@ -216,7 +244,7 @@ class product extends CI_Controller {
       //End Get Post Request
 
       $data['result'] = "s";
-      $data['id_product'] = $this->model_product->add_object($product_name, $product_price, $product_desc, $product_weight, $publish_date, $category);
+      $data['id_product'] = $this->model_product->add_object($product_name, $product_price, $product_desc, $product_weight, $publish_date, $position, $category);
       $this->session->set_flashdata('add_product_message', 'You have succesfully add product to database. Please add stock for each color now.');
       echo json_encode($data);
     }
@@ -256,6 +284,11 @@ class product extends CI_Controller {
       if ($this->input->post('publish_date', TRUE)) {
         $publish_date = $this->input->post('publish_date', TRUE);
       }
+      
+      $position = "";
+      if ($this->input->post('position', TRUE)) {
+        $position = $this->input->post('position', TRUE);
+      }
 
       $category = array();
       if ($this->input->post('category', TRUE)) {
@@ -264,7 +297,7 @@ class product extends CI_Controller {
       //End Get Post Request
 
       $data['result'] = "s";
-      $this->model_product->edit_object($id, $product_name, $product_price, $product_desc, $product_weight, $publish_date, $category);
+      $this->model_product->edit_object($id, $product_name, $product_price, $product_desc, $product_weight, $publish_date, $position, $category);
 
       echo json_encode($data);
     }
@@ -284,7 +317,8 @@ class product extends CI_Controller {
         $data['product_price'] = $row->product_price;
         $data['product_desc'] = $row->product_desc;
         $data['product_weight'] = $row->product_weight;
-        $data['publish_date'] = $row->publish_date != null ? date_format(date_create($row->publish_date), 'Y-m-d') : null;
+        $data['publish_date'] = $row->publish_date != null ? date_format(date_create($row->publish_date), 'Y-m-d H:i:s') : null;
+        $data['position'] = $row->position;
         $data['visible'] = $row->visible;
 
         //Get Category

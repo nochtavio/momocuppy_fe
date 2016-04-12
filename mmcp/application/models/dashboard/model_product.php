@@ -7,7 +7,7 @@ class model_product extends CI_Model {
   }
 
   function get_object($id = 0, $product_name = "", $type = 0, $color = 0, $sale = -1, $visible = -1, $order = 0, $limit = 0, $size = 0) {
-    $this->db->select('mp.*, (SELECT img FROM dt_product_img dpi WHERE dpi.id_product = mp.id LIMIT 1) as img');
+    $this->db->select('mp.*, (SELECT img FROM dt_product_img dpi WHERE dpi.id_product = mp.id LIMIT 1) as img, (SELECT SUM(stock) FROM dt_product dp WHERE dp.id_product = mp.id) AS stock');
     $this->db->from('ms_product mp');
 
     //Set Filter
@@ -36,8 +36,16 @@ class model_product extends CI_Model {
       if ($order == 1) {
         $this->db->order_by("mp.product_name", "desc");
       } else if ($order == 2) {
-        $this->db->order_by("mp.cretime", "desc");
+        $this->db->order_by("stock", "asc");
       } else if ($order == 3) {
+        $this->db->order_by("stock", "desc");
+      } else if ($order == 4) {
+        $this->db->order_by("mp.product_price", "asc");
+      } else if ($order == 5) {
+        $this->db->order_by("mp.product_price", "desc");
+      } else if ($order == 6) {
+        $this->db->order_by("mp.cretime", "desc");
+      } else if ($order == 7) {
         $this->db->order_by("mp.cretime", "asc");
       }
     } else {
@@ -53,7 +61,7 @@ class model_product extends CI_Model {
     return $query;
   }
 
-  function add_object($product_name, $product_price, $product_desc, $product_weight, $publish_date, $category) {
+  function add_object($product_name, $product_price, $product_desc, $product_weight, $publish_date, $position, $category) {
     $data = array(
       'product_name' => $product_name,
       'product_price' => $product_price,
@@ -61,6 +69,7 @@ class model_product extends CI_Model {
       'product_weight' => $product_weight,
       'publish_date' => $publish_date,
       'sale' => 0,
+      'position' => $position,
       'visible' => 0,
       'cretime' => date('Y-m-d H:i:s'),
       'creby' => $this->session->userdata('admin')
@@ -84,13 +93,14 @@ class model_product extends CI_Model {
     return $id_product;
   }
 
-  function edit_object($id, $product_name, $product_price, $product_desc, $product_weight, $publish_date, $category) {
+  function edit_object($id, $product_name, $product_price, $product_desc, $product_weight, $publish_date, $position, $category) {
     $data = array(
       'product_name' => $product_name,
       'product_price' => $product_price,
       'product_desc' => $product_desc,
       'product_weight' => $product_weight,
       'publish_date' => $publish_date,
+      'position' => $position,
       'modtime' => date('Y-m-d H:i:s'),
       'modby' => $this->session->userdata('admin')
     );
