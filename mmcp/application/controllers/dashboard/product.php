@@ -96,19 +96,27 @@ class product extends CI_Controller {
           $data['id'][$temp] = $row->id;
           $data['img'][$temp] = $row->img;
           
-          $category = $this->model_detail_category->generate_dt_category($row->id)->result();
+          $category = $this->model_detail_category->generate_dt_category($row->id);
           $temp_category = "";
-          foreach ($category as $cat) {
-            $temp_category = $temp_category.'['.$cat->type_name.'] '.$cat->category_name.', ';
+          if($category->num_rows() > 0){
+            foreach ($category->result() as $cat) {
+              $temp_category = $temp_category.'['.$cat->type_name.'] '.$cat->category_name.', ';
+            }
+            $data['category'][$temp] = substr($temp_category, 0, -2);
+          }else{
+            $data['category'][$temp] = '-';
           }
-          $data['category'][$temp] = substr($temp_category, 0, -2);
           
-          $color = $this->model_detail_product->get_object(0, $row->id)->result();
+          $color = $this->model_detail_product->get_object(0, $row->id);
           $temp_color = "";
-          foreach ($color as $col) {
-            $temp_color = $temp_color.$col->color_name.', ';
+          if($color->num_rows() > 0){
+            foreach ($color->result() as $col) {
+              $temp_color = $temp_color.$col->color_name.', ';
+            }
+            $data['color'][$temp] = substr($temp_color, 0, -2);
+          }else{
+            $data['color'][$temp] = '-';
           }
-          $data['color'][$temp] = substr($temp_color, 0, -2);
           
           $data['product_name'][$temp] = $row->product_name;
           $data['product_price'][$temp] = number_format($row->product_price);
