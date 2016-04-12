@@ -69,8 +69,10 @@ class product_redeem extends CI_Controller {
           $data['result'] = "s";
 
           $data['id'][$temp] = $row->id;
+          $data['img'][$temp] = $row->img;
           $data['product_name'][$temp] = $row->product_name;
           $data['product_point'][$temp] = $row->product_point;
+          $data['stock'][$temp] = $row->stock;
           $data['publish_date'][$temp] = $row->publish_date != null ? date_format(date_create($row->publish_date), 'd F Y') : 'Not Set';
           $data['visible'][$temp] = $row->visible;
 
@@ -114,6 +116,11 @@ class product_redeem extends CI_Controller {
       if ($this->input->post('product_weight', TRUE)) {
         $product_weight = $this->input->post('product_weight', TRUE);
       }
+      
+      $stock = "";
+      if ($this->input->post('stock', TRUE)) {
+        $stock = $this->input->post('stock', TRUE);
+      }
       //End Get Post Request
       //Check Error
       $data['message'] = "";
@@ -127,6 +134,11 @@ class product_redeem extends CI_Controller {
       }
       if ($product_desc === "") {
         $data['message'] .= "Product Description must be filled! <br/>";
+      }
+      if ($stock === "") {
+        $data['message'] .= "Stock name must be filled! <br/>";
+      } else if (!is_numeric($stock)) {
+        $data['message'] .= "Stock must be a number! <br/>";
       }
       //End Check Error
 
@@ -164,10 +176,15 @@ class product_redeem extends CI_Controller {
       if ($this->input->post('publish_date', TRUE)) {
         $publish_date = $this->input->post('publish_date', TRUE);
       }
+      
+      $stock = "";
+      if ($this->input->post('stock')) {
+        $stock = $this->input->post('stock');
+      }
       //End Get Post Request
 
       $data['result'] = "s";
-      $this->model_product_redeem->add_object($product_name, $product_point, $product_desc, $publish_date);
+      $this->model_product_redeem->add_object($product_name, $product_point, $product_desc, $publish_date, $stock);
 
       echo json_encode($data);
     }
@@ -202,10 +219,15 @@ class product_redeem extends CI_Controller {
       if ($this->input->post('publish_date', TRUE)) {
         $publish_date = $this->input->post('publish_date', TRUE);
       }
+      
+      $stock = "";
+      if ($this->input->post('stock')) {
+        $stock = $this->input->post('stock');
+      }
       //End Get Post Request
 
       $data['result'] = "s";
-      $this->model_product_redeem->edit_object($id, $product_name, $product_point, $product_desc, $publish_date);
+      $this->model_product_redeem->edit_object($id, $product_name, $product_point, $product_desc, $publish_date, $stock);
 
       echo json_encode($data);
     }
@@ -224,7 +246,8 @@ class product_redeem extends CI_Controller {
         $data['product_name'] = $row->product_name;
         $data['product_point'] = $row->product_point;
         $data['product_desc'] = $row->product_desc;
-        $data['publish_date'] = $row->publish_date != null ? date_format(date_create($row->publish_date), 'Y-m-d') : null;
+        $data['publish_date'] = $row->publish_date != null ? date_format(date_create($row->publish_date), 'Y-m-d H:i:s') : null;
+        $data['stock'] = $row->stock;
         $data['visible'] = $row->visible;
       }
       echo json_encode($data);

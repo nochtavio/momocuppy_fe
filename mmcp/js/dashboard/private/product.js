@@ -451,6 +451,7 @@ $(document).ready(function () {
   $('#txt_addpublishdate').datetimepicker({
     format: "YYYY-MM-DD HH:mm:SS"
   });
+  
   $('#txt_editpublishdate').datetimepicker({
     format: "YYYY-MM-DD HH:mm:SS"
   });

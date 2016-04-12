@@ -41,6 +41,14 @@ $(document).ready(function () {
 
           for (var x = 0; x < result['total']; x++)
           {
+            //Set Product Image
+            var img = "<img src='"+baseurl+"images/products/no-img-potrait.jpg' height='150px' width='125px' />";
+            if (result['img'][x] != null)
+            {
+              img = "<img src='"+baseurl+"images/products/"+result['img'][x]+"' height='150px' width='125px' />";
+            }
+            //End Set Product Image
+            
             //Set Detail
             var detail = "Created by <strong>" + result['creby'][x] + "</strong> <br/> on <strong>" + result['cretime'][x] + "</strong>";
             if (result['modby'][x] != null)
@@ -60,8 +68,10 @@ $(document).ready(function () {
             $('#tablecontent').append("\
             <tr>\
               <td class='tdcenter'>" + (parseInt(no) + parseInt(x)) + "</td>\
+              <td class='tdcenter'>" + img + "</td>\
               <td class='tdcenter'>" + result['product_name'][x] + "</td>\
               <td class='tdcenter'>" + result['product_point'][x] + "</td>\
+              <td class='tdcenter'>" + result['stock'][x] + "</td>\
               <td class='tdcenter'>" + result['publish_date'][x] + "</td>\
               <td class='tdcenter'>" + detail + "</td>\
               <td class='tdcenter'>" + visible + "</td>\
@@ -101,7 +111,12 @@ $(document).ready(function () {
     var product_name = $('#txt_addproductname').val();
     var product_point = $('#txt_addproductpoint').val();
     var product_desc = $('#txt_addproductdesc').trumbowyg('html');
-    var publish_date = $('#txt_addpublishdate').val();
+    var publish_date_raw = $('#txt_addpublishdate').data("DateTimePicker").date();
+    var publish_date = '';
+    if(publish_date_raw != null){
+      publish_date = publish_date_raw.year()+'-'+(publish_date_raw.month()+1)+'-'+publish_date_raw.date()+' '+publish_date_raw.hour()+':'+publish_date_raw.minute()+':'+publish_date_raw.second();
+    }    
+    var stock = $('#txt_addstock').val();
     $.ajax({
       url: baseurl + 'dashboard/product_redeem/check_field',
       type: 'POST',
@@ -110,7 +125,8 @@ $(document).ready(function () {
           product_name: product_name,
           product_point: product_point,
           product_desc: product_desc,
-          publish_date: publish_date
+          publish_date: publish_date,
+          stock: stock
         },
       dataType: 'json',
       success: function (result) {
@@ -124,7 +140,8 @@ $(document).ready(function () {
                 product_name: product_name,
                 product_point: product_point,
                 product_desc: product_desc,
-                publish_date: publish_date
+                publish_date: publish_date,
+                stock: stock
               },
             dataType: 'json',
             success: function (result) {
@@ -158,7 +175,12 @@ $(document).ready(function () {
     var product_name = $('#txt_editproductname').val();
     var product_point = $('#txt_editproductpoint').val();
     var product_desc = $('#txt_editproductdesc').trumbowyg('html');
-    var publish_date = $('#txt_editpublishdate').val();
+    var publish_date_raw = $('#txt_editpublishdate').data("DateTimePicker").date();
+    var publish_date = '';
+    if(publish_date_raw != null){
+      publish_date = publish_date_raw.year()+'-'+(publish_date_raw.month()+1)+'-'+publish_date_raw.date()+' '+publish_date_raw.hour()+':'+publish_date_raw.minute()+':'+publish_date_raw.second();
+    }
+    var stock =  $('#txt_editstock').val();
     $.ajax({
       url: baseurl + 'dashboard/product_redeem/check_field',
       type: 'POST',
@@ -167,7 +189,8 @@ $(document).ready(function () {
           product_name: product_name,
           product_point: product_point,
           product_desc: product_desc,
-          publish_date: publish_date
+          publish_date: publish_date,
+          stock: stock
         },
       dataType: 'json',
       success: function (result) {
@@ -182,7 +205,8 @@ $(document).ready(function () {
                 product_name: product_name,
                 product_point: product_point,
                 product_desc: product_desc,
-                publish_date: publish_date
+                publish_date: publish_date,
+                stock: stock
               },
             dataType: 'json',
             success: function (result) {
@@ -298,8 +322,9 @@ $(document).ready(function () {
               $("#txt_editproductname").val(result['product_name']);
               $("#txt_editproductpoint").val(result['product_point']);
               $('#txt_editproductdesc').trumbowyg('html', result['product_desc']);
-              $("#txt_editpublishdate").val(result['publish_date']);
-
+              $('#txt_editpublishdate').data("DateTimePicker").date(result['publish_date']);
+              $("#txt_editstock").val(result['stock']);
+              
               $('.modal_warning').hide();
               $('#modal_edit').modal('show');
             }
@@ -340,15 +365,11 @@ $(document).ready(function () {
   $('.ajaxloading-tr').hide();
   var totalobject = 0;
   $('.modal_warning').hide();
-  $('#txt_addpublishdate').datepicker({
-    todayHighlight: true,
-    zIndexOffset: '9999',
-    format: 'yyyy-m-d'
+  $('#txt_addpublishdate').datetimepicker({
+    format: "YYYY-MM-DD HH:mm:SS"
   });
-  $('#txt_editpublishdate').datepicker({
-    todayHighlight: true,
-    zIndexOffset: '9999',
-    format: 'yyyy-m-d'
+  $('#txt_editpublishdate').datetimepicker({
+    format: "YYYY-MM-DD HH:mm:SS"
   });
   $('#txt_addproductdesc').trumbowyg({
     btns: [['formatting'], ['bold', 'italic', 'underline']]

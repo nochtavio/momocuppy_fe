@@ -12,8 +12,12 @@
         <select class="form-control" id="sel_order">
           <option value="-1">Sort By Name A-Z</option>
           <option value="1">Sort By Name Z-A</option>
-          <option value="2">Sort By Newest Data</option>
-          <option value="3">Sort By Oldest Data</option>
+          <option value="2">Sort By Lowest Point</option>
+          <option value="3">Sort By Highest Point</option>
+          <option value="4">Sort By Lowest Stock</option>
+          <option value="5">Sort By Highest Stock</option>
+          <option value="6">Sort By Newest Data</option>
+          <option value="7">Sort By Oldest Data</option>
         </select>
       </div>
       <div class="form-group">
@@ -41,8 +45,10 @@
         <thead>
           <tr>
             <th>No</th>
+            <th>Product Image</th>
             <th>Product Name</th>
             <th>Product Point</th>
+            <th>Stock</th>
             <th>Publish Date</th>
             <th>Detail</th>
             <th>Visible</th>

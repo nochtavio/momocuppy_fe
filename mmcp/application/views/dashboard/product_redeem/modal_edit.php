@@ -32,6 +32,12 @@
               <p class="help-block" style="font-size: 12px;">Leave it empty if you want to publish this product immediately.</p>
             </div>
           </div>
+          <div class="form-group">
+            <label for="txt_editstock" class="col-sm-4 control-label">Stock</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" id="txt_editstock" placeholder="Input product stock ...">
+            </div>
+          </div>
           <div class="alert alert-warning modal_warning" role="alert"></div>
         </div>
         <div class="modal-footer">
