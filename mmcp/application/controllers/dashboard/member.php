@@ -7,13 +7,17 @@ class member extends CI_Controller {
     parent::__construct();
     $this->load->model('dashboard/model_admin', '', TRUE);
     $this->load->model('dashboard/model_member', '', TRUE);
+    $this->load->model('dashboard/model_city', '', TRUE);
   }
 
   function index() {
     //Data
     $content['page'] = "Member";
     $content['pagesize'] = 10;
-
+    
+    //Get City
+    $content['fetch_city'] = $this->model_city->get_object()->result();
+    
     //JS
     $content['js'][0] = 'js/dashboard/private/member.js';
 
@@ -51,6 +55,18 @@ class member extends CI_Controller {
       if ($this->input->post('email', TRUE)) {
         $email = $this->input->post('email', TRUE);
       }
+      $city = "";
+      if ($this->input->post('city', TRUE)) {
+        $city = $this->input->post('city', TRUE);
+      }
+      $cretime_from = "";
+      if ($this->input->post('cretime_from', TRUE)) {
+        $cretime_from = $this->input->post('cretime_from', TRUE);
+      }
+      $cretime_to = "";
+      if ($this->input->post('cretime_to', TRUE)) {
+        $cretime_to = $this->input->post('cretime_to', TRUE);
+      }
       $active = 0;
       if ($this->input->post('active', TRUE)) {
         $active = $this->input->post('active', TRUE);
@@ -61,7 +77,7 @@ class member extends CI_Controller {
       }
       //End Filter
 
-      $totalrow = $this->model_member->get_object(0, $firstname, $lastname, $email, $active, $order)->num_rows();
+      $totalrow = $this->model_member->get_object(0, $firstname, $lastname, $email, $city, $cretime_from, $cretime_to, $active, $order)->num_rows();
 
       //Set totalpaging
       $totalpage = ceil($totalrow / $size);
@@ -69,7 +85,7 @@ class member extends CI_Controller {
       //End Set totalpaging
 
       if ($totalrow > 0) {
-        $query = $this->model_member->get_object(0, $firstname, $lastname, $email, $active, $order, $limit, $size)->result();
+        $query = $this->model_member->get_object(0, $firstname, $lastname, $email, $city, $cretime_from, $cretime_to, $active, $order, $limit, $size)->result();
         $temp = 0;
         foreach ($query as $row) {
           $data['result'] = "s";
@@ -80,6 +96,8 @@ class member extends CI_Controller {
           $data['phone'][$temp] = $row->phone;
           $data['email'][$temp] = $row->email;
           $data['point'][$temp] = (is_null($row->point_member)) ? 0 : $row->point_member;
+          $data['total_order'][$temp] = (is_null($row->total_order)) ? 0 : $row->total_order;
+          $data['city'][$temp] = (is_null($row->city)) ? '-' : $row->city;
           $data['active'][$temp] = $row->active;
 
           $data['cretime'][$temp] = date_format(date_create($row->cretime), 'd F Y H:i:s');
@@ -233,5 +251,46 @@ class member extends CI_Controller {
       echo json_encode($data);
     }
   }
-
+  
+  function export_excel(){
+    $this->load->library("Excel");
+    
+    //Filter
+    $firstname = "";
+    if ($this->input->post('firstname', TRUE)) {
+      $firstname = $this->input->post('firstname', TRUE);
+    }
+    $lastname = "";
+    if ($this->input->post('lastname', TRUE)) {
+      $lastname = $this->input->post('lastname', TRUE);
+    }
+    $email = "";
+    if ($this->input->post('email', TRUE)) {
+      $email = $this->input->post('email', TRUE);
+    }
+    $city = "";
+    if ($this->input->post('city', TRUE)) {
+      $city = $this->input->post('city', TRUE);
+    }
+    $cretime_from = "";
+    if ($this->input->post('cretime_from', TRUE)) {
+      $cretime_from = $this->input->post('cretime_from', TRUE);
+    }
+    $cretime_to = "";
+    if ($this->input->post('cretime_to', TRUE)) {
+      $cretime_to = $this->input->post('cretime_to', TRUE);
+    }
+    $active = 0;
+    if ($this->input->post('active', TRUE)) {
+      $active = $this->input->post('active', TRUE);
+    }
+    $order = 0;
+    if ($this->input->post('order', TRUE)) {
+      $order = $this->input->post('order', TRUE);
+    }
+    //End Filter
+    
+    $result_object = $this->model_member->export_excel(0, $firstname, $lastname, $email, $city, $cretime_from, $cretime_to, -1, $order);
+    $this->excel->to_excel($result_object, 'Member_Excel_'.date('dMy'));
+  }
 }

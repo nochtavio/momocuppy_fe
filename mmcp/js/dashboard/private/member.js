@@ -10,6 +10,17 @@ $(document).ready(function () {
     var firstname = $('#txt_firstname').val();
     var lastname = $('#txt_lastname').val();
     var email = $('#txt_email').val();
+    var city = $('#sel_city').val();
+    var cretime_from_raw = $('#txt_cretime_from').data("DateTimePicker").date();
+    var cretime_from = '';
+    if(cretime_from_raw != null){
+      cretime_from = cretime_from_raw.year()+'-'+(cretime_from_raw.month()+1)+'-'+cretime_from_raw.date();
+    }
+    var cretime_to_raw = $('#txt_cretime_to').data("DateTimePicker").date();
+    var cretime_to = '';
+    if(cretime_to_raw != null){
+      cretime_to = cretime_to_raw.year()+'-'+(cretime_to_raw.month()+1)+'-'+cretime_to_raw.date();
+    }
     var active = $('#sel_active').val();
     var order = $('#sel_order').val();
     //End Filter
@@ -23,6 +34,9 @@ $(document).ready(function () {
           firstname: firstname,
           lastname: lastname,
           email: email,
+          city: city,
+          cretime_from: cretime_from,
+          cretime_to: cretime_to,
           active: active,
           order: order
         },
@@ -71,9 +85,11 @@ $(document).ready(function () {
             $('#tablecontent').append("\
             <tr>\
               <td class='tdcenter'>" + (parseInt(no) + parseInt(x)) + "</td>\
-              <td class='tdcenter'>" + result['email'][x] + "</td>\
               <td class='tdcenter'>" + account_information + "</td>\
+              <td class='tdcenter'>" + result['email'][x] + "</td>\
+              <td class='tdcenter'>" + result['total_order'][x] + "</td>\
               <td class='tdcenter'>" + result['point'][x] + "</td>\
+              <td class='tdcenter'>" + result['city'][x] + "</td>\
               <td class='tdcenter'>" + detail + "</td>\
               <td class='tdcenter'>" + active + "</td>\
               <td class='tdcenter'>\
@@ -98,7 +114,7 @@ $(document).ready(function () {
         {
           $('#tablecontent').append("\
           <tr>\
-            <td colspan='7'><strong style='color:red;'>" + result['message'] + "</strong></td>\
+            <td colspan='9'><strong style='color:red;'>" + result['message'] + "</strong></td>\
           </tr>");
         }
       }
@@ -237,16 +253,83 @@ $(document).ready(function () {
     });
   };
   //End Function Set Edit Product
+  
+  function post(path, parameters) {
+    var form = $('<form></form>');
+
+    form.attr("method", "post");
+    form.attr("action", path);
+
+    $.each(parameters, function(key, value) {
+      var field = $('<input></input>');
+
+      field.attr("type", "hidden");
+      field.attr("name", key);
+      field.attr("value", value);
+
+      form.append(field);
+    });
+
+    // The form needs to be a part of the document in
+    // order for us to be able to submit it.
+    $(document.body).append(form);
+    form.submit();
+  }
+  
+  //Function Get Object
+  exportExcel = function ()
+  {
+    //Filter
+    var firstname = $('#txt_firstname').val();
+    var lastname = $('#txt_lastname').val();
+    var email = $('#txt_email').val();
+    var city = $('#sel_city').val();
+    var cretime_from_raw = $('#txt_cretime_from').data("DateTimePicker").date();
+    var cretime_from = '';
+    if(cretime_from_raw != null){
+      cretime_from = cretime_from_raw.year()+'-'+(cretime_from_raw.month()+1)+'-'+cretime_from_raw.date();
+    }
+    var cretime_to_raw = $('#txt_cretime_to').data("DateTimePicker").date();
+    var cretime_to = '';
+    if(cretime_to_raw != null){
+      cretime_to = cretime_to_raw.year()+'-'+(cretime_to_raw.month()+1)+'-'+cretime_to_raw.date();
+    }
+    var active = $('#sel_active').val();
+    var order = $('#sel_order').val();
+    //End Filter
+    
+    post(baseurl + 'dashboard/member/export_excel', {
+      firstname: firstname,
+      lastname: lastname,
+      email: email,
+      city: city,
+      cretime_from: cretime_from,
+      cretime_to: cretime_to,
+      active: active,
+      order: order
+      }
+    );
+  };
+  //End Function Get Object
 
   //Initial Setup
   page = 1;
   lastpage = 0;
-  getObject(page);
   $('.ajaxloading-tr').hide();
   var totalobject = 0;
   $('.modal_warning').hide();
   $('#txt_addmembercode').pickAColor();
   $('#txt_editmembercode').pickAColor();
+  
+  $('#txt_cretime_from').datetimepicker({
+    format: "YYYY-MM-DD"
+  });
+  
+  $('#txt_cretime_to').datetimepicker({
+    format: "YYYY-MM-DD"
+  });
+  
+  getObject(page);
   //End Initial Setup
 
   //User Action
@@ -254,7 +337,12 @@ $(document).ready(function () {
     ajaxLoader();
     getObject(1);
   });
-
+  
+  $("#sel_city").change(function () {
+    ajaxLoader();
+    getObject(1);
+  });
+  
   $("#sel_active").change(function () {
     ajaxLoader();
     getObject(1);
@@ -275,6 +363,10 @@ $(document).ready(function () {
   $('#btn_search_').click(function () {
     ajaxLoader();
     getObject(1);
+  });
+  
+  $('#btn_export').click(function(){
+    exportExcel();
   });
   //End User Action
 });

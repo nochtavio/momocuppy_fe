@@ -17,6 +17,18 @@
         <label class="sr-only" for="txt_lastname">Lastname</label>
         <input type="text" class="form-control" id="txt_lastname" placeholder="Lastname">
       </div>
+      <div class="form-group">
+        <select class="form-control" id="sel_city">
+          <option value="">All City</option>
+          <?php 
+            foreach ($fetch_city as $city) {
+              ?>
+              <option value="<?php echo $city->city_name ?>"><?php echo $city->city_name.' ['.$city->type.']' ?></option>
+              <?php
+            }
+          ?>
+        </select>
+      </div>
     </form>
   </div>
 </div>
@@ -26,15 +38,23 @@
     <form class="form-inline form_filter" role="form">
       <div class="form-group">
         <select class="form-control" id="sel_order">
-          <option value="-1">Sort By Newest Data</option>
-          <option value="1">Sort By Oldest Data</option>
+          <option value="-1">Sort By Firstname A-Z</option>
+          <option value="1">Sort By Firstname Z-A</option>
           <option value="2">Sort By Email A-Z</option>
           <option value="3">Sort By Email Z-A</option>
-          <option value="4">Sort By Firstname A-Z</option>
-          <option value="5">Sort By Firstname Z-A</option>
-          <option value="6">Sort By Lastname A-Z</option>
-          <option value="7">Sort By Lastname Z-A</option>
+          <option value="4">Sort By Lowest Point</option>
+          <option value="5">Sort By Highest Point</option>
+          <option value="6">Sort By Lowest Total Order</option>
+          <option value="7">Sort By Highest Total Order</option>
+          <option value="8">Sort By Newest Member</option>
+          <option value="9">Sort By Oldest Member</option>
         </select>
+      </div>
+      <div class="form-group">
+        <input type='text' class="form-control" id='txt_cretime_from' placeholder="Registered From" /> - 
+      </div>
+      <div class="form-group">
+        <input type='text' class="form-control" id='txt_cretime_to' placeholder="Registered To" />
       </div>
       <div class="form-group">
         <select class="form-control" id="sel_active">
@@ -44,6 +64,7 @@
         </select>
       </div>
       <button id="btn_search_" type="button" class="btn btn-default">Search</button>
+      <button id="btn_export" type="button" class="btn btn-success">Export Excel</button>
       <div class="form-group">
         <div class="ajaxloading-tr"></div>
       </div>
@@ -61,9 +82,11 @@
         <thead>
           <tr>
             <th>No</th>
-            <th>Email</th>
             <th>Account Information</th>
+            <th>Email</th>
+            <th>Total Order</th>
             <th>Point</th>
+            <th>City</th>
             <th>Detail</th>
             <th>Active</th>
             <th>Action</th>

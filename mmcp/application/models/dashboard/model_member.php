@@ -7,12 +7,14 @@ class model_member extends CI_Model {
     $this->load->library('custom_encrypt');
   }
 
-  function get_object($id = 0, $firstname = "", $lastname = "", $email = "", $active = -1, $order = 0, $limit = 0, $size = 0) {
+  function get_object($id = 0, $firstname = "", $lastname = "", $email = "", $city = "", $cretime_from = "", $cretime_to = "", $active = -1, $order = 0, $limit = 0, $size = 0) {
     //Set Filter
     $filter_id = "";
     $filter_firstname = "";
     $filter_lastname = "";
     $filter_email = "";
+    $filter_city = "";
+    $filter_date = "";
     $filter_active = "";
     if ($id > 0) {
       $filter_id = "AND mm.id = " . $id . "";
@@ -26,27 +28,38 @@ class model_member extends CI_Model {
     if ($email !== "") {
       $filter_email = "AND mm.email LIKE '%" . $email . "%'";
     }
+    if ($city !== "") {
+      $filter_city = "AND mm.id IN (SELECT id_member AS id FROM dt_address da2 JOIN ms_city mc2 ON da2.city = mc2.city_id AND mc2.city_name = '" . $city . "') ";
+    }
+    if($cretime_from !== "" && $cretime_to !== ""){
+      $filter_date = "AND (mm.cretime BETWEEN '".$cretime_from."' AND '".$cretime_to."')";
+    }
     if ($active > -1) {
       $filter_active = "AND mm.active = " . $active . "";
     }
     //End Set Filter
+    
     //Set Order
-    $filter_order = "ORDER BY mm.cretime DESC";
+    $filter_order = "ORDER BY mm.firstname ASC";
     if ($order > 0) {
       if ($order == 1) {
-        $filter_order = "ORDER BY mm.cretime ASC";
+        $filter_order = "ORDER BY mm.firstname DESC";
       } else if ($order == 2) {
         $filter_order = "ORDER BY mm.email ASC";
       } else if ($order == 3) {
         $filter_order = "ORDER BY mm.email DESC";
       } else if ($order == 4) {
-        $filter_order = "ORDER BY mm.firstname ASC";
+        $filter_order = "ORDER BY point_member ASC";
       } else if ($order == 5) {
-        $filter_order = "ORDER BY mm.firstname DESC";
+        $filter_order = "ORDER BY point_member DESC";
       } else if ($order == 6) {
-        $filter_order = "ORDER BY mm.lastname AC";
+        $filter_order = "ORDER BY total_order ASC";
       } else if ($order == 7) {
-        $filter_order = "ORDER BY mm.lastname DESC";
+        $filter_order = "ORDER BY total_order DESC";
+      } else if ($order == 8) {
+        $filter_order = "ORDER BY cretime DESC";
+      } else if ($order == 9) {
+        $filter_order = "ORDER BY cretime ASC";
       }
     }
     //End Set Order
@@ -57,22 +70,37 @@ class model_member extends CI_Model {
     }
 
     $query = "
-            SELECT `mm`.*, 
-            (
-              SELECT SUM(mp.point) 
-              FROM ms_point mp 
-              WHERE mm.id = mp.id_member AND DATE_ADD(mp.cretime, INTERVAL 3 MONTH) > NOW()
-            ) AS point_member
-            FROM (`ms_member` mm)
-            WHERE 1=1
-            " . $filter_id . "
-            " . $filter_firstname . "
-            " . $filter_lastname . "
-            " . $filter_email . "
-            " . $filter_active . "
-            " . $filter_order . "
-            " . $filter_limit . "
-          ";
+      SELECT `mm`.*, 
+      (
+        SELECT SUM(mp.point) 
+        FROM ms_point mp 
+        WHERE mm.id = mp.id_member AND DATE_ADD(mp.cretime, INTERVAL 3 MONTH) > NOW()
+      ) AS point_member,
+      (
+        SELECT COUNT(mo.id_member)
+        FROM ms_order mo
+        WHERE mm.id = mo.id_member AND mo.status > 2
+      ) AS total_order,
+      (
+        SELECT mc.city_name
+        FROM dt_address da
+        JOIN ms_city mc ON da.city = mc.city_id
+        WHERE mm.id = da.id_member
+        LIMIT 0,1
+      ) AS city
+      FROM (`ms_member` mm)
+      WHERE 1=1
+      " . $filter_id . "
+      " . $filter_firstname . "
+      " . $filter_lastname . "
+      " . $filter_email . "
+      " . $filter_city . "
+      " . $filter_date . "
+      " . $filter_active . "
+      " . $filter_order . "
+      " . $filter_limit . "
+    ";
+    
     return $this->db->query($query);
   }
 
@@ -243,6 +271,104 @@ class model_member extends CI_Model {
       GROUP BY registered_date
       ORDER BY cretime ASC
     ";
+    return $this->db->query($query);
+  }
+  
+  function export_excel($id = 0, $firstname = "", $lastname = "", $email = "", $city = "", $cretime_from = "", $cretime_to = "", $active = -1, $order = 0, $limit = 0, $size = 0) {
+    //Set Filter
+    $filter_id = "";
+    $filter_firstname = "";
+    $filter_lastname = "";
+    $filter_email = "";
+    $filter_city = "";
+    $filter_date = "";
+    $filter_active = "";
+    if ($id > 0) {
+      $filter_id = "AND mm.id = " . $id . "";
+    }
+    if ($firstname !== "") {
+      $filter_firstname = "AND mm.firstname LIKE '%" . $firstname . "%'";
+    }
+    if ($lastname !== "") {
+      $filter_lastname = "AND mm.lastname LIKE '%" . $lastname . "%'";
+    }
+    if ($email !== "") {
+      $filter_email = "AND mm.email LIKE '%" . $email . "%'";
+    }
+    if ($city !== "") {
+      $filter_city = "AND mm.id IN (SELECT id_member AS id FROM dt_address da2 JOIN ms_city mc2 ON da2.city = mc2.city_id AND mc2.city_name = '" . $city . "') ";
+    }
+    if($cretime_from !== "" && $cretime_to !== ""){
+      $filter_date = "AND (mm.cretime BETWEEN '".$cretime_from."' AND '".$cretime_to."')";
+    }
+    if ($active > -1) {
+      $filter_active = "AND mm.active = " . $active . "";
+    }
+    //End Set Filter
+    
+    //Set Order
+    $filter_order = "ORDER BY mm.firstname ASC";
+    if ($order > 0) {
+      if ($order == 1) {
+        $filter_order = "ORDER BY mm.firstname DESC";
+      } else if ($order == 2) {
+        $filter_order = "ORDER BY mm.email ASC";
+      } else if ($order == 3) {
+        $filter_order = "ORDER BY mm.email DESC";
+      } else if ($order == 4) {
+        $filter_order = "ORDER BY point_member ASC";
+      } else if ($order == 5) {
+        $filter_order = "ORDER BY point_member DESC";
+      } else if ($order == 6) {
+        $filter_order = "ORDER BY total_order ASC";
+      } else if ($order == 7) {
+        $filter_order = "ORDER BY total_order DESC";
+      } else if ($order == 8) {
+        $filter_order = "ORDER BY cretime DESC";
+      } else if ($order == 9) {
+        $filter_order = "ORDER BY cretime ASC";
+      }
+    }
+    //End Set Order
+
+    $filter_limit = "";
+    if ($size > 0) {
+      $filter_limit = "LIMIT " . $limit . ", " . $size . "";
+    }
+
+    $query = "
+      SELECT mm.firstname, mm.lastname, mm.phone, mm.email,
+      (
+        SELECT COUNT(mo.id_member)
+        FROM ms_order mo
+        WHERE mm.id = mo.id_member AND mo.status > 2
+      ) AS total_order,
+      (
+        SELECT SUM(mp.point) 
+        FROM ms_point mp 
+        WHERE mm.id = mp.id_member AND DATE_ADD(mp.cretime, INTERVAL 3 MONTH) > NOW()
+      ) AS total_point,
+      (
+        SELECT mc.city_name
+        FROM dt_address da
+        JOIN ms_city mc ON da.city = mc.city_id
+        WHERE mm.id = da.id_member
+        LIMIT 0,1
+      ) AS city,
+      mm.cretime
+      FROM (`ms_member` mm)
+      WHERE 1=1
+      " . $filter_id . "
+      " . $filter_firstname . "
+      " . $filter_lastname . "
+      " . $filter_email . "
+      " . $filter_city . "
+      " . $filter_date . "
+      " . $filter_active . "
+      " . $filter_order . "
+      " . $filter_limit . "
+    ";
+    
     return $this->db->query($query);
   }
 
