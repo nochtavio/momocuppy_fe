@@ -76,6 +76,7 @@ require_once($dir . "content/header.php");
         <div class="rightorderbox">
           <div id="shoppingbag_confirm">
             <h3>Shopping Bag</h3>
+            <div id="div-hidden-item"></div>
             <ul id="shopbaglist" class="shopbaglist shopbaglist_confirm simplebar">
 
             </ul>                                

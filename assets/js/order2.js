@@ -11,7 +11,7 @@ $(document).ready(function () {
 
   var get_cart = function () {
     $('#shopbaglist').empty();
-    $('#div-hidden').empty();
+    $('#div-hidden-item').empty();
 
     $.ajax({
       url: base_url + 'api/get_cart',
@@ -32,15 +32,21 @@ $(document).ready(function () {
       success: function (result) {
         subtotal = 0;
         totalweight = 0;
+        totalitem = 0;
         var point = 0;
         var grand_total = 0;
+        var img = "";
         $('#btn_checkout').prop('disabled', false);
 
         if (result['result'] === 's') {
           $.each(result['content'], function (key, value) {
+            img = '/mmcp/images/products/' + value['img'];
+            if(value['img'] == null){
+              img = '/images/products/no-img-potrait.jpg';
+            }
             $('#shopbaglist').append("\
               <li>\
-                <div class='confirmbag_img'><img src='/mmcp/images/products/" + value['img'] + "' width=85 height=115 /></div>\
+                <div class='confirmbag_img'><img id='cart_img_" + value['id'] + "' src='" + img + "' /></div>\
                 <div class='confirmbag_color'>\
                   <span class='confirmbag_title'>color</span>\
                   <span class='confirmbag_data'>" + value['color_name'] + "</span>\
@@ -59,10 +65,15 @@ $(document).ready(function () {
                 </div>\
               </li>\
             ");
+            $('#div-hidden-item').append("\
+              <input type='hidden' id='objectitem" + totalitem + "' value='" + value['id'] + "' />\
+            ");
+            totalitem++;
             subtotal = parseInt(subtotal) + (parseInt(value['qty']) * parseInt(value['product_price']));
             totalweight = parseFloat(totalweight) + (parseInt(value['qty']) * parseFloat(value['product_weight']));
           });
           $('.shopbaglist').jScrollPane(); 
+          set_resolution();
           calculate();
         } else {
           //Cart is empty
@@ -73,6 +84,29 @@ $(document).ready(function () {
           ");
         }
       }
+    });
+  };
+  
+  var set_resolution = function(){
+    var id = [];
+    for (var x = 0; x < totalitem; x++)
+    {
+      id[x] = $('#objectitem' + x).val();
+    }
+    var temp_height = 0;
+    var temp_width = 0;
+    $.each(id, function (x, val) {
+      setTimeout(function(){
+        //Check Image Resolution
+        temp_height = $('#cart_img_'+val).height();
+        temp_width = $('#cart_img_'+val).width();
+        if(temp_width <= temp_height){
+          $('#cart_img_'+val).addClass("img-portrait");
+        }else{
+          $('#cart_img_'+val).addClass("img-landscape");
+        }
+        //End Check Image Resolution
+      }, 250);
     });
   };
   
@@ -429,6 +463,7 @@ $(document).ready(function () {
   shipping = 0;
   totalweight = 0;
   var totalobject = 0;
+  var totalitem = 0;
   var state = "";
   get_session_order();
   get_cart();
@@ -485,7 +520,6 @@ $(document).ready(function () {
       shipping = 0;
       $('#txt_shipping_fee').text("IDR " + format_number(shipping));
       $('#order_shipping_cost').val(shipping);
-      get_cart();
     } else {
       $.ajax({
         url: base_url + 'api/generate_member_address',

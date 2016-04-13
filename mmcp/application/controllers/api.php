@@ -513,7 +513,7 @@ class api extends CI_Controller {
       $this->email->set_newline("\r\n");
       $this->email->from('do-not-reply@momocuppy.com'); // change it to yours
       $this->email->to($email); // change it to yours
-      $this->email->subject("Welcome ".$firstname." to Momocuppy, please verify your account to continue shopping");
+      $this->email->subject("Welcome ".$firstname." to Momo Cuppy, please verify your account to continue shopping");
       
       //Data Message
       $data_message['name'] = $firstname." ".$lastname;
@@ -589,7 +589,7 @@ class api extends CI_Controller {
       $this->email->set_newline("\r\n");
       $this->email->from('do-not-reply@momocuppy.com'); // change it to yours
       $this->email->to($email); // change it to yours
-      $this->email->subject("Welcome ".$firstname." to Momocuppy, please verify your account to continue shopping");
+      $this->email->subject("Welcome ".$firstname." to Momo Cuppy, please verify your account to continue shopping");
 
       //Data Message
       $data_message['name'] = $firstname." ".$lastname;
@@ -810,7 +810,7 @@ class api extends CI_Controller {
       $this->email->set_newline("\r\n");
       $this->email->from('do-not-reply@momocuppy.com'); // change it to yours
       $this->email->to($email); // change it to yours
-      $this->email->subject("[Momocuppy] Your password for ".$email." has been resetted");
+      $this->email->subject("[Momo Cuppy] Your password for ".$email." has been resetted");
       
       //Data Message
       $data_message['email'] = $email;
@@ -1306,7 +1306,7 @@ class api extends CI_Controller {
         $this->email->set_newline("\r\n");
         $this->email->from('do-not-reply@momocuppy.com'); // change it to yours
         $this->email->to($_SESSION["email"]); // change it to yours
-        $this->email->subject("Momocuppy Order Confirmation (Order No ".$order['return_order']['order_no'].")");
+        $this->email->subject("Momo Cuppy Order Confirmation (Order No ".$order['return_order']['order_no'].")");
 
         //Data Message
         $data_message['order_no'] = $order['return_order']['order_no'];
