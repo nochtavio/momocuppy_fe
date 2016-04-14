@@ -6,7 +6,7 @@ class model_order extends CI_Model {
     parent::__construct();
   }
 
-  function get_object($id = 0, $type = 0, $email = "", $street_address = "", $zip_code = "", $country = "", $city = "", $order_no = "", $resi_no = "", $status = 0, $order = 0, $limit = 0, $size = 0) {
+  function get_object($id = 0, $type = 0, $email = "", $street_address = "", $zip_code = "", $country = "", $city = "", $order_no = "", $resi_no = "", $status = 0, $cretime_from = "", $cretime_to = "", $order = 0, $limit = 0, $size = 0) {
     if($type == 1){
       $this->db->select('mo.*, mm.email, mv.voucher_name, mpr.product_name');
     }else{
@@ -48,9 +48,14 @@ class model_order extends CI_Model {
     if ($status > 0) {
       $this->db->like('mo.status', $status);
     }
+    if ($cretime_from !== "" && $cretime_to !== ""){
+      $this->db->where('mo.cretime >=', $cretime_from);
+      $this->db->where('mo.cretime <=', $cretime_to);
+    }
     $this->db->where('mo.type', $type);
     $this->db->where('mo.archive', 0);
     //End Set Filter
+    
     //Set Order
     if ($order > 0) {
       if ($order == 1) {
@@ -69,7 +74,7 @@ class model_order extends CI_Model {
       $this->db->limit($size, $limit);
     }
     $query = $this->db->get();
-
+    
     return $query;
   }
 

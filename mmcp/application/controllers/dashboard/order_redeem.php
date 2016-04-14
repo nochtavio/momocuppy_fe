@@ -73,13 +73,21 @@ class order_redeem extends CI_Controller {
       if ($this->input->post('status', TRUE)) {
         $status = $this->input->post('status', TRUE);
       }
+      $cretime_from = "";
+      if ($this->input->post('cretime_from', TRUE)) {
+        $cretime_from = $this->input->post('cretime_from', TRUE);
+      }
+      $cretime_to = "";
+      if ($this->input->post('cretime_to', TRUE)) {
+        $cretime_to = $this->input->post('cretime_to', TRUE);
+      }
       $order = 0;
       if ($this->input->post('order', TRUE)) {
         $order = $this->input->post('order', TRUE);
       }
       //End Filter
 
-      $totalrow = $this->model_order->get_object(0, 1, $email, $street_address, $zip_code, $country, $city, $order_no, $resi_no, $status, $order)->num_rows();
+      $totalrow = $this->model_order->get_object(0, 1, $email, $street_address, $zip_code, $country, $city, $order_no, $resi_no, $status, $cretime_from, $cretime_to, $order)->num_rows();
 
       //Set totalpaging
       $totalpage = ceil($totalrow / $size);
@@ -87,7 +95,7 @@ class order_redeem extends CI_Controller {
       //End Set totalpaging
 
       if ($totalrow > 0) {
-        $query = $this->model_order->get_object(0, 1, $email, $street_address, $zip_code, $country, $city, $order_no, $resi_no, $status, $order, $limit, $size)->result();
+        $query = $this->model_order->get_object(0, 1, $email, $street_address, $zip_code, $country, $city, $order_no, $resi_no, $status, $cretime_from, $cretime_to, $order, $limit, $size)->result();
         $temp = 0;
         foreach ($query as $row) {
           $data['result'] = "s";
@@ -165,6 +173,10 @@ class order_redeem extends CI_Controller {
         $data['result'] = "s";
 
         $data['id'] = $row->id;
+        $data['street_address'] = $row->street_address;
+        $data['zip_code'] = $row->zip_code;
+        $data['country'] = $row->country;
+        $data['city'] = $row->city;
         $data['status'] = $row->status;
         $data['resi_no'] = $row->resi_no;
       }
@@ -272,6 +284,68 @@ class order_redeem extends CI_Controller {
       echo json_encode($data);
     }
   }
-
+  
+  function export_excel(){
+    $this->load->library("Excel");
+    
+    //Filter
+    $email = "";
+    if ($this->input->post('email', TRUE)) {
+      $email = $this->input->post('email', TRUE);
+    }
+    $street_address = "";
+    if ($this->input->post('street_address', TRUE)) {
+      $street_address = $this->input->post('street_address', TRUE);
+    }
+    $zip_code = "";
+    if ($this->input->post('zip_code', TRUE)) {
+      $zip_code = $this->input->post('zip_code', TRUE);
+    }
+    $country = "";
+    if ($this->input->post('country', TRUE)) {
+      $country = $this->input->post('country', TRUE);
+    }
+    $city = "";
+    if ($this->input->post('city', TRUE)) {
+      $city = $this->input->post('city', TRUE);
+    }
+    $order_no = "";
+    if ($this->input->post('order_no', TRUE)) {
+      $order_no = $this->input->post('order_no', TRUE);
+    }
+    $resi_no = "";
+    if ($this->input->post('resi_no', TRUE)) {
+      $resi_no = $this->input->post('resi_no', TRUE);
+    }
+    $status = 0;
+    if ($this->input->post('status', TRUE)) {
+      $status = $this->input->post('status', TRUE);
+    }
+    $cretime_from = "";
+    if ($this->input->post('cretime_from', TRUE)) {
+      $cretime_from = $this->input->post('cretime_from', TRUE);
+    }
+    $cretime_to = "";
+    if ($this->input->post('cretime_to', TRUE)) {
+      $cretime_to = $this->input->post('cretime_to', TRUE);
+    }
+    $order = 0;
+    if ($this->input->post('order', TRUE)) {
+      $order = $this->input->post('order', TRUE);
+    }
+    //End Filter
+    
+    $query = $this->model_order->get_object(0, 1, $email, $street_address, $zip_code, $country, $city, $order_no, $resi_no, $status, $cretime_from, $cretime_to, $order)->result();
+    $temp = 0;
+    $data = array();
+    foreach ($query as $row) {
+      $data[$temp]['email'] = $row->email;
+      $data[$temp]['ordered_date'] = date_format(date_create($row->cretime), 'd F Y H:i:s');
+      $data[$temp]['order_id'] = $row->order_no;
+      $data[$temp]['product_name'] = $row->product_name;
+      $temp++;
+    }
+    $this->excel->to_excel_array($data, 'Order_Redeem_Excel_'.date('dMy'));
+  }
   //End Function Addon 
 }

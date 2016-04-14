@@ -15,6 +15,16 @@ $(document).ready(function () {
     var order_no = $('#txt_order_no').val();
     var resi_no = $('#txt_resi_no').val();
     var status = $('#sel_status').val();
+    var cretime_from_raw = $('#txt_cretime_from').data("DateTimePicker").date();
+    var cretime_from = '';
+    if(cretime_from_raw != null){
+      cretime_from = cretime_from_raw.year()+'-'+(cretime_from_raw.month()+1)+'-'+cretime_from_raw.date();
+    }
+    var cretime_to_raw = $('#txt_cretime_to').data("DateTimePicker").date();
+    var cretime_to = '';
+    if(cretime_to_raw != null){
+      cretime_to = cretime_to_raw.year()+'-'+(cretime_to_raw.month()+1)+'-'+cretime_to_raw.date();
+    }
     var order = $('#sel_order').val();
     //End Filter
     $.ajax({
@@ -32,6 +42,8 @@ $(document).ready(function () {
           order_no:order_no,
           resi_no:resi_no,
           status:status,
+          cretime_from: cretime_from,
+          cretime_to: cretime_to,
           order: order
         },
       dataType: 'json',
@@ -96,9 +108,9 @@ $(document).ready(function () {
             <tr>\
               <td class='tdcenter'>" + (parseInt(no) + parseInt(x)) + "</td>\
               <td class='tdcenter'>" + result['email'][x] + "</td>\
+              <td class='tdcenter'>" + detail + "</td>\
               <td>" + order + "</td>\
               <td class='tdcenter'><span style='font-weight:bold;color:"+status_color+"'>" + result['status'][x] + "</span></td>\
-              <td class='tdcenter'>" + detail + "</td>\
               <td class='tdcenter'>\
                 <a id='btn_edit" + result['id'][x] + "' class='fa fa-pencil-square-o'></a> &nbsp;\
                 <a id='btn_archive" + result['id'][x] + "' class='fa fa-archive'></a> &nbsp;\
@@ -257,6 +269,7 @@ $(document).ready(function () {
             if (result['result'] === 's')
             {
               $("#txteditid").val(val);
+              $('#txt_editaddress').val(result['street_address']+', '+result['zip_code']+'\n'+result['country']+'\n'+result['city']);
               $("#sel_editstatus").val(result['status']);
               $("#txt_editresino").val(result['resi_no']);
               $('.modal_warning').hide();
@@ -310,14 +323,86 @@ $(document).ready(function () {
     });
   };
   //End Function Set Detail
+  
+  function post(path, parameters) {
+    var form = $('<form></form>');
+
+    form.attr("method", "post");
+    form.attr("action", path);
+
+    $.each(parameters, function(key, value) {
+      var field = $('<input></input>');
+
+      field.attr("type", "hidden");
+      field.attr("name", key);
+      field.attr("value", value);
+
+      form.append(field);
+    });
+
+    // The form needs to be a part of the document in
+    // order for us to be able to submit it.
+    $(document.body).append(form);
+    form.submit();
+  }
+  
+  //Function Get Object
+  exportExcel = function ()
+  {
+    //Filter
+    var email = $('#txt_email').val();
+    var street_address = $('#txt_street_address').val();
+    var zip_code = $('#txt_zip_code').val();
+    var country = $('#txt_country').val();
+    var city = $('#txt_city').val();
+    var order_no = $('#txt_order_no').val();
+    var resi_no = $('#txt_resi_no').val();
+    var status = $('#sel_status').val();
+    var cretime_from_raw = $('#txt_cretime_from').data("DateTimePicker").date();
+    var cretime_from = '';
+    if(cretime_from_raw != null){
+      cretime_from = cretime_from_raw.year()+'-'+(cretime_from_raw.month()+1)+'-'+cretime_from_raw.date();
+    }
+    var cretime_to_raw = $('#txt_cretime_to').data("DateTimePicker").date();
+    var cretime_to = '';
+    if(cretime_to_raw != null){
+      cretime_to = cretime_to_raw.year()+'-'+(cretime_to_raw.month()+1)+'-'+cretime_to_raw.date();
+    }
+    var order = $('#sel_order').val();
+    //End Filter
+    
+    post(baseurl + 'dashboard/order_redeem/export_excel', {
+      email: email,
+      street_address: street_address,
+      zip_code: zip_code,
+      country: country,
+      city: city,
+      order_no:order_no,
+      resi_no:resi_no,
+      status:status,
+      cretime_from: cretime_from,
+      cretime_to: cretime_to,
+      order: order
+      }
+    );
+  };
 
   //Initial Setup
   page = 1;
   lastpage = 0;
-  getObject(page);
   $('.ajaxloading-tr').hide();
   var totalobject = 0;
   $('.modal_warning').hide();
+  
+  $('#txt_cretime_from').datetimepicker({
+    format: "YYYY-MM-DD"
+  });
+  
+  $('#txt_cretime_to').datetimepicker({
+    format: "YYYY-MM-DD"
+  });
+  
+  getObject(page);
   //End Initial Setup
 
   //User Action
@@ -351,6 +436,10 @@ $(document).ready(function () {
   
   $('#btn_remove_').click(function () {
     archiveObject($("#txtremoveid").val());
+  });
+  
+  $('#btn_export').click(function(){
+    exportExcel();
   });
   //End User Action
 });

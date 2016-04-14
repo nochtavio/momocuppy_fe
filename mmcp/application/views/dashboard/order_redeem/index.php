@@ -51,6 +51,12 @@
         </select>
       </div>
       <div class="form-group">
+        <input type='text' class="form-control" id='txt_cretime_from' placeholder="Ordered From" /> - 
+      </div>
+      <div class="form-group">
+        <input type='text' class="form-control" id='txt_cretime_to' placeholder="Ordered To" />
+      </div>
+      <div class="form-group">
         <select class="form-control" id="sel_order">
           <option value="-1">Sort By Newest Order</option>
           <option value="1">Sort By Oldest Order</option>
@@ -60,6 +66,7 @@
       </div>
       <button id="btn_search_" type="button" class="btn btn-default">Search</button>
       <a href="<?php echo base_url() . "dashboard/order_archive/" ?>" type="button" class="btn btn-warning">Archive</a>
+      <button id="btn_export" type="button" class="btn btn-success">Export Excel</button>
       <div class="form-group">
         <div class="ajaxloading-tr"></div>
       </div>
@@ -77,9 +84,9 @@
           <tr>
             <th>No</th>
             <th>Email</th>
+            <th>Order Date</th>
             <th>Order Detail</th>
             <th>Status</th>
-            <th>Detail</th>
             <th>Action</th>
           </tr>
         </thead>

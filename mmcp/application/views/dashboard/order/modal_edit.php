@@ -8,6 +8,12 @@
       <form class="form-horizontal" role="form" id="form_edit">
         <div class="modal-body">
           <div class="form-group">
+            <label for="txt_editaddress" class="col-sm-4 control-label">Address</label>
+            <div class="col-sm-6">
+              <textarea rows="4" id="txt_editaddress" class="form-control" readonly=""></textarea>
+            </div>
+          </div>
+          <div class="form-group">
             <label for="sel_editstatus" class="col-sm-4 control-label">Status</label>
             <div class="col-sm-6">
               <select class="form-control" id="sel_editstatus">
