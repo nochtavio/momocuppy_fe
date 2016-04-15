@@ -50,16 +50,12 @@ $(document).ready(function(){
     drawChart();
   });
   
-  $('#txt_date_from').datepicker({
-    todayHighlight: true,
-    zIndexOffset: '9999',
-    format: 'd M yy'
+  $('#txt_date_from').datetimepicker({
+    format: "YYYY-MM-DD"
   });
   
-  $('#txt_date_to').datepicker({
-    todayHighlight: true,
-    zIndexOffset: '9999',
-    format: 'd M yy'
+  $('#txt_date_to').datetimepicker({
+    format: "YYYY-MM-DD"
   });
   //End Initial State
 });

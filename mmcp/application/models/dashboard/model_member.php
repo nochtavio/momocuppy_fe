@@ -265,11 +265,12 @@ class model_member extends CI_Model {
   
   function statistic_member($from, $to){
     $query = "
-      SELECT DATE_FORMAT(cretime,'%d %b %y') AS registered_date, COUNT(id) AS total_member
-      FROM ms_member
-      WHERE cretime BETWEEN '".date('Y-m-d', strtotime($from))."' AND '".date('Y-m-d', strtotime($to))."'
+      SELECT DATE_FORMAT(mc.crt_date,'%d %b %y') AS registered_date, COUNT(mm.id) AS total_member
+      FROM ms_calendar mc
+      LEFT JOIN ms_member mm ON DATE_FORMAT(mc.crt_date,'%d %b %y') = DATE_FORMAT(mm.cretime,'%d %b %y')
+      WHERE mc.crt_date BETWEEN '".date('Y-m-d', strtotime($from))."' AND '".date('Y-m-d', strtotime($to))."'
       GROUP BY registered_date
-      ORDER BY cretime ASC
+      ORDER BY mc.crt_date ASC
     ";
     return $this->db->query($query);
   }

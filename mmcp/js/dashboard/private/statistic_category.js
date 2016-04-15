@@ -5,16 +5,14 @@ $(document).ready(function(){
   function drawChart() {
     var from = $('#txt_date_from').val();
     var to = $('#txt_date_to').val();
-    var email = $('#txt_customer_email').val();
     ajaxLoader();
     $.ajax({
-      url: baseurl + 'dashboard/statistic/statistic_order',
+      url: baseurl + 'dashboard/statistic/statistic_category',
       type: 'POST',
       data:
         {
           from: from,
-          to: to,
-          email: email
+          to: to
         },
       dataType: 'json',
       success: function (result) {
@@ -22,19 +20,19 @@ $(document).ready(function(){
           $('#curve_chart').show();
           $('#span_error').hide();
           var data = new google.visualization.DataTable();
-          data.addColumn('string', 'Date');
-          data.addColumn('number', 'Total Order');
+          data.addColumn('string', 'Category Name');
+          data.addColumn('number', 'Total Sold');
           
           for (var x = 0; x < result['total']; x++){
-            data.addRow([result['order_date'][x], parseInt(result['total_order'][x])]);
+            data.addRow([result['category_name'][x], parseInt(result['total_order'][x])]);
           }
           
           var options = {
-            title: 'Statistic Order',
+            title: 'Statistic Category',
             legend: { position: 'bottom' }
           };
 
-          var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+          var chart = new google.visualization.BarChart(document.getElementById('curve_chart'));
 
           chart.draw(data, options);
         }

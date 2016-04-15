@@ -238,7 +238,7 @@ class model_product extends CI_Model {
   
   function statistic_product($from, $to){
     $query = "
-      SELECT mp.product_name, COUNT(mp.id) AS total_order
+      SELECT mp.product_name, SUM(dor.qty) AS total_order
       FROM dt_order dor
       JOIN ms_order mo ON mo.id = dor.id_order
       JOIN dt_product dp ON dp.id = dor.id_dt_product

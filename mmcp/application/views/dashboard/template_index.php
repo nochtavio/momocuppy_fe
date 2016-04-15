@@ -179,6 +179,9 @@ if (!$this->session->userdata('admin')) {
                   <a href="<?php echo base_url() ?>dashboard/statistic/member/"><i class="fa fa-fw fa-angle-right"></i> Member</a>
                 </li>
                 <li>
+                  <a href="<?php echo base_url() ?>dashboard/statistic/category"><i class="fa fa-fw fa-angle-right"></i> Category</a>
+                </li>
+                <li>
                   <a href="<?php echo base_url() ?>dashboard/statistic/product"><i class="fa fa-fw fa-angle-right"></i> Product</a>
                 </li>
                 <li>

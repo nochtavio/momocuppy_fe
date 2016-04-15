@@ -5,6 +5,7 @@ $(document).ready(function(){
   function drawChart() {
     var from = $('#txt_date_from').val();
     var to = $('#txt_date_to').val();
+    var product_name = $('#txt_product_name').val();
     ajaxLoader();
     $.ajax({
       url: baseurl + 'dashboard/statistic/statistic_product',
@@ -12,7 +13,8 @@ $(document).ready(function(){
       data:
         {
           from: from,
-          to: to
+          to: to,
+          product_name: product_name
         },
       dataType: 'json',
       success: function (result) {
@@ -50,16 +52,12 @@ $(document).ready(function(){
     drawChart();
   });
   
-  $('#txt_date_from').datepicker({
-    todayHighlight: true,
-    zIndexOffset: '9999',
-    format: 'd M yy'
+  $('#txt_date_from').datetimepicker({
+    format: "YYYY-MM-DD"
   });
   
-  $('#txt_date_to').datepicker({
-    todayHighlight: true,
-    zIndexOffset: '9999',
-    format: 'd M yy'
+  $('#txt_date_to').datetimepicker({
+    format: "YYYY-MM-DD"
   });
   //End Initial State
 });

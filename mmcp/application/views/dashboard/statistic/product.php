@@ -5,12 +5,22 @@
   <div class="col-lg-12">
     <form class="form-inline form_filter" role="form">
       <div class="form-group">
-        <label class="sr-only" for="txt_date_from">Date From</label>
-        <input type="text" class="form-control" id="txt_date_from" value="<?php echo date('01 M y'); ?>" placeholder="Date From">
+        <input type='text' class="form-control" id='txt_date_from' value="<?php echo date('Y-m-01'); ?>" placeholder="Date From" /> - 
       </div>
       <div class="form-group">
-        <label class="sr-only" for="txt_date_to">Date To</label>
-        <input type="text" class="form-control" id="txt_date_to" value="<?php echo date('d M y'); ?>" placeholder="Date To">
+        <input type='text' class="form-control" id='txt_date_to' value="<?php echo date('Y-m-d'); ?>" placeholder="Date To" />
+      </div>
+      <div class="cleardiv"></div>
+    </form>
+  </div>
+</div>
+
+<div class="row" style="margin-bottom: 10px;">
+  <div class="col-lg-12">
+    <form class="form-inline form_filter" role="form">
+      <div class="form-group">
+        <label class="sr-only" for="txt_product_name">Product Name</label>
+        <input type="text" class="form-control" id="txt_product_name" placeholder="Product Name">
       </div>
       <button id="btn_apply" type="button" class="btn btn-default">Apply</button>
       <div class="form-group">
