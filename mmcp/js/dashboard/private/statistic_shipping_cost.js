@@ -7,7 +7,7 @@ $(document).ready(function(){
     var to = $('#txt_date_to').val();
     ajaxLoader();
     $.ajax({
-      url: baseurl + 'dashboard/statistic/statistic_member',
+      url: baseurl + 'dashboard/statistic/statistic_shipping_cost',
       type: 'POST',
       data:
         {
@@ -21,14 +21,14 @@ $(document).ready(function(){
           $('#span_error').hide();
           var data = new google.visualization.DataTable();
           data.addColumn('string', 'Date');
-          data.addColumn('number', 'Member Registered');
+          data.addColumn('number', 'Total Cost');
           
           for (var x = 0; x < result['total']; x++){
-            data.addRow([result['registered_date'][x], parseInt(result['total_member'][x])]);
+            data.addRow([result['order_date'][x], parseInt(result['total_cost'][x])]);
           }
           
           var options = {
-            title: 'Statistic Member',
+            title: 'Statistic Shipping Cost',
             legend: { position: 'bottom' }
           };
 
@@ -76,7 +76,7 @@ $(document).ready(function(){
     //End Filter
     
     post(baseurl + 'dashboard/statistic/export_excel', {
-        page: 'member',
+        page: 'shipping_cost',
         from: from,
         to: to
       }

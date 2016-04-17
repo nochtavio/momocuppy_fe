@@ -23,6 +23,7 @@
         <input type="text" class="form-control" id="txt_customer_email" placeholder="Customer Email">
       </div>
       <button id="btn_apply" type="button" class="btn btn-default">Apply</button>
+      <button id="btn_export" type="button" class="btn btn-success">Export Excel</button>
       <div class="form-group">
         <div class="ajaxloading-tr"></div>
       </div>

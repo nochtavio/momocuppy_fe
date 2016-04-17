@@ -187,6 +187,9 @@ if (!$this->session->userdata('admin')) {
                 <li>
                   <a href="<?php echo base_url() ?>dashboard/statistic/order"><i class="fa fa-fw fa-angle-right"></i> Order</a>
                 </li>
+                <li>
+                  <a href="<?php echo base_url() ?>dashboard/statistic/shipping_cost"><i class="fa fa-fw fa-angle-right"></i> Shipping Cost</a>
+                </li>
               </ul>
             </li>
           </ul>

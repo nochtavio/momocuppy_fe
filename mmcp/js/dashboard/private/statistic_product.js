@@ -47,9 +47,54 @@ $(document).ready(function(){
     });
   };
   
+  function post(path, parameters) {
+    var form = $('<form></form>');
+
+    form.attr("method", "post");
+    form.attr("action", path);
+
+    $.each(parameters, function(key, value) {
+      var field = $('<input></input>');
+
+      field.attr("type", "hidden");
+      field.attr("name", key);
+      field.attr("value", value);
+
+      form.append(field);
+    });
+
+    // The form needs to be a part of the document in
+    // order for us to be able to submit it.
+    $(document.body).append(form);
+    form.submit();
+  }
+  
+  //Function Get Object
+  exportExcel = function ()
+  {
+    //Filter
+    var from = $('#txt_date_from').val();
+    var to = $('#txt_date_to').val();
+    var product_name = $('#txt_product_name').val();
+    //End Filter
+    
+    post(baseurl + 'dashboard/statistic/export_excel', {
+        page: 'product',
+        from: from,
+        to: to,
+        product_name: product_name
+      }
+    );
+  };
+  //End Function Get Object
+  
   //Initial State
   $('#btn_apply').click(function(){
     drawChart();
+  });
+  
+  $('#btn_export').click(function(){
+    exportExcel();
   });
   
   $('#txt_date_from').datetimepicker({

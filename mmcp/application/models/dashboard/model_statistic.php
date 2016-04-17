@@ -71,6 +71,22 @@ class model_statistic extends CI_Model {
     ";
     return $this->db->query($query);
   }
+  
+  function statistic_shipping_cost($from, $to){
+    $query = "
+      SELECT DATE_FORMAT(mc.crt_date,'%d %b %y') AS order_date, IFNULL(SUM(data_order.shipping_cost),0) AS total_cost
+      FROM ms_calendar mc
+      LEFT JOIN 
+        (
+        SELECT * FROM ms_order mo WHERE mo.status > 2 AND mo.status< 6
+        ) AS data_order
+        ON DATE_FORMAT(mc.crt_date,'%d %b %y') = DATE_FORMAT(data_order.cretime,'%d %b %y')
+      WHERE (mc.crt_date BETWEEN '".date('Y-m-d', strtotime($from))."' AND '".date('Y-m-d', strtotime($to))."')
+      GROUP BY order_date
+      ORDER BY mc.crt_date ASC
+    ";
+    return $this->db->query($query);
+  }
 
   //End Addon Function
 }
