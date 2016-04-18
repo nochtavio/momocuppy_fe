@@ -35,6 +35,22 @@ class model_statistic extends CI_Model {
     return $this->db->query($query);
   }
   
+  function statistic_excel_product($from, $to, $product_name){
+    $query = "
+      SELECT mp.product_name, mp.product_price, SUM(dor.qty) AS quantity, SUM(dor.qty)*mp.product_price AS total_sales
+      FROM dt_order dor
+      JOIN ms_order mo ON mo.id = dor.id_order
+      JOIN dt_product dp ON dp.id = dor.id_dt_product
+      JOIN ms_product mp ON mp.id = dp.id_product
+      WHERE (mo.cretime BETWEEN '".date('Y-m-d', strtotime($from))."' AND '".date('Y-m-d', strtotime($to))."')
+      AND mp.product_name LIKE '%".$product_name."%'
+      GROUP BY mp.product_name, mp.product_price
+      ORDER BY mo.cretime ASC
+      LIMIT 0,10
+    ";
+    return $this->db->query($query);
+  }
+  
   function statistic_order($from, $to, $email){
     $query = "
       SELECT DATE_FORMAT(mc.crt_date,'%d %b %y') AS order_date, COUNT(data_order.id) AS total_order

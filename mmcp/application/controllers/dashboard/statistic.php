@@ -280,16 +280,37 @@ class statistic extends CI_Controller {
     
     if($page == 'member'){
       $get_object = $this->model_statistic->statistic_member($from, $to);
+      
+      $this->excel->to_excel($get_object, 'Export_Statistic_'.$page.'_'.date('dMy'));
     }else if($page == 'category'){
       $get_object = $this->model_statistic->statistic_category($from, $to);
+      
+      $this->excel->to_excel($get_object, 'Export_Statistic_'.$page.'_'.date('dMy'));
     }else if($page == 'product'){
-      $get_object = $this->model_statistic->statistic_product($from, $to, $product_name);
+      $get_object = $this->model_statistic->statistic_excel_product($from, $to, $product_name);
+      $temp = 0;
+      $grand_total = 0;
+      $data = array();
+      foreach ($get_object->result() as $row) {
+        $data[$temp]['product_name'] = $row->product_name;
+        $data[$temp]['product_price'] = number_format($row->product_price);
+        $data[$temp]['quantity'] = number_format($row->quantity);
+        $data[$temp]['total_sales'] = number_format($row->total_sales);
+        $temp++;
+        $grand_total = $grand_total + $row->total_sales;
+      }
+      $data['grand_total'] = number_format($grand_total);
+      
+      
+      $this->excel->to_excel_array($data, 'Export_Statistic_'.date('dMy'));
     }else if($page == 'order'){
       $get_object = $this->model_statistic->statistic_order($from, $to, $email);
+      
+      $this->excel->to_excel($get_object, 'Export_Statistic_'.$page.'_'.date('dMy'));
     }else if($page == 'shipping_cost'){
       $get_object = $this->model_statistic->statistic_shipping_cost($from, $to);
+      
+      $this->excel->to_excel($get_object, 'Export_Statistic_'.$page.'_'.date('dMy'));
     }
-    
-    $this->excel->to_excel($get_object, 'Export_Statistic_'.$page.'_'.date('dMy'));
   }
 }

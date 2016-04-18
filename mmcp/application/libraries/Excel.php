@@ -36,7 +36,7 @@ class excel {
     echo '</table>';
   }
   
-  function to_excel_array($array, $filename) {
+  function to_excel_array($array, $filename, $grandtotal="") {
     header('Content-Disposition: attachment; filename=' . $filename . '.xls');
     header('Content-type: application/force-download');
     header('Content-Transfer-Encoding: binary');
@@ -44,9 +44,11 @@ class excel {
     print "\xEF\xBB\xBF"; // UTF-8 BOM
     $h = array();
     foreach ($array as $row) {
-      foreach ($row as $key => $val) {
-        if (!in_array($key, $h)) {
-          $h[] = $key;
+      if(is_array($row)){
+        foreach ($row as $key => $val) {
+          if (!in_array($key, $h)) {
+            $h[] = $key;
+          }
         }
       }
     }
@@ -59,8 +61,13 @@ class excel {
 
     foreach ($array as $row) {
       echo '<tr>';
-      foreach ($row as $val){
-        $this->writeRow($val);
+      if(is_array($row)){
+        foreach ($row as $val){
+          $this->writeRow($val);
+        }
+      }else{
+        echo '<td>Grand Total</td>';
+        echo '<td colspan="3">' . $row . '</td>';
       }
     }
     echo '</tr>';

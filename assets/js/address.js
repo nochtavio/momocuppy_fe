@@ -22,7 +22,7 @@ $(document).ready(function(){
               class_border = "noborder";
             }
             $('#box_address').append("\
-              <li class='address-item "+class_border+"'>\
+              <li class='address-item "+class_border+"' style='padding:0 35px;'>\
                 <span class='addr_name'>My Address #"+(totalobject+1)+"</span>\
                 <span class='name'>" + value['firstname'] + " " + value['lastname'] + "</span>\
                 <span class='addr'>\
@@ -42,7 +42,9 @@ $(document).ready(function(){
             border++;
           });
           set_edit();
-          $('#box_address').simplebar();
+          $('#box_address').jScrollPane(); 
+          var box_address_pane = $('#box_address').data('jsp');
+          box_address_pane.reinitialise();
 					
 					$("input#phone").on("keypress keyup blur",function (event) {    
 						 $(this).val($(this).val().replace(/[^\d].+/, ""));
@@ -133,16 +135,54 @@ $(document).ready(function(){
       }
     });
   };
+  
+  var validate_field = function(){
+    var firstname = $('#firstname');
+    var lastname = $('#lastname');
+    var phone = $('#phone');
+    var street_address = $('#streetname');
+    var zip_code = $('#postalcode');
+    
+    if(firstname.val() == ""){
+      firstname.addClass('warning');
+    }else{
+      firstname.removeClass('warning');
+    }
+    
+    if(lastname.val() == ""){
+      lastname.addClass('warning');
+    }else{
+      lastname.removeClass('warning');
+    }
+    
+    if(phone.val() == ""){
+      phone.addClass('warning');
+    }else{
+      phone.removeClass('warning');
+    }
+    
+    if(street_address.val() == ""){
+      street_address.addClass('warning');
+    }else{
+      street_address.removeClass('warning');
+    }
+    
+    if(zip_code.val() == ""){
+      zip_code.addClass('warning');
+    }else{
+      zip_code.removeClass('warning');
+    }
+  };
 
   var edit_address = function () {
     var id = $('#txt_id').val();
-    var firstname = $('#firstname').val();
-    var lastname = $('#lastname').val();
-    var phone = $('#phone').val();
-    var street_address = $('#streetname').val();
-    var zip_code = $('#postalcode').val();
-    var country = $('#country').val();
-    var city = $('#city').val();
+    var firstname = $('#firstname');
+    var lastname = $('#lastname');
+    var phone = $('#phone');
+    var street_address = $('#streetname');
+    var zip_code = $('#postalcode');
+    var country = $('#country');
+    var city = $('#city');
 
     $.ajax({
       url: base_url + 'api/edit_address',
@@ -150,30 +190,33 @@ $(document).ready(function(){
       data:
         {
           id: id,
-          firstname: firstname,
-          lastname: lastname,
-          phone: phone,
-          street_address: street_address,
-          zip_code: zip_code,
-          country: country,
-          city: city
+          firstname: firstname.val(),
+          lastname: lastname.val(),
+          phone: phone.val(),
+          street_address: street_address.val(),
+          zip_code: zip_code.val(),
+          country: country.val(),
+          city: city.val()
         },
       dataType: 'json',
       success: function (result) {
-        $('#poptitle').text('Success');
         $('#popmessage').text(result['result_message']);
-        $.magnificPopup.close();
-        $.magnificPopup.open({
-          items: {
-            src: '#mfp_message',
-            type: 'inline'
-          },
-          callbacks: {
-            close: function () {
-              location.reload();
+        if(result['result'] == 'r2'){
+          validate_field();
+        }else{
+          $.magnificPopup.close();
+          $.magnificPopup.open({
+            items: {
+              src: '#mfp_message',
+              type: 'inline'
+            },
+            callbacks: {
+              close: function () {
+                location.reload();
+              }
             }
-          }
-        }, 0);
+          }, 0);
+        }
       }
     });
   };
@@ -202,20 +245,23 @@ $(document).ready(function(){
         },
       dataType: 'json',
       success: function (result) {
-        $('#poptitle').text('Success');
         $('#popmessage').text(result['result_message']);
-        $.magnificPopup.close();
-        $.magnificPopup.open({
-          items: {
-            src: '#mfp_message',
-            type: 'inline'
-          },
-          callbacks: {
-            close: function () {
-              location.reload();
+        if(result['result'] == 'r2'){
+          validate_field();
+        }else{
+          $.magnificPopup.close();
+          $.magnificPopup.open({
+            items: {
+              src: '#mfp_message',
+              type: 'inline'
+            },
+            callbacks: {
+              close: function () {
+                location.reload();
+              }
             }
-          }
-        }, 0);
+          }, 0);
+        }
       }
     });
   };

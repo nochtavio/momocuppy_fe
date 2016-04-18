@@ -3,8 +3,8 @@ ob_flush();
 $dir = "../../../";
 $body = "member";
 
-$css = "main,simplebar,member,popaddress,message";
-$js = "simplebar,popaddress,address";
+$css = "main,scrollpane,member,popaddress,message";
+$js = "mousewheel,scrollpane,popaddress,address";
 $halmember = "address";
 
 require_once($dir."core/conn/config.php");
@@ -45,7 +45,7 @@ require_once($dir."content/header.php");
         <div id="shoppingbag">
         	<h5>address book</h5>                              
           <div id="div-hidden"></div>
-          <ul id="box_address" class="addrbook simplebar">
+          <ul id="box_address" class="addrbook">
           	     
           </ul>
 					          
