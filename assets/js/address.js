@@ -75,6 +75,7 @@ $(document).ready(function(){
       $(document).off('click', '#btn_edit' + val);
       $(document).on('click', '#btn_edit' + val, function (event) {
         event.preventDefault();
+        $('.warning').removeClass('warning');
         $.magnificPopup.open({
           items: {
             src: '#popaddress',
@@ -294,6 +295,7 @@ $(document).ready(function(){
     $('#city').val("");
     $('#txt_id').val("");
     state = "add";
+    $('.warning').removeClass('warning');
     $.magnificPopup.open({
       items: {
         src: '#popaddress',

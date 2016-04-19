@@ -206,6 +206,20 @@ $(document).ready(function () {
           $('#order_country').val("");
           $('#order_city').val("");
           set_edit();
+          
+          $("input#phone").on("keypress keyup blur",function (event) {    
+						 $(this).val($(this).val().replace(/[^\d].+/, ""));
+							if ((event.which < 48 || event.which > 57)) {
+									event.preventDefault();
+							}
+					});  	
+					
+					$("input#postalcode").on("keypress keyup blur",function (event) {    
+						 $(this).val($(this).val().replace(/[^\d].+/, ""));
+							if ((event.which < 48 || event.which > 57)) {
+									event.preventDefault();
+							}
+					});  
         }
       }
     });
@@ -221,6 +235,7 @@ $(document).ready(function () {
     $.each(id, function (x, val) {
       $(document).off('click', '#btn_edit' + val);
       $(document).on('click', '#btn_edit' + val, function () {
+        $('.warning').removeClass('warning');
         $.magnificPopup.open({
           items: {
             src: '#popaddress',
@@ -281,6 +296,44 @@ $(document).ready(function () {
       }
     });
   };
+  
+  var validate_field = function(){
+    var firstname = $('#firstname');
+    var lastname = $('#lastname');
+    var phone = $('#phone');
+    var street_address = $('#streetname');
+    var zip_code = $('#postalcode');
+    
+    if(firstname.val() == ""){
+      firstname.addClass('warning');
+    }else{
+      firstname.removeClass('warning');
+    }
+    
+    if(lastname.val() == ""){
+      lastname.addClass('warning');
+    }else{
+      lastname.removeClass('warning');
+    }
+    
+    if(phone.val() == ""){
+      phone.addClass('warning');
+    }else{
+      phone.removeClass('warning');
+    }
+    
+    if(street_address.val() == ""){
+      street_address.addClass('warning');
+    }else{
+      street_address.removeClass('warning');
+    }
+    
+    if(zip_code.val() == ""){
+      zip_code.addClass('warning');
+    }else{
+      zip_code.removeClass('warning');
+    }
+  };
 
   var edit_address = function () {
     var id = $('#txt_id').val();
@@ -308,15 +361,18 @@ $(document).ready(function () {
         },
       dataType: 'json',
       success: function (result) {
-        $('#poptitle').text('Success');
         $('#popmessage').text(result['result_message']);
-        $.magnificPopup.open({
-          items: {
-            src: '#mfp_message',
-            type: 'inline'
-          }
-        }, 0);
-        generate_member_address();
+        if(result['result'] == "r2"){
+          validate_field();
+        }else{
+          $.magnificPopup.open({
+            items: {
+              src: '#mfp_message',
+              type: 'inline'
+            }
+          }, 0);
+          generate_member_address();
+        }
       }
     });
   };
