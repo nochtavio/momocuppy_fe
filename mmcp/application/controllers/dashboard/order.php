@@ -116,7 +116,7 @@ class order extends CI_Controller {
             $shipping_cost = $detail_order->shipping_cost;
             $discount = $detail_order->discount;
           }
-          $data['grandtotal'][$temp] = number_format(($totalprice + $shipping_cost) * (1 - (($discount == null) ? 0 : $discount / 100)));
+          $data['grandtotal'][$temp] = number_format(($totalprice * (1 - (($discount == null) ? 0 : $discount / 100))) + $shipping_cost );
           
           $data['payment_name'][$temp] = $row->payment_name;
           $data['voucher_name'][$temp] = ($row->voucher_name == null) ? "(no voucher)" : $row->voucher_name;
@@ -283,7 +283,7 @@ class order extends CI_Controller {
           $temp++;
         }
         $data['totalprice'] = number_format($totalprice);
-        $data['grandtotal'] = number_format(($totalprice + $row->shipping_cost) * (1 - (($row->discount == null) ? 0 : $row->discount / 100)));
+        $data['grandtotal'] = number_format(($totalprice * (1 - (($row->discount == null) ? 0 : $row->discount / 100))) + $row->shipping_cost );
         $data['total'] = $temp;
         $data['size'] = $size;
       } else {

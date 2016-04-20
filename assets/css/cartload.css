@@ -49,6 +49,37 @@
 .popupimg{
 	width:15%;
 }
+.wrapimgfix{
+	float:left;
+	height:100px;
+	position:relative;
+	overflow:hidden;
+	width:100px;
+}
+.wrapimgfix img.potrait{
+	position: absolute;
+	left: 50%;
+	top: 50%;			
+	width: 100%;
+	height: auto;	
+	-webkit-transform: translate(-50%,-50%) ;
+	-ms-transform: translate(-50%,-50%);	
+	transform: translate(-50%,-50%);	
+	z-index:1;
+}
+
+.wrapimgfix img.landscape{
+	position: absolute;
+	left: 50%;
+	top: 50%;			
+	height: 100%;
+	width: auto;	
+	-webkit-transform: translate(-50%,-50%) ;
+	-ms-transform: translate(-50%,-50%);	
+	transform: translate(-50%,-50%);	
+	z-index:1;
+}
+
 .popupdesc{
 	text-align:left;
 	width:45%;

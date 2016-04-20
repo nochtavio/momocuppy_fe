@@ -26,9 +26,14 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="txt_addexpireddate" class="col-sm-4 control-label">Expired Date</label>
+            <label for="txt_addexpireddate" class="col-sm-4 control-label">Publish Date</label>
             <div class="col-sm-6">
-              <input type="text" class="form-control" id="txt_addexpireddate" placeholder="Input expired date ...">
+              <div class='input-group date' id='txt_addexpireddate'>
+                <input type='text' class="form-control" />
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+              </div>
               <p class="help-block" style="font-size: 12px;">Leave it empty if you want this voucher exist forever.</p>
             </div>
           </div>

@@ -159,7 +159,11 @@ $(document).ready(function () {
     var voucher_name = $('#txt_editvouchername').val();
     var voucher_code = $('#txt_editvouchercode').val();
     var discount = $('#txt_editdiscount').val();
-    var expired_date = $('#txt_editexpireddate').val();
+    var expired_date_raw = $('#txt_editexpireddate').data("DateTimePicker").date();
+    var expired_date = '';
+    if(expired_date_raw != null){
+      expired_date = expired_date_raw.year()+'-'+(expired_date_raw.month()+1)+'-'+expired_date_raw.date()+' '+expired_date_raw.hour()+':'+expired_date_raw.minute()+':'+expired_date_raw.second();
+    }
     $.ajax({
       url: baseurl + 'dashboard/voucher/check_field',
       type: 'POST',
@@ -298,6 +302,7 @@ $(document).ready(function () {
               $("#txt_editvouchername").val(result['voucher_name']);
               $("#txt_editvouchercode").val(result['voucher_code']);
               $("#txt_editdiscount").val(result['discount']);
+              $('#txt_editexpireddate').data("DateTimePicker").date(result['expired_date']);
               $('.modal_warning').hide();
               $('#modal_edit').modal('show');
             }
@@ -339,15 +344,12 @@ $(document).ready(function () {
   var totalobject = 0;
   $('.modal_warning').hide();
   
-  $('#txt_addexpireddate').datepicker({
-    todayHighlight: true,
-    zIndexOffset: '9999',
-    format: 'yyyy-m-d'
+  $('#txt_addexpireddate').datetimepicker({
+    format: "YYYY-MM-DD HH:mm:SS"
   });
-  $('#txt_editexpireddate').datepicker({
-    todayHighlight: true,
-    zIndexOffset: '9999',
-    format: 'yyyy-m-d'
+  
+  $('#txt_editexpireddate').datetimepicker({
+    format: "YYYY-MM-DD HH:mm:SS"
   });
   //End Initial Setup
 

@@ -1089,25 +1089,50 @@ form.confirmchkout{
 #shoppingbag_confirm ul.shopbaglist li .confirmbag_img{
 
 	float:left;
-
+	height:85px;
+	overflow:hidden;
+	position:relative;
 	width:85px;
 
 }
 
+#shoppingbag_confirm ul.shopbaglist li .confirmbag_img img.img-portrait{
+	position: absolute;
+	left: 50%;
+	top: 50%;			
+	width: 100%;
+	height: auto;	
+	-webkit-transform: translate(-50%,-50%) ;
+	-ms-transform: translate(-50%,-50%);	
+	transform: translate(-50%,-50%);				
+}
+
+#shoppingbag_confirm ul.shopbaglist li .confirmbag_img img.img-landscape{
+	position: absolute;
+	left: 50%;
+	top: 50%;			
+	height: 100%;
+	width: auto;	
+	-webkit-transform: translate(-50%,-50%) ;
+	-ms-transform: translate(-50%,-50%);	
+	transform: translate(-50%,-50%);				
+}
+
 #shoppingbag_confirm ul.shopbaglist li .confirmbag_color{
-
+	display:table;
 	float:left;
-
+	height:85px;
+	overflow:hidden;
 	width:65px;
-
 }
 
 
 
 #shoppingbag_confirm ul.shopbaglist li .confirmbag_weight{
-
+	display:table;
 	float:left;
-
+	height:85px;
+	overflow:hidden;
 	width:65px;
 
 }
@@ -1115,9 +1140,10 @@ form.confirmchkout{
 
 
 #shoppingbag_confirm ul.shopbaglist li .confirmbag_qty{
-
+	display:table;
 	float:left;
-
+	height:85px;
+	overflow:hidden;
 	width:50px;
 
 }
@@ -1125,9 +1151,10 @@ form.confirmchkout{
 
 
 #shoppingbag_confirm ul.shopbaglist li .confirmbag_price{
-
+	display:table;
 	float:left;
-
+	height:85px;
+	overflow:hidden;
 	width:65px;
 
 }

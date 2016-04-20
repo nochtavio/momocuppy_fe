@@ -372,6 +372,37 @@
 				max-width:190px;
 			}
 			
+			.wrapimg{
+				float:left;
+				height:70px;
+				position:relative;
+				overflow:hidden;
+				width:70px;
+			}
+			
+			img.landscape{
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				height: 100%;
+				width: auto;
+				-webkit-transform: translate(-50%,-50%);
+				-ms-transform: translate(-50%,-50%);
+				transform: translate(-50%,-50% );	
+				z-index:1;			
+			}
+			img.potrait{			
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				width: 100%;
+				height: auto;
+				-webkit-transform: translate(-50%,-50%);
+				-ms-transform: translate(-50%,-50%);
+				transform: translate(-50%,-50% );	
+				z-index:1;						
+			}
+			
 		</style>
 	</head>
     <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
@@ -443,7 +474,9 @@
                                                               </tr>
                                                               <tr mc:repeatable>
                                                                   <td valign="top" class="dataTableContent" mc:edit="data_table_content00">
-                                                                  	<img src="http://www.momocuppy.com/images/products/cth/prod_eg.jpg" width="51"/>
+                                                                  	<span class="wrapimg">
+	                                                                  	<img src="http://www.momocuppy.com/mmcp/images/products/4/product8.jpg" class="potrait"/>
+                                                                    </span>
                                                                   </td>
                                                                   <td valign="center" class="dataTableContent" mc:edit="data_table_content01">
                                                                     Classic Birdcage
@@ -464,7 +497,9 @@
                                                               </tr>
                                                               <tr mc:repeatable>
                                                                   <td valign="top" class="dataTableContent" mc:edit="data_table_content00">
-                                                                  	<img src="http://www.momocuppy.com/images/products/cth/prod_eg.jpg" width="51"/>
+                                                                  	<span class="wrapimg">
+	                                                                  	<img src="/mmcp/images/products/27/product47.jpg"  class="landscape"/>
+                                                                    </span>
                                                                   </td>
                                                                   <td valign="center" class="dataTableContent" mc:edit="data_table_content01">
                                                                     Classic Birdcage
@@ -485,7 +520,9 @@
                                                               </tr>
                                                               <tr mc:repeatable>
                                                                   <td valign="top" class="dataTableContent" mc:edit="data_table_content00">
-                                                                  	<img src="http://www.momocuppy.com/images/products/cth/prod_eg.jpg" width="51"/>
+                                                                  	<span class="wrapimg">
+	                                                                  	<img src="/mmcp/images/products/27/product47.jpg"  class="landscape"/>
+                                                                    </span>
                                                                   </td>
                                                                   <td valign="center" class="dataTableContent" mc:edit="data_table_content01">
                                                                     Classic Birdcage

@@ -409,8 +409,10 @@
 
                                                     <tr>
                                                       <td valign="top" class="bodyContent">
-                                                      	<img src="/images/layout/newsletter/resetpwdheader.jpg"  style="float:left;"/>
-                                                        <a href="http://www.momocuppy.com/contact-us/" target="_blank" style="float:right;"><img src="/images/layout/newsletter/linksocialresetpwd.jpg" /></a>                                                        
+                                                      	<img src="/images/layout/newsletter/resetpwd/reset-pass.jpg"  style="float:left;"/>
+																												<a href="https://www.instagram.com/momocuppy/" target="_blank" style="float:right;margin-top:10px;"><img src="/images/layout/newsletter/register/ig.jpg" /></a>                                                                                                                
+                                                        <a href="https://www.facebook.com/Momo-Cuppy-Shop-466333336738898/?fref=tst" target="_blank" style="float:right;margin-top:10px;"><img src="/images/layout/newsletter/register/fb.jpg" /></a>                                                      
+                                                        
                                                       </td>
                                                     </tr>
 

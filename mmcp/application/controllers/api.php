@@ -1314,6 +1314,7 @@ class api extends CI_Controller {
         $data_message['lastname'] = $lastname;
         $data_message['product'] = $order['return_order']['order_detail'];
         $data_message['shipping'] = $shipping_cost;
+        $data_message['discount'] = $discount;
         $data_message['courier'] = $courier;
         $data_message['street_address'] = $street_address;
         $data_message['zip_code'] = $zip_code;

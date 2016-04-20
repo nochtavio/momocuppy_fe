@@ -453,9 +453,11 @@ if(isset($_GET["name"]) && isset($_GET["email"]) && isset($_GET["phone"]) && iss
                                                     <tr>
                                                     	<td>
                                                       	<div style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:150%;">
-                                                        	<a href="http://www.momocuppy.com/contact-us/#maincontent" target="_blank"><img src="/images/layout/newsletter/contact_email.jpg" /></a>
+                                                        	<img style="float:left;" src="/images/layout/newsletter/register/stayconnect.jpg" />
+                                                        	<a style="float:left;" href="https://www.facebook.com/Momo-Cuppy-Shop-466333336738898/?fref=tst" target="_blank"><img src="/images/layout/newsletter/register/fb.jpg" /></a>
+                                                        	<a style="float:left;" href="https://www.instagram.com/momocuppy/" target="_blank"><img src="/images/layout/newsletter/register/ig.jpg" /></a>                                                          
                                                           
-                                                          <p style="font-size:14px;">
+                                                          <p style="clear:both;font-size:14px;">
                                                           	Copyright &copy; <?php echo date("Y");?> Momocuppy, All rights reserved.
                                                             <br />
                                                             <a style="color:#eb5763;text-decoration:none;font-weight:bold;" href="http://www.momocuppy.com">www.momocuppy.com</a>

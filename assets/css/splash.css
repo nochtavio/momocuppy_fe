@@ -1,141 +1,284 @@
 html, body, div, span, applet, object, iframe,
+
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+
 a, abbr, acronym, address, big, cite, code,
+
 del, dfn, em, font, img, ins, kbd, q, s, samp,
+
 small, strike, strong, sub, sup, tt, var,
+
 b, u, i, center,
+
 dl, dt, dd, ol, ul, li,
+
 fieldset, form, label, legend,
+
 table, caption, tbody, tfoot, thead, tr, th, td {
+
 	margin: 0;
+
 	padding: 0;
+
 	border: 0;
+
 	outline: 0;
+
 	font-size: 100%;
+
 	vertical-align: baseline;
+
 	background: transparent;
+
 }
+
 body {
+
 	line-height: 1;
+
 }
+
 ol, ul {
+
 	list-style: none;
+
 }
+
 blockquote, q {
+
 	quotes: none;
+
 }
+
+
 
 :focus {
+
 	outline: 0;
+
 }
+
+
 
 ins {
+
 	text-decoration: none;
+
 }
+
 del {
+
 	text-decoration: line-through;
+
 }
+
+
 
 table {
+
 	border-collapse: collapse;
+
 	border-spacing: 0;
+
 }
+
 caption, th, td {
+
 	text-align: left;
+
 	font-weight: normal;
+
 }
+
 blockquote:before, blockquote:after,
+
 q:before, q:after {
+
 	content: "";
+
 }
+
 blockquote, q {
+
 	quotes: "" "";
+
 }
+
 strong {
+
 	font-weight:bold;
+
 }
+
 em {
+
 	font-style:italic;
+
 }
+
+
 
 a:hover {
+
 	text-decoration: none;
+
 }
+
+
 
 img {
+
 	border: none;
+
 	vertical-align: middle;
+
 }
 
+
+
 p {
+
 	line-height:16px;
+
 	margin: 10px 0 0 0;
+
 }
+
+
+
 
 
 html, body{
+
 	background:#f5e8dd;
+
 	line-height: 1.5em;
+
 	text-align: center;
+
 	height:751px;
+
 	margin:0;
+
 	padding:0;
+
 	width:100%;
+
+}
+@media (max-width: 1024px) {
+	html, body{
+		width:1280px !important;
+	}
 }
 
 #container{
+
 	clear:both;
+
 	display:block;	
+
 	text-align:center;
+
 	position:relative;	
+
 	width:100%;
+
 }
+
 #splashtop{
+
 	background:url(/images/layout/splash/umbrella.png) repeat-x left top;
+
 	height:163px;
+
 	position:relative;
+
 	width:100%;
+
 	z-index:10;
+
 }
+
+
 
 #wrapsplash{
+
 	height:751px;
+
 	margin:-163px auto 0 auto;
+
 	width:1280px;	
+
 	z-index:1;
+
 }
+
+
 
 .splashcontent{
+
 	clear:both;
+
 	float:left;
+
 	width:100%;
+
 }
+
 .splashcontent a.homedecor{
+
 	background:url(/images/layout/splash/decorall.jpg) no-repeat left top;
+
 	float:left;
+
 	height:751px;
+
 	width:468px;
+
 }
+
 	.splashcontent a.homedecor:hover{
+
 		background:url(/images/layout/splash/decorall.jpg) no-repeat left bottom;
+
 	}
+
 .splashcontent a span{
+
 	display:none;
+
 }
+
+
 
 .splashcontent a.about{
+
 	background:url(/images/layout/splash/about.jpg) no-repeat left top;
+
 	float:left;
+
 	height:751px;
+
 	width:339px;	
+
 }
 
+
+
 .splashcontent a.acc{
+
 	background:url(/images/layout/splash/decorall.jpg) no-repeat right top;
+
 	float:left;
+
 	height:751px;
+
 	width:473px;
+
 }
+
 .splashcontent a.acc:hover{
+
 	background:url(/images/layout/splash/decorall.jpg) no-repeat right bottom;	
+
 }

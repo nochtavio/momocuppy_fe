@@ -1,778 +1,1559 @@
 html, body, div, span, applet, object, iframe,
+
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+
 a, abbr, acronym, address, big, cite, code,
+
 del, dfn, em, font, img, ins, kbd, q, s, samp,
+
 small, strike, strong, sub, sup, tt, var,
+
 b, u, i, center,
+
 dl, dt, dd, ol, ul, li,
+
 fieldset, form, label, legend,
+
 table, caption, tbody, tfoot, thead, tr, th, td {
+
 	margin: 0;
+
 	padding: 0;
+
 	border: 0;
+
 	outline: 0;
+
 	font-size: 100%;
+
 	vertical-align: baseline;
+
 	background: transparent;
+
 }
+
 body {
+
 	line-height: 1;
+
 }
+
 ol, ul {
+
 	list-style: none;
+
 }
+
 blockquote, q {
+
 	quotes: none;
+
 }
+
+
 
 :focus {
+
 	outline: 0;
+
 }
+
+
 
 ins {
+
 	text-decoration: none;
+
 }
+
 del {
+
 	text-decoration: line-through;
+
 }
+
+
 
 table {
+
 	border-collapse: collapse;
+
 	border-spacing: 0;
+
 }
+
 caption, th, td {
+
 	text-align: left;
+
 	font-weight: normal;
+
 }
+
 blockquote:before, blockquote:after,
+
 q:before, q:after {
+
 	content: "";
+
 }
+
 blockquote, q {
+
 	quotes: "" "";
+
 }
+
 strong {
+
 	font-weight:bold;
+
 }
+
 em {
+
 	font-style:italic;
+
 }
+
+
 
 a:hover {
+
 	text-decoration: none;
+
 }
+
+
 
 img {
+
 	border: none;
+
 	vertical-align: middle;
+
 }
+
+
 
 p {
+
 	line-height:16px;
+
 	margin: 10px 0 0 0;
+
 }
 
 
+
+
+
 /*FONTS*/
+
 @font-face {
+
 	font-family:'ProximaNova-Regular';
+
 	src: url('/assets/fonts/ProximaNova-Regular_gdi.eot');
+
 	src: url('/assets/fonts/ProximaNova-Regular_gdi.eot?#iefix') format('embedded-opentype'),
+
 		url('/assets/fonts/ProximaNova-Regular_gdi.woff') format('woff'),
+
 		url('/assets/fonts/ProximaNova-Regular_gdi.ttf') format('truetype'),
+
 		url('/assets/fonts/ProximaNova-Regular_gdi.otf') format('opentype'),
+
 		url('/assets/fonts/ProximaNova-Regular_gdi.svg#ProximaNova-Regular') format('svg');
+
 	font-weight: 400;
+
 	font-style: normal;
+
 	font-stretch: normal;
+
 	unicode-range: U+0020-2666;
+
 }
+
+
+
 
 
 @font-face {
+
 	font-family:'ProximaNova-Bold';
+
 	src: url('/assets/fonts/ProximaNova-Bold_gdi.eot');
+
 	src: url('/assets/fonts/ProximaNova-Bold_gdi.eot?#iefix') format('embedded-opentype'),
+
 		url('/assets/fonts/ProximaNova-Bold_gdi.woff') format('woff'),
+
 		url('/assets/fonts/ProximaNova-Bold_gdi.ttf') format('truetype'),
+
 		url('/assets/fonts/ProximaNova-Bold_gdi.otf') format('opentype'),
+
 		url('/assets/fonts/ProximaNova-Bold_gdi.svg#ProximaNova-Bold') format('svg');
+
 	font-weight: 400;
+
 	font-style: normal;
+
 	font-stretch: normal;
+
 	unicode-range: U+0020-2666;
+
 }
+
 /*FONTS*/
+
+
+
 
 
 /*MOMOCUPPY MAIN STYLES*/
+
 html, body{
+
 	background:url(/images/layout/mainbg.jpg) repeat center top;
+
 	background-color:#000;
+
 	background-attachment: fixed;
+
 	color:#8c5422;
+
 	font-family:'ProximaNova-Regular';
+
 	font-size:16px;
+
 	line-height: 1.5em;
+
 	text-align: center;
+
 	margin:0;
+
 	padding:0;
 
+
 }
+
+@media (max-width: 1024px) {
+	html, body{
+		width:1280px !important;
+	}
+}
+
+
 
 #container{
+	border:none;
 	clear:both;
+
 	display:block;	
+
 	text-align:center;
+
 	position:relative;	
+
 	width:100%;
+
 }
+
+
 
 #topcontent{
+
 	clear:both;
+
 	display:block;
+
 	position:relative;
+
 	width:100%;
+
 }
+
+
 
 /*start mainmenu*/
+
 #wrapnav{
+
 	clear:both;
+
 	margin:0 auto;
+
 	position:relative;
+
 	width:1280px;
+
 }
+
+
 
 ul#mainmenu{
+
 	background:url(/images/layout/mainmenu/bgmainmenu.png) no-repeat left top;
+
 	clear:both;
+
 	height:47px;
+
 	margin:170px auto 0 auto;
+
 	position:relative;
+
 	text-align:left;	
+
 	width:1098px;
+
 }
+
+
 
 ul#mainmenu li{
+
 	clear:none;
+
 	float:left;
+
 	margin:10px 5px 0 0;
+
 	position:relative;
+
 	min-width:35px;
+
 }
+
 	/*list menu /id*/
+
 	ul#mainmenu li#logo{
+
 		margin:-130px 0 0 40px;
+
 		position:relative;						
+
 	}
+
 		ul#mainmenu li#logo a{
+
 			float:left;
+
 		}
+
 	ul#mainmenu li#home{
+
 		margin-left:55px;
+
 	}
+
 	ul#mainmenu li#order{
+
 		margin-left:20px;
+
 	}			
+
 	/*list menu /id*/
+
 	
+
 	ul#mainmenu li.separator{
+
 		color:#8b5623;
+
 		font-size:35px;
+
 	}
+
 		ul#mainmenu li.separator span{
+
 			font-family:Arial, Helvetica, sans-serif;
+
 			font-size:30px;
+
 			margin-top:3px;
+
 		}
+
 	ul#mainmenu li a,
+
 	ul#mainmenu li div.hoverparent{
+
 		float:left;
+
 		text-align:center;
+
 		text-decoration:none;
+
 		
+
 		color:#8b5623;
+
 		font-family:Lobster;
+
 		font-size:27px;		
+
 		
+
 		-webkit-transition-property:color, text;
+
 		-webkit-transition-duration: 500ms, 500ms;
+
 		-webkit-transition-timing-function: linear, ease-in;
+
 		
+
 		-moz-transition-property:color, text;
+
 		-moz-transition-duration:1s;
+
 		-moz-transition-timing-function: linear, ease-in;
+
 		
+
 		-o-transition-property:color, text;
+
 		-o-transition-duration:1s;
+
 		-o-transition-timing-function: linear, ease-in;		
+
 		
+
 		transition-property:color, text;
+
 		transition-duration:1s;
+
 		transition-timing-function: linear, ease-in;
+
 	}
+
 	ul#mainmenu li div.hoverparent{
+
 		cursor:pointer;
+
 	}
+
 	
+
 	
+
 	ul#mainmenu li a:hover,
+
 	ul#mainmenu li a.selected,
+
 	ul#mainmenu li div.hoverparent:hover,
+
 	ul#mainmenu li div.selected
+
 	{
+
 		color:#e05e4f;
+
 	}
+
 	ul#mainmenu li span{
+
 		float:left;
+
 		text-align:center;
+
 		width:100%;
+
 	}
+
 ul#mainmenu li ul.submenu{
+
 	clear:both;
+
 	left:-18px;
+
 	position:absolute;
+
 	top:37px;
+
 	padding:0;
+
 	margin:0;
+
 	width:142px;
+
 	z-index:100;
+
 }
+
 ul.submenuorder{
+
 	left:-35px !important;
+
 	width:135px !important;
+
 }
+
+
 
 ul#mainmenu > li > ul.submenu > li.childmenu{
+
   overflow: hidden;
+
   height: 0;
+
 	margin-top:1px;
+
   -webkit-transition: height 200ms ease-in;
+
   -moz-transition: height 200ms ease-in;
+
   -o-transition: height 200ms ease-in;
+
   transition: height 200ms ease-in;
+
 	background:url(/images/layout/mainmenu/blueshade.png) repeat center top;
+
 	width:100%;
+
 }
+
+
 
 li.last{
+
 	border-bottom-left-radius:5px;
+
 	border-bottom-right-radius:5px;
+
 }
 
+
+
 ul#mainmenu > li:hover > ul.submenu > li.childmenu{
+
   height: 30px;	
+
 }
+
 	ul#mainmenu > li > ul.submenu > li.childmenu > a{
+
 		font-family:'ProximaNova-Regular';
+
 		font-size:16px;
+
 		margin-top:5px;
+
 		text-align:center;
+
 		width:100%;
+
     -moz-transition: none;
+
     -webkit-transition: none;
+
     -o-transition: color 0 ease-in;
+
     transition: none;				
+
 	}
+
 	ul#mainmenu > li > ul.submenu > li.childmenu > a:hover{
+
 		color:#f05364;
+
 		font-family:'ProximaNova-Bold';
+
     -moz-transition: none;
+
     -webkit-transition: none;
+
     -o-transition: color 0 ease-in;
+
     transition: none;		
+
 	}
+
 /*end mainmenu*/
 
 
+
+
+
 /*search*/
+
 #tickermenu{
+
 	background:url(/images/layout/member/bgbeforelogin.png) repeat center top;	 
+
 	border-bottom-left-radius:5px;
+
 	border-bottom-right-radius:5px;	
+
 	clear:both;
+
 	height:80px;	
+
 	position:absolute;
+
 	right:135px;
+
 	bottom:137px;
+
 	width:360px;
+
 }
+
+
 
 .afterlogin{
+
 	background:url(/images/layout/mainmenu/bg_pink.png) repeat center top !important;	
+
 }
+
+
 
 form#frmsearch{
+
 	clear:both;
+
 	float:left;
+
 	margin-top:40px;
+
 	position:relative;
+
 	width:170px;
+
 }
+
 	form#frmsearch input.inputtxt{
+
 		background:none;
+
 		border:none;
+
 		border-bottom:2px solid #8f5a29;
+
 		color:#8f5a29;
+
 		clear:both;
+
 		float:left;
+
 		height:20px;
+
 		margin-left:15px;
+
 		width:125px;
+
 	}
+
 	form#frmsearch input.submitsearch{
+
 		border-bottom:2px solid #8f5a29;
+
 		float:left;
+
 		height:14px;
+
 		padding-bottom:5px;
+
 		margin:3px 0 0 0;
+
 		width:15px;
+
 	}
+
 	
+
 	::-webkit-input-placeholder {
+
 		color:#8f5a29;
+
 		font-family: 'ProximaNova-Regular';
+
 		font-size:14px;
+
 		font-style:italic;
+
 	}
+
 	
+
 	:-moz-placeholder { /* Firefox 18- */
+
 		color:#8f5a29;
+
 		font-family: 'ProximaNova-Regular';
+
 		font-size:14px;
+
 		font-style:italic;
+
 	}
+
 	
+
 	::-moz-placeholder {  /* Firefox 19+ */
+
 		color:#8f5a29;
+
 		font-family: 'ProximaNova-Regular';
+
 		font-size:14px;
+
 		font-style:italic;
+
 	}
+
 	
+
 	:-ms-input-placeholder {  
+
 		color:#8f5a29;
+
 		font-family: 'ProximaNova-Regular';
+
 		font-size:14px;
+
 		font-style:italic;
+
 	}	
+
 #account_info{
+
 	color:#8f5a29;	
+
 	float:right;
+
 	font-family: 'ProximaNova-Regular';
+
 	font-size:19px;		
+
 	margin-top:42px;
+
 	text-align:left;
+
 	width:190px;
+
 }
+
+
 
 	#account_info a.accountinfo{
+
 		color:inherit;
+
 		clear:none;
+
 		float:left;	
+
 		font-weight:bold;		
+
 		padding-right:5px;
+
 		text-decoration:none;
+
 		text-align:center;
+
 		-webkit-transition-property:color, text;
+
 		-webkit-transition-duration: 500ms, 500ms;
+
 		-webkit-transition-timing-function: linear, ease-in;
+
 		
+
 		-moz-transition-property:color, text;
+
 		-moz-transition-duration:1s;
+
 		-moz-transition-timing-function: linear, ease-in;
+
 		
+
 		-o-transition-property:color, text;
+
 		-o-transition-duration:1s;
+
 		-o-transition-timing-function: linear, ease-in;		
+
 		
+
 		transition-property:color, text;
+
 		transition-duration:1s;
+
 		transition-timing-function: linear, ease-in;	
+
 		margin:0;
+
 		width:auto;
+
 	}
+
 	
+
 	#account_info a#mfp_login{
+
 		padding-right:20px;
+
 	}	
+
 	#account_info a#mfp_register{
+
 		padding-left:20px;
+
 	}
+
 	
+
 	#account_info a:hover{
+
 		color:#e05e4f;
+
 	}
+
 	#account_info span{
+
 		float:left;
+
 		position:relative;
+
 		width:5px;
+
 	}
+
 	#account_info span.shopchartinfo{
+
 		float:left;
+
 		margin:-5px 20px 0 5px;
+
 	}
+
 	#account_info span.shopcount{
+
 		float:left;
+
 		margin:-1px 5px 0 0;
+
 	}	
+
 	
+
 .row-logged{
+
 	clear:both;
+
 	float:left;
+
 	margin-top:-20px;
+
 	position:relative;
+
 	width:auto;
+
 }
+
+
 
 .rowlogout{
+
 	float:left;
+
 }
+
 .rowlogout a{	
+
 	color:#e05e4f;
+
 	font-family:ProximaNova-Bold;
+
 	text-decoration:none;
+
 }
+
 	
+
 a.shopcart,
+
 a.shopcart:hover{
+
 	color:#8f5a29;	
+
 }
+
 a.shopcart{
+
 	float:left;
+
 	width:auto;
+
 }
+
 /*end search*/
 
+
+
 #maincontent{
+
 	clear:both;
+
 	display:block;
+
 	min-height:250px;
+
 	padding-bottom:10px;
+
 	width:100%;
+
 }
+
+
 
 #footer{
+
 	background:url(/images/layout/home/footerdec.png) repeat-x center top;
+
 	clear:both;
+
 	float:left;
+
 	height:221px;
-	min-width:1279px;
+
+
 	width:100%;
+
 }
+
+
+
 
 
 /*MULTIPLE PAGE CSS*/
+
 .navpage{
+
 	clear:both;
+
 	float:left;
+
 	font-family:Lobster;
+
 	font-size:20px;
+
 	margin:40px 0;
+
 	width:100%;
+
 }
+
 .navpage a{
+
 	color:inherit;
+
 }
+
+
 
 .navpage span{
+
 	float:left;
+
 }
+
 .navpage span.sep{
+
 	font-style:italic;
+
 	padding:0 5px;
+
 }
+
 .content{
+
 	clear:both;
+
 	float:left;
+
 	padding-bottom:20px;
+
 	text-align:center;
+
 	width:100%;
+
 }
+
 /*MULTIPLE PAGE CSS*/
+
 /*END MOMOCUPPY MAIN STYLES*/
 
 
+
+
+
 /*LOGIN POPUP*/
+
 #wrapformlogin{
+
 	background:#ffd0d8;
+
 	border-radius:10px;
+
   box-shadow: 2px 2px 2px #d6cfd1;	
+
 	clear:both;
+
 	float:left;
+
 	padding:10px 0;
+
 	position:relative;
+
 	width:626px;
+
 }
+
+
 
 form#formlogin{
+
 	clear:both;
+
 	float:left;
+
 	height:320px;
+
 	width:100%;
+
 }
+
+
 
 form#formlogin h3{
+
 	border-bottom:3px solid #fff;
+
 	float:left;
+
 	font-size:25px;
+
 	font-weight:bold;
+
 	padding:10px 0;
+
 	text-align:center;
+
 	text-transform:uppercase;
+
 	width:100%;
+
 }
+
+
 
 form#formlogin .row{
+
 	clear:both;
+
 	float:left;
+
 	margin-top:40px;
+
 	width:100%;
+
 }
+
+
 
 form#formlogin .row2{
+
 	margin-top:10px;
+
 }
+
+
 
 form#formlogin .row label{
+
 	float:left;
+
 	font-size:18px;
+
 	margin:5px 0 0 25px;
+
 	width:155px;
+
 }
+
 form#formlogin .row input{
+
 	background:#fff;
+
 	border:none;
+
 	/*color:#f05364;*/
+
 	color:#c3c3c3;
+
 	float:left;
+
 	font-size:17px;
+
 	font-weight:bold;
+
 	height:20px;
+
 	padding:5px 10px;
+
 	width:268px;
+
 }
+
+
 
 form#formlogin .row span#forgotpwd{
+
 	cursor:pointer;
+
 	float:left;
+
 	font-size:12px;
+
 	font-style:italic;
+
 	margin:5px 0 0 15px;
+
 }
+
 form#formlogin .row span#forgotpwd:hover{
+
 	text-decoration:underline;
+
 }
+
+
 
 form#formlogin .row2 input.mfp_submit{
+
 	border:none;
+
 	background:none;
+
 	float:left;
+
 	height:65px;
+
 	margin:10px 0 0 178px;
+
 	width:303px;
+
 }
+
+
 
 span.extranote{
+
 	clear:both;
+
 	float:left;
+
 	font-size:12px;
+
 	font-style:italic;
+
 	font-weight:bold;
+
 	margin:0 0 0 180px;
+
 }
+
+
 
 span#warning_login{
+
 	color:#f15e6e;
+
 	float:left;
+
 	font-size:12px;
+
 	font-style:italic;
+
 	font-weight:bold;
+
 	line-height:15px;
+
 	margin:25px 0 0 180px;	
+
 	width:250px;
+
 }
+
+
 
 span#loading{
+
 	color:#f15e6e;
+
 	display:none;
+
 	float:left;
+
 	font-size:20px;
+
 	font-family:'Lobster';
+
 	line-height:15px;
+
 	margin:25px 0 0 180px;	
+
 	width:250px;	
+
 }
+
+
 
 #mfp_register{
+
 	clear:both;
+
 	float:left;
+
 	margin-top:37px;
+
 	padding-bottom:10px;
+
 	width:100%;
+
 }
+
+
 
 #mfp_register h3{
+
 	border-bottom:3px solid #fff;
+
 	float:left;
+
 	font-size:25px;
+
 	font-weight:bold;
+
 	padding:10px 0;
+
 	text-align:center;
+
 	text-transform:uppercase;
+
 	width:100%;
+
 }
 
+
+
 #mfp_register a.linkregis{
+
 	clear:both;
+
 	float:left;
+
 	margin:23px 0 0 180px;
+
 	height:65px;
+
 	width:303px;
+
 }
+
+
+
 
 
 #wrapforgot{
+
 	background: url(/images/layout/mainmenu/login/bgforgotpass.gif) no-repeat left top;
+
 	clear: both;
+
 	height: 312px;
+
 	left: 88px;
+
 	position: absolute;
+
 	top: 72px;
+
 	text-align:center;
+
 	width: 450px;
+
 }
+
+
 
 #wrapforgot form#forgotpass{
+
 	clear:both;
+
 	float:left;
+
 	width:100%;
+
 }
+
+
 
 #wrapforgot form#forgotpass h2{
+
 	color:#d35478;
+
 	float:left;
+
 	font-family:Lobster;
+
 	font-size:31px;
+
 	margin-top:110px;
+
 	text-align:center;
+
 	width:100%;
+
 }
+
+
 
 #wrapforgot form#forgotpass span{
+
 	float:left;
+
 	margin-top:20px;
+
 	line-height:15px;
+
 	text-align:center;
+
 	width:100%;
+
 }
+
 #wrapforgot form#forgotpass input{
+
 	background:#fff;
+
 	border:none;
+
 	margin-top:15px;
+
 	padding:5px;
+
 	width:290px;
+
 }
+
 #wrapforgot form#forgotpass input.submit{
+
 	background:none;
+
 	height:36px;
+
 	width:156px;
+
 }
+
+
 
 #wrapforgot span.closeforgot{
+
 	clear:both;
+
 	cursor:pointer;
+
 	height:17px;
+
 	right:15px;
+
 	position:absolute;
+
 	top:15px;
+
 	width:17px;
+
 }
 
+
+
 .hide{
+
 	display:none;
+
 }
+
 /*END LOGIN POPUP*/
 
 
+
+
+
 /*START SEARCH*/
+
 #searchresult{
+
 	background:#d9f7f2;
+
 	border-bottom-left-radius: 5px;
+
 	border-bottom-right-radius: 5px;
+
 	clear:both;
+
 	display:none;
+
 	position:absolute;
+
 	padding-bottom:10px;
+
 	left:0;
+
 	min-height:200px;
+
 	top:85px;
+
 	width:360px;
+
 	z-index:999;
+
 }
+
+
 
 .afterloginsearch{
+
 	background:#fde0e5 !important;
+
 }
+
+
 
 #searchresult ul{
+
 	clear:both;
+
 	float:left;
+
 	margin:10px 0 0 10px;
+
 	text-align:left;
+
 	width:340px;
+
 }
+
 #searchresult ul li,
+
 #searchresult ul li a{
+
 	float:left;
+
 	text-decoration:none;
+
 	margin-bottom:10px;		
+
 	width:100%;
+
 }
+
 #searchresult ul li a:hover{
+
 	background:#e4f4f1;
+
 }
+
+
 
 .afterloginsearch ul li a:hover{
+
 	background:#faedef !important;
+
 }
+
+
 
 #searchresult ul li{
+
 	border-bottom:1px solid #eaeaea;
+
 }
+
+
 
 #searchresult ul li a span.img{
+
 	float:left;
+
 	width:55px;
+
 }
+
 #searchresult ul li a .desc{
+
 	clear:none;
+
 	float:left;
+
 	line-height:20px;
+
 	width:260px;
+
 }
+
 #searchresult ul li a .desc span.itemname{
+
 	float:left;
+
 	color:#8b5623;
+
 	font-weight:bold;
+
 	font-size:20px;
+
 }
+
+
 
 #searchresult ul li a .desc span.itemcat{
+
 	clear:both;
+
 	color:#848685;
+
 	float:left;
 
+
+
 	font-weight:bold;
+
 	font-size:12px;	
+
 }
+
+
 
 #searchresult ul li a .desc span.itemprice{
+
 	clear:both;
+
 	color:#848685;
+
 	float:left;
+
 	font-weight:bold;
+
 	font-size:16px;	
+
 	margin-top:5px;
+
 }
+
 /*END SEARCH*/

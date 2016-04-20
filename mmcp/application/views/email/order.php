@@ -264,7 +264,23 @@
 
       #monkeyRewards img{
           max-width:190px;
-      }
+      }			
+			img.landscape{
+		
+			}
+			img.potrait{			
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				width: 100%;
+				height: auto;
+				-webkit-transform: translate(-50%,-50%);
+				-ms-transform: translate(-50%,-50%);
+				transform: translate(-50%,-50% );	
+				z-index:1;						
+			}
+			
+	
 
     </style>
   </head>
@@ -335,13 +351,36 @@
                                     Amount
                                   </th>                                                                                                                                                                                                     
                                 </tr>
+   
                                 <?php 
                                   $subtotal = 0;
                                   foreach ($product as $value) {
+																		
+																		//landscape / potrait
+																	/*	list($width, $height) = getimagesize("../mmcp/images/products/".$value->img);
+																		
+																		if ($width > $height) {
+																		
+																				// Landscape
+																			$style= "style=\"min-height:0;position: absolute;left: 50%;top: 50%;height: 100%;width: auto;-webkit-transform: translate(-50%,-50%);-ms-transform: translate(-50%,-50%);transform: translate(-50%,-50% );z-index:1;\"";	
+																		
+																			$varclass = "landscape";
+																		
+																		} else {
+																		
+																				// Portrait or Square
+																			$style= "style=\"min-height:0;position: absolute;left: 50%;top: 50%;height: auto;width: 100%;-webkit-transform: translate(-50%,-50%);-ms-transform: translate(-50%,-50%);transform: translate(-50%,-50% );z-index:1;\"";																			
+																			$varclass = "potrait";															
+																		
+																		}					*/
+																		//end ladnscape / potrait																			
+																		
                                     ?>
                                     <tr mc:repeatable>
                                       <td valign="top" class="dataTableContent" mc:edit="data_table_content00">
-                                        <img src="http://www.momocuppy.com/mmcp/images/products/<?php echo $value->img ?>" width="51"/>
+                                      	<span class="wrapimg" style="float:left;position:relative;overflow:hidden;width:70px;MAX-height:70px !important;">
+                                        <img src="http://www.momocuppy.com/mmcp/images/products/<?php echo $value->img ?>" width="70" height="70"/>
+                                        </span>
                                       </td>
                                       <td valign="center" class="dataTableContent" mc:edit="data_table_content01">
                                         <?php echo $value->product_name ?>
@@ -374,12 +413,16 @@
                                   <span style="float:left;width:150px;text-align:right;" >IDR <?php echo number_format($subtotal,2,',','.'); ?></span>                                                              
                                 </div>
                                 <div style="clear:both;float:right;color:#505050;font-family:Arial;font-size:14px;line-height:150%;text-align:left;" >
+                                  <span style="float:left;font-weight:bold;text-align:right;width:170px;" >Discount :	</span>
+                                  <span style="float:left;width:150px;text-align:right;" >IDR <?php echo number_format(($subtotal * (($discount == null) ? 0 : $discount / 100)),2,',','.'); ?></span>                                                            
+                                </div> 
+                                <div style="clear:both;float:right;color:#505050;font-family:Arial;font-size:14px;line-height:150%;text-align:left;" >
                                   <span style="float:left;font-weight:bold;text-align:right;width:170px;" >Shipping &amp; Handling :	</span>
                                   <span style="float:left;width:150px;text-align:right;" >IDR <?php echo number_format($shipping,2,',','.'); ?></span>                                                            
                                 </div>  
                                 <div style="clear:both;float:right;color:#505050;font-family:Arial;font-size:14px;line-height:150%;text-align:left;" >
                                   <span style="float:left;font-weight:bold;text-align:right;width:170px;" >Total :	</span>
-                                  <span style="float:left;width:150px;text-align:right;" ><strong>IDR <?php echo number_format($subtotal+$shipping,2,',','.'); ?></strong></span>                                                            
+                                  <span style="float:left;width:150px;text-align:right;" ><strong>IDR <?php echo number_format(($subtotal * (1 - (($discount == null) ? 0 : $discount / 100))) + $shipping ,2,',','.'); ?></strong></span>                                                            
                                 </div>                                                                                                                                                                                     
 
                               </div>
