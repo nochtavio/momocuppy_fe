@@ -14,6 +14,7 @@ if(!isset($_SESSION['order_no']) || !isset($_SESSION['redeem_keep'])){
   $order_no = $_SESSION['order_no'];
   unset($_SESSION['redeem_keep']);
 }
+$_SESSION['after_success'] = TRUE;
 require_once($dir."content/header.php");
 ?>  
   

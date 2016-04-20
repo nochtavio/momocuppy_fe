@@ -19,6 +19,12 @@ if(isset($_GET["redeem_p"]) && is_numeric($_GET["redeem_p"])){
 	exit;
 }
 
+if(isset($_SESSION['after_success'])){
+  unset($_SESSION['after_success']);
+  header("location:/redeem/#maincontent");
+	exit;
+}
+
 $detail = get_detailredeem($idredeem);
 if($detail){
 	if($detail->stock == 0){

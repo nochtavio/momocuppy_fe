@@ -105,9 +105,9 @@ function get_memberpoint($memberid){
 	
 	$point = 0;
 	$strsql = "
-	SELECT SUM(POINT) AS point 
+	SELECT point 
 	FROM ms_point WHERE id_member = ".$db->escape($memberid)."
-	GROUP BY id_member
+  AND cretime >= NOW() - INTERVAL 3 MONTH
 	";
 	$row = $db->get_row($strsql);
 	if($row){
