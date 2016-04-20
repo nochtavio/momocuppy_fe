@@ -791,7 +791,7 @@ class model_order extends CI_Model {
       'paid_date' => NULL
     );
 
-    $this->db->select('id, status');
+    $this->db->select('id, status, cretime');
     $query = $this->db->get_where('ms_order', $filter);
     return $query;
   }
