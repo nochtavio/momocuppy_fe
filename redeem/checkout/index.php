@@ -21,6 +21,10 @@ if(isset($_GET["redeem_p"]) && is_numeric($_GET["redeem_p"])){
 
 $detail = get_detailredeem($idredeem);
 if($detail){
+	if($detail->stock == 0){
+		header("location:/redeem/#maincontent");
+		exit;
+	}
   if(isset($email)){
     $memberid = get_memberid($email);		
     $point = 0;		

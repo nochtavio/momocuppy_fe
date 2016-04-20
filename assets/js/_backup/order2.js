@@ -36,7 +36,6 @@ $(document).ready(function () {
         var point = 0;
         var grand_total = 0;
         var img = "";
-				var more = "...";	
         $('#btn_checkout').prop('disabled', false);
 
         if (result['result'] === 's') {
@@ -45,27 +44,24 @@ $(document).ready(function () {
             if(value['img'] == null){
               img = '/images/products/no-img-potrait.jpg';
             }
-						
-						if(value['color_name'].length > 8){
-							color_name = value['color_name'].substr(0,5) + more;
-						}else{
-							color_name = value['color_name'];
-						}							
-						
             $('#shopbaglist').append("\
               <li>\
                 <div class='confirmbag_img'><img id='cart_img_" + value['id'] + "' src='" + img + "' /></div>\
                 <div class='confirmbag_color'>\
-                  <div class='confirmbag_data' title='"+value["color_name"]+"'><strong class='confirmbag_title' >color</strong><br />" + color_name + "</div>\
+                  <span class='confirmbag_title'>color</span>\
+                  <span class='confirmbag_data'>" + value['color_name'] + "</span>\
                 </div>\
                 <div class='confirmbag_weight'>\
-                  <div class='confirmbag_data'><strong class='confirmbag_title'>weight</strong><br />" + value['product_weight'] + "</div>\
+                  <span class='confirmbag_title'>weight</span>\
+                  <span class='confirmbag_data'>" + value['product_weight'] + "</span>\
                 </div>\
                 <div class='confirmbag_qty'>\
-                  <div class='confirmbag_data'><strong class='confirmbag_title'>qty</strong><br />" + value['qty'] + "</div>\
+                  <span class='confirmbag_title'>qty</span>\
+                  <span class='confirmbag_data'>" + value['qty'] + "</span>\
                 </div>\
                 <div class='confirmbag_price'>\
-                  <div class='confirmbag_data'><strong class='confirmbag_title'>price</strong><br />" + format_number(value['product_price']) + "</div>\
+                  <span class='confirmbag_title'>price</span>\
+                  <span class='confirmbag_data'>" + format_number(value['product_price']) + "</span>\
                 </div>\
               </li>\
             ");
@@ -210,6 +206,20 @@ $(document).ready(function () {
           $('#order_country').val("");
           $('#order_city').val("");
           set_edit();
+          
+          $("input#phone").on("keypress keyup blur",function (event) {    
+						 $(this).val($(this).val().replace(/[^\d].+/, ""));
+							if ((event.which < 48 || event.which > 57)) {
+									event.preventDefault();
+							}
+					});  	
+					
+					$("input#postalcode").on("keypress keyup blur",function (event) {    
+						 $(this).val($(this).val().replace(/[^\d].+/, ""));
+							if ((event.which < 48 || event.which > 57)) {
+									event.preventDefault();
+							}
+					});  
         }
       }
     });
@@ -286,8 +296,8 @@ $(document).ready(function () {
       }
     });
   };
-
- var validate_field = function(){
+  
+  var validate_field = function(){
     var firstname = $('#firstname');
     var lastname = $('#lastname');
     var phone = $('#phone');
@@ -391,18 +401,15 @@ $(document).ready(function () {
         },
       dataType: 'json',
       success: function (result) {
+        $('#poptitle').text('Success');
         $('#popmessage').text(result['result_message']);
-        if(result['result'] == "r2"){
-          validate_field();
-        }else{
-          $.magnificPopup.open({
-            items: {
-              src: '#mfp_message',
-              type: 'inline'
-            }
-          }, 0);
-          generate_member_address();
-        }
+        $.magnificPopup.open({
+          items: {
+            src: '#mfp_message',
+            type: 'inline'
+          }
+        }, 0);
+        generate_member_address();
       }
     });
   };
@@ -475,7 +482,7 @@ $(document).ready(function () {
           $('#poptitle').text('Failed');
           var err_msg = result['message'];
           if(err_msg == null){
-            err_msg = 'Sorry, an error occurred. Please try again in 10 minutes.';
+            err_msg = 'Mohon maaf, terjadi error dalam pengambilan ongkos kirim. Silahkan coba kembali';
           }
           $('#popmessage').text(err_msg);
           $.magnificPopup.open({
@@ -538,7 +545,6 @@ $(document).ready(function () {
     $('#postalcode').val("");
     $('#city').val("");
     $('#txt_id').val("");
-    $('.warning').removeClass('warning');
     state = "add";
     $.magnificPopup.open({
       items: {

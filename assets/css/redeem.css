@@ -772,3 +772,34 @@ p.logininfo{
 }
 
 /*end redeem 4*/
+
+/*update revisi*/
+.soldout{
+	clear:both;
+	position:absolute;
+	top:-5px;
+	z-index:99;
+}
+
+.outofstock{
+	color:#ee5262;
+	clear:both;
+	float:left;
+	font-size:20px !important;
+	font-weight:bold;
+	text-align:left;
+	margin-top:15px;
+	width:100%;	
+}
+.listitem{
+	overflow:hidden;
+	width:310px;
+}
+.listitem span{
+	float:left;
+}
+.listitem img.zoomImg{
+	cursor:crosshair;
+	width:620px;
+
+}

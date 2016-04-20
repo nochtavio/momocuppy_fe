@@ -463,15 +463,42 @@ class model_order extends CI_Model {
     );
     $this->db->insert('dt_order', $data_detail);
     
-    //Calculate Point
-    $this->db->select('mpr.product_point');
+    //Get Product Point and Stock
+    $this->db->select('mpr.product_point, mpr.stock');
     $this->db->from('ms_product_redeem mpr');
     $this->db->where('mpr.id', $id_redeem);
-    $get_point = $this->db->get();
+    $get_pointstock = $this->db->get();
     
-    $point = $get_point->row()->product_point;
-    $this->calculate_point($id_member, $id_order, $point*-1);
+    $point = $get_pointstock->row()->product_point;
+    $stock = $get_pointstock->row()->stock;
+    //End Get Product Point and Stock
+    
+    //Calculate Point
+    $filter_point = array(
+      'id_member' => $id_member
+    );
+    $this->db->select('point');
+    $check_point = $this->db->get_where('ms_point', $filter_point);
+    
+    $updated_point = $check_point->row()->point - $point;
+    $data_point = array(
+      'point' => $updated_point,
+      'cretime' => date('Y-m-d')
+    );
+
+    $this->db->where('id_member', $id_member);
+    $this->db->update('ms_point', $data_point);
     //End Calculate Point
+    
+    //Update Stock
+    $updated_stock = $stock - 1;
+    $data_stock = array(
+      'stock' => $updated_stock
+    );
+
+    $this->db->where('mpr.id', $id_redeem);
+    $this->db->update('ms_product_redeem mpr', $data_stock);
+    //End Update Stock
     
     $return_order = array(
       'order_no' => $order_no
@@ -606,10 +633,22 @@ class model_order extends CI_Model {
   }
 
   function generate_order_no() {
-    $order_no = random_string('numeric', 9);
-    while ($this->check_order_no($order_no)->num_rows() > 0) {
-      $order_no = random_string('numeric', 9);
+    $year = date('y');
+    $month = date('m');
+    
+    $this->db->where('cretime >=', date("Y-m-d 00:00:00"));
+    $this->db->where('cretime <=', date("Y-m-d 23:59:59"));
+    $this->db->from('ms_order');
+    $total_order = $this->db->count_all_results();
+    if($total_order < 10){
+      $total_order = '000'.$total_order;
+    }else if($total_order < 100){
+      $total_order = '00'.$total_order;
+    }else if($total_order < 1000){
+      $total_order = '0'.$total_order;
     }
+    
+    $order_no = $year.$month.$total_order;
 
     return $order_no;
   }
@@ -719,8 +758,7 @@ class model_order extends CI_Model {
 
   function calculate_point($id_member, $point, $revert=FALSE) {
     $filter = array(
-      'id_member' => $id_member,
-      'cretime' => date('Y-m-d')
+      'id_member' => $id_member
     );
 
     $this->db->select('point');

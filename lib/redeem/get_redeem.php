@@ -16,7 +16,9 @@ function get_redeemlist(){
 
 			mr.product_name,
 
-			mr.product_point
+			mr.product_point,
+			
+			mr.stock
 
 		FROM ms_product_redeem mr 
 
@@ -56,7 +58,9 @@ function get_detailredeem($redeemid){
 
 			mr.product_desc,			
 
-			mr.product_point
+			mr.product_point,
+			
+			mr.stock
 
 		FROM ms_product_redeem mr 
 

@@ -344,7 +344,7 @@
                                                           <p style="font-size:11.5px;" >
                                                           	Copyright &copy; <?php echo date("Y");?> Momo Cuppy, All rights reserved.
                                                             <br />
-                                                            You’re receiving this email because you signed up for our newsletter while making a purchase at our store.
+                                                            You're receiving this email because you signed up for our newsletter while making a purchase at our store.
                                                             <br />
                                                             <a  href="http://www.momocuppy.com" style="color:#eb5763;text-decoration:none;font-weight:bold;" ><strong>www.momocuppy.com</strong></a>
                                                           </p>

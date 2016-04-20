@@ -17,6 +17,7 @@ function order_history($memberid){
 	GROUP BY 
 		m.order_no, m.cretime, m.status, m.resi_no , m.discount	, m.shipping_cost
 	ORDER BY m.cretime DESC
+	LIMIT 0,200
 	";
 	$result = $db->get_results($strsql);
 	
@@ -93,7 +94,7 @@ function order_history_thumbimg($idproduct){
 	global $db;
 	
 	$folder = "/mmcp/images/products/";
-	
+	$noimg = "/images/products/no-img-potrait.jpg";
 	$strsql = "
 		SELECT img FROM dt_product_img WHERE id_product = ".$db->escape($idproduct)." ORDER BY id ASC LIMIT 0,1
 	";
@@ -102,7 +103,7 @@ function order_history_thumbimg($idproduct){
 	if($img){
 		return $folder.$img->img;
 	}else{
-		return false;
+		return $noimg;
 	}
 }
 
@@ -119,8 +120,27 @@ function order_history_redeem_thumbimg($idproduct){
 	if($img){
 		return $folder.$img->img;
 	}else{
-		return false;
+		return $noimg;
 	}
 }
 
+
+function get_product_type($idproduct){
+	global $db;
+	
+	
+	$strsql = "
+		SELECT mscat.type FROM ms_category mscat
+		LEFT JOIN dt_category dc ON dc.id_category = mscat.id
+		WHERE dc.id_product = ".$db->escape($idproduct)."
+		GROUP BY mscat.type	
+		ORDER BY mscat.type DESC
+	";
+	$row = $db->get_row($strsql);
+	if($row){
+		return $row->type;
+	}else{
+		return false;
+	}
+}
 ?>

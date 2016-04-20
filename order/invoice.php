@@ -421,7 +421,35 @@ if($id_member != $memberid){
 			#monkeyRewards img{
 				max-width:190px;
 			}
-			
+			.wrapimg{
+				float:left;
+				height:65px;
+				width:65px;
+				position:relative;
+				overflow:hidden;
+			}
+			img.landscape{
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				height: 100%;
+				width: auto;
+				-webkit-transform: translate(-50%,-50%);
+				-ms-transform: translate(-50%,-50%);
+				transform: translate(-50%,-50% );	
+				z-index:1;			
+			}
+			img.potrait{			
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				width: 100%;
+				height: auto;
+				-webkit-transform: translate(-50%,-50%);
+				-ms-transform: translate(-50%,-50%);
+				transform: translate(-50%,-50% );	
+				z-index:1;						
+			}
 		</style>
 	</head>
     <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0" onload="window.print()">
@@ -513,6 +541,25 @@ if($id_member != $memberid){
 																																		$varimg = $img;
 																																	}
 																																	
+																																	
+																																	//landscape / potrait
+																																	list($width, $height) = getimagesize("..".$varimg);
+																																	
+																																	if ($width > $height) {
+																																	
+																																			// Landscape
+																																	
+																																		$varclass = "landscape";
+																																	
+																																	} else {
+																																	
+																																			// Portrait or Square
+																																	
+																																		$varclass = "potrait";															
+																																	
+																																	}					
+																																	//end ladnscape / potrait																																	
+																																	
 																																	$vcolor = "-";
 																																	if($row->color_name){
 																																		$vcolor = "[".$row->color_name."] ";
@@ -522,7 +569,9 @@ if($id_member != $memberid){
 																																	?>
  																																	<tr mc:repeatable>
                                                                     <td valign="top" class="dataTableContent" mc:edit="data_table_content00">
-                                                                      <img src="http://www.momocuppy.com<?php echo $varimg;?>" width="51"/>
+                                                                    	<span class="wrapimg">
+                                                                      	<img src="http://www.momocuppy.com<?php echo $varimg;?>" width="51" class="<?php echo $varclass;?>"/>
+                                                                      </span>
                                                                     </td>
                                                                     <td valign="center" class="dataTableContent" mc:edit="data_table_content01">
                                                                       <?php echo strtoupper($row->product_name);?>

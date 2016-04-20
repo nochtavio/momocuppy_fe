@@ -106,6 +106,7 @@ class model_newsletter extends CI_Model {
   function get_subcsribers(){
     $this->db->select('mc.*');
     $this->db->from('ms_subscriber mc');
+    $this->db->where('mc.active', 1);
     
     $query = $this->db->get();
     return $query;

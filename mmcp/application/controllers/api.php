@@ -1174,7 +1174,7 @@ class api extends CI_Controller {
     if (isset($_SESSION['courier'])) {
       if ($response['rajaongkir']['status']['code'] == 200) {
         $data['result'] = 'r2';
-        $data['message'] = 'Maaf, alamat yang dipilih saat ini masih belum terjangkau.';
+        $data['message'] = 'Sorry, your area is not covered with JNE. Please contact help@momocuppy.com to order.';
         $courier = $_SESSION['courier'];
         foreach ($response['rajaongkir']['results'] as $value) {
           $temp = 0;
@@ -1193,14 +1193,15 @@ class api extends CI_Controller {
               break;
             }else{
               $data['result'] = 'r2';
-              $data['message'] = 'Maaf, alamat yang dipilih saat ini masih belum terjangkau.';
+              $data['message'] = 'Sorry, your area is not covered with JNE. Please contact help@momocuppy.com to order.';
             }
             $temp++;
           }
         }
       } else {
         $data['result'] = 'r2';
-        $data['message'] = $response['rajaongkir']['status']['description'];
+        $data['message'] = 'Sorry, an error occurred. Please try again in 10 minutes.';
+        //$data['message'] = $response['rajaongkir']['status']['description'];
       }
     } else {
       $data['result'] = 'r3';

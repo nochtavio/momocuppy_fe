@@ -358,7 +358,7 @@ class newsletter extends CI_Controller {
           if($last_send < strtotime('-1 day')) {
             $valid = TRUE;
           }else{
-            $valid = FALSE;
+            $valid = TRUE;
           }
         }else{
           $valid = TRUE;

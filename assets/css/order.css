@@ -1120,7 +1120,6 @@ form.confirmchkout{
 
 #shoppingbag_confirm ul.shopbaglist li .confirmbag_color{
 	display:table;
-	float:left;
 	height:85px;
 	overflow:hidden;
 	width:65px;
@@ -1130,7 +1129,6 @@ form.confirmchkout{
 
 #shoppingbag_confirm ul.shopbaglist li .confirmbag_weight{
 	display:table;
-	float:left;
 	height:85px;
 	overflow:hidden;
 	width:65px;
@@ -1141,7 +1139,6 @@ form.confirmchkout{
 
 #shoppingbag_confirm ul.shopbaglist li .confirmbag_qty{
 	display:table;
-	float:left;
 	height:85px;
 	overflow:hidden;
 	width:50px;
@@ -1152,7 +1149,7 @@ form.confirmchkout{
 
 #shoppingbag_confirm ul.shopbaglist li .confirmbag_price{
 	display:table;
-	float:left;
+;
 	height:85px;
 	overflow:hidden;
 	width:65px;
@@ -1161,28 +1158,14 @@ form.confirmchkout{
 
 
 
-#shoppingbag_confirm ul.shopbaglist li span.confirmbag_title{
 
-	float:left;
-
-	font-size:12px;
-
-	font-weight:bold;
-
-	text-align:center;
-
-	width:100%;
-
-}
-
-#shoppingbag_confirm ul.shopbaglist li span.confirmbag_data{
+#shoppingbag_confirm ul.shopbaglist li .confirmbag_data{
 
 	clear:both;
-
-	float:left;
-
+	display:table-cell;
+	float:none;
 	font-size:12px;
-
+	vertical-align:middle;
 	font-weight:normal;
   line-height: 15px;
 	margin:0;
@@ -1190,6 +1173,14 @@ form.confirmchkout{
 	text-align:center;
 
 	width:100%;
+
+}
+strong.confirmbag_title{
+
+	font-size:12px;
+
+	font-weight:bold;
+
 
 }
 

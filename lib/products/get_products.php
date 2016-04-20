@@ -1,15 +1,22 @@
 <?php 
-function get_products_list($type,$cat,$rowspage,$page){		
+function get_products_list($type,$cat,$rowspage,$page,$keywords = NULL){		
 	global $db;
 	$data = NULL;
 	
-	if(!isset($type) || !is_numeric($type)){
-		$type = 1;
+	$sqltype = "";
+	if(isset($type) && is_numeric($type) && $type != 0){
+		$sqltype = "AND mc.type = ".$db->escape($type)."";
+	}	
+
+	
+	
+	
+	$sqlcat = "";
+	if(isset($cat) && is_numeric($cat) && $cat != 0){
+		$sqlcat = "AND mc.id = ".$db->escape($cat)."";
 	}	
 	
-	if(!isset($cat) || !is_numeric($cat)){
-		$cat = 1;
-	}				
+			
 		
 	if(!isset($rowspage) || !is_numeric($rowspage)){
 		$rowspage = 10;
@@ -18,22 +25,29 @@ function get_products_list($type,$cat,$rowspage,$page){
 	if(!isset($page) || !is_numeric($page)){
 		$page = 1;
 	}	
+	$sqlsearch = "";	
+	if($keywords != NULL){
+		$sqlsearch = "AND mp.product_name LIKE '%".$db->escape($keywords)."%'";
+	}
 	
 	$rsfirst = $rowspage*($page-1);
 	
 	$strsql = "
-		SELECT DISTINCT SQL_CALC_FOUND_ROWS mp.id,mp.product_name, mp.product_price, mp.visible,mp.cretime,img.img
+		SELECT DISTINCT SQL_CALC_FOUND_ROWS mp.id,mp.product_name, mp.sale, mp.product_price, mp.visible,mp.cretime,img.img,mc.type
 		FROM ms_product mp 
 		INNER JOIN dt_category dc ON mp.id = dc.id_product
 		LEFT JOIN ms_category mc ON mc.id = dc.id_category
 		LEFT JOIN (SELECT DISTINCT img,id_product FROM dt_product_img GROUP BY id_product ORDER BY cretime DESC) img ON img.id_product = dc.id_product		
 		WHERE mp.visible = 1
-		AND mc.type = ".$db->escape($type)."
-		AND mc.id = ".$db->escape($cat)."
+		".$sqltype."
+		".$sqlcat."
 		AND NOW() > IFNULL(mp.publish_date,0)
+		".$sqlsearch ."
 		ORDER BY mp.cretime DESC, mp.publish_date DESC
 		LIMIT ".$db->escape($rsfirst).",	".$db->escape($rowspage)."
 	";	
+	
+	
 
 	
 	$result = $db->get_results($strsql);
@@ -246,5 +260,34 @@ function get_stock($idproduct){
 		return false;
 	}			
 }
+
+function get_producttype(){
+	global $db;
+	
+
+	
+	$strsql = "SELECT id, type_name, img FROM ms_type WHERE visible = 1 ORDER BY position ASC, cretime DESC";
+	$result = $db->get_results($strsql);	
+	if($result){
+		return $result;
+	}else{
+		return false;
+	}	
+}
+
+function get_producttypename($id){
+	global $db;
+	
+	
+	
+	$strsql = "SELECT id, type_name, img FROM ms_type WHERE visible = 1 AND id = ".$db->escape($id)." ORDER BY position ASC, cretime DESC";
+	$result = $db->get_row($strsql);	
+	if($result){
+		return $result;
+	}else{
+		return false;
+	}	
+}
+
 
 ?>

@@ -48,13 +48,21 @@ require_once($dir."content/header.php");
 							} else {
 									// Portrait or Square
 								$varclass = "potrait";															
-							}									
+							}							
+							
+							
+							//cek stok
+							$varnostock = "";
+							if($row->stock == 0){
+								$varnostock = "<div class=\"soldout\"><img src=\"/images/products/outofstock.png\" /></div>";
+							}
                                                           
 							
 							echo "
 							<li>
 								<div class=\"img\">
-									<img class=\"".$varclass."\" src=\"".$thumbimg."\"  />								
+									<img class=\"".$varclass."\" src=\"".$thumbimg."\"  />				
+									".$varnostock."				
 								</div>
 								<span class=\"redeem_title\">".$row->product_name."</span>
 								<span class=\"redeem_points\">".$row->product_point." Points</span>

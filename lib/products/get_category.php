@@ -1,9 +1,5 @@
 <?php 
 
-$dir = "../../";
-
-require_once($dir."core/conn/db.php");
-
 
 
 function get_category_list($type,$rowspage,$page){		
