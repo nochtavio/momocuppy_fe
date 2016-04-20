@@ -64,7 +64,7 @@ if(!$rowsum){
 			".$rowsum->payment_name." - ".$rowsum->payment_account."	
 		"; break;		*/
 		case 2 : $varinfo = "		
-			<strong>WAITING FOR CONFIRMATION</strong>
+			<strong style=\"color:#ff8e08;\">WAITING FOR CONFIRMATION</strong>
 		"; break;				
 		case 3 : $varinfo = "
 			<strong>BANK TRANSFER</strong><br />
@@ -74,7 +74,7 @@ if(!$rowsum){
 			Amount :<br />
 			IDR ".number_format($rowsum->paid_nominal,0,"",".")."<br />			
 			Transfer to : <br />
-			".$rowsum->payment_name." - ".$rowsum->payment_account."	
+			".$rowsum->payment_name." <br /> ".$rowsum->payment_account."	
 		"; break;	
 		case 4 : $varinfo = "
 			<strong>BANK TRANSFER</strong><br />
@@ -84,7 +84,7 @@ if(!$rowsum){
 			Amount :<br />
 			IDR ".number_format($rowsum->paid_nominal,0,"",".")."<br />			
 			Transfer to : <br />
-			".$rowsum->payment_name." - ".$rowsum->payment_account."	
+			".$rowsum->payment_name." <br /> ".$rowsum->payment_account."	
 		"; break;				
 		case 5 : $varinfo = "
 			<strong>BANK TRANSFER</strong><br />
@@ -94,7 +94,7 @@ if(!$rowsum){
 			Amount :<br />
 			IDR ".number_format($rowsum->paid_nominal,0,"",".")."<br />			
 			Transfer to : <br />
-			".$rowsum->payment_name." - ".$rowsum->payment_account."	
+			".$rowsum->payment_name." <br /> ".$rowsum->payment_account."	
 		"; break;			
 		case 6 : $varinfo = "		
 			<strong>-</strong><br />
@@ -159,14 +159,41 @@ if(!$dthistory){
 				}else{
 					$varimg = order_history_thumbimg($row->id_product);				
 				}
+				
+				//landscape / potrait
+				list($width, $height) = getimagesize("../../..".$varimg);
+
+				if ($width > $height) {
+
+						// Landscape
+
+					$varclass = "landscape";
+
+				} else {
+
+						// Portrait or Square
+
+					$varclass = "potrait";															
+
+				}					
+				//end ladnscape / potrait
+				$varprodname = $row->product_name;
+				if(strlen($row->product_name) > 30){
+					$varprodname = substr($row->product_name,0,28)."...";
+				}
+				
+				$typeprod = get_product_type($row->id_product);
+				$varlinkprod = "/products/detail/?type=".$typeprod."&id_product=".$row->id_product."";
 
 				echo "
 				<li>
 					<div class=\"popupimg\">
-						<img src=\"".$varimg."\" width=\"59\" height=\"99\"/>						
+						<a href=\"".$varlinkprod."\" class=\"wrapimgfix\" title=\"".$row->product_name."\" target=\"_blank\">
+							<img src=\"".$varimg."\" class=\"".$varclass."\"/>												
+						</a>
 					</div>
 					<div class=\"popupdesc\">
-						<h3 class=\"titledesc\">".$row->product_name."</h3>
+						<h3 class=\"titledesc\" title=\"".$row->product_name."\">".$varprodname."</h3>
 						<span class=\"extradesc\">Color: ".$row->color_name."</span>
 					</div>      
 					<div class=\"popupqty\">

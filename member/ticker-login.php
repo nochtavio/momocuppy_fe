@@ -15,8 +15,8 @@ if (isset($_SESSION['email']) && isset($_SESSION['status_login'])) {
 }
 ?>
 <div id="tickermenu" <?php echo $varclass;?>>
-  <form name="search" action="." method="post" id="frmsearch">
-    <input id="txt_search" class="inputtxt search" type="text" name="search" placeholder="Search" autocomplete="off"/>
+  <form name="search" action="/search/" method="get" id="frmsearch">
+    <input id="txt_search" class="inputtxt search" type="text" name="key" placeholder="Search" autocomplete="off"/>
     <input class="submitsearch"  type="image" src="/images/layout/icons/magnifier.gif" value="submit_search"/>
   </form>
   <div id="account_info">       
@@ -46,56 +46,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['status_login'])) {
   </div>
   <div id="searchresult" <?php echo $varclasssearch;?>>
     <ul id="searchlist">
-    	<li>
-      	<a href="#">
-        	<span class="img"><img src="/mmcp/images/products/product4.jpg" width="45" height="72"/></span>
-          <div class="desc">
-          	<span class="itemname">Antique Clock</span>
-          	<span class="itemcat">Category : Home Decor</span>    
-            <span class="itemprice">IDR 100.000</span>            
-          </div>
-        </a>
-      </li>
-    	<li>
-      	<a href="#">
-        	<span class="img"><img src="/mmcp/images/products/product4.jpg" width="45" height="72"/></span>
-          <div class="desc">
-          	<span class="itemname">Antique Clock</span>
-          	<span class="itemcat">Category : Home Decor</span>    
-            <span class="itemprice">IDR 100.000</span>            
-          </div>
-        </a>
-      </li>
-    	<li>
-      	<a href="#">
-        	<span class="img"><img src="/mmcp/images/products/product4.jpg" width="45" height="72"/></span>
-          <div class="desc">
-          	<span class="itemname">Antique Clock</span>
-          	<span class="itemcat">Category : Home Decor</span>    
-            <span class="itemprice">IDR 100.000</span>            
-          </div>
-        </a>
-      </li>    
-    	<li>
-      	<a href="#">
-        	<span class="img"><img src="/mmcp/images/products/product4.jpg" width="45" height="72"/></span>
-          <div class="desc">
-          	<span class="itemname">Antique Clock</span>
-          	<span class="itemcat">Category : Home Decor</span>    
-            <span class="itemprice">IDR 100.000</span>            
-          </div>
-        </a>
-      </li>
-    	<li>
-      	<a href="#">
-        	<span class="img"><img src="/mmcp/images/products/product4.jpg" width="45" height="72"/></span>
-          <div class="desc">
-          	<span class="itemname">Antique Clock</span>
-          	<span class="itemcat">Category : Home Decor</span>    
-            <span class="itemprice">IDR 100.000</span>            
-          </div>
-        </a>
-      </li>
+
     	              
     </ul>
   </div>

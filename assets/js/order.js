@@ -31,12 +31,29 @@ $(document).ready(function () {
         subtotal = 0;
         var totalweight = 0;
         var point = 0;
+				var prodname = "";
+				var more = "...";				
         if (result['result'] === 's'){
+					
+
+					
           $.each(result['content'], function (key, value) {
+						if((value['product_name'].lastIndexOf(" ") < 0) && value['product_name'].length > 15){
+							prodname = value['product_name'].substr(0,12) + more;
+						}else{
+							prodname = value['product_name'];
+						}
+						
+															
+						img = '/mmcp/images/products/' + value['img'];
+            if(value['img'] == null){
+              img = '/images/products/no-img-potrait.jpg';
+            }	
+						
             $('#shopbaglist').append("\
               <li>\
-                <div class='bag_prodimg'><img id='cart_img_" + value['id'] + "' src='/mmcp/images/products/" + value['img'] + "'  /></div>\
-                <div class='bag_proddesc'><span>" + value['product_name'] + "</span></div>\
+                <div class='bag_prodimg'><img id='cart_img_" + value['id'] + "' src='" + img + "'  /></div>\
+                <div class='bag_proddesc'><span title='" +value['product_name']+ "'>" + prodname + "</span></div>\
                 <div class='bag_qty'><span>" + value['qty'] + "</span></div>\
                 <div class='bag_color'><span>" + value['color_name'] + "</span></div>\
                 <div class='bag_price'><span>" + format_number(value['product_price']) + "</span></div>\

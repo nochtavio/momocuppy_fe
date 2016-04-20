@@ -14,7 +14,7 @@
       <input id="mfp_submit" type="image" class="mfp_submit" src="/images/layout/mainmenu/login/signin.png" />
     </div> 
     <div class="row2">
-      <span class="extranote">* Make purchase faster using previously saved details</span>        
+      <span class="extranote">* Make purchase faster by using previously saved details</span>        
     </div>
     <div class="row2">
     	<span id="loading">Please wait a moment..</span>

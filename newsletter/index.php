@@ -433,7 +433,8 @@
                                                    
                                                     <tr>
                                                       <td valign="top" class="bodyContent" style="text-align:center;padding-top:0;padding-bottom:0;">
-                                                      	<a href="http://www.momocuppy.com/contact-us/" target="_blank" title="banner 1"><img src="/images/layout/newsletter/blast/social.png"/></a>                                                       
+                                                      	<a href="http://www.momocuppy.com/contact-us/" target="_blank" title="banner 1" style="margin-right:10px;"><img src="/images/layout/newsletter/blast/follow.png"/></a>                                                      	<a href="https://www.facebook.com/Momo-Cuppy-Shop-466333336738898/?fref=ts" target="_blank" title="banner 1" style="margin-right:5px;"><img src="/images/layout/newsletter/blast/blastfb.png"/></a>                                                       
+                                                      	<a href="https://www.instagram.com/momocuppy/" target="_blank" title="banner 1" style="margin:5px 5px 0 0;"><img src="/images/layout/newsletter/blast/blastig.png"/></a>                                                        
                                                       </td>
                                                     </tr>    
                                                     

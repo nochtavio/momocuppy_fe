@@ -19,8 +19,13 @@
       <span>Products</span>
     </div>
     <ul class="submenu">
-      <li class="childmenu"><a href="/products/category/?type=1"><span>Home Decor</span></a></li>
-      <li class="childmenu"><a href="/products/category/?type=2"><span>Accessories</span></a></li>                        
+    	<?php 
+			$rstype = get_producttype();
+			foreach($rstype as $rowtype){
+				echo "<li class=\"childmenu\"><a href=\"/products/category/?type=".$rowtype->id."\"><span>".$rowtype->type_name."</span></a></li>";
+			}			
+			?>
+                      
     </ul>
   </li>
   <li id="logo">

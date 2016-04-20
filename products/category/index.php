@@ -7,7 +7,6 @@ $js = "";
 $body = "product";
 require_once($dir."core/conn/config.php");
 require_once($dir."core/conn/db.php");
-require_once($dir."lib/products/get_category.php");
 require_once($dir."content/header.php");
 
 $type = 0;
@@ -28,7 +27,16 @@ $rowspage = 9;
 <div id="maincontent">
 	<div id="wrapproduct">
   	<div class="content">
-    	<h2><img src="/images/products/maincategory/<?php echo $type;?>.png" /></h2>
+    
+			<?php 
+			$img = get_producttypename($type);
+			if($img){
+				$varimgcat = "/mmcp/images/type/".$img->img;
+			}else{
+				$varimgcat = "/images/products/maincategory/1.png";
+			}			
+			?>    
+    	<h2><img src="<?php echo $varimgcat;?>" /></h2>
       
       <ul class="listcategory" id="list_category">
       
@@ -46,11 +54,27 @@ $rowspage = 9;
 						$idcat = $row->id;
 						$img = $row->img;
 						$img_hover = $row->img_hover;
+						
+						if(isset($img)){
+							$varimg = "/mmcp/images/category/" . $img ;
+						}else{
+							$varimg = "/images/products/no-img-potrait.jpg";													
+						}						
+						
+						list($width, $height) = getimagesize("../..".$varimg);
+						if ($width > $height) {
+								// Landscape
+							$varclass = "categorylandscape";
+						} else {
+								// Portrait or Square
+							$varclass = "categorypotrait";															
+						}						
+						
 						echo "
 						<li>
 							<a href=\"/products/list/?type=".$type."&amp;cat=".$idcat."#maincontent\">
-								<img class=\"no-slide\" src=\"/mmcp/images/category/".$img."\" width=\"269\" height=\"269\"/>       
-								<img class=\"slide\" src=\"/mmcp/images/category/".$img_hover."\" width=\"269\" height=\"269\"/>
+								<img class=\"".$varclass."\" src=\"/mmcp/images/category/".$img."\" />       
+								<img class=\"slide\" src=\"/mmcp/images/category/".$img_hover."\" />
 							</a>          
 						</li>																						
 						";

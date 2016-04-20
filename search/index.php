@@ -1,20 +1,21 @@
-<?php
+<?php 
   ob_start();
   $body = "product";
-  $dir = "../../";
-  $css = "main,product,simplebar,message,scrollpane";
-  $js = "mousewheel,scrollpane,product-list,zoom.min";
+  $dir = "../";
+  $css = "main,product,simplebar,message,scrollpane,search";
+  $js = "mousewheel,scrollpane,zoom.min";
   require_once($dir . "core/conn/config.php");
   require_once($dir . "core/conn/db.php");
+  require_once($dir . "lib/products/get_category.php");
+  require_once($dir . "lib/products/get_products.php");
   require_once($dir . "content/header.php");
-
 
   $type = 0;
   if (isset($_GET["type"]) && is_numeric($_GET["type"])) {
     $type = $_GET["type"];
   }
 
-  $cat = 1;
+  $cat = 0;
   if (isset($_GET["cat"]) && is_numeric($_GET["cat"])) {
     $cat = $_GET["cat"];
   }
@@ -24,60 +25,84 @@
     $p = $_GET["p"];
   }
   $rowspage = 9;
-
-
-
 	
-	$nametype = get_producttypename($type);
-	if($nametype){
-		$varmaincat = $nametype->type_name;
-	}else{
-		$varmaincat = "Home Decor";
+	$keywords = NULL;	
+	if(isset($_GET["key"])){
+		$keywords = trim(urldecode($_GET["key"]));
+		if(strlen($keywords) < 3 || strlen($keywords) > 20){
+			$keywords = NULL;
+		}
 	}
 	
-	/*
-  if ($type == 1) {
-    $varmaincat = "Home Decor";
-  } elseif ($type == 2) {
-    $varmaincat = "Accessories";
-  } else {
-    $varmaincat = "";
-  }*/
-?>  
 
+
+?>
 <!--MAINCONTENT-->
 <div id="maincontent">
     <div id="wrapproduct">
         <div class="content">
-            <!--START MENU CATEGORIES-->
-            <ul class="categories">
-                <li class="main"><a href="#" class="selected"><?php echo $varmaincat; ?></a></li>
 
+
+            <!--START MENU SEARCH-->
+            <div class="wrapmenu">
+              <ul class="type_search">
+                <li class="first">Type <span class="arrow">V</span></li>
+                <li><a href="/search/?key=<?php echo urlencode($keywords);?>" <?php echo is_selected($type,0,"class=\"selected\"","");?>>All</a></li>
+                
+                <?php 
+								$rstype = get_producttype();
+								foreach($rstype as $rowtype){
+									echo "<li><a href=\"/search/?type=".$rowtype->id."&amp;key=".urlencode($keywords)."\" ".is_selected($type,$rowtype->id,"class=\"selected\"","").">".$rowtype->type_name."</a></li>";
+								}
+								?>
+                
+          
+              </ul>
+              
+              <?php 
+							if($type != 0){
+								echo "<ul class=\"type_search cat_search\"><li class=\"first\">Category <span class=\"arrow\">V</span></li>";
+								$data_menu = get_category_list($type, 200, 1);
+								if ($data_menu["result"]) {
+									echo "<li><a href=\"/search/?type=".$type."&amp;cat=0&amp;key=".urlencode($keywords)."\" ".is_selected($cat,0,"class=\"selected\"","").">All</a></li>";
+									foreach ($data_menu["result"] as $row) {
+										$idcat = $row->id;
+										$namecat = $row->category_name;			
+										
+										echo "<li><a href=\"/search/?type=".$type."&amp;cat=".$idcat."&amp;key=".urlencode($keywords)."\" ".is_selected($cat,$idcat,"class=\"selected\"","").">".$namecat."</a></li>";							
+									}
+								}
+								?>
+                  
+                             
                 <?php
-                  //fetch category list
-                  $data_menu = get_category_list($type, 200, 1);
-                  if ($data_menu["result"]) {
-                    foreach ($data_menu["result"] as $row) {
-                      $idcat = $row->id;
-                      $namecat = $row->category_name;
-                      echo "<li><a " . is_selected($idcat, $cat, "class=\"selected\"", "") . " href=\"/products/list/?type=" . $type . "&amp;cat=" . $idcat . "#wrapproduct\">" . $namecat . "</a></li>";
-                    }
-                  }
-                  //end fetch category list
-                ?>                       
-            </ul>
-            <!--END MENU CATEGORIES-->      
+								echo "</ul>";
+							}
+							?>
+            
+            </div>                 
+            <!--END MENU SEARCH-->
 
             <!--START PRODUCT ITEM-->
-            <div class="wraplistitem">
+            <div class="wraplistitem searchpage">
+            		<div class="searchitem">
+                                	
+                	<span>Search Result for : '<?php echo $keywords ?>'</span>
+                </div>
                 <ul class="productitem">
                     <?php
-                      $data = get_products_list($type, $cat, $rowspage, $p);
+											if($keywords != NULL){
+	                      $data = get_products_list($type, $cat, $rowspage, $p, $keywords);												
+											}else{
+												$data = false;
+											}
 
                       $maxpage = 1;
                       if (isset($data["maxPage"])) {
                         $maxpage = $data["maxPage"];
                       }
+											
+										
 
                       if ($data["result"]) {
                         foreach ($data["result"] as $row) {
@@ -105,10 +130,9 @@
 														$varimg = "/images/products/no-img-potrait.jpg";													
 													}
 													
-													
 													$stock = get_stock($id);
 
-													list($width, $height) = getimagesize("../..".$varimg);
+													list($width, $height) = getimagesize("..".$varimg);
 													if ($width > $height) {
 															// Landscape
 														$varclass = "landscape";
@@ -121,12 +145,12 @@
 													$varsale = "";													
 													if($row->sale == 1){
 														$varsale = "<span class=\"sale\"><img src=\"/images/layout/products/sale.png\" /></span>";
-													}
+													}													
 												
 													if($stock == 0){
 														echo "
 														<li>
-															<a class=\"linkproduct\" href=\"/products/detail/?type=" . $type . "&amp;id_product=" . $id . "\">
+															<a class=\"linkproduct\" href=\"/products/detail/?type=" . $row->type . "&amp;id_product=" . $id . "\">
 																<div class=\"listitem ".$varclass."\">
 																	<img src=\"".$varimg."\"  />
 																	
@@ -135,7 +159,7 @@
 																<span class=\"productprice\">IDR " . number_format($product_price, 0, "", ".") . "</span>            
 																" . $tickernew . "
 																<div class=\"soldout\"><img src=\"/images/products/soldout.png\" /></div>
-																" . $varsale . "																
+																" . $varsale . "																	
 															</a>          
 														</li> 						
 														";												
@@ -143,14 +167,14 @@
 													
 														echo "
 														<li>
-															<a class=\"linkproduct\" href=\"/products/detail/?type=" . $type . "&amp;id_product=" . $id . "\">
+															<a class=\"linkproduct\" href=\"/products/detail/?type=" .  $row->type . "&amp;id_product=" . $id . "\">
 																<div class=\"listitem ".$varclass."\">
 																	<span><img src=\"".$varimg."\" /><span>
 																</div>
 																<span class=\"productname\">" . $product_name . "</span>
 																<span class=\"productprice\">IDR " . number_format($product_price, 0, "", ".") . "</span>            
 																" . $tickernew . "
-																" . $varsale . "																
+																" . $varsale . "																	
 															</a>          
 														</li> 						
 														";													
@@ -160,42 +184,25 @@
 
                         }
                       } else {
-                        echo "No data available right now for this category...";
+												if($keywords == false){
+													echo "Keywords must be more than 3 characters and less than 20 characters";
+												}else{
+	                        echo "No data found";													
+												}
                       }
                     ?>
 
                 </ul>             
 
                 <?php
-                  $url = "/products/list/?type=" . $type . "&cat=" . $cat . "";
+                  $url = "/search/?type=" . $type . "&cat=" . $cat . "&key=" .urlencode($keywords) . "";
                   $anchor = "#maincontent";
                   echo page($maxpage, $p, $url, $anchor);
                 ?>        
             </div>      
             <!--END PRODUCT ITEM-->
 
-            <!--START SHOPPING BAG-->
-            <div id="shoppingbag">
-                <h3>Shopping Bag</h3>
-                <div id="div-hidden"></div>
-                <div id="shopbagtitle">
-                    <span class="item">ITEM</span>
-                    <span class="qty">QTY</span>
-                    <span class="price">PRICE</span>                              
-                </div>
-                <ul id="shopbaglist" class="shopbaglist simplebar">
 
-                </ul>
-                <div id="shopbagsum">
-                    <span class="title">TOTAL</span>
-                    <span class="currency">IDR (Rp)</span>
-                    <span id="txt_totalprice" class="totalprice"><strong>0</strong></span>                              
-                </div>  
-                <div class="wrapchkbtn">
-                    <a href="/order/"><span>Check Out</span></a>
-                </div>     
-            </div>
-            <!--END SHOPPING BAG-->      
 
             <!--start payment channel-->
             <div class="payment_channel">
@@ -210,43 +217,9 @@
     </div>
 </div>
 <!--MAINCONTENT-->  
-
-<div id="mfp_message" class="mfp-hide white-popup-block mfp-alert">
-  <h2>
-      <img src="/images/layout/message/bunny.gif" />
-  </h2>
-  <h3 id="poptitle" class="titlemsg"></h3>
-  <p id="popmessage" class="message"></p>
-  <div class="wrapok">
-      <div id="popok" class="okbtn">
-          <span>ok</span>
-      </div>      
-  </div>  
-</div>
-
-<div id="mfp_message" class="mfp-hide white-popup-block mfp-question">
-	<h2>
-  	<img src="/images/layout/message/decor.png" />
-  </h2>
-  
-  <h3 class="titlemsg">Oops..!</h3>
-  
-  <input type="hidden" id="txt_remove_id" />
-	<p class="message">
-  	Are you sure you want to remove this item?    
-  </p>
-  
-  <div class="wrapbtn">
-    <div class="yesbtn" id="yesbtn">
-      <span>yes</span>
-    </div>   
-    
-    <div class="nobtn" id="nobtn">
-      <span>no</span>
-    </div>   
-  </div>  
-</div>
-
 <?php
-  require_once($dir . "content/footer.php");
+	
+  require_once($dir . "content/footer.php");	
+	
+	
 ?>

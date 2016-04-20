@@ -40,12 +40,11 @@
 
 	$stockdetail = get_stock($id_product);
 
+	$varnostock = "";
 	if($stockdetail == 0){
-
-		header("location:/products/list/?type=".$type."");
-
-		exit;
-
+		//header("location:/products/list/?type=".$type."");
+		//exit;
+		$varnostock = "<div class=\"outofstock\">Sorry, this product is currently unavailable.</div>";
 	}
 
 
@@ -100,6 +99,20 @@
 
 											";
 
+										}else{
+											echo "
+
+											<div class=\"simpleLens-container\">
+
+													<div class=\"simpleLens-big-image-container\">
+
+																<img src=\"/images/products/no-img-potrait.jpg\" class=\"simpleLens-big-image\">
+
+													</div>
+
+											</div>											
+
+											";										
 										}
 
 										?>
@@ -270,29 +283,35 @@
 
 
 
+										<?php 
+										if(strlen($varnostock) <= 0){
+											?>
+                      <div class="row-form"> 
+  
+                          <span>Quantity</span>
+  
+                          <select id="txt_qty" name="qty">
+  
+                              <?php
+  
+                                for ($i = 1; $i <= 10; $i++) {
+  
+                                  echo "<option value=\"" . $i . "\">" . $i . "</option>";
+  
+                                }
+  
+                              ?>
+  
+  
+  
+                          </select>  
+  
+                      </div>                       
+											<?php
+										}
+										?>
 
-
-                    <div class="row-form"> 
-
-                        <span>Quantity</span>
-
-                        <select id="txt_qty" name="qty">
-
-                            <?php
-
-                              for ($i = 1; $i <= 10; $i++) {
-
-                                echo "<option value=\"" . $i . "\">" . $i . "</option>";
-
-                              }
-
-                            ?>
-
-
-
-                        </select>  
-
-                    </div>  
+ 
 
                     
 
@@ -326,15 +345,17 @@
 
                     <div class="row-form">
 
-                        <div class="wraporder">
+                        
+                        
+                        <?php 
+												if(strlen($varnostock) > 0){
+													echo $varnostock;
+												}else{
+													echo "<div class=\"wraporder\">".$varaddcart."<span class=\"sep\">|</span>".$varcheckout."</div>";
+												}
+												?>
 
-                            <?php echo $varaddcart;?>
-
-                            <span class="sep">|</span>
-
-                            <?php echo $varcheckout;?>
-
-                        </div>
+                        
 
                         <div class="wrapwishlist">
 
@@ -476,9 +497,13 @@
 
 									$stock = get_stock($rowrelated->id);
 
-									
+									if(isset($rowrelated->img)){
+										$varimg = "/mmcp/images/products/" . $rowrelated->img ;
+									}else{
+										$varimg = "/images/products/no-img-potrait.jpg";													
+									}
 
-									list($width, $height) = getimagesize("../../mmcp/images/products/" . $rowrelated->img."");
+									list($width, $height) = getimagesize("../..".$varimg);
 
 									if ($width > $height) {
 
@@ -502,11 +527,11 @@
 
 										<li>
 
-											<a class=\"linkproduct\" href=\"/products/list/?type=" . $rowrelated->type . "\">
+											<a class=\"linkproduct\" href=\"/products/detail/?type=" . $rowrelated->type . "&amp;id_product=" . $rowrelated->id . "\">
 
 												<div class=\"listitem ".$varclass."\">
 
-													<img src=\"/mmcp/images/products/" . $rowrelated->img . "\"  width=\"188\"/>
+													<img src=\"". $varimg ."\"  width=\"188\"/>
 
 												</div>
 
@@ -536,7 +561,7 @@
 
 											<div class=\"listitem ".$varclass."\">
 
-												<span><img src=\"/mmcp/images/products/" . $rowrelated->img . "\"  width=\"188\"/></span>
+												<span><img src=\"". $varimg ."\"  width=\"188\"/></span>
 
 											</div>
 

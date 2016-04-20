@@ -2,7 +2,7 @@
 $body = "redeem";
 $dir = "../../";
 $css = "main,simplebar,redeem";
-$js = "simplebar,redeem";
+$js = "simplebar,redeem,zoom.min";
 
 require_once($dir."core/conn/config.php");
 require_once($dir."core/conn/db.php");
@@ -90,8 +90,8 @@ if(isset($_GET["redeem_p"]) && is_numeric($_GET["redeem_p"])){
 					}					
 					
 					echo "
-					<div class=\"redeem_pic\">
-						<img src=\"".$thumbimg."\" width=\"310\"/>
+					<div class=\"redeem_pic listitem\">
+						<span><img src=\"".$thumbimg."\" width=\"310\"/></span>						
 					</div>
 					<div class=\"redeem_detail\">
 						<span class=\"pointtitle\">recent points</span>
