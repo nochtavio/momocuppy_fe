@@ -45,6 +45,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['status_login'])) {
     ?>
   </div>
   <div id="searchresult" <?php echo $varclasssearch;?>>
+    <div id="div-hidden-search"></div>
     <ul id="searchlist">
 
     	              

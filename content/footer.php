@@ -23,6 +23,8 @@
   
   //Search
   var ajax_request;
+  var total_search = 0;
+  
   $("#txt_search").on("input", function() {
     if($("#txt_search").val().length > 3){
       if(typeof ajax_request !== 'undefined'){
@@ -39,14 +41,11 @@
         dataType: 'json',
         beforeSend : function (){
           $('#searchlist').empty();
+          $('#div-hidden-search').empty();
         },
         success: function (result) {
           if (result['result'] === 's') {
             $.each(result['content'], function (key, value) {
-              var tipe = "Home Decor";
-              if(value['type'] == "2"){
-                tipe = "Accessories";
-              }
               var img = '/mmcp/images/products/' + value['img'];
               if(value['img'] == null){
                 img = "/images/products/no-img-potrait.jpg";
@@ -54,16 +53,20 @@
               $('#searchlist').append("\
                 <li>\
                   <a href='/products/detail/?type="+value['type']+"&id_product="+value['id']+"'>\
-                          <span class='img'><img src='" + img + "' width='45' height='72'/></span>\
+                          <span class='img'><img id='search_img_" + value['id'] + "' src='" + img + "' width='45' height='72'/></span>\
                     <div class='desc'>\
                           <span class='itemname'>" + value['product_name'] + "</span>\
-                          <span class='itemcat'>Category : " + tipe + "</span>\
                       <span class='itemprice'>IDR " + format_number(value['product_price']) + "</span>\
                     </div>\
                   </a>\
                 </li>\
               ");
+              $('#div-hidden-search').append("\
+                <input type='hidden' id='objectsearch" + total_search + "' value='" + value['id'] + "' />\
+              ");
+              total_search++;
             });
+            set_search_resolution();
             $('#searchresult').show();
           } else {
             $('#searchresult').hide();
@@ -75,6 +78,29 @@
     }
   });
   //End Search
+  
+  var set_search_resolution = function(){
+    var id = [];
+    for (var x = 0; x < total_search; x++)
+    {
+      id[x] = $('#objectsearch' + x).val();
+    }
+    var temp_height = 0;
+    var temp_width = 0;
+    $.each(id, function (x, val) {
+      setTimeout(function(){
+        //Check Image Resolution
+        temp_height = $('#search_img_'+val).height();
+        temp_width = $('#search_img_'+val).width();
+        if(temp_width <= temp_height){
+          $('#search_img_'+val).addClass("img-portrait");
+        }else{
+          $('#search_img_'+val).addClass("img-landscape");
+        }
+        //End Check Image Resolution
+      }, 250);
+    });
+  };
 </script>
 
 <?php 
