@@ -1,4 +1,34 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php 
+  $dir = "../";
+  
+  require_once($dir . "core/conn/config.php");
+  require_once($dir . "core/conn/db.php");
+  require_once($dir . "lib/newsletter/get_newsletter.php");
+  
+  //Get Detail Newsletter
+  if(isset($_GET["id"]) && is_numeric($_GET["id"])){
+    $id = $_GET["id"];
+  }else{
+    header("location:/");
+    exit;
+  }
+  
+  $data = get_newsletter($id);
+  if ($data["result"]) {
+    foreach ($data["result"] as $row) {
+      $banner1 = $row->banner1;
+      $link1 = $row->link1;
+      $banner2 = $row->banner2;
+      $link2 = $row->link2;
+    }
+  }else{
+    header("location:/");
+    exit;
+  }
+  //End Get Detail
+?>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -392,10 +422,10 @@
                                             
 
                                             	<!-- // Begin Module: Standard Header Image \\ -->
-                                            	<div style="font-family:Arial, Helvetica, sans-serif; font-size:12px;line-height:20px;margin-bottom:35px;">
+<!--                                            	<div style="font-family:Arial, Helvetica, sans-serif; font-size:12px;line-height:20px;margin-bottom:35px;">
                                               	Please do not reply to this email<br />
                                                 If you are unable to see the message below, click <a href="#" target="_blank" style="color:#f05364;"><strong>here</strong></a>
-                                              </div>
+                                              </div>-->
                                             	<!-- // End Module: Standard Header Image \\ -->
                                             
                                             </td>
@@ -425,8 +455,8 @@
 
                                                     <tr>
                                                       <td valign="top" class="bodyContent" style="text-align:center;">
-                                                      	<a href="#" target="_blank" title="banner 1"><img src="/images/layout/newsletter/blast/banner/1.jpg"/></a>
-                                                        <a href="#" target="_blank" title="banner 2"><img src="/images/layout/newsletter/blast/banner/2.jpg"/></a>                                                        
+                                                      	<a href="<?php echo $link1 ?>" target="_blank" title="banner 1"><img src="http://www.momocuppy.com/mmcp/images/newsletter/<?php echo $banner1 ?>"/></a>
+                                                        <a href="<?php echo $link2 ?>" target="_blank" title="banner 2"><img src="http://www.momocuppy.com/mmcp/images/newsletter/<?php echo $banner2 ?>"/></a>                                                        
                                                       </td>
                                                     </tr>
                                                     

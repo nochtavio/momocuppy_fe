@@ -416,6 +416,7 @@ class newsletter extends CI_Controller {
 
         //Data Message
         $data_message['title'] = $title;
+        $data_message['id'] = $id_newsletter;
         $data_message['banner1'] = $banner1;
         $data_message['link1'] = $link1;
         $data_message['banner2'] = $banner2;
