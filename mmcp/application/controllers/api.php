@@ -392,6 +392,7 @@ class api extends CI_Controller {
 
   function member_register() {
     $this->load->model('dashboard/model_member', '', TRUE);
+    $this->load->model('dashboard/model_subscriber', '', TRUE);
 
     $result = "s";
 
@@ -486,6 +487,13 @@ class api extends CI_Controller {
       $hash = $this->generate_hash($email);
       $referral = $this->generate_referral();
       $this->model_member->add_object($password, $firstname, $lastname, $phone, $email, $dob, $hash, $referral, $streetname, $postalcode, $country, $city);
+      
+      //Insert Subscriber
+      if($this->model_subscriber->get_object(0, $email)->num_rows() <= 0){
+        $this->model_subscriber->add_object($email);
+      }
+      //End Insert Subscriber
+      
       $this->session->unset_userdata('member_reg');
       $this->session->unset_userdata('member_err');
       $this->session->unset_userdata('member_firstname');

@@ -48,7 +48,7 @@ class model_subscriber extends CI_Model {
   function add_object($email) {
     $data = array(
       'email' => $email,
-      'active' => 0,
+      'active' => 1,
       'cretime' => date('Y-m-d H:i:s'),
       'creby' => $this->session->userdata('admin')
     );
