@@ -231,7 +231,7 @@ class model_product extends CI_Model {
     $this->db->join('ms_category mc', 'mc.id = dc.id_category');
     $this->db->where('mp.visible', 1);
     $this->db->like('mp.product_name', $keyword);
-    
+    $this->db->distinct();
     $query = $this->db->get();
     return $query;
   }

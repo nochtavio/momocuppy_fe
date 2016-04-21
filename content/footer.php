@@ -44,6 +44,7 @@
           $('#div-hidden-search').empty();
         },
         success: function (result) {
+          total_search = 0;
           if (result['result'] === 's') {
             $.each(result['content'], function (key, value) {
               var img = '/mmcp/images/products/' + value['img'];
@@ -53,7 +54,7 @@
               $('#searchlist').append("\
                 <li>\
                   <a href='/products/detail/?type="+value['type']+"&id_product="+value['id']+"'>\
-                          <span class='img'><img id='search_img_" + value['id'] + "' src='" + img + "' width='45' height='72'/></span>\
+                          <span class='img' style='width: 80px; height: 80px; position: relative;'><img id='search_img_" + value['id'] + "' src='" + img + "'/></span>\
                     <div class='desc'>\
                           <span class='itemname'>" + value['product_name'] + "</span>\
                       <span class='itemprice'>IDR " + format_number(value['product_price']) + "</span>\
@@ -78,6 +79,14 @@
     }
   });
   //End Search
+  
+  $(document).click(function() {
+    if($("#searchresult").is(':visible')){
+      total_search = 0;
+      $('#div-hidden-search').empty();
+      $('#searchresult').hide();
+    }
+  });
   
   var set_search_resolution = function(){
     var id = [];
