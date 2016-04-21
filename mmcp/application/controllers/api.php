@@ -37,7 +37,7 @@ class api extends CI_Controller {
           'protocol' => 'smtp',
           'smtp_host' => 'mail.momocuppy.com',
           'smtp_port' => 587,
-          'smtp_user' => 'do-not-reply@momocuppy.com', // change it to yours
+          'smtp_user' => 'momocuppy@momocuppy.com', // change it to yours
           'smtp_pass' => 'momocuppy2015', // change it to yours
           'mailtype' => 'html',
           'charset' => 'iso-8859-1',
@@ -46,7 +46,7 @@ class api extends CI_Controller {
 
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
-        $this->email->from('do-not-reply@momocuppy.com'); // change it to yours
+        $this->email->from('momocuppy@momocuppy.com'); // change it to yours
         $this->email->to('help@momocuppy.com'); // change it to yours
         $this->email->subject("[" . $email . "] " . $subject);
         $this->email->message($message);
@@ -510,7 +510,7 @@ class api extends CI_Controller {
         'protocol' => 'smtp',
         'smtp_host' => 'mail.momocuppy.com',
         'smtp_port' => 587,
-        'smtp_user' => 'do-not-reply@momocuppy.com', // change it to yours
+        'smtp_user' => 'momocuppy@momocuppy.com', // change it to yours
         'smtp_pass' => 'momocuppy2015', // change it to yours				
         'mailtype' => 'html',
         'charset' => 'iso-8859-1',
@@ -519,7 +519,7 @@ class api extends CI_Controller {
 
       $this->load->library('email', $config);
       $this->email->set_newline("\r\n");
-      $this->email->from('do-not-reply@momocuppy.com'); // change it to yours
+      $this->email->from('momocuppy@momocuppy.com'); // change it to yours
       $this->email->to($email); // change it to yours
       $this->email->subject("Welcome ".$firstname." to Momo Cuppy, please verify your account to continue shopping");
       
@@ -586,7 +586,7 @@ class api extends CI_Controller {
         'protocol' => 'smtp',
         'smtp_host' => 'mail.momocuppy.com',
         'smtp_port' => 587,
-        'smtp_user' => 'do-not-reply@momocuppy.com', // change it to yours
+        'smtp_user' => 'momocuppy@momocuppy.com', // change it to yours
         'smtp_pass' => 'momocuppy2015', // change it to yours				
         'mailtype' => 'html',
         'charset' => 'iso-8859-1',
@@ -595,7 +595,7 @@ class api extends CI_Controller {
 
       $this->load->library('email', $config);
       $this->email->set_newline("\r\n");
-      $this->email->from('do-not-reply@momocuppy.com'); // change it to yours
+      $this->email->from('momocuppy@momocuppy.com'); // change it to yours
       $this->email->to($email); // change it to yours
       $this->email->subject("Welcome ".$firstname." to Momo Cuppy, please verify your account to continue shopping");
 
@@ -807,7 +807,7 @@ class api extends CI_Controller {
         'protocol' => 'smtp',
         'smtp_host' => 'mail.momocuppy.com',
         'smtp_port' => 587,
-        'smtp_user' => 'do-not-reply@momocuppy.com', // change it to yours
+        'smtp_user' => 'momocuppy@momocuppy.com', // change it to yours
         'smtp_pass' => 'momocuppy2015', // change it to yours				
         'mailtype' => 'html',
         'charset' => 'iso-8859-1',
@@ -816,7 +816,7 @@ class api extends CI_Controller {
 
       $this->load->library('email', $config);
       $this->email->set_newline("\r\n");
-      $this->email->from('do-not-reply@momocuppy.com'); // change it to yours
+      $this->email->from('momocuppy@momocuppy.com'); // change it to yours
       $this->email->to($email); // change it to yours
       $this->email->subject("[Momo Cuppy] Your password for ".$email." has been resetted");
       
@@ -1304,7 +1304,7 @@ class api extends CI_Controller {
           'protocol' => 'smtp',
           'smtp_host' => 'mail.momocuppy.com',
           'smtp_port' => 587,
-          'smtp_user' => 'do-not-reply@momocuppy.com', // change it to yours
+          'smtp_user' => 'momocuppy@momocuppy.com', // change it to yours
           'smtp_pass' => 'momocuppy2015', // change it to yours				
           'mailtype' => 'html',
           'charset' => 'iso-8859-1',
@@ -1313,7 +1313,7 @@ class api extends CI_Controller {
 
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
-        $this->email->from('do-not-reply@momocuppy.com'); // change it to yours
+        $this->email->from('momocuppy@momocuppy.com'); // change it to yours
         $this->email->to($_SESSION["email"]); // change it to yours
         $this->email->subject("Momo Cuppy Order Confirmation (Order No ".$order['return_order']['order_no'].")");
 
