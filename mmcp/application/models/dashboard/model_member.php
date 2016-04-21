@@ -72,9 +72,10 @@ class model_member extends CI_Model {
     $query = "
       SELECT `mm`.*, 
       (
-        SELECT SUM(mp.point) 
-        FROM ms_point mp 
-        WHERE mm.id = mp.id_member AND DATE_ADD(mp.cretime, INTERVAL 3 MONTH) > NOW()
+        SELECT point 
+        FROM ms_point mp WHERE mm.id = mp.id_member
+        AND mp.cretime >= NOW() - INTERVAL 3 MONTH
+        LIMIT 0,1
       ) AS point_member,
       (
         SELECT COUNT(mo.id_member)

@@ -311,6 +311,16 @@ $(document).ready(function () {
     );
   };
   //End Function Get Object
+  
+  //Function Get Object
+  exportExcelWishlist = function ()
+  {
+    post(baseurl + 'dashboard/wishlist/export_excel', {
+      
+      }
+    );
+  };
+  //End Function Get Object
 
   //Initial Setup
   page = 1;
@@ -368,5 +378,11 @@ $(document).ready(function () {
   $('#btn_export').click(function(){
     exportExcel();
   });
+  
+  $('#btn_export_').click(function(){
+    exportExcelWishlist();
+  });
+  
+  
   //End User Action
 });

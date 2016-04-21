@@ -65,6 +65,7 @@
       </div>
       <button id="btn_search_" type="button" class="btn btn-default">Search</button>
       <button id="btn_export" type="button" class="btn btn-success">Export Excel</button>
+      <button id="btn_export_" type="button" class="btn btn-success">Export Wishlist</button>
       <div class="form-group">
         <div class="ajaxloading-tr"></div>
       </div>

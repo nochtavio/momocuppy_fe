@@ -66,6 +66,16 @@ class model_wishlist extends CI_Model {
     $query = $this->db->get_where('ms_wishlist', $filter);
     return $query;
   }
+  
+  function export_wishlist(){
+    $query = "
+      SELECT mp.product_name, COUNT(mw.id_product) AS total_wishlist
+      FROM ms_product mp
+      JOIN ms_wishlist mw ON mp.id = mw.id_product
+      GROUP BY mp.product_name
+    ";
+    return $this->db->query($query);
+  }
 }
 
 ?>

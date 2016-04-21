@@ -412,7 +412,7 @@ class newsletter extends CI_Controller {
         $this->email->set_newline("\r\n");
         $this->email->from('do-not-reply@momocuppy.com'); // change it to yours
         $this->email->to($email); // change it to yours
-        $this->email->subject("[Momocuppy] ".$title);
+        $this->email->subject("[Momo Cuppy] ".$title);
 
         //Data Message
         $data_message['title'] = $title;

@@ -87,4 +87,11 @@ class wishlist extends CI_Controller {
     }
   }
 
+  function export_excel(){
+    $this->load->library("Excel");
+    
+    $get_wishlist = $this->model_wishlist->export_wishlist();
+    
+    $this->excel->to_excel($get_wishlist, 'Export_Wishlist_'.date('dMy'));
+  }
 }
