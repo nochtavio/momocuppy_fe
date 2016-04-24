@@ -32,6 +32,7 @@ if($list){
 	$payment_name = strtoupper($list->payment_name);
 	$payment_account = strtoupper($list->payment_account);	
 	$payment_account_name = strtoupper($list->payment_account_name);
+  $discount  = $list->discount;
 	$shipping_cost  = $list->shipping_cost;
 	$cretime = $list->cretime;
 	
@@ -613,13 +614,17 @@ if($id_member != $memberid){
                                                               	<span style="float:left;width:150px;text-align:right;">IDR <?php echo number_format($totalamount);?></span>                                                              
                                                               </div>
                                                               <div style="clear:both;float:right;">
+                                                              	<span style="float:left;font-weight:bold;text-align:right;width:170px;">Discount :	</span>
+                                                              	<span style="float:left;width:150px;text-align:right;">IDR <?php echo number_format($totalamount * (1 - (($discount == null) ? 0 : $discount / 100)));?></span>                                                            
+                                                              </div>
+                                                              <div style="clear:both;float:right;">
                                                               	<span style="float:left;font-weight:bold;text-align:right;width:170px;">Shipping &amp; Handling :	</span>
                                                               	<span style="float:left;width:150px;text-align:right;">IDR <?php echo number_format($shipping_cost);?></span>                                                            
                                                               </div>  
                                                               <div style="clear:both;float:right;">
                                                               	<span style="float:left;font-weight:bold;text-align:right;width:170px;">Total :	</span>
-                                                              	<span style="float:left;width:150px;text-align:right;"><strong>IDR <?php echo number_format($totalamount + $shipping_cost);?></strong></span>                                                            
-                                                              </div>                                                                                                                                                                                     
+                                                              	<span style="float:left;width:150px;text-align:right;"><strong>IDR <?php echo number_format(($totalamount * (1 - (($discount == null) ? 0 : $discount / 100))) + $shipping_cost);?></strong></span>                                                            
+                                                              </div>                                                                                                                                                                                    
                                                               
                                                             </div>
 														</td>

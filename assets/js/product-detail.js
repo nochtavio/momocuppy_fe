@@ -55,10 +55,11 @@ $(document).ready(function(){
         if (result['result'] === 's')
         {
           $.each( result['content'], function( key, value ) {
-            product_name = (value['product_name'].length > 22) ? value['product_name'].substring(0, 22)+"..." : value['product_name'] ;
+            var temp = "["+value['color_name']+"] "+value['product_name'];
+            product_name = (temp.length > 22) ? temp.substring(0, 22)+"..." : "["+value['color_name']+"] "+value['product_name'] ;
             $('#shopbaglist').append("\
               <li>\
-                <div class='item'><a href='#' class='cancelprod' id='btn_remove" + value['id'] + "'>X</a><span title='"+value['product_name']+"' class='title_item'> ["+value['color_name']+"]"+product_name+"</span></div>\
+                <div class='item'><a href='#' class='cancelprod' id='btn_remove" + value['id'] + "'>X</a><span title='"+value['product_name']+"' class='title_item'>"+product_name+"</span></div>\
                 <div class='qty'> "+value['qty']+"</div>\
                 <div class='price'> "+format_number(value['product_price'])+"</div>\
               </li>\

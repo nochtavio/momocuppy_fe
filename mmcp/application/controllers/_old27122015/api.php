@@ -886,12 +886,12 @@ class api extends CI_Controller {
 
     if ($street_address == "" || $zip_code == "" || $country == "" || $city == "") {
       $result = "r2";
-      $result_message = "Shipping Address belum dipilih!";
+      $result_message = "Please choose your shipping address!";
     }
 
     if ($payment_name == "" || $payment_account == "") {
       $result = "r2";
-      $result_message = "Metode Pembayaran harus dipilih!";
+      $result_message = "Please choose your payment method!";
     }
     
     if ($shipping_cost < 0) {

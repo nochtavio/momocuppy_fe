@@ -1491,20 +1491,45 @@ span#loading{
 #searchresult ul li a span.img{
 
 	float:left;
-
-	width:55px;
+	height:60px;
+	position:relative;
+	overflow:hidden;
+	width:60px;
 
 }
+	
+	#searchresult ul li a span.img img.img-portrait{
+		position: absolute;
+		left: 50%;
+		top: 50%;			
+		width: 100%;
+		height: auto;	
+		-webkit-transform: translate(-50%,-50%) ;
+		-ms-transform: translate(-50%,-50%);	
+		transform: translate(-50%,-50%);				
+	}
+	#searchresult ul li a span.img img.img-landscape{
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		height: 100%;
+		width: auto;
+		-webkit-transform: translate(-50%,-50%);
+		-ms-transform: translate(-50%,-50%);
+		transform: translate(-50%,-50% );	
+		z-index:1;			
+	}		
 
 #searchresult ul li a .desc{
 
 	clear:none;
 
 	float:left;
+	margin-left:10px;
 
 	line-height:20px;
 
-	width:260px;
+	width:250px;
 
 }
 

@@ -76,6 +76,7 @@ class model_product extends CI_Model {
     );
 
     $this->db->insert('ms_product', $data);
+    $id_product = $this->db->insert_id();
     
     //add new category
     if(!empty($category)){

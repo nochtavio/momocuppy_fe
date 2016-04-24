@@ -330,6 +330,12 @@ p.logininfo{
 
 }
 
+.redeem_detail h1, h2, h3, h4{
+  clear: both;
+  float: left;
+  text-align: left;
+}
+
 .redeem_detail span.detail_cost{
 
 	color:#a8a8a8;	

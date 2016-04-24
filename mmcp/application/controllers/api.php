@@ -46,7 +46,7 @@ class api extends CI_Controller {
 
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
-        $this->email->from('momocuppy@momocuppy.com'); // change it to yours
+        $this->email->from('momocuppy@momocuppy.com', 'Momo Cuppy'); // change it to yours
         $this->email->to('help@momocuppy.com'); // change it to yours
         $this->email->subject("[" . $email . "] " . $subject);
         $this->email->message($message);
@@ -519,7 +519,7 @@ class api extends CI_Controller {
 
       $this->load->library('email', $config);
       $this->email->set_newline("\r\n");
-      $this->email->from('momocuppy@momocuppy.com'); // change it to yours
+      $this->email->from('momocuppy@momocuppy.com', 'Momo Cuppy'); // change it to yours
       $this->email->to($email); // change it to yours
       $this->email->subject("Welcome ".$firstname." to Momo Cuppy, please verify your account to continue shopping");
       
@@ -595,7 +595,7 @@ class api extends CI_Controller {
 
       $this->load->library('email', $config);
       $this->email->set_newline("\r\n");
-      $this->email->from('momocuppy@momocuppy.com'); // change it to yours
+      $this->email->from('momocuppy@momocuppy.com', 'Momo Cuppy'); // change it to yours
       $this->email->to($email); // change it to yours
       $this->email->subject("Welcome ".$firstname." to Momo Cuppy, please verify your account to continue shopping");
 
@@ -816,7 +816,7 @@ class api extends CI_Controller {
 
       $this->load->library('email', $config);
       $this->email->set_newline("\r\n");
-      $this->email->from('momocuppy@momocuppy.com'); // change it to yours
+      $this->email->from('momocuppy@momocuppy.com', 'Momo Cuppy'); // change it to yours
       $this->email->to($email); // change it to yours
       $this->email->subject("[Momo Cuppy] Your password for ".$email." has been resetted");
       
@@ -1258,22 +1258,22 @@ class api extends CI_Controller {
 
     if ($street_address == "" || $zip_code == "" || $country == "" || $city == "") {
       $result = "r2";
-      $result_message = "Shipping Address belum dipilih!";
+      $result_message = "Please choose your shipping address!";
     }
 
     if ($payment_name == "" || $payment_account == "") {
       $result = "r2";
-      $result_message = "Metode Pembayaran harus dipilih!";
+      $result_message = "Please choose payment method!";
     }
     
     if ($courier == "") {
       $result = "r2";
-      $result_message = "Jenis pengiriman belum dipilih!";
+      $result_message = "Please choose your shipping method!";
     }
     
     if ($shipping_cost < 0) {
       $result = "r2";
-      $result_message = "Jenis pengiriman belum dipilih!";
+      $result_message = "Please choose your shipping method!";
     }
 
     //Check Cart
@@ -1313,7 +1313,7 @@ class api extends CI_Controller {
 
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
-        $this->email->from('momocuppy@momocuppy.com'); // change it to yours
+        $this->email->from('momocuppy@momocuppy.com', 'Momo Cuppy'); // change it to yours
         $this->email->to($_SESSION["email"]); // change it to yours
         $this->email->subject("Momo Cuppy Order Confirmation (Order No ".$order['return_order']['order_no'].")");
 
@@ -1413,7 +1413,7 @@ class api extends CI_Controller {
 
     if ($street_address == "" || $zip_code == "" || $country == "" || $city == "") {
       $result = "r2";
-      $result_message = "Shipping Address belum dipilih!";
+      $result_message = "Please choose your Shipping Address!";
     }
     //End Check Parameter
 

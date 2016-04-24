@@ -20,7 +20,7 @@ if (!isset($id_newsletter)) {
     
     <script type="text/javascript" src="<?php echo base_url() . 'js/dashboard/jquery-1.11.0.min.js'; ?>"></script>
     <script>
-      var base_url = "http://www.momocuppy.fe/mmcp/";
+      var base_url = "http://www.momocuppy.com/mmcp/";
       
       $(document).ready(function(){
         $.ajax({

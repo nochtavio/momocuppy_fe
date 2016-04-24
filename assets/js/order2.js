@@ -265,6 +265,20 @@ $(document).ready(function () {
             $('#city').val(value['city']);
             $('#txt_id').val(value['id']);
           });
+          
+          $("input#phone").on("keypress keyup blur",function (event) {    
+						 $(this).val($(this).val().replace(/[^\d].+/, ""));
+							if ((event.which < 48 || event.which > 57)) {
+									event.preventDefault();
+							}
+					});  
+          
+          $("input#postalcode").on("keypress keyup blur",function (event) {    
+						 $(this).val($(this).val().replace(/[^\d].+/, ""));
+							if ((event.which < 48 || event.which > 57)) {
+									event.preventDefault();
+							}
+					});
         } else {
           $('#poptitle').text('Failed');
           $('#popmessage').text(result['message']);

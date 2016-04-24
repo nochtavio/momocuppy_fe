@@ -49,6 +49,13 @@ $(document).ready(function () {
             }
             //End Set Product Image
             
+            //Set Stock Color
+            var stock_color = '';
+            if(result['stock'][x] <= 3){
+              stock_color = "style='background-color: #FD635F;color: white;'";
+            }
+            //End Set Stock Color
+            
             //Set Detail
             var detail = "Created by <strong>" + result['creby'][x] + "</strong> <br/> on <strong>" + result['cretime'][x] + "</strong>";
             if (result['modby'][x] != null)
@@ -71,7 +78,7 @@ $(document).ready(function () {
               <td class='tdcenter'>" + img + "</td>\
               <td class='tdcenter'>" + result['product_name'][x] + "</td>\
               <td class='tdcenter'>" + result['product_point'][x] + "</td>\
-              <td class='tdcenter'>" + result['stock'][x] + "</td>\
+              <td class='tdcenter' "+stock_color+">" + result['stock'][x] + "</td>\
               <td class='tdcenter'>" + result['publish_date'][x] + "</td>\
               <td class='tdcenter'>" + detail + "</td>\
               <td class='tdcenter'>" + visible + "</td>\
@@ -372,11 +379,13 @@ $(document).ready(function () {
     format: "YYYY-MM-DD HH:mm:SS"
   });
   $('#txt_addproductdesc').trumbowyg({
-    btns: [['formatting'], ['bold', 'italic', 'underline']]
+    btns: [['formatting'], ['bold', 'italic', 'underline']],
+    removeformatPasted: true
   });
   
   $('#txt_editproductdesc').trumbowyg({
-    btns: [['formatting'], ['bold', 'italic', 'underline']]
+    btns: [['formatting'], ['bold', 'italic', 'underline']],
+    removeformatPasted: true
   });
   //End Initial Setup
 
