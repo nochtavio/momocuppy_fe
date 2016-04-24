@@ -50,7 +50,8 @@ class model_admin extends CI_Model {
     if ($active > -1) {
       $this->db->where('ma.active', $active);
     }
-
+    
+    $this->db->where('ma.username !=', $this->session->userdata('admin'));
     //End Set Filter
     //Set Order
     if ($order > 0) {

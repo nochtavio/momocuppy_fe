@@ -49,7 +49,7 @@ class model_color extends CI_Model {
     $data = array(
       'color_name' => $color_name,
       'color_code' => $color_code,
-      'visible' => 0,
+      'visible' => 1,
       'cretime' => date('Y-m-d H:i:s'),
       'creby' => $this->session->userdata('admin')
     );

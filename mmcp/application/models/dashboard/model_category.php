@@ -69,7 +69,7 @@ class model_category extends CI_Model {
       'img' => $img,
       'img_hover' => $img_hover,
       'position' => $position,
-      'visible' => 0,
+      'visible' => 1,
       'cretime' => date('Y-m-d H:i:s'),
       'creby' => $this->session->userdata('admin')
     );
