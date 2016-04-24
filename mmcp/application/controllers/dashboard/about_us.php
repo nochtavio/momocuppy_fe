@@ -65,6 +65,35 @@ class about_us extends CI_Controller {
       echo json_encode($data);
     }
   }
+  
+  function edit_image(){
+    $admin = $this->session->userdata('admin');
+    $checkadmin = $this->model_admin->check_admin($admin)->num_rows();
+    if ($checkadmin > 0) {
+      //Upload Image
+      $file_element_name = 'editfile';
+      $config['upload_path'] = './images/aboutus/';
+      $config['allowed_types'] = 'png';
+      $config['max_size'] = 1000;
+      $config['file_name'] = 'headerintro.png';
+      $config['overwrite'] = TRUE;
+
+      $this->upload->initialize($config);
+      //0 Wrong Param; 1 Valid Image; 2 No Image Uploaded
+      if (!$this->upload->do_upload($file_element_name)) {
+        $data['result'] = 'f';
+        $data['message'] = $this->upload->display_errors('', '');
+      } else {
+        $data['result'] = 's';
+        $data['message'] = 'Edit Image Success !';
+        $this->upload->data();
+      }
+      @unlink($_FILES[$file_element_name]);
+      //End Upload Image
+
+      echo json_encode($data);
+    }
+  }
 
   function get_object() {
     $admin = $this->session->userdata('admin');
@@ -76,6 +105,7 @@ class about_us extends CI_Controller {
 
         $data['id'] = $row->id;
         $data['content'] = $row->content;
+        $data['vimg'] = $row->vimg;
         $data['modtime'] = $row->modtime;
         $data['modby'] = $row->modby;
       }
