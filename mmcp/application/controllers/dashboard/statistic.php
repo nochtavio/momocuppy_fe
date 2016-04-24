@@ -91,6 +91,7 @@ class statistic extends CI_Controller {
       }
       //End Filter
       $get_object = $this->model_statistic->statistic_product($from, $to, $product_name);
+      $get_grand_total = $this->model_statistic->statistic_order_sales($from, $to, '', $product_name);
 
       if ($get_object->num_rows() > 0) {
         $temp = 0;
@@ -101,6 +102,7 @@ class statistic extends CI_Controller {
           $data['total_order'][$temp] = $row->total_order;
           $temp++;
         }
+        $data['grand_total'] = number_format($get_grand_total->row()->total_sales);
         $data['total'] = $temp;
       } else {
         $data['result'] = "f";
@@ -141,6 +143,7 @@ class statistic extends CI_Controller {
       }
       //End Filter
       $get_object = $this->model_statistic->statistic_order($from, $to, $email);
+      $get_grand_total = $this->model_statistic->statistic_order_sales($from, $to, $email);
 
       if ($get_object->num_rows() > 0) {
         $temp = 0;
@@ -151,6 +154,7 @@ class statistic extends CI_Controller {
           $data['total_order'][$temp] = $row->total_order;
           $temp++;
         }
+        $data['grand_total'] = number_format($get_grand_total->row()->total_sales);
         $data['total'] = $temp;
       } else {
         $data['result'] = "f";

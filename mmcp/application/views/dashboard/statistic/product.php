@@ -32,10 +32,15 @@
   </div>
 </div>
 
-
 <div class="row">
   <div class="col-lg-12">
     <div id="curve_chart" style="width: 100%; height: 500px"></div>
     <span id="span_error" style="color: red"></span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12" id="grand_total_container">
+    Total Penjualan: <span id="span_grand_total" style="font-weight: bold;">0</span>
   </div>
 </div>

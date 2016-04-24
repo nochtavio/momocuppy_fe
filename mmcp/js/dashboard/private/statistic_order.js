@@ -20,6 +20,7 @@ $(document).ready(function(){
       success: function (result) {
         if (result['result'] === 's'){
           $('#curve_chart').show();
+          $('#grand_total_container').show();
           $('#span_error').hide();
           var data = new google.visualization.DataTable();
           data.addColumn('string', 'Date');
@@ -37,9 +38,12 @@ $(document).ready(function(){
           var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
           chart.draw(data, options);
+          
+          $('#span_grand_total').html(result['grand_total']);
         }
         else{
           $('#curve_chart').hide();
+          $('#grand_total_container').hide();
           $('#span_error').show();
           $('#span_error').html(result['message']);
         }

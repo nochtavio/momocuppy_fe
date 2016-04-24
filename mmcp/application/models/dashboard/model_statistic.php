@@ -12,7 +12,7 @@ class model_statistic extends CI_Model {
       SELECT DATE_FORMAT(mc.crt_date,'%d %b %y') AS registered_date, COUNT(mm.id) AS total_member
       FROM ms_calendar mc
       LEFT JOIN ms_member mm ON DATE_FORMAT(mc.crt_date,'%d %b %y') = DATE_FORMAT(mm.cretime,'%d %b %y')
-      WHERE mc.crt_date BETWEEN '".date('Y-m-d', strtotime($from))."' AND '".date('Y-m-d', strtotime($to))."'
+      WHERE mc.crt_date BETWEEN '".date('Y-m-d', strtotime($from))."' AND '".date('Y-m-d', strtotime($to))." 23:59:59'
       GROUP BY registered_date
       ORDER BY mc.crt_date ASC
     ";
@@ -26,8 +26,9 @@ class model_statistic extends CI_Model {
       JOIN ms_order mo ON mo.id = dor.id_order
       JOIN dt_product dp ON dp.id = dor.id_dt_product
       JOIN ms_product mp ON mp.id = dp.id_product
-      WHERE (mo.cretime BETWEEN '".date('Y-m-d', strtotime($from))."' AND '".date('Y-m-d', strtotime($to))."')
+      WHERE (mo.cretime BETWEEN '".date('Y-m-d', strtotime($from))."' AND '".date('Y-m-d', strtotime($to))." 23:59:59')
       AND mp.product_name LIKE '%".$product_name."%'
+      AND mo.status > 2 AND mo.status < 6
       GROUP BY mp.product_name
       ORDER BY mo.cretime ASC
       LIMIT 0,10
@@ -42,8 +43,9 @@ class model_statistic extends CI_Model {
       JOIN ms_order mo ON mo.id = dor.id_order
       JOIN dt_product dp ON dp.id = dor.id_dt_product
       JOIN ms_product mp ON mp.id = dp.id_product
-      WHERE (mo.cretime BETWEEN '".date('Y-m-d', strtotime($from))."' AND '".date('Y-m-d', strtotime($to))."')
+      WHERE (mo.cretime BETWEEN '".date('Y-m-d', strtotime($from))."' AND '".date('Y-m-d', strtotime($to))." 23:59:59)
       AND mp.product_name LIKE '%".$product_name."%'
+      AND mo.status > 2 AND mo.status < 6
       GROUP BY mp.product_name, mp.product_price
       ORDER BY mo.cretime ASC
       LIMIT 0,10
@@ -64,9 +66,25 @@ class model_statistic extends CI_Model {
           AND mo.status > 2 AND mo.status < 6
         ) AS data_order
         ON DATE_FORMAT(mc.crt_date,'%d %b %y') = DATE_FORMAT(data_order.cretime,'%d %b %y')
-      WHERE (mc.crt_date BETWEEN '".date('Y-m-d', strtotime($from))."' AND '".date('Y-m-d', strtotime($to))."')
+      WHERE (mc.crt_date BETWEEN '".date('Y-m-d', strtotime($from))."' AND '".date('Y-m-d', strtotime($to))." 23:59:59')
       GROUP BY order_date
       ORDER BY mc.crt_date ASC
+    ";
+    return $this->db->query($query);
+  }
+  
+  function statistic_order_sales($from, $to, $email="", $product_name=""){
+    $query = "
+      SELECT SUM(price*qty) AS total_sales
+      FROM dt_order dt
+      JOIN ms_order mo ON mo.id = dt.id_order
+      JOIN ms_member mm ON mm.id = mo.id_member
+      JOIN dt_product dp ON dp.id = dt.id_dt_product
+      JOIN ms_product mp ON mp.id = dp.id_product
+      WHERE mm.email LIKE '%".$email."%' 
+      AND mp.product_name LIKE '%".$product_name."%'
+      AND STATUS > 2 AND STATUS < 6
+      AND (mo.cretime BETWEEN '".date('Y-m-d', strtotime($from))."' AND '".date('Y-m-d', strtotime($to))." 23:59:59')
     ";
     return $this->db->query($query);
   }
@@ -80,7 +98,7 @@ class model_statistic extends CI_Model {
       JOIN ms_product mp ON mp.id = dp.id_product
       JOIN dt_category dc ON dc.id_product = dp.id_product
       JOIN ms_category mc ON mc.id = dc.id_category
-      WHERE mo.cretime BETWEEN '".date('Y-m-d', strtotime($from))."' AND '".date('Y-m-d', strtotime($to))."'
+      WHERE mo.cretime BETWEEN '".date('Y-m-d', strtotime($from))."' AND '".date('Y-m-d', strtotime($to))." 23:59:59'
       AND mo.status > 2 
       AND mo.status < 6
       GROUP BY mc.category_name
@@ -97,7 +115,7 @@ class model_statistic extends CI_Model {
         SELECT * FROM ms_order mo WHERE mo.status > 2 AND mo.status< 6
         ) AS data_order
         ON DATE_FORMAT(mc.crt_date,'%d %b %y') = DATE_FORMAT(data_order.cretime,'%d %b %y')
-      WHERE (mc.crt_date BETWEEN '".date('Y-m-d', strtotime($from))."' AND '".date('Y-m-d', strtotime($to))."')
+      WHERE (mc.crt_date BETWEEN '".date('Y-m-d', strtotime($from))."' AND '".date('Y-m-d', strtotime($to))." 23:59:59')
       GROUP BY order_date
       ORDER BY mc.crt_date ASC
     ";
