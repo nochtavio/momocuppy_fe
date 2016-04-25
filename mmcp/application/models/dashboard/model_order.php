@@ -636,7 +636,7 @@ class model_order extends CI_Model {
     $year = date('y');
     $month = date('m');
     
-    $this->db->where('cretime >=', date("Y-m-d 00:00:00"));
+    $this->db->where('cretime >=', date("Y-m-01 00:00:00"));
     $this->db->where('cretime <=', date("Y-m-d 23:59:59"));
     $this->db->from('ms_order');
     $total_order = $this->db->count_all_results();
@@ -649,6 +649,29 @@ class model_order extends CI_Model {
     }
     
     $order_no = $year.$month.$total_order;
+    
+    $this->db->select('order_no');
+    $this->db->from('ms_order');
+    $this->db->where('order_no', $order_no);
+    $check_order_no = $this->db->get();
+    
+    while($check_order_no->num_rows() > 0){
+      $total_order++;
+      if($total_order < 10){
+        $total_order = '000'.$total_order;
+      }else if($total_order < 100){
+        $total_order = '00'.$total_order;
+      }else if($total_order < 1000){
+        $total_order = '0'.$total_order;
+      }
+      
+      $order_no = $year.$month.$total_order;
+      
+      $this->db->select('order_no');
+      $this->db->from('ms_order');
+      $this->db->where('order_no', $order_no);
+      $check_order_no = $this->db->get();
+    }
 
     return $order_no;
   }
