@@ -89,6 +89,7 @@ $(document).ready(function () {
               <td class='tdcenter'>" + (parseInt(no) + parseInt(x)) + "</td>\
               <td class='tdcenter'>" + img + "</td>\
               <td class='tdcenter'>" + result['product_name'][x] + "</td>\
+              <td class='tdcenter'>" + result['type'][x] + "</td>\
               <td class='tdcenter'>" + result['category'][x] + "</td>\
               <td class='tdcenter'>" + result['color'][x] + "</td>\
               <td class='tdcenter'>" + result['product_price'][x] + "</td>\
@@ -122,7 +123,7 @@ $(document).ready(function () {
         {
           $('#tablecontent').append("\
           <tr>\
-            <td colspan='11'><strong style='color:red;'>" + result['message'] + "</strong></td>\
+            <td colspan='12'><strong style='color:red;'>" + result['message'] + "</strong></td>\
           </tr>");
         }
       }
@@ -144,6 +145,14 @@ $(document).ready(function () {
     }    
     var position = $('#txt_addposition').val();
     var category = $('#sel_addcategory').val();
+    var visible = 0;
+    if ($('#chk_visible').prop('checked')) {
+      visible = 1;
+    }
+    var sale = 0;
+    if ($('#chk_sale').prop('checked')) {
+      sale = 1;
+    }
     $.ajax({
       url: baseurl + 'dashboard/product/check_field',
       type: 'POST',
@@ -160,9 +169,11 @@ $(document).ready(function () {
       success: function (result) {
         if (result['result'] === 's')
         {
-          $.ajax({
+          $.ajaxFileUpload({
             url: baseurl + 'dashboard/product/add_object',
-            type: 'POST',
+            secureuri: false,
+            fileElementId: 'userfile',
+            dataType: 'json',
             data:
               {
                 product_name: product_name,
@@ -171,10 +182,12 @@ $(document).ready(function () {
                 product_weight: product_weight,
                 publish_date: publish_date,
                 position: position,
-                category: category
+                category: category,
+                visible: visible,
+                sale: sale
               },
-            dataType: 'json',
-            success: function (result) {
+            success: function (result)
+            {
               if (result['result'] === "s")
               {
                 document.location.href = '/mmcp/dashboard/detail_product/?id='+result['id_product'];

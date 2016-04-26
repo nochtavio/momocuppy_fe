@@ -53,6 +53,7 @@ class model_detail_product extends CI_Model {
       'id_product' => $id_product,
       'id_color' => $id_color,
       'stock' => $stock,
+      'visible' => 1,
       'cretime' => date('Y-m-d H:i:s'),
       'creby' => $this->session->userdata('admin')
     );

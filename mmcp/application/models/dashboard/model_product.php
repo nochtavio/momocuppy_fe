@@ -61,16 +61,16 @@ class model_product extends CI_Model {
     return $query;
   }
 
-  function add_object($product_name, $product_price, $product_desc, $product_weight, $publish_date, $position, $category) {
+  function add_object($product_name, $product_price, $product_desc, $product_weight, $publish_date, $position, $category, $visible, $sale) {
     $data = array(
       'product_name' => $product_name,
       'product_price' => $product_price,
       'product_desc' => $product_desc,
       'product_weight' => $product_weight,
       'publish_date' => $publish_date,
-      'sale' => 0,
+      'sale' => $sale,
       'position' => $position,
-      'visible' => 0,
+      'visible' => $visible,
       'cretime' => date('Y-m-d H:i:s'),
       'creby' => $this->session->userdata('admin')
     );
@@ -80,6 +80,9 @@ class model_product extends CI_Model {
     
     //add new category
     if(!empty($category)){
+      if(!is_array($category)){
+        $category = explode(",", $category);
+      }
       foreach ($category as $cat) {
         $data = array(
           'id_category' => $cat,
@@ -114,6 +117,9 @@ class model_product extends CI_Model {
 
     //add new category
     if(!empty($category)){
+      if(!is_array($category)){
+        $category = explode(",", $category);
+      }
       foreach ($category as $cat) {
         $data = array(
           'id_category' => $cat,

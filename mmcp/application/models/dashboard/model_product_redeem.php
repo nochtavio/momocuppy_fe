@@ -53,19 +53,22 @@ class model_product_redeem extends CI_Model {
     return $query;
   }
 
-  function add_object($product_name, $product_point, $product_desc, $publish_date, $stock) {
+  function add_object($product_name, $product_point, $product_desc, $publish_date, $stock, $visible) {
     $data = array(
       'product_name' => $product_name,
       'product_point' => $product_point,
       'product_desc' => $product_desc,
       'publish_date' => $publish_date,
       'stock' => $stock,
-      'visible' => 0,
+      'visible' => $visible,
       'cretime' => date('Y-m-d H:i:s'),
       'creby' => $this->session->userdata('admin')
     );
 
     $this->db->insert('ms_product_redeem', $data);
+    $id_product = $this->db->insert_id();
+    
+    return $id_product;
   }
 
   function edit_object($id, $product_name, $product_point, $product_desc, $publish_date, $stock) {

@@ -7,6 +7,7 @@ class product_redeem extends CI_Controller {
     parent::__construct();
     $this->load->model('dashboard/model_admin', '', TRUE);
     $this->load->model('dashboard/model_product_redeem', '', TRUE);
+    $this->load->model('dashboard/model_detail_product_redeem_img', '', TRUE);
   }
 
   function index() {
@@ -181,10 +182,80 @@ class product_redeem extends CI_Controller {
       if ($this->input->post('stock')) {
         $stock = $this->input->post('stock');
       }
+      
+      $visible = 0;
+      if ($this->input->post('visible', TRUE)) {
+        $visible = $this->input->post('visible', TRUE);
+      }
       //End Get Post Request
+      
+      //Check Image Validation
+      $lastid = $this->model_detail_product_redeem_img->get_last_id()->result();
+      if ($lastid) {
+        foreach ($lastid as $row) {
+          $newid = $row->id + 1;
+          $img = "product_redeem" . $newid . ".jpg";
+        }
+      } else {
+        $img = "product_redeem1.jpg";
+      }
+      
+      $check_element = 'userfile';
+      $config['upload_path'] = './images/products/';
+      $config['allowed_types'] = 'jpg';
+      $config['max_size'] = 600;
+      $config['file_name'] = $img;
+      $config['overwrite'] = TRUE;
 
-      $data['result'] = "s";
-      $this->model_product_redeem->add_object($product_name, $product_point, $product_desc, $publish_date, $stock);
+      $this->upload->initialize($config);
+      $uplst = false;
+      if (!$this->upload->do_upload($check_element)) {
+        $uplst = false;
+        $data['message'] = $this->upload->display_errors('', '');
+      } else {
+        $uplst = true;
+      }
+      //End Check Image Validation
+      
+      if($uplst){
+        $data['result'] = "s";
+        $data['id_product'] = $this->model_product_redeem->add_object($product_name, $product_point, $product_desc, $publish_date, $stock, $visible);
+        
+        //Upload Image
+        //Check Directory
+        if (!is_dir('images/products/'.$data['id_product'])){
+          mkdir('./images/products/'.$data['id_product'].'/', 0777, true);
+        }
+        
+        $file_element_name = 'userfile';
+        $config['upload_path'] = './images/products/'.$data['id_product'].'/';
+        $config['allowed_types'] = 'jpg';
+        $config['max_size'] = 600;
+        $config['file_name'] = $img;
+        $config['overwrite'] = TRUE;
+
+        $this->upload->initialize($config);
+        $uplst = false;
+        if (!$this->upload->do_upload($file_element_name)) {
+          $uplst = false;
+          $data['message'] = $this->upload->display_errors('', '');
+        } else {
+          $uplst = true;
+          $this->upload->data();
+        }
+        @unlink($_FILES[$file_element_name]);
+
+        $saved_img = $data['id_product'].'/'.$img;
+        if ($uplst) {
+          $data['result'] = "s";
+          $this->model_detail_product_redeem_img->add_object($data['id_product'], $saved_img);
+        } else {
+          $data['result'] = "f";
+        }
+        //End Upload Image
+      }else{
+        $data['result'] = "f";
+      }
 
       echo json_encode($data);
     }

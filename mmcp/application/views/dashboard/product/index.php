@@ -79,6 +79,7 @@
             <th>Product Image</th>
             <th>Product Name</th>
             <th>Category</th>
+            <th>Type</th>
             <th>Color</th>
             <th>Product Price</th>
             <th>Stock</th>

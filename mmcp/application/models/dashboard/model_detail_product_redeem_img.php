@@ -54,6 +54,7 @@ class model_detail_product_redeem_img extends CI_Model {
     $data = array(
       'id_product' => $id_product,
       'img' => $img,
+      'visible' => 1,
       'cretime' => date('Y-m-d H:i:s'),
       'creby' => $this->session->userdata('admin')
     );

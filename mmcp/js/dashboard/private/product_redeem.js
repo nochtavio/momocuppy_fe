@@ -124,6 +124,10 @@ $(document).ready(function () {
       publish_date = publish_date_raw.year()+'-'+(publish_date_raw.month()+1)+'-'+publish_date_raw.date()+' '+publish_date_raw.hour()+':'+publish_date_raw.minute()+':'+publish_date_raw.second();
     }    
     var stock = $('#txt_addstock').val();
+    var visible = 0;
+    if ($('#chk_visible').prop('checked')) {
+      visible = 1;
+    }
     $.ajax({
       url: baseurl + 'dashboard/product_redeem/check_field',
       type: 'POST',
@@ -139,19 +143,22 @@ $(document).ready(function () {
       success: function (result) {
         if (result['result'] === 's')
         {
-          $.ajax({
+          $.ajaxFileUpload({
             url: baseurl + 'dashboard/product_redeem/add_object',
-            type: 'POST',
+            secureuri: false,
+            fileElementId: 'userfile',
+            dataType: 'json',
             data:
               {
                 product_name: product_name,
                 product_point: product_point,
                 product_desc: product_desc,
                 publish_date: publish_date,
-                stock: stock
+                stock: stock,
+                visible: visible
               },
-            dataType: 'json',
-            success: function (result) {
+            success: function (result)
+            {
               if (result['result'] === "s")
               {
                 $('#modal_add').modal('hide');

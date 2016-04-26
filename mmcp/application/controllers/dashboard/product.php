@@ -7,6 +7,7 @@ class product extends CI_Controller {
     parent::__construct();
     $this->load->model('dashboard/model_admin', '', TRUE);
     $this->load->model('dashboard/model_product', '', TRUE);
+    $this->load->model('dashboard/model_detail_product_img', '', TRUE);
     $this->load->model('dashboard/model_detail_product', '', TRUE);
     $this->load->model('dashboard/model_detail_category', '', TRUE);
     $this->load->model('dashboard/model_type', '', TRUE);
@@ -98,13 +99,21 @@ class product extends CI_Controller {
           
           $category = $this->model_detail_category->generate_dt_category($row->id);
           $temp_category = "";
+          $temp_type = "";
           if($category->num_rows() > 0){
             foreach ($category->result() as $cat) {
-              $temp_category = $temp_category.'['.$cat->type_name.'] '.$cat->category_name.', ';
+              if (strpos($temp_category, $cat->category_name) === false) {
+                $temp_category = $temp_category.$cat->category_name.', ';
+              }
+              if (strpos($temp_type, $cat->type_name) === false) {
+                $temp_type = $temp_type.$cat->type_name.', ';
+              }
             }
             $data['category'][$temp] = substr($temp_category, 0, -2);
+            $data['type'][$temp] = substr($temp_type, 0, -2);
           }else{
             $data['category'][$temp] = '-';
+            $data['type'][$temp] = '-';
           }
           
           $color = $this->model_detail_product->get_object(0, $row->id);
@@ -249,11 +258,89 @@ class product extends CI_Controller {
       if ($this->input->post('category', TRUE)) {
         $category = $this->input->post('category', TRUE);
       }
+      
+      $visible = 0;
+      if ($this->input->post('visible', TRUE)) {
+        $visible = $this->input->post('visible', TRUE);
+      }
+      
+      $sale = 0;
+      if ($this->input->post('sale', TRUE)) {
+        $sale = $this->input->post('sale', TRUE);
+      }
       //End Get Post Request
+      
+      //Check Image Validation
+      $lastid = $this->model_detail_product_img->get_last_id()->result();
+      if ($lastid) {
+        foreach ($lastid as $row) {
+          $newid = $row->id + 1;
+          $img = "product" . $newid . ".jpg";
+        }
+      } else {
+        $img = "product1.jpg";
+      }
+      
+      $check_element = 'userfile';
+      $config['upload_path'] = './images/products/';
+      $config['allowed_types'] = 'jpg';
+      $config['max_size'] = 600;
+      $config['file_name'] = $img;
+      $config['overwrite'] = TRUE;
 
-      $data['result'] = "s";
-      $data['id_product'] = $this->model_product->add_object($product_name, $product_price, $product_desc, $product_weight, $publish_date, $position, $category);
-      $this->session->set_flashdata('add_product_message', 'You have succesfully add product to database. Please add stock for each color now.');
+      $this->upload->initialize($config);
+      $uplst = false;
+      if (!$this->upload->do_upload($check_element)) {
+        $uplst = false;
+        $data['message'] = $this->upload->display_errors('', '');
+      } else {
+        $uplst = true;
+      }
+      //End Check Image Validation
+      
+      if($uplst){
+        $data['result'] = "s";
+        $data['id_product'] = $this->model_product->add_object($product_name, $product_price, $product_desc, $product_weight, $publish_date, $position, $category, $visible, $sale);
+
+        //Upload Image
+
+        //Check Directory
+        if (!is_dir('images/products/'.$data['id_product'])){
+          mkdir('./images/products/'.$data['id_product'].'/', 0777, true);
+        }
+
+        $file_element_name = 'userfile';
+        $config['upload_path'] = './images/products/'.$data['id_product'].'/';
+        $config['allowed_types'] = 'jpg';
+        $config['max_size'] = 600;
+        $config['file_name'] = $img;
+        $config['overwrite'] = TRUE;
+
+        $this->upload->initialize($config);
+        $uplst = false;
+        if (!$this->upload->do_upload($file_element_name)) {
+          $uplst = false;
+          $data['message'] = $this->upload->display_errors('', '');
+        } else {
+          $uplst = true;
+          $this->upload->data();
+        }
+        @unlink($_FILES[$file_element_name]);
+
+        $saved_img = $data['id_product'].'/'.$img;
+        if ($uplst) {
+          $data['result'] = "s";
+          $this->model_detail_product_img->add_object($data['id_product'], $saved_img);
+        } else {
+          $data['result'] = "f";
+        }
+        //End Upload Image
+
+        $this->session->set_flashdata('add_product_message', 'You have succesfully add product to database. Please add stock for each color now.');
+      }else{
+        $data['result'] = "f";
+      }
+      
       echo json_encode($data);
     }
   }

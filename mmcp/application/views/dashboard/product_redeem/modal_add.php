@@ -14,6 +14,15 @@
             </div>
           </div>
           <div class="form-group">
+            <label class="col-sm-4 control-label" style="padding-top: 0;">Product Image</label>
+            <div class="col-sm-6">
+              <label class="label-no col-xs-12">
+                <input type="file" name="userfile" id="userfile" size="20" style="margin-bottom: 4px;" />
+                <em>Only .jpg is allowed (1227x757 pixels)</em> <br/>
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
             <label for="txt_addproductpoint" class="col-sm-4 control-label">Product Point</label>
             <div class="col-sm-6">
               <input type="text" class="form-control" id="txt_addproductpoint" placeholder="Input product point ...">
@@ -36,6 +45,16 @@
             <label for="txt_addstock" class="col-sm-4 control-label">Stock</label>
             <div class="col-sm-6">
               <input type="text" class="form-control" id="txt_addstock" placeholder="Input product stock ...">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="chk_visible" class="col-sm-4 control-label">Status</label>
+            <div class="col-sm-6">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" id="chk_visible" value=""> Visible
+                </label>
+              </div>
             </div>
           </div>
           <div class="alert alert-warning modal_warning" role="alert"></div>
