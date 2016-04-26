@@ -52,7 +52,7 @@ class excel {
         }
       }
     }
-    echo '<table><tr>';
+    echo '<table><tr valign="top">';
     foreach ($h as $key) {
       $key = ucwords($key);
       echo '<th>' . $key . '</th>';
@@ -60,7 +60,7 @@ class excel {
     echo '</tr>';
 
     foreach ($array as $row) {
-      echo '<tr>';
+      echo '<tr valign="top">';
       if(is_array($row)){
         foreach ($row as $val){
           $this->writeRow($val);

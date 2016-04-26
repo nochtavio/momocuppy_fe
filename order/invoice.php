@@ -11,17 +11,20 @@ require_once($dir . "lib/member/order_history.php");
 //Maintain Session
 session_start();
 
-$order_no = $_SESSION["order_no"];
-$memberid = get_memberid($_SESSION["email"]);
-if(!$memberid){
-	header("location:/order/");
-	exit;
+if(isset($_GET['id']) && is_numeric($_GET['id'])){
+  $order_id = $_GET['id'];
+  $list = order_history_summary_id($order_id);
+}else{
+  $order_no = $_SESSION["order_no"];
+  $memberid = get_memberid($_SESSION["email"]);
+  if(!$memberid){
+    header("location:/order/");
+    exit;
+  }
+  $list = order_history_summary($order_no);
 }
 
 
-
-
-$list = order_history_summary($order_no);
 if($list){
 	$firstname = $list->firstname;
 	$lastname = $list->lastname;
@@ -42,7 +45,7 @@ if($list){
 	exit;		
 }
 
-if($id_member != $memberid){
+if(($id_member != $memberid) && !isset($order_id)){
 	header("location:/order/");
 	exit;	
 }
@@ -532,7 +535,11 @@ if($id_member != $memberid){
                                                               
                                                               
                                                               <?php 
-																															$detail = order_history_detail($memberid,$order_no);
+                                                              if(isset($order_id)){
+                                                                $detail = order_history_detail_id($order_id);
+                                                              }else{
+                                                                $detail = order_history_detail($memberid,$order_no);
+                                                              }
 																															if($detail){
 																																$totalamount = 0;
 																																foreach($detail as $row){

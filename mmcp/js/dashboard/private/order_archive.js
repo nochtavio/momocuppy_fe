@@ -7,6 +7,7 @@ $(document).ready(function () {
     $('#paging').empty();
     var pagesize = $('#pagesize').val();
     //Filter
+    var type = $('#sel_type').val();
     var email = $('#txt_email').val();
     var street_address = $('#txt_street_address').val();
     var zip_code = $('#txt_zip_code').val();
@@ -15,6 +16,16 @@ $(document).ready(function () {
     var order_no = $('#txt_order_no').val();
     var resi_no = $('#txt_resi_no').val();
     var status = $('#sel_status').val();
+    var cretime_from_raw = $('#txt_cretime_from').data("DateTimePicker").date();
+    var cretime_from = '';
+    if(cretime_from_raw != null){
+      cretime_from = cretime_from_raw.year()+'-'+(cretime_from_raw.month()+1)+'-'+cretime_from_raw.date();
+    }
+    var cretime_to_raw = $('#txt_cretime_to').data("DateTimePicker").date();
+    var cretime_to = '';
+    if(cretime_to_raw != null){
+      cretime_to = cretime_to_raw.year()+'-'+(cretime_to_raw.month()+1)+'-'+cretime_to_raw.date();
+    }
     var order = $('#sel_order').val();
     //End Filter
     $.ajax({
@@ -24,6 +35,7 @@ $(document).ready(function () {
         {
           page: page,
           size: pagesize,
+          type: type,
           email: email,
           street_address: street_address,
           zip_code: zip_code,
@@ -32,6 +44,8 @@ $(document).ready(function () {
           order_no:order_no,
           resi_no:resi_no,
           status:status,
+          cretime_from: cretime_from,
+          cretime_to: cretime_to,
           order: order
         },
       dataType: 'json',
@@ -53,10 +67,6 @@ $(document).ready(function () {
 
           for (var x = 0; x < result['total']; x++)
           {
-            //Set Address
-            var address = result['street_address'][x] + ", " + result['zip_code'][x] + "<br/>" + result['country'][x] + "<br/>" + result['city'][x] + "";
-            //End Set Address
-            
             //Set Detail
             var detail = "Created by <strong>" + result['creby'][x] + "</strong> <br/> on <strong>" + result['cretime'][x] + "</strong>";
             if (result['modby'][x] != null)
@@ -110,24 +120,34 @@ $(document).ready(function () {
             //End Set Paid Information
             
             //Set Order Detail
-            var order = "\
-              <strong>Order No: </strong><a id='btn_detail" + result['id'][x] + "'>" + result['order_no'][x] + "</a> <br/>\
-              <strong>Payment: </strong>" + result['payment_name'][x] + " <br/>\
-              <span style='float:left'><strong>Voucher: </strong>" + result['voucher_code'][x] +" "+ voucher_title + " </span><br/>\
-              <strong>Address: </strong>" + address + " <br/>\
-              <strong>No Resi: </strong>" + result['resi_no'][x] + " <br/> <br/>\
-              <strong>Payment Information: </strong> <br/> \
-              "+paid+"\
-            ";
+            var order = "";
+            if(type == 0){
+              order = "\
+                <strong>Order No: </strong><a id='btn_detail" + result['id'][x] + "'>" + result['order_no'][x] + "</a> <br/>\
+                <strong>Payment: </strong>" + result['payment_name'][x] + " <br/>\
+                <strong>Grand Total: </strong><span style='font-weight:bold;color:#009900'>"+result['grandtotal'][x]+"</span> <br/>\
+                <span style='float:left'><strong>Voucher: </strong>" + result['voucher_code'][x] +" "+ voucher_title + " </span><br/>\
+                <strong>No Resi: </strong>" + result['resi_no'][x] + " <br/> <br/>\
+                <strong>Payment Information: </strong> <br/> \
+                "+paid+"\
+              ";
+            }else{
+              order = "\
+                <strong>Order No: </strong>" + result['order_no'][x] + " <br/>\
+                <strong>Product Name: </strong>" + result['product_name'][x] + "<br/>\
+                <strong>Point: </strong><span style='font-weight:bold;color:#009900'>"+result['grandtotal'][x]+"</span> <br/>\
+                <strong>No Resi: </strong>" + result['resi_no'][x] + "\
+              ";
+            }
             //End Set Order Detail
 
             $('#tablecontent').append("\
             <tr>\
               <td class='tdcenter'>" + (parseInt(no) + parseInt(x)) + "</td>\
               <td class='tdcenter'>" + result['email'][x] + "</td>\
+              <td class='tdcenter'>" + detail + "</td>\
               <td>" + order + "</td>\
               <td class='tdcenter'><span style='font-weight:bold;color:"+status_color+"'>" + result['status'][x] + "</span></td>\
-              <td class='tdcenter'>" + detail + "</td>\
               <td class='tdcenter'>\
                 <a id='btn_archive" + result['id'][x] + "' class='fa fa-archive'></a> &nbsp;\
               </td>\
@@ -339,13 +359,88 @@ $(document).ready(function () {
   };
   //End Function Set Detail
   
+  function post(path, parameters) {
+    var form = $('<form></form>');
+
+    form.attr("method", "post");
+    form.attr("action", path);
+
+    $.each(parameters, function(key, value) {
+      var field = $('<input></input>');
+
+      field.attr("type", "hidden");
+      field.attr("name", key);
+      field.attr("value", value);
+
+      form.append(field);
+    });
+
+    // The form needs to be a part of the document in
+    // order for us to be able to submit it.
+    $(document.body).append(form);
+    form.submit();
+  }
+  
+  //Function Get Object
+  exportExcel = function ()
+  {
+    //Filter
+    var type = $('#sel_type').val();
+    var email = $('#txt_email').val();
+    var street_address = $('#txt_street_address').val();
+    var zip_code = $('#txt_zip_code').val();
+    var country = $('#txt_country').val();
+    var city = $('#txt_city').val();
+    var order_no = $('#txt_order_no').val();
+    var resi_no = $('#txt_resi_no').val();
+    var status = $('#sel_status').val();
+    var cretime_from_raw = $('#txt_cretime_from').data("DateTimePicker").date();
+    var cretime_from = '';
+    if(cretime_from_raw != null){
+      cretime_from = cretime_from_raw.year()+'-'+(cretime_from_raw.month()+1)+'-'+cretime_from_raw.date();
+    }
+    var cretime_to_raw = $('#txt_cretime_to').data("DateTimePicker").date();
+    var cretime_to = '';
+    if(cretime_to_raw != null){
+      cretime_to = cretime_to_raw.year()+'-'+(cretime_to_raw.month()+1)+'-'+cretime_to_raw.date();
+    }
+    var order = $('#sel_order').val();
+    //End Filter
+    
+    post(baseurl + 'dashboard/order_archive/export_excel', {
+      type: type,
+      email: email,
+      street_address: street_address,
+      zip_code: zip_code,
+      country: country,
+      city: city,
+      order_no:order_no,
+      resi_no:resi_no,
+      status:status,
+      cretime_from: cretime_from,
+      cretime_to: cretime_to,
+      order: order
+      }
+    );
+  };
+  //End Function Get Object
+  
   //Initial Setup
   page = 1;
   lastpage = 0;
-  getObject(page);
   $('.ajaxloading-tr').hide();
   var totalobject = 0;
   $('.modal_warning').hide();
+  
+  $('#txt_cretime_from').datetimepicker({
+    format: "YYYY-MM-DD"
+  });
+  
+  $('#txt_cretime_to').datetimepicker({
+    format: "YYYY-MM-DD"
+  });
+  
+  getObject(page);
   //End Initial Setup
 
   //User Action
@@ -358,6 +453,11 @@ $(document).ready(function () {
   });
 
   $('#btn_search_').click(function () {
+    ajaxLoader();
+    getObject(1);
+  });
+  
+  $("#sel_type").change(function () {
     ajaxLoader();
     getObject(1);
   });
@@ -375,6 +475,10 @@ $(document).ready(function () {
   $('#form_edit').submit(function (e) {
     e.preventDefault();
     editObject();
+  });
+  
+  $('#btn_export').click(function(){
+    exportExcel();
   });
   
   $('#btn_remove_').click(function () {

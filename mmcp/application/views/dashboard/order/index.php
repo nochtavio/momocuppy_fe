@@ -67,7 +67,6 @@
       </div>
       <button id="btn_search_" type="button" class="btn btn-default">Search</button>
       <a href="<?php echo base_url() . "dashboard/order_archive/" ?>" type="button" class="btn btn-warning">Archive</a>
-      <button id="btn_export" type="button" class="btn btn-success">Export Excel</button>
       <div class="form-group">
         <div class="ajaxloading-tr"></div>
       </div>

@@ -41,6 +41,10 @@ class order_archive extends CI_Controller {
       $limit = ($page - 1) * $size;
       //end paging
       //Filter
+      $type = 0;
+      if ($this->input->post('type', TRUE)) {
+        $type = $this->input->post('type', TRUE);
+      }
       $email = "";
       if ($this->input->post('email', TRUE)) {
         $email = $this->input->post('email', TRUE);
@@ -73,13 +77,21 @@ class order_archive extends CI_Controller {
       if ($this->input->post('status', TRUE)) {
         $status = $this->input->post('status', TRUE);
       }
+      $cretime_from = "";
+      if ($this->input->post('cretime_from', TRUE)) {
+        $cretime_from = $this->input->post('cretime_from', TRUE);
+      }
+      $cretime_to = "";
+      if ($this->input->post('cretime_to', TRUE)) {
+        $cretime_to = $this->input->post('cretime_to', TRUE);
+      }
       $order = 0;
       if ($this->input->post('order', TRUE)) {
         $order = $this->input->post('order', TRUE);
       }
       //End Filter
 
-      $totalrow = $this->model_order_archive->get_object(0, $email, $street_address, $zip_code, $country, $city, $order_no, $resi_no, $status, $order)->num_rows();
+      $totalrow = $this->model_order_archive->get_object(0, $type, $email, $street_address, $zip_code, $country, $city, $order_no, $resi_no, $status, $cretime_from, $cretime_to, $order)->num_rows();
 
       //Set totalpaging
       $totalpage = ceil($totalrow / $size);
@@ -87,7 +99,7 @@ class order_archive extends CI_Controller {
       //End Set totalpaging
 
       if ($totalrow > 0) {
-        $query = $this->model_order_archive->get_object(0, $email, $street_address, $zip_code, $country, $city, $order_no, $resi_no, $status, $order, $limit, $size)->result();
+        $query = $this->model_order_archive->get_object(0, $type, $email, $street_address, $zip_code, $country, $city, $order_no, $resi_no, $status, $cretime_from, $cretime_to, $order, $limit, $size)->result();
         $temp = 0;
         foreach ($query as $row) {
           $data['result'] = "s";
@@ -100,6 +112,23 @@ class order_archive extends CI_Controller {
           $data['city'][$temp] = $row->city;
           $data['order_no'][$temp] = $row->order_no;
           $data['resi_no'][$temp] = ($row->resi_no == null) ? "(empty)" : $row->resi_no;
+          
+          $result_detail_order = $this->model_order_archive->get_detail_order($row->id)->result();
+          $totalprice = 0;
+          foreach ($result_detail_order as $detail_order) {
+            if($type == 1){
+              $totalprice += $detail_order->product_point;
+              $shipping_cost = 0;
+              $discount = 0;
+              $data['product_name'][$temp] = $row->product_name;
+            }else{
+              $totalprice += $detail_order->price * $detail_order->qty;
+              $shipping_cost = $detail_order->shipping_cost;
+              $discount = $detail_order->discount;
+            }
+          }
+          $data['grandtotal'][$temp] = number_format(($totalprice * (1 - (($discount == null) ? 0 : $discount / 100))) + $shipping_cost );
+          
           $data['payment_name'][$temp] = $row->payment_name;
           $data['voucher_name'][$temp] = ($row->voucher_name == null) ? "(no voucher)" : $row->voucher_name;
           $data['voucher_code'][$temp] = ($row->voucher_code == null) ? "(no voucher)" : $row->voucher_code;
@@ -214,5 +243,94 @@ class order_archive extends CI_Controller {
     return $status;
   }
 
+  function export_excel(){
+    $this->load->library("Excel");
+    
+    //Filter
+    $type = 0;
+    if ($this->input->post('type', TRUE)) {
+      $type = $this->input->post('type', TRUE);
+    }
+    $email = "";
+    if ($this->input->post('email', TRUE)) {
+      $email = $this->input->post('email', TRUE);
+    }
+    $street_address = "";
+    if ($this->input->post('street_address', TRUE)) {
+      $street_address = $this->input->post('street_address', TRUE);
+    }
+    $zip_code = "";
+    if ($this->input->post('zip_code', TRUE)) {
+      $zip_code = $this->input->post('zip_code', TRUE);
+    }
+    $country = "";
+    if ($this->input->post('country', TRUE)) {
+      $country = $this->input->post('country', TRUE);
+    }
+    $city = "";
+    if ($this->input->post('city', TRUE)) {
+      $city = $this->input->post('city', TRUE);
+    }
+    $order_no = "";
+    if ($this->input->post('order_no', TRUE)) {
+      $order_no = $this->input->post('order_no', TRUE);
+    }
+    $resi_no = "";
+    if ($this->input->post('resi_no', TRUE)) {
+      $resi_no = $this->input->post('resi_no', TRUE);
+    }
+    $status = 0;
+    if ($this->input->post('status', TRUE)) {
+      $status = $this->input->post('status', TRUE);
+    }
+    $cretime_from = "";
+    if ($this->input->post('cretime_from', TRUE)) {
+      $cretime_from = $this->input->post('cretime_from', TRUE);
+    }
+    $cretime_to = "";
+    if ($this->input->post('cretime_to', TRUE)) {
+      $cretime_to = $this->input->post('cretime_to', TRUE);
+    }
+    $order = 0;
+    if ($this->input->post('order', TRUE)) {
+      $order = $this->input->post('order', TRUE);
+    }
+    //End Filter
+    
+    $query = $this->model_order_archive->get_object(0, $type, $email, $street_address, $zip_code, $country, $city, $order_no, $resi_no, $status, $cretime_from, $cretime_to, $order)->result();
+    $temp = 0;
+    $data = array();
+    foreach ($query as $row) {
+      $data[$temp]['email'] = $row->email;
+      $data[$temp]['ordered_date'] = date_format(date_create($row->cretime), 'd F Y H:i:s');
+      $data[$temp]['order_id'] = $row->order_no;
+      $result_detail_order = $this->model_order_archive->get_detail_order($row->id)->result();
+      $totalprice = 0;
+      $totalpoint = 0;
+      $order_detail = "";
+      if($type == 0){
+        foreach ($result_detail_order as $detail_order) {
+          $order_detail .= "<strong>Product Name:</strong><br/>".$detail_order->product_name."<br/><strong>Color: </strong>".(($detail_order->color_name) ? $detail_order->color_name : '-' )."<br/><strong>Jumlah: </strong>".$detail_order->qty."<br/><strong>Harga: </strong>".$detail_order->price."<br/><br/>";
+          $totalprice += $detail_order->price * $detail_order->qty;
+          $shipping_cost = $detail_order->shipping_cost;
+          $discount = $detail_order->discount;
+        }
+        $data[$temp]['order_detail'] = $order_detail;
+        $data[$temp]['voucher'] = ($row->voucher_name == null) ? "(no voucher)" : $row->voucher_name;
+        $data[$temp]['payment_name'] = $row->payment_name;
+        $data[$temp]['grand_total'] = number_format(($totalprice * (1 - (($discount == null) ? 0 : $discount / 100))) + $shipping_cost);
+        $data[$temp]['shipping_cost'] = number_format($row->shipping_cost);
+      }else{
+        foreach ($result_detail_order as $detail_order) {
+          $order_detail .= $detail_order->product_name;
+          $totalpoint += $detail_order->product_point;
+        }
+        $data[$temp]['product_name'] = $order_detail;
+        $data[$temp]['total_point'] = number_format($totalpoint);
+      }
+      $temp++;
+    }
+    $this->excel->to_excel_array($data, 'Order_Excel_'.date('dMy'));
+  }
   //End Function Addon 
 }
