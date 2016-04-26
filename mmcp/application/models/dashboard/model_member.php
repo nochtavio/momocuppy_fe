@@ -32,7 +32,7 @@ class model_member extends CI_Model {
       $filter_city = "AND mm.id IN (SELECT id_member AS id FROM dt_address da2 JOIN ms_city mc2 ON da2.city = mc2.city_id AND mc2.city_name = '" . $city . "') ";
     }
     if($cretime_from !== "" && $cretime_to !== ""){
-      $filter_date = "AND (mm.cretime BETWEEN '".$cretime_from."' AND '".$cretime_to."')";
+      $filter_date = "AND (mm.cretime BETWEEN '".$cretime_from."' AND '".$cretime_to." 23:59:59')";
     }
     if ($active > -1) {
       $filter_active = "AND mm.active = " . $active . "";

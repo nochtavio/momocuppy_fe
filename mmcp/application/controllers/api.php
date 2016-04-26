@@ -1206,10 +1206,12 @@ class api extends CI_Controller {
             $temp++;
           }
         }
-      } else {
+      }else if($response['rajaongkir']['status']['code'] == 400){
+        $data['result'] = 'r2';
+        $data['message'] = 'Sorry, weight limit is exceeded (max 30 kg).';
+      }else {
         $data['result'] = 'r2';
         $data['message'] = 'Sorry, an error occurred. Please try again in 10 minutes.';
-        //$data['message'] = $response['rajaongkir']['status']['description'];
       }
     } else {
       $data['result'] = 'r3';

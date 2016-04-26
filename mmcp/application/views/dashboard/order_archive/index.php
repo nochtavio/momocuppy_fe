@@ -44,10 +44,11 @@
         <select class="form-control" id="sel_status">
           <option value="-1">All Status</option>
           <option value="1">Waiting for Payment</option>
-          <option value="2">Approved</option>
-          <option value="3">On Process</option>
-          <option value="4">Delivered</option>
-          <option value="5">Canceled</option>
+          <option value="2">Member Confirmed</option>
+          <option value="3">Approved</option>
+          <option value="4">On Delivery</option>
+          <option value="5">Delivered</option>
+          <option value="6">Canceled</option>
         </select>
       </div>
       <div class="form-group">

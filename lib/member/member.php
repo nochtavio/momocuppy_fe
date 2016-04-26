@@ -152,5 +152,20 @@ function change_memberwpd($memberid,$oldpwd,$newpwd,$newpwdc){
 	return $result;
 }
 
+function unsubscribe($email){
+	global $db;
+	
+	$strsql = "
+		DELETE FROM ms_subscriber
+		WHERE email = '".$db->escape($email)."'
+	";
+	$st = $db->query($strsql);
+	if($st){
+		return 1;
+	}else{
+		return 0;
+	}
+}
+
 
 ?>

@@ -44,21 +44,7 @@ $(document).ready(function(){
           set_edit();
           $('#box_address').jScrollPane(); 
           var box_address_pane = $('#box_address').data('jsp');
-          box_address_pane.reinitialise();
-					
-					$("input#phone").on("keypress keyup blur",function (event) {    
-						 $(this).val($(this).val().replace(/[^\d].+/, ""));
-							if ((event.which < 48 || event.which > 57)) {
-									event.preventDefault();
-							}
-					});  	
-					
-					$("input#postalcode").on("keypress keyup blur",function (event) {    
-						 $(this).val($(this).val().replace(/[^\d].+/, ""));
-							if ((event.which < 48 || event.which > 57)) {
-									event.preventDefault();
-							}
-					});  							
+          box_address_pane.reinitialise();						
         }
       }
     });
@@ -114,6 +100,20 @@ $(document).ready(function(){
             $('#country').val(value['country']);
             $('#city').val(value['city']);
             $('#txt_id').val(value['id']);
+            
+            $("input#phone").on("keypress keyup blur",function (event) {    
+              $(this).val($(this).val().replace(/[^\d].+/, ""));
+               if ((event.which < 48 || event.which > 57)) {
+                   event.preventDefault();
+               }
+            });  	
+
+            $("input#postalcode").on("keypress keyup blur",function (event) {    
+               $(this).val($(this).val().replace(/[^\d].+/, ""));
+                if ((event.which < 48 || event.which > 57)) {
+                    event.preventDefault();
+                }
+            });  	
           });
         } else {
           $('#poptitle').text('Failed');
@@ -295,6 +295,19 @@ $(document).ready(function(){
     $('#city').val("");
     $('#txt_id').val("");
     state = "add";
+    $("input#phone").on("keypress keyup blur",function (event) {    
+      $(this).val($(this).val().replace(/[^\d].+/, ""));
+       if ((event.which < 48 || event.which > 57)) {
+           event.preventDefault();
+       }
+    });  	
+
+    $("input#postalcode").on("keypress keyup blur",function (event) {    
+      $(this).val($(this).val().replace(/[^\d].+/, ""));
+       if ((event.which < 48 || event.which > 57)) {
+           event.preventDefault();
+       }
+    });  	
     $('.warning').removeClass('warning');
     $.magnificPopup.open({
       items: {

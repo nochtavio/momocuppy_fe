@@ -410,7 +410,7 @@ class newsletter extends CI_Controller {
 
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
-        $this->email->from('momocuppy@momocuppy.com'); // change it to yours
+        $this->email->from('momocuppy@momocuppy.com', 'Momo Cuppy'); // change it to yours
         $this->email->to($email); // change it to yours
         $this->email->subject("[Momo Cuppy] ".$title);
 
@@ -421,6 +421,7 @@ class newsletter extends CI_Controller {
         $data_message['link1'] = $link1;
         $data_message['banner2'] = $banner2;
         $data_message['link2'] = $link2;
+        $data_message['email'] = $email;
         $message = $this->load->view('email/newsletter', $data_message, TRUE);
         $this->email->message($message);
         if ($this->email->send()) {

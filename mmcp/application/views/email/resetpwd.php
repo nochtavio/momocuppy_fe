@@ -425,7 +425,7 @@ $password = (isset($password) ? $password : "" );
                                                     <!--start payment info-->
 																										<tr>
                                                     	<td valign="top" style="padding-top:0; padding-bottom:0;">
-                                                          <table border="0" cellpadding="10" cellspacing="0" width="100%" class="templateDataTable">
+                                                          <table border="0" cellpadding="10" cellspacing="0" width="100%" class="templateDataTable" bgcolor='#fbe0e6'>
 
 
  

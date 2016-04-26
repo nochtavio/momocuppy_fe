@@ -50,7 +50,7 @@ class model_order extends CI_Model {
     }
     if ($cretime_from !== "" && $cretime_to !== ""){
       $this->db->where('mo.cretime >=', $cretime_from);
-      $this->db->where('mo.cretime <=', $cretime_to);
+      $this->db->where('mo.cretime <=', $cretime_to.' 23:59:59');
     }
     $this->db->where('mo.type', $type);
     $this->db->where('mo.archive', 0);
@@ -61,9 +61,9 @@ class model_order extends CI_Model {
       if ($order == 1) {
         $this->db->order_by("mo.cretime", "asc");
       } else if ($order == 2) {
-        $this->db->order_by("mm.email", "desc");
-      } else if ($order == 3) {
         $this->db->order_by("mm.email", "asc");
+      } else if ($order == 3) {
+        $this->db->order_by("mm.email", "desc");
       }
     } else {
       $this->db->order_by("mo.cretime", "desc");
@@ -683,6 +683,7 @@ class model_order extends CI_Model {
     $this->db->join('ms_product mp', 'mp.id = dp.id_product');
     $this->db->join('ms_color mc', 'mc.id = dp.id_color');
     $this->db->where('mcart.id_member', $id_member);
+    $this->db->order_by("mcart.id", "desc");
     $query = $this->db->get();
     return $query;
   }
@@ -814,7 +815,7 @@ class model_order extends CI_Model {
       'paid_date' => NULL
     );
 
-    $this->db->select('id, status, cretime');
+    $this->db->select('id, status, cretime, order_no');
     $query = $this->db->get_where('ms_order', $filter);
     return $query;
   }
@@ -839,41 +840,6 @@ class model_order extends CI_Model {
     if ($check_first_time_buy->num_rows() <= 0) {
       $first_time_buyer = TRUE;
     }
-    
-    //Revert Point
-    $detail_order = $this->model_order->get_detail_order($id_order);
-    if($detail_order->num_rows() > 0){
-      //Calculate Grand Total
-      $grand_total = 0;
-      foreach ($detail_order->result() as $row) {
-        $grand_total += $row->price * $row->qty;
-      }
-
-      //Calculate Point
-      $point = floor($grand_total / 50000);
-      if ($point > 0) {
-        $this->calculate_point($id_member, $point, TRUE);
-      }
-    }
-
-    if (!empty($referral)) {
-      //Check Referral Exist
-      $filter = array(
-        'referral' => $referral
-      );
-
-      $this->db->select('id');
-      $check_referral = $this->db->get_where('ms_member', $filter);
-      if ($check_referral->num_rows() > 0) {
-        $parent_id_member = $check_referral->row()->id;
-
-        if ($first_time_buyer) {
-          $this->calculate_point($id_member, 5, TRUE);
-          $this->calculate_point($parent_id_member, 5, TRUE);
-        }
-      }
-    }
-    //End Revert Point
     
     //Return Stock
     $filter = array(

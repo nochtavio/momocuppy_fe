@@ -26,7 +26,7 @@
   var total_search = 0;
   
   $("#txt_search").on("input", function() {
-    if($("#txt_search").val().length > 3){
+    if($("#txt_search").val().length > 2){
       if(typeof ajax_request !== 'undefined'){
         $('#searchlist').empty();
         ajax_request.abort();

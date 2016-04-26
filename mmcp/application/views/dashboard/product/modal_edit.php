@@ -10,7 +10,7 @@
           <div class="form-group">
             <label for="txt_editproductname" class="col-sm-4 control-label">Product Name</label>
             <div class="col-sm-6">
-              <input type="text" class="form-control" id="txt_editproductname" placeholder="Input product name ...">
+              <input type="text" class="form-control" id="txt_editproductname" maxlength22" placeholder="Input product name ...">
             </div>
           </div>
           <div class="form-group">

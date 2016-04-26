@@ -17,7 +17,7 @@ class cron extends CI_Controller {
           $now = time(); // or your date as well
           $your_date = strtotime($row->cretime);
           $date_diff = floor(($now - $your_date)/(60*60*24));
-          if($row->status == 1 && $date_diff >= 30){
+          if($row->status == 1 && $date_diff >= 1){
             $this->model_order->cancel_order($row->id);
           }
         }

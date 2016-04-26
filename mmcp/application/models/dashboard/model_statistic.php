@@ -43,7 +43,7 @@ class model_statistic extends CI_Model {
       JOIN ms_order mo ON mo.id = dor.id_order
       JOIN dt_product dp ON dp.id = dor.id_dt_product
       JOIN ms_product mp ON mp.id = dp.id_product
-      WHERE (mo.cretime BETWEEN '".date('Y-m-d', strtotime($from))."' AND '".date('Y-m-d', strtotime($to))." 23:59:59)
+      WHERE (mo.cretime BETWEEN '".date('Y-m-d', strtotime($from))."' AND '".date('Y-m-d', strtotime($to))." 23:59:59')
       AND mp.product_name LIKE '%".$product_name."%'
       AND mo.status > 2 AND mo.status < 6
       GROUP BY mp.product_name, mp.product_price

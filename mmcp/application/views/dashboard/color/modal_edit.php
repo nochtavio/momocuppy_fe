@@ -10,7 +10,7 @@
           <div class="form-group">
             <label for="txt_editcolorname" class="col-sm-4 control-label">Color Name</label>
             <div class="col-sm-6">
-              <input type="text" class="form-control" id="txt_editcolorname" placeholder="Input color name ...">
+              <input type="text" class="form-control" id="txt_editcolorname" maxlength="15" placeholder="Input color name ...">
             </div>
           </div>
 <!--          <div class="form-group">

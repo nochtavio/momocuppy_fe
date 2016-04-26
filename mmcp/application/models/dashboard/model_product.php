@@ -233,6 +233,7 @@ class model_product extends CI_Model {
     $this->db->where('mp.visible', 1);
     $this->db->like('mp.product_name', $keyword);
     $this->db->distinct();
+    $this->db->limit(4);
     $query = $this->db->get();
     return $query;
   }

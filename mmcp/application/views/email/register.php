@@ -456,10 +456,10 @@ $referral = (isset($hash) ? $referral : "" );
                                 <img style="float:left;" src="http://www.momocuppy.com/images/layout/newsletter/register/stayconnect.jpg" />
                                 <a style="float:left;" href="https://www.facebook.com/Momo-Cuppy-Shop-466333336738898/?fref=tst" target="_blank"><img src="http://www.momocuppy.com/images/layout/newsletter/register/fb.jpg" /></a>
                                 <a style="float:left;" href="https://www.instagram.com/momocuppy/" target="_blank"><img src="http://www.momocuppy.com/images/layout/newsletter/register/ig.jpg" /></a>   
-                                <p style="font-size:14px;" >
-                                  Copyright &copy; <?php echo date("Y"); ?> Momocuppy, All rights reserved.
+                                <p style="clear:both;font-size:14px;">
+                                  Copyright &copy; <?php echo date("Y");?> Momocuppy, All rights reserved.
                                   <br />
-                                  <a  href="http://www.momocuppy.com" style="color:#eb5763;text-decoration:none;font-weight:bold;" >www.momocuppy.com</a>
+                                  <a style="color:#eb5763;text-decoration:none;font-weight:bold;" href="http://www.momocuppy.com">www.momocuppy.com</a>
                                 </p>
                               </div>
                             </td>
