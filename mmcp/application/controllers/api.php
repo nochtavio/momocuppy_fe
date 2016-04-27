@@ -1182,7 +1182,7 @@ class api extends CI_Controller {
     if (isset($_SESSION['courier'])) {
       if ($response['rajaongkir']['status']['code'] == 200) {
         $data['result'] = 'r2';
-        $data['message'] = 'Sorry, your area is not covered with JNE. Please contact help@momocuppy.com to order.';
+        $data['message'] = 'Sorry, your area is not covered with JNE. Please <br/> contact help@momocuppy.com to order.';
         $courier = $_SESSION['courier'];
         foreach ($response['rajaongkir']['results'] as $value) {
           $temp = 0;
@@ -1201,7 +1201,7 @@ class api extends CI_Controller {
               break;
             }else{
               $data['result'] = 'r2';
-              $data['message'] = 'Sorry, your area is not covered with JNE. Please contact help@momocuppy.com to order.';
+              $data['message'] = 'Sorry, your area is not covered with JNE. Please <br/> contact help@momocuppy.com to order.';
             }
             $temp++;
           }

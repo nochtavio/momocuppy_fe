@@ -9,6 +9,7 @@ $(document).ready(function () {
     //Filter
     var product_name = $('#txt_product_name').val();
     var type = $('#sel_type').val();
+    var category = $('#sel_category').val();
     var color = $('#sel_color').val();
     var sale = $('#sel_sale').val();
     var visible = $('#sel_visible').val();
@@ -23,6 +24,7 @@ $(document).ready(function () {
           size: pagesize,
           product_name: product_name,
           type: type,
+          category: category,
           color: color,
           sale: sale,
           visible: visible,
@@ -512,6 +514,11 @@ $(document).ready(function () {
   });
   
   $("#sel_type").change(function () {
+    ajaxLoader();
+    getObject(1);
+  });
+  
+  $("#sel_category").change(function () {
     ajaxLoader();
     getObject(1);
   });

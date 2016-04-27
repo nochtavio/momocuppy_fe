@@ -21,6 +21,18 @@
         </select>
       </div>
       <div class="form-group">
+        <select class="form-control" id="sel_category">
+          <option value="-1">All Type</option>
+          <?php 
+            foreach ($category as $cat) {
+              ?>
+              <option value="<?php echo $cat->id ?>"><?php echo $cat->category_name ?></option>
+              <?php
+            }
+          ?>
+        </select>
+      </div>
+      <div class="form-group">
         <select class="form-control" id="sel_color">
           <option value="-1">All Color</option>
           <?php 

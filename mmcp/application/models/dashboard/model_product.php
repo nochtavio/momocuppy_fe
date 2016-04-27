@@ -6,7 +6,7 @@ class model_product extends CI_Model {
     parent::__construct();
   }
 
-  function get_object($id = 0, $product_name = "", $type = 0, $color = 0, $sale = -1, $visible = -1, $order = 0, $limit = 0, $size = 0) {
+  function get_object($id = 0, $product_name = "", $type = 0, $category = 0, $color = 0, $sale = -1, $visible = -1, $order = 0, $limit = 0, $size = 0) {
     $this->db->select('mp.*, (SELECT img FROM dt_product_img dpi WHERE dpi.id_product = mp.id LIMIT 1) as img, (SELECT SUM(stock) FROM dt_product dp WHERE dp.id_product = mp.id) AS stock');
     $this->db->from('ms_product mp');
 
@@ -19,6 +19,9 @@ class model_product extends CI_Model {
     }
     if ($type > 0) {
       $this->db->where('mp.id IN (SELECT DISTINCT dc.id_product AS id FROM dt_category dc JOIN ms_category mc ON dc.id_category = mc.id JOIN ms_type mt ON mt.id = mc.type WHERE mt.id = '.$type.')', NULL, FALSE);
+    }
+    if ($category > 0) {
+      $this->db->where('mp.id IN (SELECT DISTINCT dc2.id_product AS id FROM dt_category dc2 JOIN ms_category mc2 ON dc2.id_category = mc2.id WHERE mc2.id = '.$category.')', NULL, FALSE);
     }
     if ($color > 0) {
       $this->db->where('mp.id IN (SELECT id_product AS id FROM dt_product WHERE id_color = '.$color.')', NULL, FALSE);

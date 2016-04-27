@@ -13,6 +13,9 @@
 }
 
 
+#wrapredeem .content .navpage{
+	margin-left:60px;
+}
 
 
 
@@ -281,6 +284,8 @@ p.logininfo{
 	padding-bottom:1px;
 
 	text-transform:uppercase;
+	float:left;
+	width:100%;	
 
 }
 
@@ -296,11 +301,15 @@ p.logininfo{
 
 	margin-top:10px;
 
+	float:left;
 	width:100%;
+	
 
 }
 
 .redeem_detail span.detail_name{
+	float:left;
+	width:100%;
 
 	font-family:'ProximaNova-Bold';
 
@@ -310,7 +319,7 @@ p.logininfo{
 
 }
 
-.redeem_detail p.detail_desc{
+.redeem_detail .detail_desc{
 
 	clear:both;
 
@@ -330,7 +339,7 @@ p.logininfo{
 
 }
 
-.redeem_detail h1, h2, h3, h4{
+.detail_wysiwyg h1, .detail_wysiwyg h2, .detail_wysiwyg h3, .detail_wysiwyg h4{
   clear: both;
   float: left;
   text-align: left;

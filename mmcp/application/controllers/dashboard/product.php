@@ -21,7 +21,6 @@ class product extends CI_Controller {
     
     //Get Category
     $content['category'] = $this->model_detail_category->generate_ms_category()->result();
-    
     //Get Type
     $content['fetch_type'] = $this->model_type->get_object(0, "", 1, 0)->result();
     
@@ -63,6 +62,10 @@ class product extends CI_Controller {
       if ($this->input->post('type', TRUE)) {
         $type = $this->input->post('type', TRUE);
       }
+      $category = 0;
+      if ($this->input->post('category', TRUE)) {
+        $category = $this->input->post('category', TRUE);
+      }
       $color = 0;
       if ($this->input->post('color', TRUE)) {
         $color = $this->input->post('color', TRUE);
@@ -81,7 +84,7 @@ class product extends CI_Controller {
       }
       //End Filter
 
-      $totalrow = $this->model_product->get_object(0, $product_name, $type, $color, $sale, $visible, $order)->num_rows();
+      $totalrow = $this->model_product->get_object(0, $product_name, $type, $category, $color, $sale, $visible, $order)->num_rows();
 
       //Set totalpaging
       $totalpage = ceil($totalrow / $size);
@@ -89,7 +92,7 @@ class product extends CI_Controller {
       //End Set totalpaging
 
       if ($totalrow > 0) {
-        $query = $this->model_product->get_object(0, $product_name, $type, $color, $sale, $visible, $order, $limit, $size)->result();
+        $query = $this->model_product->get_object(0, $product_name, $type, $category, $color, $sale, $visible, $order, $limit, $size)->result();
         $temp = 0;
         foreach ($query as $row) {
           $data['result'] = "s";

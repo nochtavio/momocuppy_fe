@@ -57,6 +57,7 @@ class model_newsletter extends CI_Model {
       'link1' => $link1,
       'banner2' => $banner2,
       'link2' => $link2,
+      'visible' => 1,
       'cretime' => date('Y-m-d H:i:s'),
       'creby' => $this->session->userdata('admin')
     );

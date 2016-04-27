@@ -360,12 +360,48 @@ ul#wishlist li{
 	position:relative;
 	width:186px;
 }
+ul#wishlist li a{
+	float:left;
+	width:186px;
+}
+ul#wishlist li span.wrapimg{
+	float:left;
+	width:186px;
+	height:186px;
+	overflow:hidden;
+	position:relative;
+}
+
+ul#wishlist li span.wrapimg img.potrait{
+	position: absolute;
+	left: 50%;
+	top: 50%;			
+	width: 100%;
+	height: auto;	
+	-webkit-transform: translate(-50%,-50%) ;
+	-ms-transform: translate(-50%,-50%);	
+	transform: translate(-50%,-50%);	
+	z-index:1;	
+}
+
+ul#wishlist li span.wrapimg img.landscape{
+	position: absolute;
+	left: 50%;
+	top: 50%;			
+	height: 100%;
+	width: auto;	
+	-webkit-transform: translate(-50%,-50%) ;
+	-ms-transform: translate(-50%,-50%);	
+	transform: translate(-50%,-50%);	
+	z-index:1;	
+}
+
 ul#wishlist li span.wishlist_item{
 	clear:both;
 	float:left;
 	font-weight:bold;
-	font-size:14px;
-	line-height:10px;
+	font-size:16px;
+	line-height:20px;
 	text-align:left;
 	margin-top:10px;
 	width:100%;
@@ -387,6 +423,7 @@ ul#wishlist li a.wishlist_cancel{
 	top:5px;
 	right:5px;
 	width:17px;
+	z-index:2;
 }
 ul#wishlist li a.wishlist_cancel span{
 	display:none;
