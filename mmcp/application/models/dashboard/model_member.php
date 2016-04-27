@@ -80,7 +80,9 @@ class model_member extends CI_Model {
       (
         SELECT COUNT(mo.id_member)
         FROM ms_order mo
-        WHERE mm.id = mo.id_member AND mo.status > 2
+        WHERE mm.id = mo.id_member 
+        AND mo.status > 2
+        AND mo.status < 6
       ) AS total_order,
       (
         SELECT mc.city_name
@@ -343,8 +345,18 @@ class model_member extends CI_Model {
       (
         SELECT COUNT(mo.id_member)
         FROM ms_order mo
-        WHERE mm.id = mo.id_member AND mo.status > 2
+        WHERE mm.id = mo.id_member 
+        AND mo.status > 2
+        AND mo.status < 6
       ) AS total_order,
+      (
+        SELECT SUM(do.price*do.qty)
+        FROM dt_order do
+        JOIN ms_order mo2 ON do.id_order = mo2.id
+        WHERE mm.id = mo2.id_member
+        AND mo2.status > 2
+        AND mo2.status < 6
+      ) AS total_pembelian,
       (
         SELECT SUM(mp.point) 
         FROM ms_point mp 

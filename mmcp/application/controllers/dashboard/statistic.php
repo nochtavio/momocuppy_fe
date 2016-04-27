@@ -7,6 +7,7 @@ class statistic extends CI_Controller {
     parent::__construct();
     $this->load->model('dashboard/model_admin', '', TRUE);
     $this->load->model('dashboard/model_statistic', '', TRUE);
+    $this->load->model('dashboard/model_detail_category', '', TRUE);
   }
 
   function index() {
@@ -297,6 +298,24 @@ class statistic extends CI_Controller {
       $data = array();
       foreach ($get_object->result() as $row) {
         $data[$temp]['product_name'] = $row->product_name;
+        $category = $this->model_detail_category->generate_dt_category($row->id);
+        $temp_category = "";
+        $temp_type = "";
+        if($category->num_rows() > 0){
+          foreach ($category->result() as $cat) {
+            if (strpos($temp_category, $cat->category_name) === false) {
+              $temp_category = $temp_category.$cat->category_name.', ';
+            }
+            if (strpos($temp_type, $cat->type_name) === false) {
+              $temp_type = $temp_type.$cat->type_name.', ';
+            }
+          }
+          $data[$temp]['type'] = substr($temp_type, 0, -2);
+          $data[$temp]['category'] = substr($temp_category, 0, -2);
+        }else{
+          $data[$temp]['type'] = '-';
+          $data[$temp]['category'] = '-';
+        }
         $data[$temp]['product_price'] = number_format($row->product_price);
         $data[$temp]['quantity'] = number_format($row->quantity);
         $data[$temp]['total_sales'] = number_format($row->total_sales);

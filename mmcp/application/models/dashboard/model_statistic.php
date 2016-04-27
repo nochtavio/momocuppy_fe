@@ -38,7 +38,7 @@ class model_statistic extends CI_Model {
   
   function statistic_excel_product($from, $to, $product_name){
     $query = "
-      SELECT mp.product_name, mp.product_price, SUM(dor.qty) AS quantity, SUM(dor.qty)*mp.product_price AS total_sales
+      SELECT mp.id, mp.product_name, mp.product_price, SUM(dor.qty) AS quantity, SUM(dor.qty)*mp.product_price AS total_sales
       FROM dt_order dor
       JOIN ms_order mo ON mo.id = dor.id_order
       JOIN dt_product dp ON dp.id = dor.id_dt_product
@@ -83,7 +83,7 @@ class model_statistic extends CI_Model {
       JOIN ms_product mp ON mp.id = dp.id_product
       WHERE mm.email LIKE '%".$email."%' 
       AND mp.product_name LIKE '%".$product_name."%'
-      AND STATUS > 2 AND STATUS < 6
+      AND mo.status > 2 AND mo.status < 6
       AND (mo.cretime BETWEEN '".date('Y-m-d', strtotime($from))."' AND '".date('Y-m-d', strtotime($to))." 23:59:59')
     ";
     return $this->db->query($query);
