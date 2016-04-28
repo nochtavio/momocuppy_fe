@@ -31,7 +31,6 @@ class model_statistic extends CI_Model {
       AND mo.status > 2 AND mo.status < 6
       GROUP BY mp.product_name
       ORDER BY mo.cretime ASC
-      LIMIT 0,10
     ";
     return $this->db->query($query);
   }
@@ -48,7 +47,6 @@ class model_statistic extends CI_Model {
       AND mo.status > 2 AND mo.status < 6
       GROUP BY mp.product_name, mp.product_price
       ORDER BY mo.cretime ASC
-      LIMIT 0,10
     ";
     return $this->db->query($query);
   }

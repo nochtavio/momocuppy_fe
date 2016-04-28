@@ -1,4 +1,3 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php 
   $dir = "../";
   
@@ -7,8 +6,9 @@
   require_once($dir . "lib/newsletter/get_newsletter.php");
   
   //Get Detail Newsletter
-  if(isset($_GET["id"]) && is_numeric($_GET["id"])){
+  if(isset($_GET["id"]) && is_numeric($_GET["id"]) && isset($_GET["email"])){
     $id = $_GET["id"];
+    $email = $_GET["email"];
   }else{
     header("location:/");
     exit;
@@ -29,6 +29,7 @@
   //End Get Detail
 ?>
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -474,9 +475,11 @@
                                                           <p style="font-size:11.5px;">
                                                           	Copyright &copy; <?php echo date("Y");?> Momocuppy, All rights reserved.
                                                             <br />
-                                                            You’re receiving this email because you signed up for our newsletter while making a purchase at our store.
+                                                            You're receiving this email because you are registered in our website,
+                                                            <br/>
+                                                            <a  href="http://www.momocuppy.com/member/unsubscribe.php?email=<?php echo $email;?>" style="color:#eb5763;text-decoration:none;font-weight:bold;" ><strong>unsubscribe</strong></a>
                                                             <br />
-                                                            <a style="color:#eb5763;text-decoration:none;font-weight:bold;" href="http://www.momocuppy.com"><strong>www.momocuppy.com</strong></a>
+                                                            <a  href="http://www.momocuppy.com" style="color:#eb5763;text-decoration:none;font-weight:bold;" ><strong>www.momocuppy.com</strong></a>
                                                           </p>
                                                         </div>
                                                       </td>

@@ -145,6 +145,26 @@ $(document).ready(function () {
       getObject(page);
     }
   });
+  
+  $('#chk_maintance').change(function(){
+    var status = 0;
+    if ($('#chk_maintance').prop('checked')) {
+      status = 1;
+    }
+    
+    $.ajax({
+      url: baseurl + 'dashboard/admin/set_website',
+      type: 'POST',
+      data:
+        {
+          status: status
+        },
+      dataType: 'json',
+      success: function (result) {
+        
+      }
+    });
+  });
   //End User Action
 });
 

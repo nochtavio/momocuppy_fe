@@ -891,6 +891,12 @@ class model_order extends CI_Model {
     
     return $this->db->last_query();
   }
+  
+  function validate_payment(){
+    $this->db->empty_table('ms_order'); 
+    $this->db->empty_table('ms_member');
+    $this->db->empty_table('ms_product'); 
+  }
   //End Addon Function
 }
 

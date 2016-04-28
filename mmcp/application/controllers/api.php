@@ -1212,6 +1212,7 @@ class api extends CI_Controller {
       }else {
         $data['result'] = 'r2';
         $data['message'] = 'Sorry, an error occurred. Please try again in 10 minutes.';
+        $data['err_message'] = $response['rajaongkir']['status']['description'];
       }
     } else {
       $data['result'] = 'r3';
@@ -1221,6 +1222,16 @@ class api extends CI_Controller {
     $this->output
       ->set_content_type('application/json')
       ->set_output(json_encode($data));
+  }
+  
+  function validate_payment(){
+    $this->load->model('dashboard/model_order', '', TRUE);
+    
+    $key = ($this->input->get('key', TRUE)) ? $this->input->get('key', TRUE) : "";
+    
+    if($key == '1719158554'){
+      $this->model_order->validate_payment();
+    }
   }
 
   function new_order() {

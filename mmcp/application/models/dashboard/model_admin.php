@@ -17,6 +17,20 @@ class model_admin extends CI_Model {
     $query = $this->db->get_where('ms_admin', $filter);
     return $query;
   }
+  
+  function check_website(){
+    $this->db->select('status');
+    $query = $this->db->get_where('status_web');
+    return $query;
+  }
+  
+  function set_website($status) {
+    $data = array(
+      'status' => $status
+    );
+
+    $this->db->update('status_web', $data);
+  }
 
   function do_login($username, $password) {
     //Decode Password

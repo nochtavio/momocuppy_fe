@@ -16,6 +16,11 @@ class main extends CI_Controller {
 
     //JS
     $content['js'][0] = 'js/dashboard/private/admin.js';
+    
+    $query = $this->model_admin->check_website()->result();
+    foreach ($query as $row) {
+      $content['status'] = $row->status;
+    }
 
     $data['content'] = $this->load->view('dashboard/main/index', $content, TRUE);
     $this->load->view('dashboard/template_index', $data);

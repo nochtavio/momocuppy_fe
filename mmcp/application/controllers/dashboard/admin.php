@@ -254,5 +254,17 @@ class admin extends CI_Controller {
       echo json_encode($data);
     }
   }
+  
+  function set_website(){
+    $admin = $this->session->userdata('admin');
+    $checkadmin = $this->model_admin->check_admin($admin)->num_rows();
+    if ($checkadmin > 0) {
+      $status = $this->input->post('status', TRUE);
 
+      $data['result'] = "s";
+      $this->model_admin->set_website($status);
+
+      echo json_encode($data);
+    }
+  }
 }

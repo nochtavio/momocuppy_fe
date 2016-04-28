@@ -402,7 +402,7 @@
                                             	<!-- // Begin Module: Standard Header Image  -->
                                             	<div style="font-family:Arial, Helvetica, sans-serif;font-size:12px;line-height:20px;margin-bottom:35px;" >
                                               	Please do not reply to this email<br />
-                                                If you are unable to see the message below, click <a href="http://www.momocuppy.com/newsletter/?id=<?php echo $id; ?>" target="_blank" style="color:#f05364;font-weight:normal;text-decoration:underline;" ><strong>here</strong></a>
+                                                If you are unable to see the message below, click <a href="http://www.momocuppy.com/newsletter/?id=<?php echo $id; ?>&email=<?php echo $email ?>" target="_blank" style="color:#f05364;font-weight:normal;text-decoration:underline;" ><strong>here</strong></a>
                                               </div>
                                             	<!-- // End Module: Standard Header Image  -->
                                             
@@ -453,7 +453,7 @@
                                                           <p style="font-size:11.5px;" >
                                                           	Copyright &copy; <?php echo date("Y");?> Momo Cuppy, All rights reserved.
                                                             <br />
-                                                            You're receiving this email because you signed up for our newsletter while making a purchase at our store.
+                                                            You're receiving this email because you are registered in our website,
                                                             <br/>
                                                             <a  href="http://www.momocuppy.com/member/unsubscribe.php?email=<?php echo $email;?>" style="color:#eb5763;text-decoration:none;font-weight:bold;" ><strong>unsubscribe</strong></a>
                                                             <br />

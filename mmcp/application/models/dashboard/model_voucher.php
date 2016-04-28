@@ -18,7 +18,7 @@ class model_voucher extends CI_Model {
       $this->db->like('mv.voucher_name', $voucher_name);
     }
     if ($voucher_code !== "") {
-      $this->db->like('mv.voucher_code', $voucher_code);
+      $this->db->where('mv.voucher_code', $voucher_code);
     }
 
     if ($active > -1) {
