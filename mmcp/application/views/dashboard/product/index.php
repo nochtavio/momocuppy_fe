@@ -54,6 +54,8 @@
           <option value="5">Sort By Highest Price</option>
           <option value="6">Sort By Newest Data</option>
           <option value="7">Sort By Oldest Data</option>
+          <option value="8">Sort By Lowest Position</option>
+          <option value="9">Sort By Highest Position</option>
         </select>
       </div>
       <div class="form-group">

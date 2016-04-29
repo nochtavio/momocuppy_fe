@@ -22,6 +22,8 @@ require_once($dir."lib/lib.php");
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 <link href="/assets/css/main.css" rel="stylesheet">
 <link href="/assets/css/comingsoon.css" rel="stylesheet">
+<link href="/assets/css/mfp.css" rel="stylesheet">
+<link href="/assets/css/message.css" rel="stylesheet">
 
 
 </head>
@@ -51,8 +53,8 @@ require_once($dir."lib/lib.php");
       
       <div id="wrapsubscribe">
         <form id="subscribe" name="subscribe" method="post">
-          <input class="txt" type="text" name="email_subscribe" placeholder="email address"/>
-          <input class="submit" type="image" src="/images/layout/coming-soon/btnsubscribe.png" />
+          <input class="txt" type="text" name="email_subscribe" placeholder="email address" id="email_subscribe"/>
+          <input id="submitcs" class="submit" type="image" src="/images/layout/coming-soon/btnsubscribe.png" />
         </form>
       </div>
       
@@ -60,6 +62,22 @@ require_once($dir."lib/lib.php");
   </div>
 </div>
 <!--MAINCONTENT-->  
+
+<div id="mfp_message" class="mfp-hide white-popup-block mfp-alert">
+  <h2 class="pop-up-img-success">
+      <img src="/images/layout/message/bunny.gif" />
+  </h2>
+  <h2 class="pop-up-img-failed">
+    <img src="/images/layout/message/decor.png" />
+  </h2>
+  <h3 id="poptitle" class="titlemsg"></h3>
+  <p id="popmessage" class="message"></p>
+  <div class="wrapok">
+      <div id="popok" class="okbtn">
+          <span>ok</span>
+      </div>      
+  </div>  
+</div>
  <!--FOOTER-->
 
   <div id="footer"></div>
@@ -72,10 +90,9 @@ require_once($dir."lib/lib.php");
 
 <script type="text/javascript" src="/assets/js/fontsmoothie.min.js" async></script>
 <script type="text/javascript" src="/assets/js/jquery.min.js" ></script>
-
-
-
-
+<script type="text/javascript" src="/assets/js/mfp.js" ></script>
+<script type="text/javascript" src="/assets/js/mfp.js" ></script>
+<script type="text/javascript" src="/assets/js/cs.js" ></script>
 
 </body>
 

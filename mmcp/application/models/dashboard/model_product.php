@@ -50,6 +50,10 @@ class model_product extends CI_Model {
         $this->db->order_by("mp.cretime", "desc");
       } else if ($order == 7) {
         $this->db->order_by("mp.cretime", "asc");
+      } else if ($order == 8) {
+        $this->db->order_by("mp.position", "asc");
+      } else if ($order == 9) {
+        $this->db->order_by("mp.position", "desc");
       }
     } else {
       $this->db->order_by("mp.product_name", "asc");
