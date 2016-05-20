@@ -18,7 +18,7 @@
             <div class="col-sm-6">
               <label class="label-no col-xs-12" style="margin: 0 0 0 -15px;">
                 <input type="file" name="userfile" id="userfile" size="20" style="margin-bottom: 4px;" />
-                <em>Only .jpg is allowed and max size is 1MB (444x474 pixels)</em> <br/>
+                <em>Only .jpg is allowed | Maximum Size is 1 MB | Recommended Resolution is 444x474 pixels</em> <br/>
               </label>
             </div>
           </div>
@@ -33,7 +33,7 @@
             <div class="col-sm-6">
               <label class="label-no col-xs-12" style="margin: 0 0 0 -15px;">
                 <input type="file" name="userfile2" id="userfile2" size="20" style="margin-bottom: 4px;" />
-                <em>Only .jpg is allowed and max size is 1MB (444x257 pixels)</em> <br/>
+                <em>Only .jpg is allowed | Maximum Size is 1 MB | Recommended Resolution is 444x474 pixels</em> <br/>
               </label>
             </div>
           </div>

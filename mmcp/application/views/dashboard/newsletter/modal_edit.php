@@ -23,7 +23,7 @@
                 <div class="col-lg-12">
                   <label class="label-no col-xs-12" style="margin: 0 0 0 -15px;">
                     <input type="file" name="editfile" id="editfile" size="20" style="margin:10px 0 1px 0" />
-                    <em>Only .jpg is allowed and max size is 1MB (444x474 pixels)</em> <br/>
+                    <em>Only .jpg is allowed | Maximum Size is 1 MB | Recommended Resolution is 444x474 pixels</em> <br/>
                   </label>
                 </div>
               </div>
@@ -45,7 +45,7 @@
                 <div class="col-lg-12">
                   <label class="label-no col-xs-12" style="margin: 0 0 0 -15px;">
                     <input type="file" name="editfile2" id="editfile2" size="20" style="margin:10px 0 1px 0" />
-                    <em>Only .jpg is allowed and max size is 1MB (444x257 pixels)</em> <br/>
+                    <em>Only .jpg is allowed | Maximum Size is 1 MB | Recommended Resolution is 444x474 pixels</em> <br/>
                   </label>
                 </div>
               </div>
