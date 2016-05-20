@@ -7,7 +7,7 @@ class model_product extends CI_Model {
   }
 
   function get_object($id = 0, $product_name = "", $type = 0, $category = 0, $color = 0, $sale = -1, $visible = -1, $order = 0, $limit = 0, $size = 0) {
-    $this->db->select('mp.*, (SELECT img FROM dt_product_img dpi WHERE dpi.id_product = mp.id LIMIT 1) as img, (SELECT SUM(stock) FROM dt_product dp WHERE dp.id_product = mp.id) AS stock');
+    $this->db->select('mp.*, (SELECT img FROM dt_product_img dpi WHERE dpi.id_product = mp.id LIMIT 1) as img, (SELECT SUM(stock) FROM dt_product dp WHERE dp.id_product = mp.id AND dp.visible = 1) AS stock');
     $this->db->from('ms_product mp');
 
     //Set Filter

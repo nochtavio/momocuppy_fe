@@ -49,16 +49,18 @@ class model_detail_product extends CI_Model {
   }
 
   function add_object($id_product, $id_color, $stock) {
-    $data = array(
-      'id_product' => $id_product,
-      'id_color' => $id_color,
-      'stock' => $stock,
-      'visible' => 1,
-      'cretime' => date('Y-m-d H:i:s'),
-      'creby' => $this->session->userdata('admin')
-    );
+    if($this->model_detail_product->validate_color($id_product, $id_color)->num_rows() <= 0){
+      $data = array(
+        'id_product' => $id_product,
+        'id_color' => $id_color,
+        'stock' => $stock,
+        'visible' => 1,
+        'cretime' => date('Y-m-d H:i:s'),
+        'creby' => $this->session->userdata('admin')
+      );
 
-    $this->db->insert('dt_product', $data);
+      $this->db->insert('dt_product', $data);
+    }
   }
 
   function edit_object($id, $stock) {

@@ -53,7 +53,7 @@ if (!$this->session->userdata('admin')) {
         $adminlevel = empty($adminlevel) ? 0 : $adminlevel;
         ?>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
-          <ul class="nav navbar-nav side-nav">
+          <ul class="nav navbar-nav side-nav" style="height: 799px; overflow-x: hidden; overflow-y: auto;">
             <li>
               <a href="javascript:;" data-toggle="collapse" data-target="#master"><i class="fa fa-fw fa-user"></i> Master <i class="fa fa-fw fa-caret-down"></i></a>
               <ul id="master" class="collapse">

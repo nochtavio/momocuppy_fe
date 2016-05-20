@@ -53,7 +53,7 @@ function order_history_summary_id($orderid){
 	
 	$strsql = "
 		SELECT 
-			firstname,lastname, street_address,
+			order_no, firstname,lastname, street_address,
 			city,country,zip_code,phone,payment_name, paid_date, paid_name,paid_nominal,
 			payment_account,payment_account_name,discount,shipping_cost, status, resi_no, type,cretime,id_member
 		FROM ms_order WHERE id = '".$db->escape($orderid)."'

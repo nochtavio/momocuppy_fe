@@ -14,6 +14,7 @@ session_start();
 if(isset($_GET['id']) && is_numeric($_GET['id'])){
   $order_id = $_GET['id'];
   $list = order_history_summary_id($order_id);
+  $order_no = $list->order_no;
 }else{
   $order_no = $_SESSION["order_no"];
   $memberid = get_memberid($_SESSION["email"]);
