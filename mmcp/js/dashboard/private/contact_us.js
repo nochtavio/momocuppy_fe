@@ -77,7 +77,7 @@ $(document).ready(function () {
 
   //Initial Setup
   $('#txt_editcontent').trumbowyg({
-    btns: [['formatting'], ['bold', 'italic', 'underline']],
+    btns: [['formatting'], ['bold', 'italic', 'underline'], ['link']],
     removeformatPasted: true
   });
   getObject();

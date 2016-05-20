@@ -144,12 +144,11 @@ class detail_product extends CI_Controller {
         $data['message'] .= "Color is already used for this product! <br/>";
       } //check duplicate color if id product is filled
 
-      if ($stock === "") {
+      /*if ($stock === "") {
         $data['message'] .= "Stock must be filled! <br/>";
       } else if (!is_numeric($stock)) {
         $data['message'] .= "Stock must be a number! <br/>";
-      }
-      //End Check Error
+      }*/      //End Check Error
 
       if ($data['message'] === "") {
         $data['result'] = "s";

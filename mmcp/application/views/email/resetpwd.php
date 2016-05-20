@@ -172,6 +172,7 @@ $password = (isset($password) ? $password : "" );
 
 			#headerImage{
 				height:auto;
+
 				max-width:600px !important;
 			}
 
@@ -392,7 +393,7 @@ $password = (isset($password) ? $password : "" );
                                             <td class="headerContent">
                                             
                                             	<!-- // Begin Module: Standard Header Image \\ -->
-                                            	<img src="http://www.momocuppy.com/images/layout/newsletter/logo.jpg" style="max-width:600px;" id="headerImage campaign-icon" mc:label="header_image" mc:edit="header_image" mc:allowdesigner mc:allowtext />
+                                            	<img src="http://www.momocuppy.com/images/layout/newsletter/logo.jpg" style="max-width:600px;margin-left:20px;" id="headerImage campaign-icon" mc:label="header_image" mc:edit="header_image" mc:allowdesigner mc:allowtext/>
                                             	<!-- // End Module: Standard Header Image \\ -->
                                             
                                             </td>
