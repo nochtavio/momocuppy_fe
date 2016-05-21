@@ -4,7 +4,7 @@
     <form>
       <div class="form-group" style="margin: 7px 0 0 0;">
         <input type="file" name="editfile" id="editfile">
-        <p class="help-block">Choose your image to replace the old one. Only PNG is allowed.</p>
+        <p class="help-block">Choose your image to replace the old one. Only PNG is allowed | Maximum Size is 1 MB | Recommended Resolution is 550x249 px</p>
       </div>
     </form>
     <div class="alert alert-warning modal_warning_" role="alert" style="display: none;"></div>
