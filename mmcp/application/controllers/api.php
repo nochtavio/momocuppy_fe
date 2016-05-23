@@ -818,7 +818,7 @@ class api extends CI_Controller {
       $this->email->set_newline("\r\n");
       $this->email->from('momocuppy@momocuppy.com', 'Momo Cuppy'); // change it to yours
       $this->email->to($email); // change it to yours
-      $this->email->subject("[Momo Cuppy] Your password for ".$email." has been resetted");
+      $this->email->subject("Your password for ".$email." has been resetted");
       
       //Data Message
       $data_message['email'] = $email;

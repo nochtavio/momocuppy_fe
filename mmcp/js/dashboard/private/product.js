@@ -460,12 +460,14 @@ $(document).ready(function () {
   
   $('#sel_addcategory').multiselect({
     enableFiltering: true,
+    enableCaseInsensitiveFiltering: true,
     buttonClass: 'btn btn-default',
     maxHeight: 400
   });
   
   $('#sel_editcategory').multiselect({
     enableFiltering: true,
+    enableCaseInsensitiveFiltering: true,
     buttonClass: 'btn btn-default',
     maxHeight: 400
   });
