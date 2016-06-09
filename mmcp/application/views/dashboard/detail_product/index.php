@@ -48,6 +48,8 @@
           <option value="1">Sort By Oldest Data</option>
           <option value="2">Sort By Lowest Stock</option>
           <option value="3">Sort By Highest Stock</option>
+		  <option value="4">Sort By Color Name A-Z</option>
+		  <option value="5">Sort By Color Name Z-A</option>
         </select>
       </div>
       <div class="form-group">

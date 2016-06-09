@@ -10,7 +10,7 @@
           <div class="form-group">
             <label for="txt_editproductname" class="col-sm-4 control-label">Product Name</label>
             <div class="col-sm-6">
-              <input type="text" class="form-control" id="txt_editproductname" maxlength22" placeholder="Input product name ...">
+              <input type="text" class="form-control" id="txt_editproductname" placeholder="Input product name ...">
             </div>
           </div>
           <div class="form-group">
@@ -23,6 +23,7 @@
             <label for="txt_editproductdesc" class="col-sm-4 control-label">Product Description</label>
             <div class="col-sm-6">
               <textarea id="txt_editproductdesc" style="width:100%;"></textarea>
+              <em>Please avoid copy paste from other source. Or at least copy paste to notepad first, then copy it to here.</em>
             </div>
           </div>
           <div class="form-group">
@@ -53,7 +54,7 @@
             <label class="col-sm-4 control-label">Category</label>
             <div class="col-sm-6">
               <select id="sel_editcategory" class="form-control" multiple="multiple">
-                <?php 
+                <?php
                 foreach($category as $cat){
                   ?>
                     <option value="<?php echo $cat->id; ?>"><?php echo '['.$cat->type_name.'] '.$cat->category_name; ?></option>

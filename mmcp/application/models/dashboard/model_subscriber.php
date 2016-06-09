@@ -50,7 +50,7 @@ class model_subscriber extends CI_Model {
       'email' => $email,
       'active' => 1,
       'cretime' => date('Y-m-d H:i:s'),
-      'creby' => $this->session->userdata('admin')
+      'creby' => ($this->session->userdata('admin')) ? $this->session->userdata('admin') : 'SYSTEM'
     );
 
     $this->db->insert('ms_subscriber', $data);
@@ -88,6 +88,15 @@ class model_subscriber extends CI_Model {
   function remove_object($id) {
     $this->db->where('id', $id);
     $this->db->delete('ms_subscriber');
+  }
+
+  function check_subscriber($email){
+    $this->db->select('me.email');
+    $this->db->from('ms_subscriber me');
+    $this->db->where('me.email', $email);
+
+    $query = $this->db->get();
+    return $query;
   }
 
 }

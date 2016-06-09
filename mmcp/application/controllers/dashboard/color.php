@@ -98,22 +98,19 @@ class color extends CI_Controller {
       if ($this->input->post('color_name', TRUE)) {
         $color_name = $this->input->post('color_name', TRUE);
       }
-
-//      $color_code = "";
-//      if ($this->input->post('color_code', TRUE)) {
-//        $color_code = $this->input->post('color_code', TRUE);
-//      }
       //End Get Post Request
       //Check Error
       $data['message'] = "";
 
       if ($color_name === "") {
         $data['message'] .= "Color name must be filled! <br/>";
-      }
+      }else{
+		$check_color = $this->model_color->get_object(0, $color_name, -1, 0)->num_rows();
+		if($check_color > 0){
+			$data['message'] .= "Color name is already existed! <br/>";
+		}
+	  }
 
-//      if ($color_code === "") {
-//        $data['message'] .= "Color code must be filled! <br/>";
-//      }
       //End Check Error
 
       if ($data['message'] === "") {

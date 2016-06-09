@@ -24,7 +24,8 @@ if (!$this->session->userdata('admin')) {
     <input type="hidden" name="base" id="base" value="<?php echo base_url(); ?>" />
     <div id="wrapper">
       <!-- Navigation -->
-      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="height: 100%; background-color: transparent; z-index: 0; padding: 0 0 75px 0;">
+<!--      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="height: 100%; z-index: 0; background-color: transparent; padding: 0 0 75px 0;">-->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -53,7 +54,7 @@ if (!$this->session->userdata('admin')) {
         $adminlevel = empty($adminlevel) ? 0 : $adminlevel;
         ?>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
-          <ul class="nav navbar-nav side-nav" style="height: 100%; overflow-x: hidden; overflow-y: auto;">
+          <ul class="nav navbar-nav side-nav" style="height: 800px; overflow-x: hidden; overflow-y: auto;">
             <li>
               <a href="javascript:;" data-toggle="collapse" data-target="#master"><i class="fa fa-fw fa-user"></i> Master <i class="fa fa-fw fa-caret-down"></i></a>
               <ul id="master" class="collapse">

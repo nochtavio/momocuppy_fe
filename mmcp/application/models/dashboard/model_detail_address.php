@@ -49,7 +49,7 @@ class model_detail_address extends CI_Model {
 
     return $query;
   }
-  
+
   function add_object($id_member, $firstname, $lastname, $street_address, $zip_code, $phone, $country, $city) {
     $data = array(
       'id_member' => $id_member,
@@ -66,7 +66,7 @@ class model_detail_address extends CI_Model {
 
     $this->db->insert('dt_address', $data);
   }
-  
+
   function edit_object($id, $firstname, $lastname, $street_address, $zip_code, $phone, $country, $city) {
     $data = array(
       'firstname' => $firstname,

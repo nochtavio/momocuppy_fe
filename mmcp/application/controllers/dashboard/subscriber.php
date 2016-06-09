@@ -103,6 +103,11 @@ class subscriber extends CI_Controller {
 
       if ($email === "") {
         $data['message'] .= "Email must be filled! <br/>";
+      }else{
+        $check_subscriber = $this->model_subscriber->check_subscriber($email)->num_rows();
+        if($check_subscriber > 0){
+          $data['message'] .= "Email is already registered! <br/>";
+        }
       }
       //End Check Error
 

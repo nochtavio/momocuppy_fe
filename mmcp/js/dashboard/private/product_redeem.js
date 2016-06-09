@@ -104,7 +104,7 @@ $(document).ready(function () {
         {
           $('#tablecontent').append("\
           <tr>\
-            <td colspan='7'><strong style='color:red;'>" + result['message'] + "</strong></td>\
+            <td colspan='9'><strong style='color:red;'>" + result['message'] + "</strong></td>\
           </tr>");
         }
       }

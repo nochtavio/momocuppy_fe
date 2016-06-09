@@ -105,6 +105,7 @@ $(document).ready(function () {
                 <a id='btn_edit" + result['id'][x] + "' class='fa fa-pencil-square-o'></a> &nbsp;\
                 <a href='" + baseurl + "dashboard/detail_product/?id=" + result['id'][x] + "' class='fa fa-folder-open'></a> &nbsp;\
                 <a href='" + baseurl + "dashboard/detail_product_img/?id=" + result['id'][x] + "' class='fa fa-picture-o'></a> &nbsp;\
+				<a href='http://www.momocuppy.com/products/detail/preview_mmcp.php?type=1&id_product="+result['id'][x]+"&key=preview_mmcp' target='_blank' class='fa fa-eye'></a> &nbsp;\
               </td>\
             </tr>");
 
@@ -125,7 +126,7 @@ $(document).ready(function () {
         {
           $('#tablecontent').append("\
           <tr>\
-            <td colspan='12'><strong style='color:red;'>" + result['message'] + "</strong></td>\
+            <td colspan='14'><strong style='color:red;'>" + result['message'] + "</strong></td>\
           </tr>");
         }
       }

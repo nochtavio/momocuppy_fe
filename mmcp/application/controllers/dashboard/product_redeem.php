@@ -87,7 +87,7 @@ class product_redeem extends CI_Controller {
         $data['size'] = $size;
       } else {
         $data['result'] = "f";
-        $data['message'] = "No Product Type";
+        $data['message'] = "No Products";
       }
       echo json_encode($data);
     }

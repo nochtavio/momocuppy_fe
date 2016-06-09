@@ -32,6 +32,7 @@
             <label for="txt_addproductdesc" class="col-sm-4 control-label">Product Description</label>
             <div class="col-sm-6">
               <div id="txt_addproductdesc"></div>
+              <em>Please avoid copy paste from other source. Or at least copy paste to notepad first, then copy it to here.</em>
             </div>
           </div>
           <div class="form-group">
@@ -62,7 +63,7 @@
             <label class="col-sm-4 control-label">Category</label>
             <div class="col-sm-6">
               <select id="sel_addcategory" class="form-control" multiple="multiple">
-                <?php 
+                <?php
                 foreach($category as $cat){
                   ?>
                     <option value="<?php echo $cat->id; ?>"><?php echo '['.$cat->type_name.'] '.$cat->category_name; ?></option>

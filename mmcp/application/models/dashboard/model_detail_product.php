@@ -113,6 +113,7 @@ class model_detail_product extends CI_Model {
     $this->db->select('mc.*');
     $this->db->from('ms_color mc');
     $this->db->where('visible', 1);
+    $this->db->order_by("mc.color_name", "asc");
     $query = $this->db->get();
 
     return $query;

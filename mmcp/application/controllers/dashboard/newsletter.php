@@ -401,8 +401,8 @@ class newsletter extends CI_Controller {
           'protocol' => 'smtp',
           'smtp_host' => 'mail.momocuppy.com',
           'smtp_port' => 587,
-          'smtp_user' => 'momocuppy@momocuppy.com', // change it to yours
-          'smtp_pass' => 'momocuppy2015', // change it to yours				
+          'smtp_user' => 'info@momocuppy.com', // change it to yours
+          'smtp_pass' => 'momocuppy2016', // change it to yours				
           'mailtype' => 'html',
           'charset' => 'iso-8859-1',
           'wordwrap' => TRUE
@@ -410,7 +410,7 @@ class newsletter extends CI_Controller {
 
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
-        $this->email->from('momocuppy@momocuppy.com', 'Momo Cuppy'); // change it to yours
+        $this->email->from('info@momocuppy.com', 'Momo Cuppy'); // change it to yours
         $this->email->to($email); // change it to yours
         $this->email->subject($title);
 

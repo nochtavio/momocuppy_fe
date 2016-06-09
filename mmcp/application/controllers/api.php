@@ -24,7 +24,7 @@ class api extends CI_Controller {
     $no1 = (isset($_SESSION["no1"])) ? $_SESSION["no1"] : 0;
     $no2 = (isset($_SESSION["no2"])) ? $_SESSION["no2"] : 0;
     $verify = ($this->input->post('verify', TRUE)) ? $this->input->post('verify', TRUE) : "";
-    
+
     if($name == "" || $subject == "" || $message == "" || $email == "" || $verify == ""){
       $data['result'] = "f";
       $data['message'] = "All field must be filled.";
@@ -37,8 +37,8 @@ class api extends CI_Controller {
           'protocol' => 'smtp',
           'smtp_host' => 'mail.momocuppy.com',
           'smtp_port' => 587,
-          'smtp_user' => 'momocuppy@momocuppy.com', // change it to yours
-          'smtp_pass' => 'momocuppy2015', // change it to yours
+          'smtp_user' => 'info@momocuppy.com', // change it to yours
+          'smtp_pass' => 'momocuppy2016', // change it to yours
           'mailtype' => 'html',
           'charset' => 'iso-8859-1',
           'wordwrap' => TRUE
@@ -46,7 +46,7 @@ class api extends CI_Controller {
 
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
-        $this->email->from('momocuppy@momocuppy.com', 'Momo Cuppy'); // change it to yours
+        $this->email->from('info@momocuppy.com', 'Momo Cuppy'); // change it to yours
         $this->email->to('help@momocuppy.com'); // change it to yours
         $this->email->subject("[" . $email . "] " . $subject);
         $this->email->message($message);
@@ -59,7 +59,7 @@ class api extends CI_Controller {
         }
       }
     }
-    
+
     $this->output
       ->set_content_type('application/json')
       ->set_output(json_encode($data));
@@ -145,12 +145,12 @@ class api extends CI_Controller {
     $id_member = $this->get_id_member();
     $order = ($this->input->post('order', TRUE)) ? $this->input->post('order', TRUE) : 1;
     //End Filter
-    
+
     if($id_member){
-      $totalrow = $this->model_detail_address->get_object($id, $id_member, "", $order)->num_rows();
+      $totalrow = $this->model_detail_address->get_object($id, $id_member, "", "", "", "", $order)->num_rows();
 
       if ($totalrow > 0) {
-        $query = $this->model_detail_address->get_object($id, $id_member, "", $order)->result();
+        $query = $this->model_detail_address->get_object($id, $id_member, "", "", "", "", $order)->result();
         $data['result'] = "s";
         $data['content'] = $query;
       } else {
@@ -161,7 +161,7 @@ class api extends CI_Controller {
       $data['result'] = "f";
       $data['message'] = "No Address";
     }
-    
+
     $this->output
       ->set_content_type('application/json')
       ->set_output(json_encode($data));
@@ -183,7 +183,7 @@ class api extends CI_Controller {
     $country = ($this->input->post('country', TRUE)) ? $this->input->post('country', TRUE) : "";
     $city = ($this->input->post('city', TRUE)) ? $this->input->post('city', TRUE) : "";
     //End Parameter
-    
+
     //Check Error
     $data['message'] = "";
     if (!$id_member) {
@@ -253,7 +253,7 @@ class api extends CI_Controller {
     $country = ($this->input->post('country', TRUE)) ? $this->input->post('country', TRUE) : "";
     $city = ($this->input->post('city', TRUE)) ? $this->input->post('city', TRUE) : "";
     //End Parameter
-    
+
     //Check Error
     $data['message'] = "";
     if (!$id_member) {
@@ -312,7 +312,7 @@ class api extends CI_Controller {
   function generate_list_payment() {
     $this->load->model('dashboard/model_payment', '', TRUE);
     $id = ($this->input->post('id', TRUE)) ? $this->input->post('id', TRUE) : 0;
-    
+
     if($id > 0){
       $totalrow = $this->model_payment->get_object($id, "", "", "", 1)->num_rows();
 
@@ -328,7 +328,7 @@ class api extends CI_Controller {
       $data['result'] = "f";
       $data['message'] = "No Payment";
     }
-    
+
     $this->output
       ->set_content_type('application/json')
       ->set_output(json_encode($data));
@@ -487,13 +487,13 @@ class api extends CI_Controller {
       $hash = $this->generate_hash($email);
       $referral = $this->generate_referral();
       $this->model_member->add_object($password, $firstname, $lastname, $phone, $email, $dob, $hash, $referral, $streetname, $postalcode, $country, $city);
-      
+
       //Insert Subscriber
       if($this->model_subscriber->get_object(0, $email)->num_rows() <= 0){
         $this->model_subscriber->add_object($email);
       }
       //End Insert Subscriber
-      
+
       $this->session->unset_userdata('member_reg');
       $this->session->unset_userdata('member_err');
       $this->session->unset_userdata('member_firstname');
@@ -510,8 +510,8 @@ class api extends CI_Controller {
         'protocol' => 'smtp',
         'smtp_host' => 'mail.momocuppy.com',
         'smtp_port' => 587,
-        'smtp_user' => 'momocuppy@momocuppy.com', // change it to yours
-        'smtp_pass' => 'momocuppy2015', // change it to yours				
+        'smtp_user' => 'info@momocuppy.com', // change it to yours
+        'smtp_pass' => 'momocuppy2016', // change it to yours
         'mailtype' => 'html',
         'charset' => 'iso-8859-1',
         'wordwrap' => TRUE
@@ -519,10 +519,10 @@ class api extends CI_Controller {
 
       $this->load->library('email', $config);
       $this->email->set_newline("\r\n");
-      $this->email->from('momocuppy@momocuppy.com', 'Momo Cuppy'); // change it to yours
+      $this->email->from('info@momocuppy.com', 'Momo Cuppy'); // change it to yours
       $this->email->to($email); // change it to yours
       $this->email->subject("Welcome ".$firstname." to Momo Cuppy, please verify your account to continue shopping");
-      
+
       //Data Message
       $data_message['name'] = $firstname." ".$lastname;
       $data_message['email'] = $email;
@@ -561,13 +561,13 @@ class api extends CI_Controller {
       die();
     }
   }
-  
+
   function resend_verification(){
     $this->load->model('dashboard/model_member', '', TRUE);
-    
+
     //Parameter
     $email = ($this->input->post('email', TRUE)) ? $this->input->post('email', TRUE) : "";
-    
+
     if ($this->model_member->check_email($email)->num_rows() < 0) {
       $data['result'] = "f";
       $data['message'] = "Email is invalid";
@@ -580,14 +580,14 @@ class api extends CI_Controller {
         $hash = $row->hash;
         $referral = $row->referral;
       }
-      
+
       //SEND MAIL VERIFICATION
       $config = Array(
         'protocol' => 'smtp',
         'smtp_host' => 'mail.momocuppy.com',
         'smtp_port' => 587,
-        'smtp_user' => 'momocuppy@momocuppy.com', // change it to yours
-        'smtp_pass' => 'momocuppy2015', // change it to yours				
+        'smtp_user' => 'info@momocuppy.com', // change it to yours
+        'smtp_pass' => 'momocuppy2016', // change it to yours
         'mailtype' => 'html',
         'charset' => 'iso-8859-1',
         'wordwrap' => TRUE
@@ -595,7 +595,7 @@ class api extends CI_Controller {
 
       $this->load->library('email', $config);
       $this->email->set_newline("\r\n");
-      $this->email->from('momocuppy@momocuppy.com', 'Momo Cuppy'); // change it to yours
+      $this->email->from('info@momocuppy.com', 'Momo Cuppy'); // change it to yours
       $this->email->to($email); // change it to yours
       $this->email->subject("Welcome ".$firstname." to Momo Cuppy, please verify your account to continue shopping");
 
@@ -615,7 +615,7 @@ class api extends CI_Controller {
         $data['message'] = show_error($this->email->print_debugger());
       }
     }
-    
+
     $this->output
       ->set_content_type('application/json')
       ->set_output(json_encode($data));
@@ -663,7 +663,7 @@ class api extends CI_Controller {
     $email = ($this->input->post('email', TRUE)) ? $this->input->post('email', TRUE) : "";
     $password = ($this->input->post('password', TRUE)) ? $this->input->post('password', TRUE) : "";
     //End Parameter
-    
+
     //Check Parameter
     if ($password == "") {
       $result = "r2";
@@ -695,7 +695,7 @@ class api extends CI_Controller {
         'status_login' => $this->custom_encrypt->encrypt_string($email)
       );
       $this->session->set_userdata($session_data);
-      
+
       $_SESSION["email"] = $email;
       $_SESSION["status_login"] = $this->custom_encrypt->encrypt_string($email);
     }
@@ -714,7 +714,7 @@ class api extends CI_Controller {
 
     $result = "r1";
     $result_message = "Login is valid";
-    
+
     //Check Parameter
     if (!isset($_SESSION['email'])) {
       $result = "r2";
@@ -725,7 +725,7 @@ class api extends CI_Controller {
       $result = "r2";
       $result_message = "Status Login is expired!";
     }
-    
+
     if($result == "r1"){
       if (!$this->model_member->validate_login($_SESSION['email'], $_SESSION['status_login'])) {
         $result = "r2";
@@ -742,12 +742,12 @@ class api extends CI_Controller {
       ->set_content_type('application/json')
       ->set_output(json_encode($data));
   }
-  
+
   function get_id_member(){
-    if(!isset($_SESSION)){session_start();} 
+    if(!isset($_SESSION)){session_start();}
     $this->load->model('dashboard/model_member', '', TRUE);
     $valid = TRUE;
-    
+
     //Check Parameter
     if (!isset($_SESSION['email'])) {
       $valid = FALSE;
@@ -756,21 +756,21 @@ class api extends CI_Controller {
     if (!isset($_SESSION['status_login'])) {
       $valid = FALSE;
     }
-    
-    if($valid){
+
+    /*if($valid){
       if (!$this->model_member->validate_login($_SESSION['email'], $_SESSION['status_login'])) {
         $valid = FALSE;
       }
-    }
+    }*/
     //End Check Parameter
-    
+
     if($valid){
       return $this->model_member->get_id($_SESSION['email']);
     }else{
       return $valid;
     }
   }
-  
+
   function member_logout() {
     if(!isset($_SESSION)){session_start();} ;
     $this->session->unset_userdata('email');
@@ -779,17 +779,17 @@ class api extends CI_Controller {
     redirect('../about-us/');
     die();
   }
-  
+
   function member_forget_password(){
     $this->load->model('dashboard/model_member', '', TRUE);
-    
+
     $data['result'] = 'r1';
     $data['result_message'] = 'Your new password has succesfully been sent to your email.';
-    
+
     //Parameter
     $email = ($this->input->post('email', TRUE)) ? $this->input->post('email', TRUE) : "";
     //End Parameter
-    
+
     //Check Parameter
     if($email == ""){
       $data['result'] = 'r2';
@@ -799,16 +799,16 @@ class api extends CI_Controller {
       $data['result_message'] = 'Email is not registered.';
     }
     //End Check Parameter
-    
+
     if($data['result'] == 'r1'){
       $generated_password = $this->model_member->reset_password($email);
-      
+
       $config = Array(
         'protocol' => 'smtp',
         'smtp_host' => 'mail.momocuppy.com',
         'smtp_port' => 587,
-        'smtp_user' => 'momocuppy@momocuppy.com', // change it to yours
-        'smtp_pass' => 'momocuppy2015', // change it to yours				
+        'smtp_user' => 'info@momocuppy.com', // change it to yours
+        'smtp_pass' => 'momocuppy2016', // change it to yours
         'mailtype' => 'html',
         'charset' => 'iso-8859-1',
         'wordwrap' => TRUE
@@ -816,10 +816,10 @@ class api extends CI_Controller {
 
       $this->load->library('email', $config);
       $this->email->set_newline("\r\n");
-      $this->email->from('momocuppy@momocuppy.com', 'Momo Cuppy'); // change it to yours
+      $this->email->from('info@momocuppy.com', 'Momo Cuppy'); // change it to yours
       $this->email->to($email); // change it to yours
       $this->email->subject("Your password for ".$email." has been resetted");
-      
+
       //Data Message
       $data_message['email'] = $email;
       $data_message['password'] = $generated_password;
@@ -830,7 +830,7 @@ class api extends CI_Controller {
         $data['result_message'] = show_error($this->email->print_debugger());
       }
     }
-    
+
     $this->output
       ->set_content_type('application/json')
       ->set_output(json_encode($data));
@@ -846,7 +846,7 @@ class api extends CI_Controller {
     $id_member = $this->get_id_member();
     $id_product = ($this->input->post('id_product', TRUE)) ? $this->input->post('id_product', TRUE) : "";
     //End Parameter
-    
+
     //Check Parameter
     if(!$id_member){
       $result = "r2";
@@ -862,8 +862,8 @@ class api extends CI_Controller {
         $result_message = "Product is already on your wishlist!";
       }
     }
-    
-    
+
+
     //End Check Parameter
 
     if ($result == "r1") {
@@ -923,7 +923,7 @@ class api extends CI_Controller {
     $id_dt_product = ($this->input->post('id_dt_product', TRUE)) ? $this->input->post('id_dt_product', TRUE) : "";
     $qty = ($this->input->post('qty', TRUE)) ? $this->input->post('qty', TRUE) : "";
     //End Parameter
-    
+
     //Check Parameter
     if(!$id_member){
       $result = "r2";
@@ -966,7 +966,7 @@ class api extends CI_Controller {
     //Filter
     $id_member = $this->get_id_member();
     //End Filter
-    
+
     if(!$id_member){
       $data['result'] = "f";
       $data['message'] = "You must login first!";
@@ -982,7 +982,7 @@ class api extends CI_Controller {
       }
     }
 
-    
+
     $this->output
       ->set_content_type('application/json')
       ->set_output(json_encode($data));
@@ -995,7 +995,7 @@ class api extends CI_Controller {
     $id_member = $this->get_id_member();
     $id = ($this->input->post('id', TRUE)) ? $this->input->post('id', TRUE) : 0;
     //End Filter
-    
+
     if(!$id_member){
       $data['result'] = "f";
       $data['message'] = "You must login first!";
@@ -1018,7 +1018,7 @@ class api extends CI_Controller {
     //Filter
     $voucher_code = ($this->input->post('voucher_code', TRUE)) ? $this->input->post('voucher_code', TRUE) : '';
     //End Filter
-    
+
     if($voucher_code == ''){
       $data['result'] = "f";
       $data['message'] = "Voucher is empty!";
@@ -1059,7 +1059,7 @@ class api extends CI_Controller {
         $data['message'] = "Voucher is not exist!";
       }
     }
-    
+
     $this->output
       ->set_content_type('application/json')
       ->set_output(json_encode($data));
@@ -1085,7 +1085,7 @@ class api extends CI_Controller {
     $id_member = $this->get_id_member();
     $referral = ($this->input->post('referral', TRUE)) ? $this->input->post('referral', TRUE) : '';
     //End Filter
-    
+
     if(!$id_member){
       $data['result'] = "f";
       $data['message'] = "You must login first!";
@@ -1112,7 +1112,7 @@ class api extends CI_Controller {
         $data['message'] = "Referral only applied to first time buyer!";
       }
     }
-    
+
     $this->output
       ->set_content_type('application/json')
       ->set_output(json_encode($data));
@@ -1129,14 +1129,14 @@ class api extends CI_Controller {
       ->set_content_type('application/json')
       ->set_output(json_encode($data));
   }
-  
+
   function get_shipping() {
     if(!isset($_SESSION)){session_start();} ;
-    
+
     //Filter
     $courier = ($this->input->post('courier', TRUE)) ? $this->input->post('courier', TRUE) : "";
     //End Filter
-    
+
     if($courier !== ""){
       $data['result'] = "s";
       $_SESSION['courier'] = $courier;
@@ -1149,15 +1149,37 @@ class api extends CI_Controller {
       ->set_content_type('application/json')
       ->set_output(json_encode($data));
   }
-  
+
+  function test_rajaongkir(){
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => "http://api.rajaongkir.com/starter/cost",
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => "",
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 30,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => "POST",
+      CURLOPT_POSTFIELDS => "origin=151&destination=151&weight=1&courier=jne",
+      CURLOPT_HTTPHEADER => array(
+        "content-type: application/x-www-form-urlencoded",
+        "key: 67e47b562d26068bdf0db0886c797f7c"
+      ),
+    ));
+
+    $response = json_decode(curl_exec($curl), true);
+
+    var_dump($response);
+  }
+
   function get_cost() {
     if(!isset($_SESSION)){session_start();} ;
-    
+
     //Get Parameter
     $city_id = ($this->input->post('city_id', TRUE)) ? $this->input->post('city_id', TRUE) : "";
     $weight = ($this->input->post('weight', TRUE)) ? $this->input->post('weight', TRUE) : "";
     //End Get Parameter
-    
+
     $curl = curl_init();
     curl_setopt_array($curl, array(
       CURLOPT_URL => "http://api.rajaongkir.com/starter/cost",
@@ -1177,7 +1199,7 @@ class api extends CI_Controller {
     $response = json_decode(curl_exec($curl), true);
     $err = curl_error($curl);
     curl_close($curl);
-    
+
     //Check Courier
     if (isset($_SESSION['courier'])) {
       if ($response['rajaongkir']['status']['code'] == 200) {
@@ -1218,17 +1240,17 @@ class api extends CI_Controller {
       $data['result'] = 'r3';
       $data['message'] = 'Shipping Method is empty';
     }
-    
+
     $this->output
       ->set_content_type('application/json')
       ->set_output(json_encode($data));
   }
-  
+
   function validate_payment(){
     $this->load->model('dashboard/model_order', '', TRUE);
-    
+
     $key = ($this->input->get('key', TRUE)) ? $this->input->get('key', TRUE) : "";
-    
+
     if($key == '1719158554'){
       $this->model_order->validate_payment();
     }
@@ -1236,7 +1258,7 @@ class api extends CI_Controller {
 
   function new_order() {
     if(!isset($_SESSION)){session_start();}
-    
+
     $this->load->model('dashboard/model_order', '', TRUE);
 
     $result = "r1";
@@ -1260,7 +1282,7 @@ class api extends CI_Controller {
     $discount = ($this->input->post('order_discount', TRUE)) ? $this->input->post('order_discount', TRUE) : NULL;
     $referral = ($this->input->post('order_referral', TRUE)) ? $this->input->post('order_referral', TRUE) : NULL;
     //End Parameter
-    
+
     //Check Parameter
     if (!$id_member) {
       $result = "r2";
@@ -1278,12 +1300,12 @@ class api extends CI_Controller {
       $result = "r2";
       $result_message = "Please choose payment method!";
     }
-    
+
     if ($courier == "") {
       $result = "r2";
       $result_message = "Please choose your shipping method!";
     }
-    
+
     if ($shipping_cost < 0) {
       $result = "r2";
       $result_message = "Please choose your shipping method!";
@@ -1317,8 +1339,8 @@ class api extends CI_Controller {
           'protocol' => 'smtp',
           'smtp_host' => 'mail.momocuppy.com',
           'smtp_port' => 587,
-          'smtp_user' => 'momocuppy@momocuppy.com', // change it to yours
-          'smtp_pass' => 'momocuppy2015', // change it to yours				
+          'smtp_user' => 'info@momocuppy.com', // change it to yours
+          'smtp_pass' => 'momocuppy2016', // change it to yours
           'mailtype' => 'html',
           'charset' => 'iso-8859-1',
           'wordwrap' => TRUE
@@ -1326,7 +1348,7 @@ class api extends CI_Controller {
 
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
-        $this->email->from('momocuppy@momocuppy.com', 'Momo Cuppy'); // change it to yours
+        $this->email->from('info@momocuppy.com', 'Momo Cuppy'); // change it to yours
         $this->email->to($_SESSION["email"]); // change it to yours
         $this->email->subject("Momo Cuppy Order Confirmation (Order No ".$order['return_order']['order_no'].")");
 
@@ -1390,10 +1412,10 @@ class api extends CI_Controller {
       die();
     }
   }
-  
+
   function new_redeem() {
     if(!isset($_SESSION)){session_start();}
-    
+
     $this->load->model('dashboard/model_order', '', TRUE);
 
     $result = "r1";
@@ -1410,7 +1432,7 @@ class api extends CI_Controller {
     $country = ($this->input->post('order_country', TRUE)) ? $this->input->post('order_country', TRUE) : "";
     $city = ($this->input->post('order_city', TRUE)) ? $this->input->post('order_city', TRUE) : "";
     //End Parameter
-    
+
     //Check Parameter
     if (!$id_member) {
       $result = "r2";
@@ -1418,7 +1440,7 @@ class api extends CI_Controller {
       redirect('../order/order2.php#summary', 'refresh');
       die();
     }
-    
+
     if ($id_redeem == "") {
       $result = "r2";
       $result_message = "Redeem product is not found!";
@@ -1445,7 +1467,7 @@ class api extends CI_Controller {
           redirect('../redeem/checkout/?redeem_p='.$id_redeem, 'refresh');
         die();
         }
-        
+
         //Set Session Order
         $_SESSION['order_no'] = $order['return_order']['order_no'];
         $_SESSION['redeem_keep'] = TRUE;
@@ -1472,10 +1494,10 @@ class api extends CI_Controller {
       die();
     }
   }
-  
+
   function get_order_payment() {
     $this->load->model('dashboard/model_order', '', TRUE);
-    
+
 //    $id_member = $this->get_id_member();
 //    if(!$id_member){
 //      $data['result'] = "f";
@@ -1492,7 +1514,7 @@ class api extends CI_Controller {
 //        $data['message'] = "ORDER ID is not exist";
 //      }
 //    }
-    
+
     $orderid = ($this->input->post('orderid', TRUE)) ? $this->input->post('orderid', TRUE) : 0;
     if($orderid > 0){
       $totalrow = $this->model_order->get_object(0, 0, "", "", "", "", "", $orderid)->num_rows();
@@ -1508,12 +1530,12 @@ class api extends CI_Controller {
       $data['result'] = "f";
       $data['message'] = "ORDER ID is not exist";
     }
-    
+
     $this->output
       ->set_content_type('application/json')
       ->set_output(json_encode($data));
   }
-  
+
   function get_session_order_alert() {
     if ($this->session->userdata('order_alert')) {
       $data['result'] = "r1";
@@ -1564,7 +1586,7 @@ class api extends CI_Controller {
       ->set_content_type('application/json')
       ->set_output(json_encode($data));
   }
-  
+
   function get_session_redeem() {
     if ($this->session->userdata('order_no')) {
       $data['result'] = "r1";
@@ -1589,27 +1611,27 @@ class api extends CI_Controller {
       ->set_content_type('application/json')
       ->set_output(json_encode($data));
   }
-  
+
   function set_price(){
     $price = ($this->input->post('price', TRUE)) ? $this->input->post('price', TRUE) : "";
     $weight = ($this->input->post('weight', TRUE)) ? $this->input->post('weight', TRUE) : "";
     $interest = ($this->input->post('interest', TRUE)) ? $this->input->post('interest', TRUE) : "";
-    
+
     $calculated_price = ($price/($weight/500))*($interest+100)/100;
-    
+
     $data['calculated_price'] = ceil($calculated_price);
     $this->output
       ->set_content_type('application/json')
       ->set_output(json_encode($data));
   }
-  
+
   function get_object_search() {
     $this->load->model('dashboard/model_product', '', TRUE);
 
     //Filter
     $keyword = ($this->input->post('keyword', TRUE)) ? $this->input->post('keyword', TRUE) : "";
     //End Filter
-    
+
     if($keyword != ""){
       $get_object_search = $this->model_product->get_object_search($keyword);
       if($get_object_search->num_rows() > 0){
@@ -1621,7 +1643,7 @@ class api extends CI_Controller {
     }else{
       $data['result'] = "f";
     }
-    
+
     $this->output
       ->set_content_type('application/json')
       ->set_output(json_encode($data));
